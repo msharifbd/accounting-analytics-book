@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Accounting Analytics with Python",
     "section": "",
-    "text": "Preface\nWelcome to Accounting Analytics with Python. This book is intended for accounting undergraduate students. However, students from other disciplines such as Finance are very likely to be benefited from using the book.",
+    "text": "Preface\nWelcome to Accounting Analytics with Python. This book is intended for accounting undergraduate students. However, students from other disciplines such as Finance are very likely to be benefited from using the book.\n\n\nAbout the Author\nSharif Islam, DBA, CPA, CMA is an Associate professor in School of Accountancy in Southern Illinois University Carbondale (SIUC). He is a licensed CPA in Illinois and a Certified Management Accountant (CMA). He teaches Advanced Cost Accounting, Auditing, Accounting Information Systems, Machine Learning, and Analytics for Accounting Data. He earned his doctorate from Louisiana Tech University. His mansucripts are selected for “Best Research Paper Award” in several conferences of American Accounting Association (AAA). His research also got 2024 “Notable Contribution to the Literature Award” by AIS section of AAA. He published research in Accounting Horizons, Journal of Accounting and Public Policy, Journal of Information Systems, Advances in Accounting, Journal of Emerging Technologies in Accounting, Issues in Accounting Education, and Managerial Auditing Journal. His research interests lie at the intersection of Accounting and Data Science.\n\n\nAcknowledgement\nTo prepare the book, I took help from many sources on the internet and published materials. Many of them are cited in the book. I acknowledge the contribution of all of those resources that help me to prepare the book for the students.",
     "crumbs": [
       "Preface"
     ]
@@ -139,6 +139,270 @@
     "crumbs": [
       "Part I: Foundations",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Accounting Analytics</span>"
+    ]
+  },
+  {
+    "objectID": "02-python-quarto-setup.html",
+    "href": "02-python-quarto-setup.html",
+    "title": "2  Python and Quarto Environment Setup",
+    "section": "",
+    "text": "2.1 Why This Chapter Matters\nEvery chapter after this one assumes you can do three things: write Python code, run it, and see the results in a nicely formatted document. This chapter gets that pipeline working on your own laptop, once, so that the rest of the course is about accounting analytics rather than fighting with software installation.\nIf you get stuck at any point in this chapter, don’t worry — environment setup is almost always the hardest part of a data analytics course, and it only gets easier from here.",
+    "crumbs": [
+      "Part I: Foundations",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Python and Quarto Environment Setup</span>"
+    ]
+  },
+  {
+    "objectID": "02-python-quarto-setup.html#the-three-tools-you-need",
+    "href": "02-python-quarto-setup.html#the-three-tools-you-need",
+    "title": "2  Python and Quarto Environment Setup",
+    "section": "2.2 The Three Tools You Need",
+    "text": "2.2 The Three Tools You Need\n\n\n\n\n\n\n\n\nTool\nWhat it does\nAnalogy\n\n\n\n\nPython\nThe programming language that does the actual data work\nThe engine\n\n\nQuarto\nCombines your writing, Python code, and output into one document (HTML, PDF, Word)\nThe publishing system\n\n\nA Code Editor (Also called Integrated Development Environment(IDE))\nWhere you write and run your code (this book uses Positron, but VS Code works identically)\nThe workshop\n\n\n\nYou need all three installed before you can complete the exercises in this book.",
+    "crumbs": [
+      "Part I: Foundations",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Python and Quarto Environment Setup</span>"
+    ]
+  },
+  {
+    "objectID": "02-python-quarto-setup.html#step-1-install-python",
+    "href": "02-python-quarto-setup.html#step-1-install-python",
+    "title": "2  Python and Quarto Environment Setup",
+    "section": "2.3 Step 1: Install Python",
+    "text": "2.3 Step 1: Install Python\nYou can install the python from https://www.python.org/downloads/. We recommend you use this link to install a specific version of python. Your professor might recommend a specific version that you should use. If you use macOS, please click macOS to install python suitable for mac.\nIn addition, you can also install Python via the Anaconda or Miniconda distribution, because it comes bundled with the data packages we’ll use (pandas, numpy, matplotlib) and makes managing versions easier than a bare Python install.\n\nDownload Miniconda from https://docs.conda.io/en/latest/miniconda.html (choose the installer for your operating system).\nRun the installer with default settings.\nConfirm the install worked by opening a terminal and typing:\n\npython --version\nYou should see something like Python 3.11.x (the exact version doesn’t need to match this).\n\n\n\n\n\n\nTipConnect to Practice\n\n\n\nIf your future employer uses a specific data platform (e.g., a cloud data warehouse, or a company-managed Python environment), the concepts you learn here transfer directly — only the installation step changes.",
+    "crumbs": [
+      "Part I: Foundations",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Python and Quarto Environment Setup</span>"
+    ]
+  },
+  {
+    "objectID": "02-python-quarto-setup.html#step-2-install-quarto",
+    "href": "02-python-quarto-setup.html#step-2-install-quarto",
+    "title": "2  Python and Quarto Environment Setup",
+    "section": "2.4 Step 2: Install Quarto",
+    "text": "2.4 Step 2: Install Quarto\n\nGo to https://quarto.org/docs/get-started/ and download the installer for your operating system.\nRun the installer with default settings.\nConfirm the install worked:\n\nquarto --version\nSince we’ll render to PDF as well as HTML, also install a LaTeX distribution — Quarto includes a lightweight one you can install with a single command:\nquarto install tinytex\nThis only needs to be done once per computer.",
+    "crumbs": [
+      "Part I: Foundations",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Python and Quarto Environment Setup</span>"
+    ]
+  },
+  {
+    "objectID": "02-python-quarto-setup.html#step-3-install-a-code-editor",
+    "href": "02-python-quarto-setup.html#step-3-install-a-code-editor",
+    "title": "2  Python and Quarto Environment Setup",
+    "section": "2.5 Step 3: Install a Code Editor",
+    "text": "2.5 Step 3: Install a Code Editor\nThis book’s examples use Positron, which can be downloaded from https://positron.posit.co/download.html. Positron is a code editor built specifically for data science that will feel very familiar if you’ve used VS Code before — the two share the same underlying editing engine, so keyboard shortcuts, extensions, and layout all work the same way. (If your instructor prefers plain VS Code, everything in this chapter applies identically.)\nFigure 2.1 shows the general layout you’ll be working in for the rest of this book: a file explorer on the left, an editor pane in the middle where you write your .qmd files, a terminal at the bottom where you run commands like quarto render, and a Source Control panel for Git (covered separately if your instructor uses version control in this course).\n\n\n\n\n\n\nFigure 2.1: A typical code-editor layout: file explorer, editor pane, session, and plots\n\n\n\nOnce installed, open your project folder in Positron/VS Code using File → Open Folder, and select the folder containing your _quarto.yml file.",
+    "crumbs": [
+      "Part I: Foundations",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Python and Quarto Environment Setup</span>"
+    ]
+  },
+  {
+    "objectID": "02-python-quarto-setup.html#three-ways-to-write-python-script-notebook-or-quarto-document",
+    "href": "02-python-quarto-setup.html#three-ways-to-write-python-script-notebook-or-quarto-document",
+    "title": "2  Python and Quarto Environment Setup",
+    "section": "2.6 Three Ways to Write Python: Script, Notebook, or Quarto Document",
+    "text": "2.6 Three Ways to Write Python: Script, Notebook, or Quarto Document\nAs you start doing accounting analytics work, you’ll encounter three common file types for writing Python. It’s worth understanding the difference early, since this book uses all three at different points.\n\n2.6.1 1. A Plain Python Script (.py)\nA .py file contains only code — no narrative text, no formatted output. You run the whole file at once (or line by line) and see output printed to a terminal or console. This is the format used for production code, reusable functions, or automated jobs that don’t need explanation baked in.\n# analysis.py\nimport pandas as pd\n\ndf = pd.read_csv(\"data/trial_balance.csv\")\nprint(df.head())\n\n\n2.6.2 2. A Jupyter Notebook (.ipynb)\nA Jupyter notebook mixes code and narrative text in a sequence of cells, and shows output (tables, charts) directly underneath the code that produced it. This makes notebooks excellent for exploratory analysis — trying things out, looking at results immediately, and iterating.\nFigure 2.2 shows a simplified notebook: a markdown cell explaining what’s about to happen, a code cell that loads data, and the output (a data table) displayed directly below it.\n\n\n\n\n\n\nFigure 2.2: A Jupyter notebook combines markdown cells, code cells, and their output in one scrollable document\n\n\n\nYou can open and run .ipynb files directly in Positron/VS Code, the same as in classic Jupyter.\n\n\n2.6.3 3. A Quarto Document (.qmd)\nA Quarto document looks a lot like a notebook conceptually — narrative text plus embedded, runnable code — but it’s a plain text file (easier to track with Git) that can render to multiple polished output formats: HTML, PDF, Word, and more. This is the format used for every chapter in this book.\nA Quarto document has three parts:\n\nA YAML header at the top (between --- lines) with metadata like the title\nNarrative text written in Markdown\nCode chunks, marked with three backticks and curly braces\n\n---\ntitle: \"Example Chapter\"\n---\n\n## Analyzing the Trial Balance\n\nHere we load the trial balance and preview the first few rows.\n\n::: {#7d99ad09 .cell execution_count=1}\n``` {.python .cell-code}\nimport pandas as pd\n\ndf = pd.read_csv(\"data/trial_balance.csv\")\ndf.head()\n```\n\n::: {.cell-output .cell-output-display execution_count=3}\n```{=html}\n&lt;div&gt;\n&lt;style scoped&gt;\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n    .dataframe tbody tr th {\n        vertical-align: top;\n    }\n\n    .dataframe thead th {\n        text-align: right;\n    }\n&lt;/style&gt;\n&lt;table border=\"1\" class=\"dataframe\"&gt;\n  &lt;thead&gt;\n    &lt;tr style=\"text-align: right;\"&gt;\n      &lt;th&gt;&lt;/th&gt;\n      &lt;th&gt;account&lt;/th&gt;\n      &lt;th&gt;account_type&lt;/th&gt;\n      &lt;th&gt;debit&lt;/th&gt;\n      &lt;th&gt;credit&lt;/th&gt;\n    &lt;/tr&gt;\n  &lt;/thead&gt;\n  &lt;tbody&gt;\n    &lt;tr&gt;\n      &lt;th&gt;0&lt;/th&gt;\n      &lt;td&gt;Cash&lt;/td&gt;\n      &lt;td&gt;Asset&lt;/td&gt;\n      &lt;td&gt;12500&lt;/td&gt;\n      &lt;td&gt;0&lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;th&gt;1&lt;/th&gt;\n      &lt;td&gt;Accounts Receivable&lt;/td&gt;\n      &lt;td&gt;Asset&lt;/td&gt;\n      &lt;td&gt;8200&lt;/td&gt;\n      &lt;td&gt;0&lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;th&gt;2&lt;/th&gt;\n      &lt;td&gt;Inventory&lt;/td&gt;\n      &lt;td&gt;Asset&lt;/td&gt;\n      &lt;td&gt;15300&lt;/td&gt;\n      &lt;td&gt;0&lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;th&gt;3&lt;/th&gt;\n      &lt;td&gt;Prepaid Insurance&lt;/td&gt;\n      &lt;td&gt;Asset&lt;/td&gt;\n      &lt;td&gt;1200&lt;/td&gt;\n      &lt;td&gt;0&lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;th&gt;4&lt;/th&gt;\n      &lt;td&gt;Equipment&lt;/td&gt;\n      &lt;td&gt;Asset&lt;/td&gt;\n      &lt;td&gt;42000&lt;/td&gt;\n      &lt;td&gt;0&lt;/td&gt;\n    &lt;/tr&gt;\n  &lt;/tbody&gt;\n&lt;/table&gt;\n&lt;/div&gt;\n```\n:::\n:::\n\n\nThe output above shows account balances before adjusting entries.\n\n\n\n\n\n\nImportantWhich format does this book use?\n\n\n\nEvery chapter in this book is written as a .qmd file, since we want a single, polished, professional document (in both HTML and PDF) at the end of the semester — not a folder of separate notebooks. However, your instructor may ask you to practice and experiment in a Jupyter notebook before copying finished code into your chapter or assignment .qmd file. Think of the notebook as your scratch paper and the .qmd file as your final submission.",
+    "crumbs": [
+      "Part I: Foundations",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Python and Quarto Environment Setup</span>"
+    ]
+  },
+  {
+    "objectID": "02-python-quarto-setup.html#your-first-quarto-document",
+    "href": "02-python-quarto-setup.html#your-first-quarto-document",
+    "title": "2  Python and Quarto Environment Setup",
+    "section": "2.7 Your First Quarto Document",
+    "text": "2.7 Your First Quarto Document\nLet’s create a small Quarto document from scratch to make sure everything works end to end.\n1. Create a new file called test.qmd in your project folder with the following content:\n---\ntitle: \"My First Quarto Document\"\nformat: html\n---\n\n## Testing My Setup\n\n::: {#e658c5a3 .cell execution_count=2}\n``` {.python .cell-code}\nimport pandas as pd\n\ndata = {\"account\": [\"Cash\", \"Accounts Receivable\", \"Inventory\"],\n        \"balance\": [12500, 8200, 15300]}\n\ndf = pd.DataFrame(data)\ndf\n```\n\n::: {.cell-output .cell-output-display execution_count=4}\n```{=html}\n&lt;div&gt;\n&lt;style scoped&gt;\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n    .dataframe tbody tr th {\n        vertical-align: top;\n    }\n\n    .dataframe thead th {\n        text-align: right;\n    }\n&lt;/style&gt;\n&lt;table border=\"1\" class=\"dataframe\"&gt;\n  &lt;thead&gt;\n    &lt;tr style=\"text-align: right;\"&gt;\n      &lt;th&gt;&lt;/th&gt;\n      &lt;th&gt;account&lt;/th&gt;\n      &lt;th&gt;balance&lt;/th&gt;\n    &lt;/tr&gt;\n  &lt;/thead&gt;\n  &lt;tbody&gt;\n    &lt;tr&gt;\n      &lt;th&gt;0&lt;/th&gt;\n      &lt;td&gt;Cash&lt;/td&gt;\n      &lt;td&gt;12500&lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;th&gt;1&lt;/th&gt;\n      &lt;td&gt;Accounts Receivable&lt;/td&gt;\n      &lt;td&gt;8200&lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;th&gt;2&lt;/th&gt;\n      &lt;td&gt;Inventory&lt;/td&gt;\n      &lt;td&gt;15300&lt;/td&gt;\n    &lt;/tr&gt;\n  &lt;/tbody&gt;\n&lt;/table&gt;\n&lt;/div&gt;\n```\n:::\n:::\n\n\nIf you can see a table above with three accounts, your Python and Quarto setup is working correctly.\n2. Render it. In the terminal, run:\nquarto render test.qmd\n3. Open the result. This creates test.html in the same folder — open it in your web browser and confirm you can see the table.\nIf this worked, your environment is fully set up. If you got an error, check the Troubleshooting section at the end of this chapter before moving on.",
+    "crumbs": [
+      "Part I: Foundations",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Python and Quarto Environment Setup</span>"
+    ]
+  },
+  {
+    "objectID": "02-python-quarto-setup.html#rendering-this-books-project-html-and-pdf",
+    "href": "02-python-quarto-setup.html#rendering-this-books-project-html-and-pdf",
+    "title": "2  Python and Quarto Environment Setup",
+    "section": "2.8 Rendering This Book’s Project (HTML and PDF)",
+    "text": "2.8 Rendering This Book’s Project (HTML and PDF)\nYour course textbook project is set up as a Quarto book (multiple chapters combined into one publication), which is slightly different from rendering a single file. From the terminal, inside your project folder (the one containing _quarto.yml):\nquarto render\nThis single command renders every chapter listed in _quarto.yml and produces both formats we configured:\n\n_book/index.html — an HTML website you can open in a browser or host online\na single PDF file inside _book/ — a downloadable, printable version of the entire book\n\nFigure 2.3 summarizes this process: your .qmd source files go in, quarto render executes the Python code and assembles the document, and both an HTML and a PDF version come out the other side from the same source file — you never have to write your content twice.\n\n\n\n\n\n\nFigure 2.3: The Quarto rendering workflow: one source document, two polished output formats\n\n\n\nTo preview your book live while editing (auto-refreshing as you save changes), use:\nquarto preview",
+    "crumbs": [
+      "Part I: Foundations",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Python and Quarto Environment Setup</span>"
+    ]
+  },
+  {
+    "objectID": "02-python-quarto-setup.html#installing-the-python-packages-youll-need",
+    "href": "02-python-quarto-setup.html#installing-the-python-packages-youll-need",
+    "title": "2  Python and Quarto Environment Setup",
+    "section": "2.9 Installing the Python Packages You’ll Need",
+    "text": "2.9 Installing the Python Packages You’ll Need\nThis book relies on a small set of Python packages. If you installed Python via Anaconda/Miniconda, most of these are likely already available. To install (or confirm) them, run:\npip install pandas numpy matplotlib jupyter\nConfirm they’re installed correctly by running this in a .qmd code chunk or a notebook cell:\n```{python}\nimport pandas as pd\nimport numpy as np\nimport matplotlib\n\nprint(pd.__version__)\nprint(np.__version__)\nprint(matplotlib.__version__)\n```\nIf this runs without errors and prints three version numbers, you’re ready for Chapter 3.",
+    "crumbs": [
+      "Part I: Foundations",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Python and Quarto Environment Setup</span>"
+    ]
+  },
+  {
+    "objectID": "02-python-quarto-setup.html#organizing-your-project-folder",
+    "href": "02-python-quarto-setup.html#organizing-your-project-folder",
+    "title": "2  Python and Quarto Environment Setup",
+    "section": "2.10 Organizing Your Project Folder",
+    "text": "2.10 Organizing Your Project Folder\nAs your book (or your homework project) grows, keeping files organized will save you real time. Figure 2.4 shows the recommended structure, which matches how this book’s own project folder is organized: one .qmd file per chapter, a shared images/ folder for figures, and the configuration file (_quarto.yml) at the top level.\n\n\n\n\n\n\nFigure 2.4: Recommended project folder structure: one file per chapter, plus a shared images folder\n\n\n\nA couple of habits worth building now:\n\nKeep all figures in a single images/ folder rather than scattering them across the project — it makes the project easier to navigate and easier to back up.\nGive files and images descriptive, lowercase, hyphenated names (e.g., revenue-by-quarter.png, not Figure1_FINAL_v2.png) — this avoids broken links when you rename things later and matches conventions used in real data projects.",
+    "crumbs": [
+      "Part I: Foundations",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Python and Quarto Environment Setup</span>"
+    ]
+  },
+  {
+    "objectID": "02-python-quarto-setup.html#troubleshooting-common-setup-issues",
+    "href": "02-python-quarto-setup.html#troubleshooting-common-setup-issues",
+    "title": "2  Python and Quarto Environment Setup",
+    "section": "2.11 Troubleshooting Common Setup Issues",
+    "text": "2.11 Troubleshooting Common Setup Issues\n\n\n\n\n\n\nWarning“quarto: command not found”\n\n\n\nThis usually means Quarto wasn’t added to your system’s PATH during installation. Try closing and reopening your terminal (and your code editor) after installing Quarto — this alone fixes the issue most of the time. If it persists, reinstall Quarto and confirm you allowed it to modify your PATH during setup.\n\n\n\n\n\n\n\n\nWarning“ModuleNotFoundError: No module named ‘pandas’”\n\n\n\nPython can’t find the package because it isn’t installed in the environment your editor is using. Run pip install pandas in the same terminal your editor uses, and confirm you’re using the Python interpreter you expect (in Positron/VS Code, check the interpreter shown in the bottom status bar).\n\n\n\n\n\n\n\n\nWarningPDF rendering fails but HTML works fine\n\n\n\nThis almost always means the LaTeX installation is missing or incomplete. Run quarto install tinytex and try again. If it still fails, re-render with quarto render --to pdf --log render.log and check the log file for the specific missing package.",
+    "crumbs": [
+      "Part I: Foundations",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Python and Quarto Environment Setup</span>"
+    ]
+  },
+  {
+    "objectID": "02-python-quarto-setup.html#chapter-summary",
+    "href": "02-python-quarto-setup.html#chapter-summary",
+    "title": "2  Python and Quarto Environment Setup",
+    "section": "2.12 Chapter Summary",
+    "text": "2.12 Chapter Summary\n\nPython, Quarto, and a code editor (Positron or VS Code) are the three tools needed for this course, and each is installed once at the start of the semester.\nA .py script, a .ipynb notebook, and a .qmd Quarto document all run Python code, but serve different purposes: scripts for production code, notebooks for exploration, and Quarto documents for polished, reproducible reports — which is why this book is written entirely in .qmd files.\nquarto render turns your .qmd source into both HTML and PDF from a single source of truth.\nKeeping a consistent project folder structure (chapters at the top level, a shared images/ folder) will save you time throughout the semester.",
+    "crumbs": [
+      "Part I: Foundations",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Python and Quarto Environment Setup</span>"
+    ]
+  },
+  {
+    "objectID": "02-python-quarto-setup.html#exercises",
+    "href": "02-python-quarto-setup.html#exercises",
+    "title": "2  Python and Quarto Environment Setup",
+    "section": "2.13 Exercises",
+    "text": "2.13 Exercises\n\nComplete the “Your First Quarto Document” walkthrough in this chapter. Take a screenshot of your rendered HTML output showing the table, and submit it as instructed by your course syllabus.\nIn your own words (2–3 sentences), explain when you would choose to use a Jupyter notebook versus a Quarto document for a piece of analytical work.\nIntentionally introduce one small error into your test.qmd file (e.g., misspell pandas as panadas), render it, and copy the error message you get. Then fix it and re-render successfully. This exercise is designed to make error messages feel less intimidating early in the course.",
+    "crumbs": [
+      "Part I: Foundations",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Python and Quarto Environment Setup</span>"
+    ]
+  },
+  {
+    "objectID": "03-data-fundamentals.html",
+    "href": "03-data-fundamentals.html",
+    "title": "3  Data Fundamentals for Accountants",
+    "section": "",
+    "text": "3.1 Why Data Structure Matters Before You Start Coding\nIt’s tempting to jump straight into pandas and start writing code — and we will, starting next chapter. But most real-world accounting analytics problems are data problems, not coding problems. A well-written line of Python code applied to poorly structured or misunderstood data will still give you a wrong (or misleading) answer.\nThis chapter builds the conceptual foundation you need before touching code: what “well-structured” data looks like, what kinds of data you’ll encounter, how core accounting datasets are organized, and what tends to go wrong with real data. Think of this as learning to read a map before you start driving.",
+    "crumbs": [
+      "Part I: Foundations",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Fundamentals for Accountants</span>"
+    ]
+  },
+  {
+    "objectID": "03-data-fundamentals.html#tidy-data-principles",
+    "href": "03-data-fundamentals.html#tidy-data-principles",
+    "title": "3  Data Fundamentals for Accountants",
+    "section": "3.2 Tidy Data Principles",
+    "text": "3.2 Tidy Data Principles\nTidy data is a simple, widely-used standard for organizing tabular data so that it’s easy to analyze. A dataset is tidy when:\n\nEach variable forms a column.\nEach observation forms a row.\nEach type of observational unit forms a table.\n\nThis sounds abstract, so let’s look at an example. Suppose you have quarterly revenue by product line.\nMessy (wide) version — each quarter is its own column:\n\n\n\nproduct_line\nQ1\nQ2\nQ3\nQ4\n\n\n\n\nConsulting\n42,000\n45,500\n47,200\n50,100\n\n\nSoftware\n61,000\n58,000\n63,500\n70,200\n\n\n\nThis looks fine to read as a human, and it’s a completely normal way to present numbers in a report. But it’s not tidy: “quarter” is a variable that’s been spread across four columns instead of living in a single column.\nTidy (long) version — the same data, restructured:\n\n\n\nproduct_line\nquarter\nrevenue\n\n\n\n\nConsulting\nQ1\n42,000\n\n\nConsulting\nQ2\n45,500\n\n\nConsulting\nQ3\n47,200\n\n\nConsulting\nQ4\n50,100\n\n\nSoftware\nQ1\n61,000\n\n\nSoftware\nQ2\n58,000\n\n\nSoftware\nQ3\n63,500\n\n\nSoftware\nQ4\n70,200\n\n\n\n\n\n\n\n\n\nTipConnect to Practice\n\n\n\nTidy data isn’t just an academic preference. In Chapter 4, you’ll see that pandas operations — filtering, grouping, plotting — are dramatically easier when your data is tidy. A wide table like the “messy” example above requires extra reshaping steps before you can, say, plot revenue trends across all product lines on one chart.\n\n\nYou don’t need to memorize a rulebook here — the practical test is: if I wanted to filter, group, or plot by any single variable, is that variable sitting in one clearly labeled column? If yes, you’re likely looking at tidy data.",
+    "crumbs": [
+      "Part I: Foundations",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Fundamentals for Accountants</span>"
+    ]
+  },
+  {
+    "objectID": "03-data-fundamentals.html#levels-of-measurement",
+    "href": "03-data-fundamentals.html#levels-of-measurement",
+    "title": "3  Data Fundamentals for Accountants",
+    "section": "3.3 Levels of Measurement",
+    "text": "3.3 Levels of Measurement\nBefore you calculate anything — an average, a sum, a comparison — it’s worth asking: what kind of variable is this, and what operations actually make sense on it? This is the idea behind levels of measurement, a classification used throughout statistics.\nThere are four levels, each allowing more mathematical operations than the last:\n\n\n\n\n\n\n\n\n\nLevel\nDescription\nAccounting Example\nMeaningful Operations\n\n\n\n\nNominal\nCategories with no inherent order\nAccount type (Asset, Liability, Equity), Department, Vendor name\nCount, mode, group by\n\n\nOrdinal\nOrdered categories, but differences between levels aren’t meaningful\nCredit risk rating (Low/Medium/High), Audit opinion severity\nCount, mode, median, ranking\n\n\nInterval\nMeaningful differences, but no true zero\nFiscal year, Credit score (in some scales)\nAddition/subtraction, mean, but not meaningful ratios\n\n\nRatio\nTrue zero point; all arithmetic is meaningful\nAccount balance, Transaction amount, Units sold\nMean, sum, ratios, all standard arithmetic\n\n\n\n\n\n\n\n\n\nImportantWhy This Matters in Practice\n\n\n\nIt’s easy to make a technically-valid-looking calculation that is conceptually meaningless. For example: averaging a customer’s credit risk rating of “Low, Medium, High” by assigning them 1, 2, 3 and computing a mean of 1.8 looks like a real number, but “1.8” doesn’t correspond to any real risk category — ordinal data doesn’t support that kind of averaging. Similarly, summing account numbers from your chart of accounts (nominal data, even though it’s stored as a number) produces a number with no accounting meaning at all.\nWe’ll return to this idea in Chapter 5, where choosing the right summary statistic depends directly on a variable’s level of measurement.",
+    "crumbs": [
+      "Part I: Foundations",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Fundamentals for Accountants</span>"
+    ]
+  },
+  {
+    "objectID": "03-data-fundamentals.html#data-types-youll-encounter",
+    "href": "03-data-fundamentals.html#data-types-youll-encounter",
+    "title": "3  Data Fundamentals for Accountants",
+    "section": "3.4 Data Types You’ll Encounter",
+    "text": "3.4 Data Types You’ll Encounter\nRelated to levels of measurement, but more about how data is stored and represented in a dataset, are data types. In accounting data, you’ll regularly see:\n\nNumeric — continuous: dollar amounts (account balances, transaction amounts) — ratio-level, all arithmetic makes sense\nNumeric — discrete: counts (units sold, number of invoices) — ratio-level, but only whole numbers make sense\nCategorical: account type, department, cost center, vendor — typically nominal, sometimes ordinal (e.g., risk tier)\nDate/time: transaction date, fiscal period, posting date — deserves special attention, covered next\nText/string: transaction descriptions, memo fields, vendor names — often messy and inconsistently formatted\nBoolean/flag: is_reversed, is_intercompany, is_reconciled — true/false indicators, nominal with only two categories\n\n\n3.4.1 A Special Note on Dates\nDates cause more headaches in accounting data than almost any other data type, for a few reasons:\n\nThey can be stored as text (\"01/15/2025\") instead of an actual date type, which prevents sorting and date arithmetic from working correctly\nFormat ambiguity: is 03/04/2025 March 4th or April 3rd? This depends on regional conventions (US vs. most of the rest of the world) and is a common source of silent errors\nFiscal year vs. calendar year: a company with a fiscal year ending June 30 will label transactions in “FY2025” that occurred in calendar 2024\n\nWe’ll handle dates properly with pandas in Chapter 4 — for now, just know that a date column that “looks fine” when you eyeball a spreadsheet is one of the most common sources of hidden bugs in accounting analytics.",
+    "crumbs": [
+      "Part I: Foundations",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Fundamentals for Accountants</span>"
+    ]
+  },
+  {
+    "objectID": "03-data-fundamentals.html#core-accounting-data-structures",
+    "href": "03-data-fundamentals.html#core-accounting-data-structures",
+    "title": "3  Data Fundamentals for Accountants",
+    "section": "3.5 Core Accounting Data Structures",
+    "text": "3.5 Core Accounting Data Structures\nMost accounting analytics work touches one or more of four related data structures. Figure 3.1 shows how they connect.\n\n\n\n\n\n\nFigure 3.1: How core accounting data structures relate: the chart of accounts defines every account, transactions flow through the general ledger (fed by subledgers), and roll up into a trial balance and ultimately the financial statements\n\n\n\n\n3.5.1 Chart of Accounts (COA)\nThe chart of accounts is the master list of every account a company uses — essentially a data dictionary for the rest of the accounting system. A typical COA entry includes an account number, account name, and account type (Asset, Liability, Equity, Revenue, Expense).\n\n\n3.5.2 General Ledger (GL)\nThe general ledger contains transaction-level detail — every individual journal entry, each with a debit and a credit side, a date, a description, and (typically) the account(s) affected. This is the most granular, information-rich accounting dataset, and the one most audit and fraud analytics work is performed on.\n\n\n3.5.3 Subsidiary Ledgers\nSubsidiary ledgers (Accounts Receivable, Accounts Payable, Fixed Assets, Payroll, etc.) hold detailed records for a specific area that then roll up into summary entries in the general ledger. For example, the AR subledger tracks every individual customer invoice and payment, but the GL might only see a periodic summary entry.\n\n\n3.5.4 Trial Balance\nThe trial balance is a summarized snapshot: the ending balance of every account in the chart of accounts, as of a point in time. This is the level of detail you worked with in Chapter 2 — one row per account, not one row per transaction. A trial balance is a checkpoint used to confirm that total debits equal total credits before financial statements are prepared.",
+    "crumbs": [
+      "Part I: Foundations",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Fundamentals for Accountants</span>"
+    ]
+  },
+  {
+    "objectID": "03-data-fundamentals.html#transaction-level-vs.-summarized-data",
+    "href": "03-data-fundamentals.html#transaction-level-vs.-summarized-data",
+    "title": "3  Data Fundamentals for Accountants",
+    "section": "3.6 Transaction-Level vs. Summarized Data",
+    "text": "3.6 Transaction-Level vs. Summarized Data\nThis distinction matters more than it might first appear:\n\nA trial balance can look completely normal — accounts balanced, nothing unusual — while individual transactions underneath it hide errors, unusual patterns, or fraud.\nFor example, imagine a “Travel Expense” account with a perfectly reasonable ending balance of $45,000 for the year. That summary number gives no indication that $38,000 of it came from a single suspicious transaction posted on a Sunday by an employee who doesn’t normally have travel expenses.\n\nThis is exactly why audit analytics (Chapter 8) and fraud detection (Chapter 9) typically require transaction-level general ledger data, not just trial balances — the interesting patterns often only show up at the most granular level.",
+    "crumbs": [
+      "Part I: Foundations",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Fundamentals for Accountants</span>"
+    ]
+  },
+  {
+    "objectID": "03-data-fundamentals.html#common-data-quality-issues-in-accounting-data",
+    "href": "03-data-fundamentals.html#common-data-quality-issues-in-accounting-data",
+    "title": "3  Data Fundamentals for Accountants",
+    "section": "3.7 Common Data Quality Issues in Accounting Data",
+    "text": "3.7 Common Data Quality Issues in Accounting Data\nReal accounting data is rarely clean. Some of the most common issues you’ll encounter:\n\nMissing values: blank department codes, missing dates, unpopulated memo fields\nDuplicate entries: the same transaction entered twice, sometimes with slightly different formatting\nInconsistent formatting: dates stored as text in different formats, currency values stored with $ symbols or commas (which prevents numeric calculations until cleaned), inconsistent capitalization in account or vendor names (\"Cash\" vs. \"cash\" vs. \"CASH \" with trailing whitespace)\nInconsistent categorical labels: the same department entered as \"HR\", \"H.R.\", and \"Human Resources\" across different rows\nOutliers vs. errors: an unusually large transaction might be a legitimate one-time event (a building purchase) or a data entry error (an extra zero) — these require judgment, not just a statistical rule, to tell apart\n\n\n\n\n\n\n\nWarningA Realistic Messy Example\n\n\n\nImagine you received this general ledger excerpt exactly as extracted from a client’s system:\n\n\n\nentry_date\naccount\ndebit\ndepartment\n\n\n\n\n01/15/2025\nCash\n$4,500.00\nSales\n\n\n1-15-2025\ncash\n4500\nsales\n\n\n01/15/2025\nCash\n4,500\n\n\n\n01/32/2025\nCash\n45,000\nSales\n\n\n\nThis tiny sample already contains: inconsistent date formats, inconsistent account name capitalization, inconsistent currency formatting, a missing department value, a likely duplicate entry, an impossible date (01/32/2025), and a value that may be a data-entry error (an extra zero turning $4,500 into $45,000). Spotting these issues before you calculate anything is a core skill — we’ll clean data like this hands-on in Chapter 4.",
+    "crumbs": [
+      "Part I: Foundations",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Fundamentals for Accountants</span>"
+    ]
+  },
+  {
+    "objectID": "03-data-fundamentals.html#a-preview-look-at-a-real-dataset",
+    "href": "03-data-fundamentals.html#a-preview-look-at-a-real-dataset",
+    "title": "3  Data Fundamentals for Accountants",
+    "section": "3.8 A Preview Look at a Real Dataset",
+    "text": "3.8 A Preview Look at a Real Dataset\nTo connect these ideas to something concrete, look at the sample transaction-level general ledger below (general_ledger_sample.csv), covering two weeks of journal entries for a small company. Each journal entry (entry_id) has at least two rows — one debit, one credit — matching how double-entry accounting actually works.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nentry_id\nentry_date\naccount\naccount_type\ndescription\ndebit\ncredit\ndepartment\nposted_by\n\n\n\n\nJE1001\n2025-01-03\nCash\nAsset\nCustomer payment received\n4500\n0\nSales\njsmith\n\n\nJE1001\n2025-01-03\nAccounts Receivable\nAsset\nCustomer payment received\n0\n4500\nSales\njsmith\n\n\nJE1002\n2025-01-05\nInventory\nAsset\nPurchase of merchandise\n7200\n0\nOperations\nmchen\n\n\nJE1002\n2025-01-05\nAccounts Payable\nLiability\nPurchase of merchandise\n0\n7200\nOperations\nmchen\n\n\n\n\nA few things worth noticing just from visual inspection, before we write a single line of pandas code in Chapter 4:\n\nThis table is tidy: each column is a single variable (date, account, debit, credit, etc.), and each row is one line of a journal entry.\nThe level of measurement varies by column: debit/credit are ratio-level (arithmetic is meaningful), account_type and department are nominal (categories only), entry_date is a date type requiring careful handling.\nThis is transaction-level data — far more granular than the trial balance from Chapter 2 — which is exactly the kind of dataset audit and fraud analytics techniques (Chapters 8–9) are designed to work with.\n\nWe’ll load and work with this exact file in Chapter 4.",
+    "crumbs": [
+      "Part I: Foundations",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Fundamentals for Accountants</span>"
+    ]
+  },
+  {
+    "objectID": "03-data-fundamentals.html#chapter-summary",
+    "href": "03-data-fundamentals.html#chapter-summary",
+    "title": "3  Data Fundamentals for Accountants",
+    "section": "3.9 Chapter Summary",
+    "text": "3.9 Chapter Summary\n\nTidy data — one variable per column, one observation per row, one observational unit per table — makes analysis dramatically easier and is the standard this book (and pandas) assumes.\nLevels of measurement (nominal, ordinal, interval, ratio) determine which calculations are actually meaningful for a given variable — averaging an ordinal rating or summing a nominal code produces numbers without real meaning.\nAccounting data typically falls into a few types: numeric, categorical, date/time, text, and boolean — each with its own quirks, dates especially.\nThe chart of accounts, general ledger, subledgers, and trial balance are related but distinct structures, moving from transaction-level detail to summarized snapshots.\nAnalytics work — especially audit and fraud analytics — usually requires transaction-level data, since summarized data can hide the patterns that matter most.\nReal accounting data commonly has quality issues: missing values, duplicates, inconsistent formatting, and ambiguous outliers, all of which need to be identified before analysis begins.",
+    "crumbs": [
+      "Part I: Foundations",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Fundamentals for Accountants</span>"
+    ]
+  },
+  {
+    "objectID": "03-data-fundamentals.html#discussion-questions",
+    "href": "03-data-fundamentals.html#discussion-questions",
+    "title": "3  Data Fundamentals for Accountants",
+    "section": "3.10 Discussion Questions",
+    "text": "3.10 Discussion Questions\n\nLook back at the “wide” quarterly revenue example early in this chapter. Why might a company’s finance team prefer the wide format for a printed report, even though it’s not tidy for analysis purposes?\nGive one example (not from this chapter) of an accounting variable at each level of measurement: nominal, ordinal, interval, and ratio.\nWhy might a company’s trial balance appear completely normal in a given month, even if fraudulent transactions occurred during that period?",
+    "crumbs": [
+      "Part I: Foundations",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Fundamentals for Accountants</span>"
+    ]
+  },
+  {
+    "objectID": "03-data-fundamentals.html#exercises",
+    "href": "03-data-fundamentals.html#exercises",
+    "title": "3  Data Fundamentals for Accountants",
+    "section": "3.11 Exercises",
+    "text": "3.11 Exercises\n\nTake the “messy” wide revenue table from this chapter and manually rewrite it in tidy (long) format on paper or in a spreadsheet.\nUsing the messy general ledger excerpt in the callout box above, list every data quality issue you can find, and for each one, briefly describe how you would investigate or resolve it if this were real client data.\nDownload general_ledger_sample.csv (provided alongside this chapter) and open it in a spreadsheet program. Identify: (a) how many unique journal entries it contains, (b) how many unique departments appear, and (c) whether total debits equal total credits.",
+    "crumbs": [
+      "Part I: Foundations",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Fundamentals for Accountants</span>"
     ]
   }
 ]

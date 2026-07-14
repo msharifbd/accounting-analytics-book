@@ -23,41 +23,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -107,6 +72,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<style>
+.scrollable-table {
+  overflow-x: auto !important;
+}
+.scrollable-table table {
+  width: max-content !important;
+  max-width: none !important;
+}
+</style>
 
 
 </head>
@@ -136,6 +110,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Accounting Analytics with Python</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/msharifbd/accounting-analytics-book" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -308,20 +285,74 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">References</span></a>
   </div>
 </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendix-a-python-primer.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">A Primer on Python</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendix-b-financial-statement-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Financial Statement Basics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendix-c-edgar-database.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">An Introduction to EDGAR Database</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#why-data-structure-matters-before-you-start-coding" id="toc-why-data-structure-matters-before-you-start-coding" class="nav-link active" data-scroll-target="#why-data-structure-matters-before-you-start-coding"><span class="header-section-number">3.1</span> Why Data Structure Matters Before You Start Coding</a></li>
+  <li><a href="#tidy-data-principles" id="toc-tidy-data-principles" class="nav-link" data-scroll-target="#tidy-data-principles"><span class="header-section-number">3.2</span> Tidy Data Principles</a></li>
+  <li><a href="#levels-of-measurement" id="toc-levels-of-measurement" class="nav-link" data-scroll-target="#levels-of-measurement"><span class="header-section-number">3.3</span> Levels of Measurement</a></li>
+  <li><a href="#data-types-youll-encounter" id="toc-data-types-youll-encounter" class="nav-link" data-scroll-target="#data-types-youll-encounter"><span class="header-section-number">3.4</span> Data Types You’ll Encounter</a>
+  <ul class="collapse">
+  <li><a href="#a-special-note-on-dates" id="toc-a-special-note-on-dates" class="nav-link" data-scroll-target="#a-special-note-on-dates"><span class="header-section-number">3.4.1</span> A Special Note on Dates</a></li>
+  </ul></li>
+  <li><a href="#core-accounting-data-structures" id="toc-core-accounting-data-structures" class="nav-link" data-scroll-target="#core-accounting-data-structures"><span class="header-section-number">3.5</span> Core Accounting Data Structures</a>
+  <ul class="collapse">
+  <li><a href="#chart-of-accounts-coa" id="toc-chart-of-accounts-coa" class="nav-link" data-scroll-target="#chart-of-accounts-coa"><span class="header-section-number">3.5.1</span> Chart of Accounts (COA)</a></li>
+  <li><a href="#general-ledger-gl" id="toc-general-ledger-gl" class="nav-link" data-scroll-target="#general-ledger-gl"><span class="header-section-number">3.5.2</span> General Ledger (GL)</a></li>
+  <li><a href="#subsidiary-ledgers" id="toc-subsidiary-ledgers" class="nav-link" data-scroll-target="#subsidiary-ledgers"><span class="header-section-number">3.5.3</span> Subsidiary Ledgers</a></li>
+  <li><a href="#trial-balance" id="toc-trial-balance" class="nav-link" data-scroll-target="#trial-balance"><span class="header-section-number">3.5.4</span> Trial Balance</a></li>
+  </ul></li>
+  <li><a href="#transaction-level-vs.-summarized-data" id="toc-transaction-level-vs.-summarized-data" class="nav-link" data-scroll-target="#transaction-level-vs.-summarized-data"><span class="header-section-number">3.6</span> Transaction-Level vs.&nbsp;Summarized Data</a></li>
+  <li><a href="#common-data-quality-issues-in-accounting-data" id="toc-common-data-quality-issues-in-accounting-data" class="nav-link" data-scroll-target="#common-data-quality-issues-in-accounting-data"><span class="header-section-number">3.7</span> Common Data Quality Issues in Accounting Data</a></li>
+  <li><a href="#a-preview-look-at-a-real-dataset" id="toc-a-preview-look-at-a-real-dataset" class="nav-link" data-scroll-target="#a-preview-look-at-a-real-dataset"><span class="header-section-number">3.8</span> A Preview Look at a Real Dataset</a></li>
+  <li><a href="#chapter-summary" id="toc-chapter-summary" class="nav-link" data-scroll-target="#chapter-summary"><span class="header-section-number">3.9</span> Chapter Summary</a></li>
+  <li><a href="#discussion-questions" id="toc-discussion-questions" class="nav-link" data-scroll-target="#discussion-questions"><span class="header-section-number">3.10</span> Discussion Questions</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">3.11</span> Exercises</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/msharifbd/accounting-analytics-book/edit/main/03-data-fundamentals.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/blob/main/03-data-fundamentals.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-introduction-to-accounting-analytics.html">Part I: Foundations</a></li><li class="breadcrumb-item"><a href="./03-data-fundamentals.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Fundamentals for Accountants</span></a></li></ol></nav>
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Fundamentals for Accountants</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Fundamentals for Accountants</span></h1>
 </div>
 
 
@@ -338,10 +369,434 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Learning Objectives
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>By the end of this chapter, you should be able to:</p>
+<ul>
+<li>Explain tidy data principles and identify whether a table is tidy or messy</li>
+<li>Identify the four levels of measurement and match them to common accounting variables</li>
+<li>Recognize the main data types encountered in accounting data (numeric, categorical, date/time, text, boolean)</li>
+<li>Describe the structure and relationship between the chart of accounts, general ledger, trial balance, and subledgers</li>
+<li>Explain the difference between transaction-level and summarized data, and why analytics often needs the former</li>
+<li>Identify common data quality issues in real-world accounting datasets</li>
+</ul>
+</div>
+</div>
+<section id="why-data-structure-matters-before-you-start-coding" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="why-data-structure-matters-before-you-start-coding"><span class="header-section-number">3.1</span> Why Data Structure Matters Before You Start Coding</h2>
+<p>It’s tempting to jump straight into pandas and start writing code — and we will, starting next chapter. But most real-world accounting analytics problems are <strong>data problems</strong>, not coding problems. A well-written line of Python code applied to poorly structured or misunderstood data will still give you a wrong (or misleading) answer.</p>
+<p>This chapter builds the conceptual foundation you need before touching code: what “well-structured” data looks like, what kinds of data you’ll encounter, how core accounting datasets are organized, and what tends to go wrong with real data. Think of this as learning to read a map before you start driving.</p>
+</section>
+<section id="tidy-data-principles" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="tidy-data-principles"><span class="header-section-number">3.2</span> Tidy Data Principles</h2>
+<p><strong>Tidy data</strong> is a simple, widely-used standard for organizing tabular data so that it’s easy to analyze. A dataset is tidy when:</p>
+<ol type="1">
+<li><strong>Each variable forms a column.</strong></li>
+<li><strong>Each observation forms a row.</strong></li>
+<li><strong>Each type of observational unit forms a table.</strong></li>
+</ol>
+<p>This sounds abstract, so let’s look at an example. Suppose you have quarterly revenue by product line.</p>
+<p><strong>Messy (wide) version</strong> — each quarter is its own column:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>product_line</th>
+<th>Q1</th>
+<th>Q2</th>
+<th>Q3</th>
+<th>Q4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Consulting</td>
+<td>42,000</td>
+<td>45,500</td>
+<td>47,200</td>
+<td>50,100</td>
+</tr>
+<tr class="even">
+<td>Software</td>
+<td>61,000</td>
+<td>58,000</td>
+<td>63,500</td>
+<td>70,200</td>
+</tr>
+</tbody>
+</table>
+<p>This looks fine to read as a human, and it’s a completely normal way to present numbers in a report. But it’s <strong>not tidy</strong>: “quarter” is a variable that’s been spread across four columns instead of living in a single column.</p>
+<p><strong>Tidy (long) version</strong> — the same data, restructured:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>product_line</th>
+<th>quarter</th>
+<th>revenue</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Consulting</td>
+<td>Q1</td>
+<td>42,000</td>
+</tr>
+<tr class="even">
+<td>Consulting</td>
+<td>Q2</td>
+<td>45,500</td>
+</tr>
+<tr class="odd">
+<td>Consulting</td>
+<td>Q3</td>
+<td>47,200</td>
+</tr>
+<tr class="even">
+<td>Consulting</td>
+<td>Q4</td>
+<td>50,100</td>
+</tr>
+<tr class="odd">
+<td>Software</td>
+<td>Q1</td>
+<td>61,000</td>
+</tr>
+<tr class="even">
+<td>Software</td>
+<td>Q2</td>
+<td>58,000</td>
+</tr>
+<tr class="odd">
+<td>Software</td>
+<td>Q3</td>
+<td>63,500</td>
+</tr>
+<tr class="even">
+<td>Software</td>
+<td>Q4</td>
+<td>70,200</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Connect to Practice
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Tidy data isn’t just an academic preference. In Chapter 4, you’ll see that pandas operations — filtering, grouping, plotting — are dramatically easier when your data is tidy. A wide table like the “messy” example above requires extra reshaping steps before you can, say, plot revenue trends across all product lines on one chart.</p>
+</div>
+</div>
+<p>You don’t need to memorize a rulebook here — the practical test is: <em>if I wanted to filter, group, or plot by any single variable, is that variable sitting in one clearly labeled column?</em> If yes, you’re likely looking at tidy data.</p>
+</section>
+<section id="levels-of-measurement" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="levels-of-measurement"><span class="header-section-number">3.3</span> Levels of Measurement</h2>
+<p>Before you calculate anything — an average, a sum, a comparison — it’s worth asking: <em>what kind of variable is this, and what operations actually make sense on it?</em> This is the idea behind <strong>levels of measurement</strong>, a classification used throughout statistics.</p>
+<p>There are four levels, each allowing more mathematical operations than the last:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Level</th>
+<th>Description</th>
+<th>Accounting Example</th>
+<th>Meaningful Operations</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Nominal</strong></td>
+<td>Categories with no inherent order</td>
+<td>Account type (Asset, Liability, Equity), Department, Vendor name</td>
+<td>Count, mode, group by</td>
+</tr>
+<tr class="even">
+<td><strong>Ordinal</strong></td>
+<td>Ordered categories, but differences between levels aren’t meaningful</td>
+<td>Credit risk rating (Low/Medium/High), Audit opinion severity</td>
+<td>Count, mode, median, ranking</td>
+</tr>
+<tr class="odd">
+<td><strong>Interval</strong></td>
+<td>Meaningful differences, but no true zero</td>
+<td>Fiscal year, Credit score (in some scales)</td>
+<td>Addition/subtraction, mean, but not meaningful ratios</td>
+</tr>
+<tr class="even">
+<td><strong>Ratio</strong></td>
+<td>True zero point; all arithmetic is meaningful</td>
+<td>Account balance, Transaction amount, Units sold</td>
+<td>Mean, sum, ratios, all standard arithmetic</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Why This Matters in Practice
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>It’s easy to make a technically-valid-looking calculation that is conceptually meaningless. For example: averaging a customer’s credit risk rating of “Low, Medium, High” by assigning them 1, 2, 3 and computing a mean of 1.8 <em>looks</em> like a real number, but “1.8” doesn’t correspond to any real risk category — ordinal data doesn’t support that kind of averaging. Similarly, summing account numbers from your chart of accounts (nominal data, even though it’s stored as a number) produces a number with no accounting meaning at all.</p>
+<p>We’ll return to this idea in Chapter 5, where choosing the right summary statistic depends directly on a variable’s level of measurement.</p>
+</div>
+</div>
+</section>
+<section id="data-types-youll-encounter" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="data-types-youll-encounter"><span class="header-section-number">3.4</span> Data Types You’ll Encounter</h2>
+<p>Related to levels of measurement, but more about how data is <em>stored and represented</em> in a dataset, are data types. In accounting data, you’ll regularly see:</p>
+<ul>
+<li><strong>Numeric — continuous</strong>: dollar amounts (account balances, transaction amounts) — ratio-level, all arithmetic makes sense</li>
+<li><strong>Numeric — discrete</strong>: counts (units sold, number of invoices) — ratio-level, but only whole numbers make sense</li>
+<li><strong>Categorical</strong>: account type, department, cost center, vendor — typically nominal, sometimes ordinal (e.g., risk tier)</li>
+<li><strong>Date/time</strong>: transaction date, fiscal period, posting date — deserves special attention, covered next</li>
+<li><strong>Text/string</strong>: transaction descriptions, memo fields, vendor names — often messy and inconsistently formatted</li>
+<li><strong>Boolean/flag</strong>: <code>is_reversed</code>, <code>is_intercompany</code>, <code>is_reconciled</code> — true/false indicators, nominal with only two categories</li>
+</ul>
+<section id="a-special-note-on-dates" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="a-special-note-on-dates"><span class="header-section-number">3.4.1</span> A Special Note on Dates</h3>
+<p>Dates cause more headaches in accounting data than almost any other data type, for a few reasons:</p>
+<ul>
+<li>They can be stored as <strong>text</strong> (<code>"01/15/2025"</code>) instead of an actual date type, which prevents sorting and date arithmetic from working correctly</li>
+<li><strong>Format ambiguity</strong>: is <code>03/04/2025</code> March 4th or April 3rd? This depends on regional conventions (US vs.&nbsp;most of the rest of the world) and is a common source of silent errors</li>
+<li><strong>Fiscal year vs.&nbsp;calendar year</strong>: a company with a fiscal year ending June 30 will label transactions in “FY2025” that occurred in <em>calendar</em> 2024</li>
+</ul>
+<p>We’ll handle dates properly with pandas in Chapter 4 — for now, just know that a date column that “looks fine” when you eyeball a spreadsheet is one of the most common sources of hidden bugs in accounting analytics.</p>
+</section>
+</section>
+<section id="core-accounting-data-structures" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="core-accounting-data-structures"><span class="header-section-number">3.5</span> Core Accounting Data Structures</h2>
+<p>Most accounting analytics work touches one or more of four related data structures. <a href="#fig-coa-gl-flow" class="quarto-xref">Figure&nbsp;<span>3.1</span></a> shows how they connect.</p>
+<div id="fig-coa-gl-flow" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-coa-gl-flow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/coa-gl-tb-flow.png" class="img-fluid figure-img" style="width:95.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-coa-gl-flow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.1: How core accounting data structures relate: the chart of accounts defines every account, transactions flow through the general ledger (fed by subledgers), and roll up into a trial balance and ultimately the financial statements
+</figcaption>
+</figure>
+</div>
+<section id="chart-of-accounts-coa" class="level3" data-number="3.5.1">
+<h3 data-number="3.5.1" class="anchored" data-anchor-id="chart-of-accounts-coa"><span class="header-section-number">3.5.1</span> Chart of Accounts (COA)</h3>
+<p>The chart of accounts is the master list of every account a company uses — essentially a data dictionary for the rest of the accounting system. A typical COA entry includes an account number, account name, and account type (Asset, Liability, Equity, Revenue, Expense).</p>
+</section>
+<section id="general-ledger-gl" class="level3" data-number="3.5.2">
+<h3 data-number="3.5.2" class="anchored" data-anchor-id="general-ledger-gl"><span class="header-section-number">3.5.2</span> General Ledger (GL)</h3>
+<p>The general ledger contains <strong>transaction-level detail</strong> — every individual journal entry, each with a debit and a credit side, a date, a description, and (typically) the account(s) affected. This is the most granular, information-rich accounting dataset, and the one most audit and fraud analytics work is performed on.</p>
+</section>
+<section id="subsidiary-ledgers" class="level3" data-number="3.5.3">
+<h3 data-number="3.5.3" class="anchored" data-anchor-id="subsidiary-ledgers"><span class="header-section-number">3.5.3</span> Subsidiary Ledgers</h3>
+<p>Subsidiary ledgers (Accounts Receivable, Accounts Payable, Fixed Assets, Payroll, etc.) hold detailed records for a specific area that then roll up into summary entries in the general ledger. For example, the AR subledger tracks every individual customer invoice and payment, but the GL might only see a periodic summary entry.</p>
+</section>
+<section id="trial-balance" class="level3" data-number="3.5.4">
+<h3 data-number="3.5.4" class="anchored" data-anchor-id="trial-balance"><span class="header-section-number">3.5.4</span> Trial Balance</h3>
+<p>The trial balance is a <strong>summarized snapshot</strong>: the ending balance of every account in the chart of accounts, as of a point in time. This is the level of detail you worked with in Chapter 2 — one row per account, not one row per transaction. A trial balance is a checkpoint used to confirm that total debits equal total credits before financial statements are prepared.</p>
+</section>
+</section>
+<section id="transaction-level-vs.-summarized-data" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="transaction-level-vs.-summarized-data"><span class="header-section-number">3.6</span> Transaction-Level vs.&nbsp;Summarized Data</h2>
+<p>This distinction matters more than it might first appear:</p>
+<ul>
+<li>A <strong>trial balance</strong> can look completely normal — accounts balanced, nothing unusual — while individual <strong>transactions</strong> underneath it hide errors, unusual patterns, or fraud.</li>
+<li>For example, imagine a “Travel Expense” account with a perfectly reasonable ending balance of $45,000 for the year. That summary number gives no indication that $38,000 of it came from a single suspicious transaction posted on a Sunday by an employee who doesn’t normally have travel expenses.</li>
+</ul>
+<p>This is exactly why audit analytics (Chapter 8) and fraud detection (Chapter 9) typically require <strong>transaction-level general ledger data</strong>, not just trial balances — the interesting patterns often only show up at the most granular level.</p>
+</section>
+<section id="common-data-quality-issues-in-accounting-data" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="common-data-quality-issues-in-accounting-data"><span class="header-section-number">3.7</span> Common Data Quality Issues in Accounting Data</h2>
+<p>Real accounting data is rarely clean. Some of the most common issues you’ll encounter:</p>
+<ul>
+<li><strong>Missing values</strong>: blank department codes, missing dates, unpopulated memo fields</li>
+<li><strong>Duplicate entries</strong>: the same transaction entered twice, sometimes with slightly different formatting</li>
+<li><strong>Inconsistent formatting</strong>: dates stored as text in different formats, currency values stored with <code>$</code> symbols or commas (which prevents numeric calculations until cleaned), inconsistent capitalization in account or vendor names (<code>"Cash"</code> vs.&nbsp;<code>"cash"</code> vs.&nbsp;<code>"CASH "</code> with trailing whitespace)</li>
+<li><strong>Inconsistent categorical labels</strong>: the same department entered as <code>"HR"</code>, <code>"H.R."</code>, and <code>"Human Resources"</code> across different rows</li>
+<li><strong>Outliers vs.&nbsp;errors</strong>: an unusually large transaction might be a legitimate one-time event (a building purchase) or a data entry error (an extra zero) — these require judgment, not just a statistical rule, to tell apart</li>
+</ul>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>A Realistic Messy Example
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Imagine you received this general ledger excerpt exactly as extracted from a client’s system:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>entry_date</th>
+<th>account</th>
+<th>debit</th>
+<th>department</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>01/15/2025</td>
+<td>Cash</td>
+<td>$4,500.00</td>
+<td>Sales</td>
+</tr>
+<tr class="even">
+<td>1-15-2025</td>
+<td>cash</td>
+<td>4500</td>
+<td>sales</td>
+</tr>
+<tr class="odd">
+<td>01/15/2025</td>
+<td>Cash</td>
+<td>4,500</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>01/32/2025</td>
+<td>Cash</td>
+<td>45,000</td>
+<td>Sales</td>
+</tr>
+</tbody>
+</table>
+<p>This tiny sample already contains: inconsistent date formats, inconsistent account name capitalization, inconsistent currency formatting, a missing department value, a likely duplicate entry, an impossible date (<code>01/32/2025</code>), and a value that may be a data-entry error (an extra zero turning $4,500 into $45,000). Spotting these issues <em>before</em> you calculate anything is a core skill — we’ll clean data like this hands-on in Chapter 4.</p>
+</div>
+</div>
+</section>
+<section id="a-preview-look-at-a-real-dataset" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="a-preview-look-at-a-real-dataset"><span class="header-section-number">3.8</span> A Preview Look at a Real Dataset</h2>
+<p>To connect these ideas to something concrete, look at the sample transaction-level general ledger below (<code>general_ledger_sample.csv</code>), covering two weeks of journal entries for a small company. Each journal entry (<code>entry_id</code>) has at least two rows — one debit, one credit — matching how double-entry accounting actually works.</p>
+<div class="scrollable-table">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>entry_id</th>
+<th>entry_date</th>
+<th>account</th>
+<th>account_type</th>
+<th>description</th>
+<th>debit</th>
+<th>credit</th>
+<th>department</th>
+<th>posted_by</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>JE1001</td>
+<td>2025-01-03</td>
+<td>Cash</td>
+<td>Asset</td>
+<td>Customer payment received</td>
+<td>4500</td>
+<td>0</td>
+<td>Sales</td>
+<td>jsmith</td>
+</tr>
+<tr class="even">
+<td>JE1001</td>
+<td>2025-01-03</td>
+<td>Accounts Receivable</td>
+<td>Asset</td>
+<td>Customer payment received</td>
+<td>0</td>
+<td>4500</td>
+<td>Sales</td>
+<td>jsmith</td>
+</tr>
+<tr class="odd">
+<td>JE1002</td>
+<td>2025-01-05</td>
+<td>Inventory</td>
+<td>Asset</td>
+<td>Purchase of merchandise</td>
+<td>7200</td>
+<td>0</td>
+<td>Operations</td>
+<td>mchen</td>
+</tr>
+<tr class="even">
+<td>JE1002</td>
+<td>2025-01-05</td>
+<td>Accounts Payable</td>
+<td>Liability</td>
+<td>Purchase of merchandise</td>
+<td>0</td>
+<td>7200</td>
+<td>Operations</td>
+<td>mchen</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>A few things worth noticing just from visual inspection, before we write a single line of pandas code in Chapter 4:</p>
+<ul>
+<li>This table is <strong>tidy</strong>: each column is a single variable (date, account, debit, credit, etc.), and each row is one line of a journal entry.</li>
+<li>The <strong>level of measurement</strong> varies by column: <code>debit</code>/<code>credit</code> are ratio-level (arithmetic is meaningful), <code>account_type</code> and <code>department</code> are nominal (categories only), <code>entry_date</code> is a date type requiring careful handling.</li>
+<li>This is <strong>transaction-level</strong> data — far more granular than the trial balance from Chapter 2 — which is exactly the kind of dataset audit and fraud analytics techniques (Chapters 8–9) are designed to work with.</li>
+</ul>
+<p>We’ll load and work with this exact file in Chapter 4.</p>
+</section>
+<section id="chapter-summary" class="level2" data-number="3.9">
+<h2 data-number="3.9" class="anchored" data-anchor-id="chapter-summary"><span class="header-section-number">3.9</span> Chapter Summary</h2>
+<ul>
+<li>Tidy data — one variable per column, one observation per row, one observational unit per table — makes analysis dramatically easier and is the standard this book (and pandas) assumes.</li>
+<li>Levels of measurement (nominal, ordinal, interval, ratio) determine which calculations are actually meaningful for a given variable — averaging an ordinal rating or summing a nominal code produces numbers without real meaning.</li>
+<li>Accounting data typically falls into a few types: numeric, categorical, date/time, text, and boolean — each with its own quirks, dates especially.</li>
+<li>The chart of accounts, general ledger, subledgers, and trial balance are related but distinct structures, moving from transaction-level detail to summarized snapshots.</li>
+<li>Analytics work — especially audit and fraud analytics — usually requires transaction-level data, since summarized data can hide the patterns that matter most.</li>
+<li>Real accounting data commonly has quality issues: missing values, duplicates, inconsistent formatting, and ambiguous outliers, all of which need to be identified before analysis begins.</li>
+</ul>
+</section>
+<section id="discussion-questions" class="level2" data-number="3.10">
+<h2 data-number="3.10" class="anchored" data-anchor-id="discussion-questions"><span class="header-section-number">3.10</span> Discussion Questions</h2>
+<ol type="1">
+<li>Look back at the “wide” quarterly revenue example early in this chapter. Why might a company’s finance team <em>prefer</em> the wide format for a printed report, even though it’s not tidy for analysis purposes?</li>
+<li>Give one example (not from this chapter) of an accounting variable at each level of measurement: nominal, ordinal, interval, and ratio.</li>
+<li>Why might a company’s trial balance appear completely normal in a given month, even if fraudulent transactions occurred during that period?</li>
+</ol>
+</section>
+<section id="exercises" class="level2" data-number="3.11">
+<h2 data-number="3.11" class="anchored" data-anchor-id="exercises"><span class="header-section-number">3.11</span> Exercises</h2>
+<ol type="1">
+<li>Take the “messy” wide revenue table from this chapter and manually rewrite it in tidy (long) format on paper or in a spreadsheet.</li>
+<li>Using the messy general ledger excerpt in the callout box above, list every data quality issue you can find, and for each one, briefly describe how you would investigate or resolve it if this were real client data.</li>
+<li>Download <code>general_ledger_sample.csv</code> (provided alongside this chapter) and open it in a spreadsheet program. Identify: (a) how many unique journal entries it contains, (b) how many unique departments appear, and (c) whether total debits equal total credits.</li>
+</ol>
 
 
-<!-- -->
-
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -414,57 +869,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         container: window.document.getElementById('quarto-embedded-source-code-modal')
       });
       clipboardModal.on('success', onCopySuccess);
-    }
-    const viewSource = window.document.getElementById('quarto-view-source') ||
-                       window.document.getElementById('quarto-code-tools-source');
-    if (viewSource) {
-      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
-      viewSource.addEventListener("click", function(e) {
-        if (sourceUrl) {
-          // rstudio viewer pane
-          if (/\bcapabilities=\b/.test(window.location)) {
-            window.open(sourceUrl);
-          } else {
-            window.location.href = sourceUrl;
-          }
-        } else {
-          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
-          modal.show();
-        }
-        return false;
-      });
-    }
-    function toggleCodeHandler(show) {
-      return function(e) {
-        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-        for (let i=0; i<detailsSrc.length; i++) {
-          const details = detailsSrc[i].parentElement;
-          if (show) {
-            details.open = true;
-          } else {
-            details.removeAttribute("open");
-          }
-        }
-        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
-        const fromCls = show ? "hidden" : "unhidden";
-        const toCls = show ? "unhidden" : "hidden";
-        for (let i=0; i<cellCodeDivs.length; i++) {
-          const codeDiv = cellCodeDivs[i];
-          if (codeDiv.classList.contains(fromCls)) {
-            codeDiv.classList.remove(fromCls);
-            codeDiv.classList.add(toCls);
-          } 
-        }
-        return false;
-      }
-    }
-    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
-    if (hideAllCode) {
-      hideAllCode.addEventListener("click", toggleCodeHandler(false));
-    }
-    const showAllCode = window.document.getElementById("quarto-show-all-code");
-    if (showAllCode) {
-      showAllCode.addEventListener("click", toggleCodeHandler(true));
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
@@ -806,9 +1210,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Wrangling with Pandas</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
-</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Data Fundamentals for Accountants</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
-</div></div></div></div></div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -817,9 +1219,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    </div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/msharifbd/accounting-analytics-book/edit/main/03-data-fundamentals.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/blob/main/03-data-fundamentals.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
-<p>Fall 2026</p>
+
 </div>
   </div>
 </footer>

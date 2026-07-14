@@ -7,9 +7,11 @@ book:
   subtitle: "Analytics Powered by Large Language Models (LLM)"
   author: "Sharif Islam, DBA, CPA, CMA"
   date: today
+  repo-url: https://github.com/msharifbd/accounting-analytics-book
+  repo-actions: [edit, source, issue]
   page-footer:
     left: "Accounting Analytics with Python"
-    right: "Fall 2026"
+    right: " "
   chapters:
     - index.qmd
     - part: "Part I: Foundations"
@@ -50,11 +52,23 @@ bibliography: references.bib
 format:
   html:
     theme: cosmo
+    include-in-header:
+      text: |
+        <style>
+        .scrollable-table {
+          overflow-x: auto !important;
+        }
+        .scrollable-table table {
+          width: max-content !important;
+          max-width: none !important;
+        }
+        </style>
     number-sections: true
     toc: true
     toc-depth: 3
     code-fold: false
     code-tools: false
+    
   pdf:
     documentclass: scrbook
     toc: true

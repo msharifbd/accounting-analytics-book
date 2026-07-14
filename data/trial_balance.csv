@@ -1,0 +1,21 @@
+account,account_type,debit,credit
+Cash,Asset,12500,0
+Accounts Receivable,Asset,8200,0
+Inventory,Asset,15300,0
+Prepaid Insurance,Asset,1200,0
+Equipment,Asset,42000,0
+Accumulated Depreciation - Equipment,Contra-Asset,0,9000
+Accounts Payable,Liability,0,6400
+Unearned Revenue,Liability,0,2500
+Notes Payable,Liability,0,20000
+Common Stock,Equity,0,25000
+Retained Earnings,Equity,0,8900
+Dividends,Equity,3000,0
+Sales Revenue,Revenue,0,68500
+Cost of Goods Sold,Expense,32000,0
+Salaries Expense,Expense,12800,0
+Rent Expense,Expense,6000,0
+Utilities Expense,Expense,2100,0
+Depreciation Expense,Expense,3000,0
+Insurance Expense,Expense,1200,0
+Interest Expense,Expense,1000,0

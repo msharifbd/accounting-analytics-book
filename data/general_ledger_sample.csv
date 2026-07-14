@@ -1,0 +1,21 @@
+entry_id,entry_date,account,account_type,description,debit,credit,department,posted_by
+JE1001,2025-01-03,Cash,Asset,Customer payment received,4500,0,Sales,jsmith
+JE1001,2025-01-03,Accounts Receivable,Asset,Customer payment received,0,4500,Sales,jsmith
+JE1002,2025-01-05,Inventory,Asset,Purchase of merchandise,7200,0,Operations,mchen
+JE1002,2025-01-05,Accounts Payable,Liability,Purchase of merchandise,0,7200,Operations,mchen
+JE1003,2025-01-08,Salaries Expense,Expense,Biweekly payroll,15400,0,HR,ktaylor
+JE1003,2025-01-08,Cash,Asset,Biweekly payroll,0,15400,HR,ktaylor
+JE1004,2025-01-12,Accounts Receivable,Asset,Sale on account,9800,0,Sales,jsmith
+JE1004,2025-01-12,Sales Revenue,Revenue,Sale on account,0,9800,Sales,jsmith
+JE1005,2025-01-15,Rent Expense,Expense,Monthly office rent,3000,0,Operations,mchen
+JE1005,2025-01-15,Cash,Asset,Monthly office rent,0,3000,Operations,mchen
+JE1006,2025-01-18,Utilities Expense,Expense,Electricity and water,850,0,Operations,mchen
+JE1006,2025-01-18,Accounts Payable,Liability,Electricity and water,0,850,Operations,mchen
+JE1007,2025-01-22,Cash,Asset,Customer payment received,6200,0,Sales,jsmith
+JE1007,2025-01-22,Accounts Receivable,Asset,Customer payment received,0,6200,Sales,jsmith
+JE1008,2025-01-25,Cost of Goods Sold,Expense,COGS on January sales,5100,0,Operations,mchen
+JE1008,2025-01-25,Inventory,Asset,COGS on January sales,0,5100,Operations,mchen
+JE1009,2025-01-29,Accounts Payable,Liability,Vendor payment,7200,0,Operations,ktaylor
+JE1009,2025-01-29,Cash,Asset,Vendor payment,0,7200,Operations,ktaylor
+JE1010,2025-01-31,Depreciation Expense,Expense,Monthly depreciation,1000,0,Operations,mchen
+JE1010,2025-01-31,Accumulated Depreciation - Equipment,Contra-Asset,Monthly depreciation,0,1000,Operations,mchen

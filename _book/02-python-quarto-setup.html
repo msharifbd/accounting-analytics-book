@@ -23,10 +23,45 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -72,6 +107,21 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+<style>
+.scrollable-table {
+  overflow-x: auto !important;
+}
+.scrollable-table table {
+  width: max-content !important;
+  max-width: none !important;
+}
+</style>
 
 
 </head>
@@ -101,6 +151,9 @@ ul.task-list li input[type="checkbox"] {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Accounting Analytics with Python</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/msharifbd/accounting-analytics-book" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -273,13 +326,65 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">References</span></a>
   </div>
 </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendix-a-python-primer.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">A Primer on Python</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendix-b-financial-statement-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Financial Statement Basics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendix-c-edgar-database.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">An Introduction to EDGAR Database</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#why-this-chapter-matters" id="toc-why-this-chapter-matters" class="nav-link active" data-scroll-target="#why-this-chapter-matters"><span class="header-section-number">2.1</span> Why This Chapter Matters</a></li>
+  <li><a href="#the-three-tools-you-need" id="toc-the-three-tools-you-need" class="nav-link" data-scroll-target="#the-three-tools-you-need"><span class="header-section-number">2.2</span> The Three Tools You Need</a></li>
+  <li><a href="#step-1-install-python" id="toc-step-1-install-python" class="nav-link" data-scroll-target="#step-1-install-python"><span class="header-section-number">2.3</span> Step 1: Install Python</a></li>
+  <li><a href="#step-2-install-quarto" id="toc-step-2-install-quarto" class="nav-link" data-scroll-target="#step-2-install-quarto"><span class="header-section-number">2.4</span> Step 2: Install Quarto</a></li>
+  <li><a href="#step-3-install-a-code-editor" id="toc-step-3-install-a-code-editor" class="nav-link" data-scroll-target="#step-3-install-a-code-editor"><span class="header-section-number">2.5</span> Step 3: Install a Code Editor</a></li>
+  <li><a href="#three-ways-to-write-python-script-notebook-or-quarto-document" id="toc-three-ways-to-write-python-script-notebook-or-quarto-document" class="nav-link" data-scroll-target="#three-ways-to-write-python-script-notebook-or-quarto-document"><span class="header-section-number">2.6</span> Three Ways to Write Python: Script, Notebook, or Quarto Document</a>
+  <ul class="collapse">
+  <li><a href="#a-plain-python-script-.py" id="toc-a-plain-python-script-.py" class="nav-link" data-scroll-target="#a-plain-python-script-.py"><span class="header-section-number">2.6.1</span> 1. A Plain Python Script (<code>.py</code>)</a></li>
+  <li><a href="#a-jupyter-notebook-.ipynb" id="toc-a-jupyter-notebook-.ipynb" class="nav-link" data-scroll-target="#a-jupyter-notebook-.ipynb"><span class="header-section-number">2.6.2</span> 2. A Jupyter Notebook (<code>.ipynb</code>)</a></li>
+  <li><a href="#a-quarto-document-.qmd" id="toc-a-quarto-document-.qmd" class="nav-link" data-scroll-target="#a-quarto-document-.qmd"><span class="header-section-number">2.6.3</span> 3. A Quarto Document (<code>.qmd</code>)</a></li>
+  </ul></li>
+  <li><a href="#your-first-quarto-document" id="toc-your-first-quarto-document" class="nav-link" data-scroll-target="#your-first-quarto-document"><span class="header-section-number">2.7</span> Your First Quarto Document</a></li>
+  <li><a href="#rendering-this-books-project-html-and-pdf" id="toc-rendering-this-books-project-html-and-pdf" class="nav-link" data-scroll-target="#rendering-this-books-project-html-and-pdf"><span class="header-section-number">2.8</span> Rendering This Book’s Project (HTML and PDF)</a></li>
+  <li><a href="#installing-the-python-packages-youll-need" id="toc-installing-the-python-packages-youll-need" class="nav-link" data-scroll-target="#installing-the-python-packages-youll-need"><span class="header-section-number">2.9</span> Installing the Python Packages You’ll Need</a></li>
+  <li><a href="#organizing-your-project-folder" id="toc-organizing-your-project-folder" class="nav-link" data-scroll-target="#organizing-your-project-folder"><span class="header-section-number">2.10</span> Organizing Your Project Folder</a></li>
+  <li><a href="#troubleshooting-common-setup-issues" id="toc-troubleshooting-common-setup-issues" class="nav-link" data-scroll-target="#troubleshooting-common-setup-issues"><span class="header-section-number">2.11</span> Troubleshooting Common Setup Issues</a></li>
+  <li><a href="#chapter-summary" id="toc-chapter-summary" class="nav-link" data-scroll-target="#chapter-summary"><span class="header-section-number">2.12</span> Chapter Summary</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">2.13</span> Exercises</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/msharifbd/accounting-analytics-book/edit/main/02-python-quarto-setup.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/blob/main/02-python-quarto-setup.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -303,8 +408,453 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Learning Objectives
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>By the end of this chapter, you should be able to:</p>
+<ul>
+<li>Install Python, Quarto, and a code editor on your own computer</li>
+<li>Explain the difference between a Jupyter notebook (<code>.ipynb</code>), a plain Python script (<code>.py</code>), and a Quarto document (<code>.qmd</code>)</li>
+<li>Create, edit, and render a Quarto document containing Python code</li>
+<li>Render a Quarto book to both HTML and PDF</li>
+<li>Install and import the Python packages used throughout this book (pandas, numpy, matplotlib)</li>
+</ul>
+</div>
+</div>
+<section id="why-this-chapter-matters" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="why-this-chapter-matters"><span class="header-section-number">2.1</span> Why This Chapter Matters</h2>
+<p>Every chapter after this one assumes you can do three things: write Python code, run it, and see the results in a nicely formatted document. This chapter gets that pipeline working on your own laptop, once, so that the rest of the course is about <em>accounting analytics</em> rather than <em>fighting with software installation</em>.</p>
+<p>If you get stuck at any point in this chapter, don’t worry — environment setup is almost always the hardest part of a data analytics course, and it only gets easier from here.</p>
+</section>
+<section id="the-three-tools-you-need" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="the-three-tools-you-need"><span class="header-section-number">2.2</span> The Three Tools You Need</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tool</th>
+<th>What it does</th>
+<th>Analogy</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Python</strong></td>
+<td>The programming language that does the actual data work</td>
+<td>The engine</td>
+</tr>
+<tr class="even">
+<td><strong>Quarto</strong></td>
+<td>Combines your writing, Python code, and output into one document (HTML, PDF, Word)</td>
+<td>The publishing system</td>
+</tr>
+<tr class="odd">
+<td><strong>A Code Editor</strong> (Also called Integrated Development Environment(IDE))</td>
+<td>Where you write and run your code (this book uses Positron, but VS Code works identically)</td>
+<td>The workshop</td>
+</tr>
+</tbody>
+</table>
+<p>You need all three installed before you can complete the exercises in this book.</p>
+</section>
+<section id="step-1-install-python" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="step-1-install-python"><span class="header-section-number">2.3</span> Step 1: Install Python</h2>
+<p>You can install the python from <a href="https://www.python.org/downloads/" class="uri">https://www.python.org/downloads/</a>. We recommend you use this link to install a specific version of python. Your professor might recommend a specific version that you should use. If you use macOS, please click <code>macOS</code> to install python suitable for mac.</p>
+<p>In addition, you can also install Python via the <strong>Anaconda</strong> or <strong>Miniconda</strong> distribution, because it comes bundled with the data packages we’ll use (pandas, numpy, matplotlib) and makes managing versions easier than a bare Python install.</p>
+<ol type="1">
+<li>Download Miniconda from <a href="https://docs.conda.io/en/latest/miniconda.html">https://docs.conda.io/en/latest/miniconda.html</a> (choose the installer for your operating system).</li>
+<li>Run the installer with default settings.</li>
+<li>Confirm the install worked by opening a terminal and typing:</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">--version</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>You should see something like <code>Python 3.11.x</code> (the exact version doesn’t need to match this).</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Connect to Practice
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If your future employer uses a specific data platform (e.g., a cloud data warehouse, or a company-managed Python environment), the <em>concepts</em> you learn here transfer directly — only the installation step changes.</p>
+</div>
+</div>
+</section>
+<section id="step-2-install-quarto" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="step-2-install-quarto"><span class="header-section-number">2.4</span> Step 2: Install Quarto</h2>
+<ol type="1">
+<li>Go to <a href="https://quarto.org/docs/get-started/">https://quarto.org/docs/get-started/</a> and download the installer for your operating system.</li>
+<li>Run the installer with default settings.</li>
+<li>Confirm the install worked:</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> <span class="at">--version</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Since we’ll render to PDF as well as HTML, also install a LaTeX distribution — Quarto includes a lightweight one you can install with a single command:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> install tinytex</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This only needs to be done once per computer.</p>
+</section>
+<section id="step-3-install-a-code-editor" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="step-3-install-a-code-editor"><span class="header-section-number">2.5</span> Step 3: Install a Code Editor</h2>
+<p>This book’s examples use <strong>Positron</strong>, which can be downloaded from <a href="https://positron.posit.co/download.html" class="uri">https://positron.posit.co/download.html</a>. Positron is a code editor built specifically for data science that will feel very familiar if you’ve used VS Code before — the two share the same underlying editing engine, so keyboard shortcuts, extensions, and layout all work the same way. (If your instructor prefers plain VS Code, everything in this chapter applies identically.)</p>
+<p><a href="#fig-editor-layout" class="quarto-xref">Figure&nbsp;<span>2.1</span></a> shows the general layout you’ll be working in for the rest of this book: a file explorer on the left, an editor pane in the middle where you write your <code>.qmd</code> files, a terminal at the bottom where you run commands like <code>quarto render</code>, and a Source Control panel for Git (covered separately if your instructor uses version control in this course).</p>
+<div id="fig-editor-layout" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-editor-layout-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/editor-layout.png" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-editor-layout-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.1: A typical code-editor layout: file explorer, editor pane, session, and plots
+</figcaption>
+</figure>
+</div>
+<p>Once installed, open your project folder in Positron/VS Code using <strong>File → Open Folder</strong>, and select the folder containing your <code>_quarto.yml</code> file.</p>
+</section>
+<section id="three-ways-to-write-python-script-notebook-or-quarto-document" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="three-ways-to-write-python-script-notebook-or-quarto-document"><span class="header-section-number">2.6</span> Three Ways to Write Python: Script, Notebook, or Quarto Document</h2>
+<p>As you start doing accounting analytics work, you’ll encounter three common file types for writing Python. It’s worth understanding the difference early, since this book uses all three at different points.</p>
+<section id="a-plain-python-script-.py" class="level3" data-number="2.6.1">
+<h3 data-number="2.6.1" class="anchored" data-anchor-id="a-plain-python-script-.py"><span class="header-section-number">2.6.1</span> 1. A Plain Python Script (<code>.py</code>)</h3>
+<p>A <code>.py</code> file contains only code — no narrative text, no formatted output. You run the whole file at once (or line by line) and see output printed to a terminal or console. This is the format used for production code, reusable functions, or automated jobs that don’t need explanation baked in.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># analysis.py</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"data/trial_balance.csv"</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.head())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="a-jupyter-notebook-.ipynb" class="level3" data-number="2.6.2">
+<h3 data-number="2.6.2" class="anchored" data-anchor-id="a-jupyter-notebook-.ipynb"><span class="header-section-number">2.6.2</span> 2. A Jupyter Notebook (<code>.ipynb</code>)</h3>
+<p>A Jupyter notebook mixes code and narrative text in a sequence of <strong>cells</strong>, and shows output (tables, charts) directly underneath the code that produced it. This makes notebooks excellent for exploratory analysis — trying things out, looking at results immediately, and iterating.</p>
+<p><a href="#fig-jupyter-mockup" class="quarto-xref">Figure&nbsp;<span>2.2</span></a> shows a simplified notebook: a markdown cell explaining what’s about to happen, a code cell that loads data, and the output (a data table) displayed directly below it.</p>
+<div id="fig-jupyter-mockup" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-jupyter-mockup-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/jupyter-notebook-mockup.png" class="img-fluid figure-img" style="width:85.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-jupyter-mockup-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.2: A Jupyter notebook combines markdown cells, code cells, and their output in one scrollable document
+</figcaption>
+</figure>
+</div>
+<p>You can open and run <code>.ipynb</code> files directly in Positron/VS Code, the same as in classic Jupyter.</p>
+</section>
+<section id="a-quarto-document-.qmd" class="level3" data-number="2.6.3">
+<h3 data-number="2.6.3" class="anchored" data-anchor-id="a-quarto-document-.qmd"><span class="header-section-number">2.6.3</span> 3. A Quarto Document (<code>.qmd</code>)</h3>
+<p>A Quarto document looks a lot like a notebook conceptually — narrative text plus embedded, runnable code — but it’s a <strong>plain text file</strong> (easier to track with Git) that can render to multiple polished output formats: HTML, PDF, Word, and more. This is the format used for every chapter in this book.</p>
+<p>A Quarto document has three parts:</p>
+<ol type="1">
+<li>A <strong>YAML header</strong> at the top (between <code>---</code> lines) with metadata like the title</li>
+<li><strong>Narrative text</strong> written in Markdown</li>
+<li><strong>Code chunks</strong>, marked with three backticks and curly braces</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Example Chapter"</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">## Analyzing the Trial Balance</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>Here we load the trial balance and preview the first few rows.</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>::: {#7d99ad09 .cell execution_count=1}</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="in">``` {.python .cell-code}</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"data/trial_balance.csv"</span>)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>df.head()</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>::: {.cell-output .cell-output-display execution_count=3}</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="in">```{=html}</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div&gt;</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;style scoped&gt;</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="in">    .dataframe tbody tr th:only-of-type {</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="in">        vertical-align: middle;</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="in">    .dataframe tbody tr th {</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="in">        vertical-align: top;</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a><span class="in">    .dataframe thead th {</span></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a><span class="in">        text-align: right;</span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/style&gt;</span></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;table border="1" class="dataframe"&gt;</span></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;thead&gt;</span></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;tr style="text-align: right;"&gt;</span></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;th&gt;&lt;/th&gt;</span></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;th&gt;account&lt;/th&gt;</span></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;th&gt;account_type&lt;/th&gt;</span></span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;th&gt;debit&lt;/th&gt;</span></span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;th&gt;credit&lt;/th&gt;</span></span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;/tr&gt;</span></span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;/thead&gt;</span></span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;tbody&gt;</span></span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;tr&gt;</span></span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;th&gt;0&lt;/th&gt;</span></span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;Cash&lt;/td&gt;</span></span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;Asset&lt;/td&gt;</span></span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;12500&lt;/td&gt;</span></span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;0&lt;/td&gt;</span></span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;/tr&gt;</span></span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;tr&gt;</span></span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;th&gt;1&lt;/th&gt;</span></span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;Accounts Receivable&lt;/td&gt;</span></span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;Asset&lt;/td&gt;</span></span>
+<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;8200&lt;/td&gt;</span></span>
+<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;0&lt;/td&gt;</span></span>
+<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;/tr&gt;</span></span>
+<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;tr&gt;</span></span>
+<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;th&gt;2&lt;/th&gt;</span></span>
+<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;Inventory&lt;/td&gt;</span></span>
+<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;Asset&lt;/td&gt;</span></span>
+<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;15300&lt;/td&gt;</span></span>
+<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;0&lt;/td&gt;</span></span>
+<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;/tr&gt;</span></span>
+<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;tr&gt;</span></span>
+<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;th&gt;3&lt;/th&gt;</span></span>
+<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;Prepaid Insurance&lt;/td&gt;</span></span>
+<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;Asset&lt;/td&gt;</span></span>
+<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;1200&lt;/td&gt;</span></span>
+<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;0&lt;/td&gt;</span></span>
+<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;/tr&gt;</span></span>
+<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;tr&gt;</span></span>
+<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;th&gt;4&lt;/th&gt;</span></span>
+<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;Equipment&lt;/td&gt;</span></span>
+<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;Asset&lt;/td&gt;</span></span>
+<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;42000&lt;/td&gt;</span></span>
+<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;0&lt;/td&gt;</span></span>
+<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;/tr&gt;</span></span>
+<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;/tbody&gt;</span></span>
+<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/table&gt;</span></span>
+<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
+<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-83"><a href="#cb5-83" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb5-84"><a href="#cb5-84" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb5-85"><a href="#cb5-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-86"><a href="#cb5-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-87"><a href="#cb5-87" aria-hidden="true" tabindex="-1"></a>The output above shows account balances before adjusting entries.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Which format does this book use?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Every chapter in <em>this</em> book is written as a <code>.qmd</code> file, since we want a single, polished, professional document (in both HTML and PDF) at the end of the semester — not a folder of separate notebooks. However, your instructor may ask you to <em>practice and experiment</em> in a Jupyter notebook before copying finished code into your chapter or assignment <code>.qmd</code> file. Think of the notebook as your scratch paper and the <code>.qmd</code> file as your final submission.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="your-first-quarto-document" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="your-first-quarto-document"><span class="header-section-number">2.7</span> Your First Quarto Document</h2>
+<p>Let’s create a small Quarto document from scratch to make sure everything works end to end.</p>
+<p><strong>1. Create a new file</strong> called <code>test.qmd</code> in your project folder with the following content:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "My First Quarto Document"</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> html</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">## Testing My Setup</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>::: {#e658c5a3 .cell execution_count=2}</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="in">``` {.python .cell-code}</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {<span class="st">"account"</span>: [<span class="st">"Cash"</span>, <span class="st">"Accounts Receivable"</span>, <span class="st">"Inventory"</span>],</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">"balance"</span>: [<span class="dv">12500</span>, <span class="dv">8200</span>, <span class="dv">15300</span>]}</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(data)</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>df</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>::: {.cell-output .cell-output-display execution_count=4}</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="in">```{=html}</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div&gt;</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;style scoped&gt;</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="in">    .dataframe tbody tr th:only-of-type {</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="in">        vertical-align: middle;</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="in">    .dataframe tbody tr th {</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="in">        vertical-align: top;</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="in">    .dataframe thead th {</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="in">        text-align: right;</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/style&gt;</span></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;table border="1" class="dataframe"&gt;</span></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;thead&gt;</span></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;tr style="text-align: right;"&gt;</span></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;th&gt;&lt;/th&gt;</span></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;th&gt;account&lt;/th&gt;</span></span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;th&gt;balance&lt;/th&gt;</span></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;/tr&gt;</span></span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;/thead&gt;</span></span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;tbody&gt;</span></span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;tr&gt;</span></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;th&gt;0&lt;/th&gt;</span></span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;Cash&lt;/td&gt;</span></span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;12500&lt;/td&gt;</span></span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;/tr&gt;</span></span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;tr&gt;</span></span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;th&gt;1&lt;/th&gt;</span></span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;Accounts Receivable&lt;/td&gt;</span></span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;8200&lt;/td&gt;</span></span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;/tr&gt;</span></span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;tr&gt;</span></span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;th&gt;2&lt;/th&gt;</span></span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;Inventory&lt;/td&gt;</span></span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;15300&lt;/td&gt;</span></span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;/tr&gt;</span></span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;/tbody&gt;</span></span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/table&gt;</span></span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
+<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a>If you can see a table above with three accounts, your Python and Quarto setup is working correctly.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>2. Render it.</strong> In the terminal, run:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render test.qmd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>3. Open the result.</strong> This creates <code>test.html</code> in the same folder — open it in your web browser and confirm you can see the table.</p>
+<p>If this worked, your environment is fully set up. If you got an error, check the Troubleshooting section at the end of this chapter before moving on.</p>
+</section>
+<section id="rendering-this-books-project-html-and-pdf" class="level2" data-number="2.8">
+<h2 data-number="2.8" class="anchored" data-anchor-id="rendering-this-books-project-html-and-pdf"><span class="header-section-number">2.8</span> Rendering This Book’s Project (HTML and PDF)</h2>
+<p>Your course textbook project is set up as a <strong>Quarto book</strong> (multiple chapters combined into one publication), which is slightly different from rendering a single file. From the terminal, inside your project folder (the one containing <code>_quarto.yml</code>):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This single command renders <em>every</em> chapter listed in <code>_quarto.yml</code> and produces both formats we configured:</p>
+<ul>
+<li><code>_book/index.html</code> — an HTML website you can open in a browser or host online</li>
+<li>a single PDF file inside <code>_book/</code> — a downloadable, printable version of the entire book</li>
+</ul>
+<p><a href="#fig-quarto-workflow" class="quarto-xref">Figure&nbsp;<span>2.3</span></a> summarizes this process: your <code>.qmd</code> source files go in, <code>quarto render</code> executes the Python code and assembles the document, and both an HTML and a PDF version come out the other side from the <em>same source file</em> — you never have to write your content twice.</p>
+<div id="fig-quarto-workflow" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-quarto-workflow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/quarto-workflow.png" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-quarto-workflow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.3: The Quarto rendering workflow: one source document, two polished output formats
+</figcaption>
+</figure>
+</div>
+<p>To preview your book live while editing (auto-refreshing as you save changes), use:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> preview</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="installing-the-python-packages-youll-need" class="level2" data-number="2.9">
+<h2 data-number="2.9" class="anchored" data-anchor-id="installing-the-python-packages-youll-need"><span class="header-section-number">2.9</span> Installing the Python Packages You’ll Need</h2>
+<p>This book relies on a small set of Python packages. If you installed Python via Anaconda/Miniconda, most of these are likely already available. To install (or confirm) them, run:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install pandas numpy matplotlib jupyter</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Confirm they’re installed correctly by running this in a <code>.qmd</code> code chunk or a notebook cell:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pd.__version__)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.__version__)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(matplotlib.__version__)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>If this runs without errors and prints three version numbers, you’re ready for Chapter 3.</p>
+</section>
+<section id="organizing-your-project-folder" class="level2" data-number="2.10">
+<h2 data-number="2.10" class="anchored" data-anchor-id="organizing-your-project-folder"><span class="header-section-number">2.10</span> Organizing Your Project Folder</h2>
+<p>As your book (or your homework project) grows, keeping files organized will save you real time. <a href="#fig-folder-structure" class="quarto-xref">Figure&nbsp;<span>2.4</span></a> shows the recommended structure, which matches how this book’s own project folder is organized: one <code>.qmd</code> file per chapter, a shared <code>images/</code> folder for figures, and the configuration file (<code>_quarto.yml</code>) at the top level.</p>
+<div id="fig-folder-structure" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-folder-structure-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/project-folder-structure.png" class="img-fluid figure-img" style="width:75.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-folder-structure-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.4: Recommended project folder structure: one file per chapter, plus a shared images folder
+</figcaption>
+</figure>
+</div>
+<p>A couple of habits worth building now:</p>
+<ul>
+<li>Keep all figures in a single <code>images/</code> folder rather than scattering them across the project — it makes the project easier to navigate and easier to back up.</li>
+<li>Give files and images descriptive, lowercase, hyphenated names (e.g., <code>revenue-by-quarter.png</code>, not <code>Figure1_FINAL_v2.png</code>) — this avoids broken links when you rename things later and matches conventions used in real data projects.</li>
+</ul>
+</section>
+<section id="troubleshooting-common-setup-issues" class="level2" data-number="2.11">
+<h2 data-number="2.11" class="anchored" data-anchor-id="troubleshooting-common-setup-issues"><span class="header-section-number">2.11</span> Troubleshooting Common Setup Issues</h2>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>“quarto: command not found”
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This usually means Quarto wasn’t added to your system’s PATH during installation. Try closing and reopening your terminal (and your code editor) after installing Quarto — this alone fixes the issue most of the time. If it persists, reinstall Quarto and confirm you allowed it to modify your PATH during setup.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>“ModuleNotFoundError: No module named ‘pandas’”
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Python can’t find the package because it isn’t installed in the environment your editor is using. Run <code>pip install pandas</code> in the same terminal your editor uses, and confirm you’re using the Python interpreter you expect (in Positron/VS Code, check the interpreter shown in the bottom status bar).</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>PDF rendering fails but HTML works fine
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This almost always means the LaTeX installation is missing or incomplete. Run <code>quarto install tinytex</code> and try again. If it still fails, re-render with <code>quarto render --to pdf --log render.log</code> and check the log file for the specific missing package.</p>
+</div>
+</div>
+</section>
+<section id="chapter-summary" class="level2" data-number="2.12">
+<h2 data-number="2.12" class="anchored" data-anchor-id="chapter-summary"><span class="header-section-number">2.12</span> Chapter Summary</h2>
+<ul>
+<li>Python, Quarto, and a code editor (Positron or VS Code) are the three tools needed for this course, and each is installed once at the start of the semester.</li>
+<li>A <code>.py</code> script, a <code>.ipynb</code> notebook, and a <code>.qmd</code> Quarto document all run Python code, but serve different purposes: scripts for production code, notebooks for exploration, and Quarto documents for polished, reproducible reports — which is why this book is written entirely in <code>.qmd</code> files.</li>
+<li><code>quarto render</code> turns your <code>.qmd</code> source into both HTML and PDF from a single source of truth.</li>
+<li>Keeping a consistent project folder structure (chapters at the top level, a shared <code>images/</code> folder) will save you time throughout the semester.</li>
+</ul>
+</section>
+<section id="exercises" class="level2" data-number="2.13">
+<h2 data-number="2.13" class="anchored" data-anchor-id="exercises"><span class="header-section-number">2.13</span> Exercises</h2>
+<ol type="1">
+<li>Complete the “Your First Quarto Document” walkthrough in this chapter. Take a screenshot of your rendered HTML output showing the table, and submit it as instructed by your course syllabus.</li>
+<li>In your own words (2–3 sentences), explain when you would choose to use a Jupyter notebook versus a Quarto document for a piece of analytical work.</li>
+<li>Intentionally introduce one small error into your <code>test.qmd</code> file (e.g., misspell <code>pandas</code> as <code>panadas</code>), render it, and copy the error message you get. Then fix it and re-render successfully. This exercise is designed to make error messages feel less intimidating early in the course.</li>
+</ol>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -727,9 +1277,9 @@ ul.task-list li input[type="checkbox"] {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    </div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/msharifbd/accounting-analytics-book/edit/main/02-python-quarto-setup.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/blob/main/02-python-quarto-setup.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
-<p>Fall 2026</p>
+
 </div>
   </div>
 </footer>
