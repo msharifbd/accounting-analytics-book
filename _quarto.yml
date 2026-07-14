@@ -1,0 +1,67 @@
+project:
+  type: book
+  output-dir: _book
+
+book:
+  title: "Accounting Analytics with Python"
+  subtitle: "Analytics Powered by Large Language Models (LLM)"
+  author: "Sharif Islam, DBA, CPA, CMA"
+  date: today
+  page-footer:
+    left: "Accounting Analytics with Python"
+    right: "Fall 2026"
+  chapters:
+    - index.qmd
+    - part: "Part I: Foundations"
+      chapters:
+        - 01-introduction-to-accounting-analytics.qmd
+        - 02-python-quarto-setup.qmd
+        - 03-data-fundamentals.qmd
+    - part: "Part II: Core Data Skills"
+      chapters:
+        - 04-data-wrangling-pandas.qmd
+        - 05-exploratory-data-analysis.qmd
+        - 06-data-visualization.qmd
+    - part: "Part III: Applied Accounting Analytics"
+      chapters:
+        - 07-financial-statement-analysis.qmd
+        - 08-audit-analytics.qmd
+        - 09-fraud-anomaly-detection.qmd
+        - 10-revenue-recognition-analysis.qmd
+        - 11-tax-analytics.qmd
+    - part: "Part IV: Predictive Methods and GenAI"
+      chapters:
+        - 12-predictive-modeling-intro.qmd
+        - 13-genai-in-accounting.qmd
+    - part: "Part V: Communication and Capstone"
+      chapters:
+        - 14-automated-reporting-quarto.qmd
+        - 15-data-ethics-reproducibility.qmd
+        - 16-capstone-project.qmd
+    - references.qmd
+  appendices:
+    - appendix-a-python-primer.qmd
+    - appendix-b-financial-statement-basics.qmd
+    - appendix-c-edgar-database.qmd
+
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+    number-sections: true
+    toc: true
+    toc-depth: 3
+    code-fold: false
+    code-tools: false
+  pdf:
+    documentclass: scrbook
+    toc: true
+    number-sections: true
+    colorlinks: true
+    fig-pos: "H"
+
+execute:
+  freeze: auto
+  warning: false

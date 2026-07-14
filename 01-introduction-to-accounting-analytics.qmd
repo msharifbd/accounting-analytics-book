@@ -1,0 +1,130 @@
+---
+title: Introduction to Accounting Analytics
+format: html 
+---
+
+
+::: {.callout-note}
+## Learning Objectives
+By the end of this chapter, you should be able to:
+
+- Define accounting analytics and distinguish it from traditional accounting and auditing
+- Explain why data analytics has become central to accounting practice
+- Describe the four major types of analytics (descriptive, diagnostic, predictive, prescriptive) and give an accounting example of each
+- Outline the typical accounting analytics workflow, from raw data to a decision
+- Identify career paths and professional certifications related to accounting analytics
+:::
+
+## What Is Accounting Analytics?
+
+Accounting has always been about data. Every transaction a business records — a sale, a payment, a depreciation entry — becomes a data point that eventually rolls up into financial statements. What has changed in the last two decades is not *that* accountants work with data, but the *volume*, *speed*, and *tools* available for working with it.
+
+**Accounting analytics** is the application of data analysis techniques — statistical, visual, and computational — to accounting and financial data in order to support decisions in areas such as financial reporting, auditing, tax, and management accounting. It sits at the intersection of three fields:
+
+- **Accounting knowledge** — understanding what the numbers mean (revenue recognition, internal controls, GAAP/IFRS rules)
+- **Data skills** — the ability to collect, clean, and analyze data (which is where Python comes in)
+- **Business judgment** — knowing what question is worth asking and what a result actually implies for a decision
+
+A useful way to think about it: traditional accounting produces the numbers; accounting analytics asks *what the numbers are telling us* and *what we should do about it*.
+
+## Why Now? The Shift Toward Data-Driven Accounting
+
+Several forces have pushed analytics from a "nice to have" to a core accounting skill:
+
+1. **Data volume.** Modern ERP systems (SAP, Oracle, NetSuite) log every transaction electronically. A mid-sized company can generate millions of journal entries a year — far more than any auditor or accountant could review manually.
+2. **Regulatory and audit expectations.** Standard-setters and regulators (including the PCAOB) increasingly expect auditors to test *entire populations* of transactions rather than small manual samples, which requires analytics tools.
+3. **Automation of routine work.** Many manual bookkeeping and reconciliation tasks are increasingly automated, shifting accountants' time toward analysis, interpretation, and communication of results.
+4. **The rise of accessible tools.** Python, R, and business intelligence tools (Power BI, Tableau) have made analytics accessible to accountants without a computer science background — you don't need to be a software engineer to benefit from these tools.
+5. **CPA Exam evolution.** The AICPA has incorporated data analytics content into the CPA Exam Blueprint, particularly in the Business Analysis and Reporting (BAR) discipline, signaling that the profession considers this a core competency, not an elective skill.
+
+::: {.callout-tip}
+## Connect to Practice
+Throughout this book, look for "Connect to Practice" boxes like this one, which tie a concept back to how it's used in real accounting and audit work.
+:::
+
+## Accounting Analytics vs. Traditional Accounting and Auditing
+
+It's worth being precise about how this course differs from other accounting courses you've taken:
+
+| | Traditional Accounting/Auditing | Accounting Analytics |
+|---|---|---|
+| **Primary tool** | Spreadsheets, manual ledgers | Python, SQL, visualization tools |
+| **Sample size** | Often a sample of transactions | Frequently the *entire population* |
+| **Focus** | Was this recorded correctly? | What patterns, risks, or insights exist in the data? |
+| **Output** | Journal entries, financial statements, audit opinions | Dashboards, models, flagged anomalies, predictions |
+| **Skillset emphasis** | Rules and standards (GAAP/IFRS) | Rules and standards *plus* coding, statistics, visualization |
+
+This isn't a replacement for the accounting knowledge you've built in other courses — it's a set of tools that make that knowledge more powerful and scalable.
+
+## The Four Types of Analytics
+
+A common framework in the analytics field breaks analysis into four types, moving from "what happened" to "what should we do." Every technique in this book fits into one of these categories.
+
+1. **Descriptive analytics** — *What happened?* Summarizing past data. Example: calculating total revenue by month, or the average days-sales-outstanding over the last year.
+2. **Diagnostic analytics** — *Why did it happen?* Investigating causes and relationships. Example: determining why gross margin declined in Q3 by breaking revenue and cost data down by product line.
+3. **Predictive analytics** — *What is likely to happen?* Using historical data to forecast. Example: predicting which customers are likely to become uncollectible accounts receivable.
+4. **Prescriptive analytics** — *What should we do?* Recommending an action based on analysis. Example: recommending which vendors to flag for additional audit procedures based on a fraud-risk score.
+
+Most introductory accounting analytics work — including much of this book — lives in the descriptive and diagnostic space, with an introduction to predictive methods later in the book (Chapter 12). Prescriptive analytics tends to require more advanced modeling and is largely beyond the scope of an undergraduate course, but it's useful to know where the field is heading.
+
+## The Accounting Analytics Workflow
+
+Most accounting analytics projects — whether a homework assignment in this course or a real audit engagement — follow a similar sequence:
+
+1. **Define the question.** What decision or risk are we trying to inform? (e.g., "Are there unusual journal entries near period-end that warrant investigation?")
+2. **Obtain the data.** Extract data from a source system — a general ledger export, a CSV file, a database query.
+3. **Clean and prepare the data.** Real data is messy: missing values, inconsistent formats, duplicate entries. This step often takes the most time in practice.
+4. **Explore and analyze.** Apply descriptive statistics, visualizations, or models to look for patterns.
+5. **Interpret results in context.** A statistical pattern is not automatically meaningful — this is where accounting judgment matters most.
+6. **Communicate findings.** Produce a report, dashboard, or memo that a non-technical stakeholder (a partner, a controller, a client) can act on.
+
+This book is structured around this workflow. Chapters 2–3 build foundational tools and data literacy; Chapters 4–6 cover steps 2–4 in depth; Chapters 7–11 apply the workflow to specific accounting domains (financial statements, audit, fraud, revenue, tax); and later chapters extend into predictive methods, GenAI, and communicating results.
+
+## Where Accounting Analytics Shows Up in Practice
+
+A few examples of accounting analytics in action:
+
+- **External audit** — Using full-population testing and anomaly detection to identify unusual journal entries for further audit procedures, rather than testing a small manual sample.
+- **Internal audit** — Continuous monitoring dashboards that flag control violations or policy exceptions as they occur, not just at year-end.
+- **Financial planning & analysis (FP&A)** — Building forecasting models and variance-analysis dashboards to support budgeting decisions.
+- **Forensic accounting** — Applying techniques like Benford's Law (covered in Chapter 8) to detect potential financial statement fraud.
+- **Tax** — Analyzing large transactional datasets to identify tax planning opportunities or compliance risks across jurisdictions.
+
+## Careers and Certifications
+
+Accounting analytics skills are increasingly valued across public accounting, industry, and government. A few relevant credentials and pathways worth knowing about as you plan your career:
+
+- **CPA (Certified Public Accountant)** — increasingly incorporates data analytics content, especially through the BAR discipline
+- **CISA (Certified Information Systems Auditor)** — relevant for IT audit and control-focused roles
+- **Data-analytics-specific certificates** offered by the AICPA and various universities
+
+You don't need to become a data scientist to benefit from this course — the goal is *analytics literacy*: being comfortable enough with data tools that you can perform basic analyses yourself, and knowledgeable enough to critically evaluate analyses done by others (including, increasingly, by AI tools).
+
+## A Note on Tools: Why Python and Quarto?
+
+This book uses **Python** as its programming language and **Quarto** as its authoring and reporting tool, for a few reasons that matter to your future career:
+
+- Python is one of the most widely used languages in data analytics and is free and open-source, meaning you can continue using it after graduation without needing a paid license.
+- The pandas library (introduced in Chapter 4) is purpose-built for exactly the kind of tabular, spreadsheet-like data accountants work with every day.
+- Quarto allows you to combine narrative writing, code, and output (tables, charts) into a single reproducible document — which mirrors how analytics work is increasingly delivered in practice, as a reproducible report rather than a static spreadsheet.
+
+You'll get hands-on with both tools starting in Chapter 2.
+
+## Chapter Summary
+
+- Accounting analytics combines accounting knowledge, data skills, and business judgment to support decisions.
+- The shift toward analytics is driven by data volume, regulatory expectations, automation, and accessible tools.
+- Analytics can be descriptive, diagnostic, predictive, or prescriptive — most of this course focuses on the first two, with an introduction to the third.
+- A consistent workflow (define, obtain, clean, analyze, interpret, communicate) underlies most accounting analytics projects, and structures the rest of this book.
+- These skills map directly onto current and evolving areas of accounting practice, including the CPA Exam.
+
+## Discussion Questions
+
+1. Choose one accounting role (e.g., external auditor, tax accountant, FP&A analyst). How might accounting analytics change the day-to-day work of someone in that role over the next five years?
+2. Think of a business decision (not necessarily accounting-related) you or your family have made recently. Which of the four analytics types (descriptive, diagnostic, predictive, prescriptive) best describes the thinking that went into it?
+3. Why do you think regulators like the PCAOB have pushed auditors toward analyzing full populations of transactions rather than samples? What are the potential benefits and risks of this shift?
+
+## Exercises
+
+1. Find one recent (last 12 months) news article or company disclosure describing the use of data analytics or AI in an accounting, audit, or finance context. Write a short (150-word) summary of what the technology does and what problem it solves.
+2. Look up the current AICPA CPA Exam Blueprint for the Business Analysis and Reporting (BAR) discipline. Identify two specific data-analytics-related skills listed and briefly explain, in your own words, what they mean.

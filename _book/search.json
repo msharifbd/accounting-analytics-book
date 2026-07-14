@@ -1,0 +1,144 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Accounting Analytics with Python",
+    "section": "",
+    "text": "Preface\nWelcome to Accounting Analytics with Python. This book is intended for accounting undergraduate students. However, students from other disciplines such as Finance are very likely to be benefited from using the book.",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "01-introduction-to-accounting-analytics.html",
+    "href": "01-introduction-to-accounting-analytics.html",
+    "title": "1  Introduction to Accounting Analytics",
+    "section": "",
+    "text": "1.1 What Is Accounting Analytics?\nAccounting has always been about data. Every transaction a business records — a sale, a payment, a depreciation entry — becomes a data point that eventually rolls up into financial statements. What has changed in the last two decades is not that accountants work with data, but the volume, speed, and tools available for working with it.\nAccounting analytics is the application of data analysis techniques — statistical, visual, and computational — to accounting and financial data in order to support decisions in areas such as financial reporting, auditing, tax, and management accounting. It sits at the intersection of three fields:\nA useful way to think about it: traditional accounting produces the numbers; accounting analytics asks what the numbers are telling us and what we should do about it.",
+    "crumbs": [
+      "Part I: Foundations",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Accounting Analytics</span>"
+    ]
+  },
+  {
+    "objectID": "01-introduction-to-accounting-analytics.html#what-is-accounting-analytics",
+    "href": "01-introduction-to-accounting-analytics.html#what-is-accounting-analytics",
+    "title": "1  Introduction to Accounting Analytics",
+    "section": "",
+    "text": "Accounting knowledge — understanding what the numbers mean (revenue recognition, internal controls, GAAP/IFRS rules)\nData skills — the ability to collect, clean, and analyze data (which is where Python comes in)\nBusiness judgment — knowing what question is worth asking and what a result actually implies for a decision",
+    "crumbs": [
+      "Part I: Foundations",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Accounting Analytics</span>"
+    ]
+  },
+  {
+    "objectID": "01-introduction-to-accounting-analytics.html#why-now-the-shift-toward-data-driven-accounting",
+    "href": "01-introduction-to-accounting-analytics.html#why-now-the-shift-toward-data-driven-accounting",
+    "title": "1  Introduction to Accounting Analytics",
+    "section": "1.2 Why Now? The Shift Toward Data-Driven Accounting",
+    "text": "1.2 Why Now? The Shift Toward Data-Driven Accounting\nSeveral forces have pushed analytics from a “nice to have” to a core accounting skill:\n\nData volume. Modern ERP systems (SAP, Oracle, NetSuite) log every transaction electronically. A mid-sized company can generate millions of journal entries a year — far more than any auditor or accountant could review manually.\nRegulatory and audit expectations. Standard-setters and regulators (including the PCAOB) increasingly expect auditors to test entire populations of transactions rather than small manual samples, which requires analytics tools.\nAutomation of routine work. Many manual bookkeeping and reconciliation tasks are increasingly automated, shifting accountants’ time toward analysis, interpretation, and communication of results.\nThe rise of accessible tools. Python, R, and business intelligence tools (Power BI, Tableau) have made analytics accessible to accountants without a computer science background — you don’t need to be a software engineer to benefit from these tools.\nCPA Exam evolution. The AICPA has incorporated data analytics content into the CPA Exam Blueprint, particularly in the Business Analysis and Reporting (BAR) discipline, signaling that the profession considers this a core competency, not an elective skill.\n\n\n\n\n\n\n\nTipConnect to Practice\n\n\n\nThroughout this book, look for “Connect to Practice” boxes like this one, which tie a concept back to how it’s used in real accounting and audit work.",
+    "crumbs": [
+      "Part I: Foundations",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Accounting Analytics</span>"
+    ]
+  },
+  {
+    "objectID": "01-introduction-to-accounting-analytics.html#accounting-analytics-vs.-traditional-accounting-and-auditing",
+    "href": "01-introduction-to-accounting-analytics.html#accounting-analytics-vs.-traditional-accounting-and-auditing",
+    "title": "1  Introduction to Accounting Analytics",
+    "section": "1.3 Accounting Analytics vs. Traditional Accounting and Auditing",
+    "text": "1.3 Accounting Analytics vs. Traditional Accounting and Auditing\nIt’s worth being precise about how this course differs from other accounting courses you’ve taken:\n\n\n\n\n\n\n\n\n\nTraditional Accounting/Auditing\nAccounting Analytics\n\n\n\n\nPrimary tool\nSpreadsheets, manual ledgers\nPython, SQL, visualization tools\n\n\nSample size\nOften a sample of transactions\nFrequently the entire population\n\n\nFocus\nWas this recorded correctly?\nWhat patterns, risks, or insights exist in the data?\n\n\nOutput\nJournal entries, financial statements, audit opinions\nDashboards, models, flagged anomalies, predictions\n\n\nSkillset emphasis\nRules and standards (GAAP/IFRS)\nRules and standards plus coding, statistics, visualization\n\n\n\nThis isn’t a replacement for the accounting knowledge you’ve built in other courses — it’s a set of tools that make that knowledge more powerful and scalable.",
+    "crumbs": [
+      "Part I: Foundations",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Accounting Analytics</span>"
+    ]
+  },
+  {
+    "objectID": "01-introduction-to-accounting-analytics.html#the-four-types-of-analytics",
+    "href": "01-introduction-to-accounting-analytics.html#the-four-types-of-analytics",
+    "title": "1  Introduction to Accounting Analytics",
+    "section": "1.4 The Four Types of Analytics",
+    "text": "1.4 The Four Types of Analytics\nA common framework in the analytics field breaks analysis into four types, moving from “what happened” to “what should we do.” Every technique in this book fits into one of these categories.\n\nDescriptive analytics — What happened? Summarizing past data. Example: calculating total revenue by month, or the average days-sales-outstanding over the last year.\nDiagnostic analytics — Why did it happen? Investigating causes and relationships. Example: determining why gross margin declined in Q3 by breaking revenue and cost data down by product line.\nPredictive analytics — What is likely to happen? Using historical data to forecast. Example: predicting which customers are likely to become uncollectible accounts receivable.\nPrescriptive analytics — What should we do? Recommending an action based on analysis. Example: recommending which vendors to flag for additional audit procedures based on a fraud-risk score.\n\nMost introductory accounting analytics work — including much of this book — lives in the descriptive and diagnostic space, with an introduction to predictive methods later in the book (Chapter 12). Prescriptive analytics tends to require more advanced modeling and is largely beyond the scope of an undergraduate course, but it’s useful to know where the field is heading.",
+    "crumbs": [
+      "Part I: Foundations",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Accounting Analytics</span>"
+    ]
+  },
+  {
+    "objectID": "01-introduction-to-accounting-analytics.html#the-accounting-analytics-workflow",
+    "href": "01-introduction-to-accounting-analytics.html#the-accounting-analytics-workflow",
+    "title": "1  Introduction to Accounting Analytics",
+    "section": "1.5 The Accounting Analytics Workflow",
+    "text": "1.5 The Accounting Analytics Workflow\nMost accounting analytics projects — whether a homework assignment in this course or a real audit engagement — follow a similar sequence:\n\nDefine the question. What decision or risk are we trying to inform? (e.g., “Are there unusual journal entries near period-end that warrant investigation?”)\nObtain the data. Extract data from a source system — a general ledger export, a CSV file, a database query.\nClean and prepare the data. Real data is messy: missing values, inconsistent formats, duplicate entries. This step often takes the most time in practice.\nExplore and analyze. Apply descriptive statistics, visualizations, or models to look for patterns.\nInterpret results in context. A statistical pattern is not automatically meaningful — this is where accounting judgment matters most.\nCommunicate findings. Produce a report, dashboard, or memo that a non-technical stakeholder (a partner, a controller, a client) can act on.\n\nThis book is structured around this workflow. Chapters 2–3 build foundational tools and data literacy; Chapters 4–6 cover steps 2–4 in depth; Chapters 7–11 apply the workflow to specific accounting domains (financial statements, audit, fraud, revenue, tax); and later chapters extend into predictive methods, GenAI, and communicating results.",
+    "crumbs": [
+      "Part I: Foundations",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Accounting Analytics</span>"
+    ]
+  },
+  {
+    "objectID": "01-introduction-to-accounting-analytics.html#where-accounting-analytics-shows-up-in-practice",
+    "href": "01-introduction-to-accounting-analytics.html#where-accounting-analytics-shows-up-in-practice",
+    "title": "1  Introduction to Accounting Analytics",
+    "section": "1.6 Where Accounting Analytics Shows Up in Practice",
+    "text": "1.6 Where Accounting Analytics Shows Up in Practice\nA few examples of accounting analytics in action:\n\nExternal audit — Using full-population testing and anomaly detection to identify unusual journal entries for further audit procedures, rather than testing a small manual sample.\nInternal audit — Continuous monitoring dashboards that flag control violations or policy exceptions as they occur, not just at year-end.\nFinancial planning & analysis (FP&A) — Building forecasting models and variance-analysis dashboards to support budgeting decisions.\nForensic accounting — Applying techniques like Benford’s Law (covered in Chapter 8) to detect potential financial statement fraud.\nTax — Analyzing large transactional datasets to identify tax planning opportunities or compliance risks across jurisdictions.",
+    "crumbs": [
+      "Part I: Foundations",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Accounting Analytics</span>"
+    ]
+  },
+  {
+    "objectID": "01-introduction-to-accounting-analytics.html#careers-and-certifications",
+    "href": "01-introduction-to-accounting-analytics.html#careers-and-certifications",
+    "title": "1  Introduction to Accounting Analytics",
+    "section": "1.7 Careers and Certifications",
+    "text": "1.7 Careers and Certifications\nAccounting analytics skills are increasingly valued across public accounting, industry, and government. A few relevant credentials and pathways worth knowing about as you plan your career:\n\nCPA (Certified Public Accountant) — increasingly incorporates data analytics content, especially through the BAR discipline\nCISA (Certified Information Systems Auditor) — relevant for IT audit and control-focused roles\nData-analytics-specific certificates offered by the AICPA and various universities\n\nYou don’t need to become a data scientist to benefit from this course — the goal is analytics literacy: being comfortable enough with data tools that you can perform basic analyses yourself, and knowledgeable enough to critically evaluate analyses done by others (including, increasingly, by AI tools).",
+    "crumbs": [
+      "Part I: Foundations",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Accounting Analytics</span>"
+    ]
+  },
+  {
+    "objectID": "01-introduction-to-accounting-analytics.html#a-note-on-tools-why-python-and-quarto",
+    "href": "01-introduction-to-accounting-analytics.html#a-note-on-tools-why-python-and-quarto",
+    "title": "1  Introduction to Accounting Analytics",
+    "section": "1.8 A Note on Tools: Why Python and Quarto?",
+    "text": "1.8 A Note on Tools: Why Python and Quarto?\nThis book uses Python as its programming language and Quarto as its authoring and reporting tool, for a few reasons that matter to your future career:\n\nPython is one of the most widely used languages in data analytics and is free and open-source, meaning you can continue using it after graduation without needing a paid license.\nThe pandas library (introduced in Chapter 4) is purpose-built for exactly the kind of tabular, spreadsheet-like data accountants work with every day.\nQuarto allows you to combine narrative writing, code, and output (tables, charts) into a single reproducible document — which mirrors how analytics work is increasingly delivered in practice, as a reproducible report rather than a static spreadsheet.\n\nYou’ll get hands-on with both tools starting in Chapter 2.",
+    "crumbs": [
+      "Part I: Foundations",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Accounting Analytics</span>"
+    ]
+  },
+  {
+    "objectID": "01-introduction-to-accounting-analytics.html#chapter-summary",
+    "href": "01-introduction-to-accounting-analytics.html#chapter-summary",
+    "title": "1  Introduction to Accounting Analytics",
+    "section": "1.9 Chapter Summary",
+    "text": "1.9 Chapter Summary\n\nAccounting analytics combines accounting knowledge, data skills, and business judgment to support decisions.\nThe shift toward analytics is driven by data volume, regulatory expectations, automation, and accessible tools.\nAnalytics can be descriptive, diagnostic, predictive, or prescriptive — most of this course focuses on the first two, with an introduction to the third.\nA consistent workflow (define, obtain, clean, analyze, interpret, communicate) underlies most accounting analytics projects, and structures the rest of this book.\nThese skills map directly onto current and evolving areas of accounting practice, including the CPA Exam.",
+    "crumbs": [
+      "Part I: Foundations",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Accounting Analytics</span>"
+    ]
+  },
+  {
+    "objectID": "01-introduction-to-accounting-analytics.html#discussion-questions",
+    "href": "01-introduction-to-accounting-analytics.html#discussion-questions",
+    "title": "1  Introduction to Accounting Analytics",
+    "section": "1.10 Discussion Questions",
+    "text": "1.10 Discussion Questions\n\nChoose one accounting role (e.g., external auditor, tax accountant, FP&A analyst). How might accounting analytics change the day-to-day work of someone in that role over the next five years?\nThink of a business decision (not necessarily accounting-related) you or your family have made recently. Which of the four analytics types (descriptive, diagnostic, predictive, prescriptive) best describes the thinking that went into it?\nWhy do you think regulators like the PCAOB have pushed auditors toward analyzing full populations of transactions rather than samples? What are the potential benefits and risks of this shift?",
+    "crumbs": [
+      "Part I: Foundations",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Accounting Analytics</span>"
+    ]
+  },
+  {
+    "objectID": "01-introduction-to-accounting-analytics.html#exercises",
+    "href": "01-introduction-to-accounting-analytics.html#exercises",
+    "title": "1  Introduction to Accounting Analytics",
+    "section": "1.11 Exercises",
+    "text": "1.11 Exercises\n\nFind one recent (last 12 months) news article or company disclosure describing the use of data analytics or AI in an accounting, audit, or finance context. Write a short (150-word) summary of what the technology does and what problem it solves.\nLook up the current AICPA CPA Exam Blueprint for the Business Analysis and Reporting (BAR) discipline. Identify two specific data-analytics-related skills listed and briefly explain, in your own words, what they mean.",
+    "crumbs": [
+      "Part I: Foundations",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Accounting Analytics</span>"
+    ]
+  }
+]
