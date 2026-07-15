@@ -2,5 +2,7 @@
 *.pyo
 __pycache__/
 
-/.quarto/
-**/*.quarto_ipynb
+# Quarto-generated notebook artifacts
+*.quarto_ipynb_*
+
+
