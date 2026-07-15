@@ -6,12 +6,13 @@ book:
   title: "Accounting Analytics with Python"
   subtitle: "Analytics Powered by Large Language Models (LLM)"
   author: "Sharif Islam, DBA, CPA, CMA"
+  downloads: [pdf, epub] 
   date: today
   repo-url: https://github.com/msharifbd/accounting-analytics-book
   repo-actions: [edit, source, issue]
   page-footer:
     left: "Accounting Analytics with Python"
-    right: " "
+    right: "This book was built with [Quarto](https://quarto.org/)"
   chapters:
     - index.qmd
     - part: "Part I: Foundations"
@@ -62,6 +63,12 @@ format:
           width: max-content !important;
           max-width: none !important;
         }
+        a.citation, a.citation:visited {
+          color: #1a56db !important;
+        }
+        #refs a {
+          color: #1a56db !important;
+        }
         </style>
     number-sections: true
     toc: true
@@ -71,10 +78,23 @@ format:
     
   pdf:
     documentclass: scrbook
+    classoption: ["fontsize=13pt", "extrafontsizes"]
+    geometry:
+      - margin=1in
     toc: true
     number-sections: true
     colorlinks: true
+    citecolor: blue
+    linkcolor: blue
+    urlcolor: blue
+    cite-method: natbib
+    natbiboptions: round
     fig-pos: "H"
+    pdf-engine: xelatex
+    mainfont: "EB Garamond"
+    include-in-header:
+      text: |
+        \setkomafont{disposition}{\rmfamily\bfseries}
 
 execute:
   freeze: auto

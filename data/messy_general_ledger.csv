@@ -1,0 +1,12 @@
+entry_id,entry_date,account,debit,credit,department
+JE2001,01/15/2025,Cash,"$4,500.00",0,Sales
+JE2001,1-15-2025,cash ,4500,0, sales
+JE2002,01/16/2025,Accounts Receivable,0,"$4,500.00",Sales
+JE2003,01/18/2025,Inventory,7200,0,Operations
+JE2003,01/18/2025,Accounts Payable,0,7200,Operations
+JE2004,02/30/2025,Rent Expense,3000,0,Operations
+JE2004,02/30/2025,Cash,0,3000,Operations
+JE2005,01/22/2025,SALARIES EXPENSE,15400,0,
+JE2005,01/22/2025,Cash,0,15400,HR
+JE2006,01/25/2025,Utilities Expense,850,0,Operations
+JE2006,01/25/2025,Accounts Payable,0,8500,Operations

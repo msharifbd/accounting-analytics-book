@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>4&nbsp; Data Wrangling with Pandas – Accounting Analytics with Python</title>
+<title>4&nbsp; Data Wrangling with Pandas and Polars – Accounting Analytics with Python</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -23,10 +23,64 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -72,6 +126,12 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
 <style>
 .scrollable-table {
   overflow-x: auto !important;
@@ -79,6 +139,12 @@ ul.task-list li input[type="checkbox"] {
 .scrollable-table table {
   width: max-content !important;
   max-width: none !important;
+}
+a.citation, a.citation:visited {
+  color: #1a56db !important;
+}
+#refs a {
+  color: #1a56db !important;
 }
 </style>
 
@@ -94,7 +160,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-data-wrangling-pandas.html">Part II: Core Data Skills</a></li><li class="breadcrumb-item"><a href="./04-data-wrangling-pandas.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Wrangling with Pandas</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-data-wrangling-pandas.html">Part II: Core Data Skills</a></li><li class="breadcrumb-item"><a href="./04-data-wrangling-pandas.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Wrangling with <code>Pandas</code> and <code>Polars</code></span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -112,6 +178,23 @@ ul.task-list li input[type="checkbox"] {
       <a href="./">Accounting Analytics with Python</a> 
         <div class="sidebar-tools-main">
     <a href="https://github.com/msharifbd/accounting-analytics-book" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Download"><i class="bi bi-download"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./Accounting-Analytics-with-Python.pdf">
+              <i class="bi bi-file-pdf pe-1"></i>
+            Download PDF
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./Accounting-Analytics-with-Python.epub">
+              <i class="bi bi-journal pe-1"></i>
+            Download ePub
+            </a>
+          </li>
+      </ul>
+    </div>
 </div>
     </div>
       </div>
@@ -169,7 +252,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04-data-wrangling-pandas.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Wrangling with Pandas</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Wrangling with <code>Pandas</code> and <code>Polars</code></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -319,15 +402,66 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#what-is-data-wrangling" id="toc-what-is-data-wrangling" class="nav-link active" data-scroll-target="#what-is-data-wrangling"><span class="header-section-number">4.1</span> What is Data Wrangling?</a>
+  <ul class="collapse">
+  <li><a href="#data-wrangling-steps-and-techniques" id="toc-data-wrangling-steps-and-techniques" class="nav-link" data-scroll-target="#data-wrangling-steps-and-techniques"><span class="header-section-number">4.1.1</span> Data Wrangling Steps and Techniques</a></li>
+  <li><a href="#data-wrangling-vs.-data-cleaning" id="toc-data-wrangling-vs.-data-cleaning" class="nav-link" data-scroll-target="#data-wrangling-vs.-data-cleaning"><span class="header-section-number">4.1.2</span> Data Wrangling vs.&nbsp;Data Cleaning</a></li>
+  <li><a href="#importance-of-data-wrangling" id="toc-importance-of-data-wrangling" class="nav-link" data-scroll-target="#importance-of-data-wrangling"><span class="header-section-number">4.1.3</span> Importance of Data Wrangling</a></li>
+  </ul></li>
+  <li><a href="#two-tools-one-set-of-concepts" id="toc-two-tools-one-set-of-concepts" class="nav-link" data-scroll-target="#two-tools-one-set-of-concepts"><span class="header-section-number">4.2</span> Two Tools, One Set of Concepts</a></li>
+  <li><a href="#reading-data-in" id="toc-reading-data-in" class="nav-link" data-scroll-target="#reading-data-in"><span class="header-section-number">4.3</span> Reading Data In</a>
+  <ul class="collapse">
+  <li><a href="#reading-with-an-explicit-schema" id="toc-reading-with-an-explicit-schema" class="nav-link" data-scroll-target="#reading-with-an-explicit-schema"><span class="header-section-number">4.3.1</span> Reading with an Explicit Schema</a></li>
+  </ul></li>
+  <li><a href="#selecting-filtering-and-sorting" id="toc-selecting-filtering-and-sorting" class="nav-link" data-scroll-target="#selecting-filtering-and-sorting"><span class="header-section-number">4.4</span> Selecting, Filtering, and Sorting</a>
+  <ul class="collapse">
+  <li><a href="#filtering-on-a-single-condition" id="toc-filtering-on-a-single-condition" class="nav-link" data-scroll-target="#filtering-on-a-single-condition"><span class="header-section-number">4.4.1</span> Filtering on a Single Condition</a></li>
+  <li><a href="#combining-multiple-conditions" id="toc-combining-multiple-conditions" class="nav-link" data-scroll-target="#combining-multiple-conditions"><span class="header-section-number">4.4.2</span> Combining Multiple Conditions</a></li>
+  <li><a href="#sorting" id="toc-sorting" class="nav-link" data-scroll-target="#sorting"><span class="header-section-number">4.4.3</span> Sorting</a></li>
+  </ul></li>
+  <li><a href="#cleaning-data" id="toc-cleaning-data" class="nav-link" data-scroll-target="#cleaning-data"><span class="header-section-number">4.5</span> Cleaning Data</a>
+  <ul class="collapse">
+  <li><a href="#step-1-fix-currency-formatting" id="toc-step-1-fix-currency-formatting" class="nav-link" data-scroll-target="#step-1-fix-currency-formatting"><span class="header-section-number">4.5.1</span> Step 1: Fix Currency Formatting</a></li>
+  <li><a href="#step-2-standardize-text-fields" id="toc-step-2-standardize-text-fields" class="nav-link" data-scroll-target="#step-2-standardize-text-fields"><span class="header-section-number">4.5.2</span> Step 2: Standardize Text Fields</a></li>
+  <li><a href="#step-3-fix-inconsistent-dates" id="toc-step-3-fix-inconsistent-dates" class="nav-link" data-scroll-target="#step-3-fix-inconsistent-dates"><span class="header-section-number">4.5.3</span> Step 3: Fix Inconsistent Dates</a></li>
+  <li><a href="#step-4-handle-missing-values" id="toc-step-4-handle-missing-values" class="nav-link" data-scroll-target="#step-4-handle-missing-values"><span class="header-section-number">4.5.4</span> Step 4: Handle Missing Values</a></li>
+  <li><a href="#step-5-check-for-duplicates" id="toc-step-5-check-for-duplicates" class="nav-link" data-scroll-target="#step-5-check-for-duplicates"><span class="header-section-number">4.5.5</span> Step 5: Check for Duplicates</a></li>
+  </ul></li>
+  <li><a href="#merging-and-joining-tables" id="toc-merging-and-joining-tables" class="nav-link" data-scroll-target="#merging-and-joining-tables"><span class="header-section-number">4.6</span> Merging and Joining Tables</a>
+  <ul class="collapse">
+  <li><a href="#inner-join" id="toc-inner-join" class="nav-link" data-scroll-target="#inner-join"><span class="header-section-number">4.6.1</span> Inner Join</a></li>
+  <li><a href="#left-join" id="toc-left-join" class="nav-link" data-scroll-target="#left-join"><span class="header-section-number">4.6.2</span> Left Join</a></li>
+  </ul></li>
+  <li><a href="#reshaping-data" id="toc-reshaping-data" class="nav-link" data-scroll-target="#reshaping-data"><span class="header-section-number">4.7</span> Reshaping Data</a>
+  <ul class="collapse">
+  <li><a href="#wide-total-debits-by-account-and-department" id="toc-wide-total-debits-by-account-and-department" class="nav-link" data-scroll-target="#wide-total-debits-by-account-and-department"><span class="header-section-number">4.7.1</span> Wide: Total Debits by Account and Department</a></li>
+  <li><a href="#back-to-long-tidy-format" id="toc-back-to-long-tidy-format" class="nav-link" data-scroll-target="#back-to-long-tidy-format"><span class="header-section-number">4.7.2</span> Back to Long (Tidy) Format</a></li>
+  </ul></li>
+  <li><a href="#grouping-and-aggregating" id="toc-grouping-and-aggregating" class="nav-link" data-scroll-target="#grouping-and-aggregating"><span class="header-section-number">4.8</span> Grouping and Aggregating</a>
+  <ul class="collapse">
+  <li><a href="#multi-level-grouping" id="toc-multi-level-grouping" class="nav-link" data-scroll-target="#multi-level-grouping"><span class="header-section-number">4.8.1</span> Multi-Level Grouping</a></li>
+  </ul></li>
+  <li><a href="#polars-lazy-frames-wrangling-large-accounting-datasets" id="toc-polars-lazy-frames-wrangling-large-accounting-datasets" class="nav-link" data-scroll-target="#polars-lazy-frames-wrangling-large-accounting-datasets"><span class="header-section-number">4.9</span> Polars Lazy Frames: Wrangling Large Accounting Datasets</a>
+  <ul class="collapse">
+  <li><a href="#eager-vs.-lazy-the-same-pipeline-two-ways" id="toc-eager-vs.-lazy-the-same-pipeline-two-ways" class="nav-link" data-scroll-target="#eager-vs.-lazy-the-same-pipeline-two-ways"><span class="header-section-number">4.9.1</span> Eager vs.&nbsp;Lazy: The Same Pipeline, Two Ways</a></li>
+  </ul></li>
+  <li><a href="#chapter-summary" id="toc-chapter-summary" class="nav-link" data-scroll-target="#chapter-summary"><span class="header-section-number">4.10</span> Chapter Summary</a></li>
+  <li><a href="#discussion-questions" id="toc-discussion-questions" class="nav-link" data-scroll-target="#discussion-questions"><span class="header-section-number">4.11</span> Discussion Questions</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">4.12</span> Exercises</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/msharifbd/accounting-analytics-book/edit/main/04-data-wrangling-pandas.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/blob/main/04-data-wrangling-pandas.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-data-wrangling-pandas.html">Part II: Core Data Skills</a></li><li class="breadcrumb-item"><a href="./04-data-wrangling-pandas.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Wrangling with Pandas</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-data-wrangling-pandas.html">Part II: Core Data Skills</a></li><li class="breadcrumb-item"><a href="./04-data-wrangling-pandas.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Wrangling with <code>Pandas</code> and <code>Polars</code></span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Wrangling with Pandas</span></h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Wrangling with <code>Pandas</code> and <code>Polars</code></span></h1>
 </div>
 
 
@@ -344,8 +478,3320 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Learning Objectives
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>By the end of this chapter, you should be able to:</p>
+<ul>
+<li>Understand what data wrangling is and its importance</li>
+<li>Import tabular accounting data (CSV) into both pandas and polars DataFrames</li>
+<li>Select, filter, and sort accounting data using both libraries</li>
+<li>Clean messy accounting data: fix currency formatting, inconsistent text, bad dates, and missing values</li>
+<li>Merge/join accounting tables and explain the difference between inner and left joins</li>
+<li>Reshape data between wide and long formats</li>
+<li>Group and aggregate transaction-level data into account-level summaries</li>
+<li>Explain lazy vs.&nbsp;eager evaluation in polars, and why it matters for large accounting datasets</li>
+</ul>
+</div>
+</div>
+<section id="what-is-data-wrangling" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="what-is-data-wrangling"><span class="header-section-number">4.1</span> What is Data Wrangling?</h2>
+<p><strong>Data wrangling</strong>—also called <em>data cleaning</em>, <em>data remediation</em>, or <em>data munging</em>—refers to a variety of processes designed to transform raw data into more readily used formats. The exact methods differ from project to project depending on the data you’re leveraging and the goal you’re trying to achieve <span class="citation" data-cites="stobierski_data_2021">(<a href="references.html#ref-stobierski_data_2021" role="doc-biblioref">Stobierski 2021</a>)</span>.</p>
+<p>Some examples of data wrangling include:</p>
+<ul>
+<li><p>Merging multiple data sources into a single dataset for analysis</p></li>
+<li><p>Identifying gaps in data (for example, empty cells in a spreadsheet) and either filling or deleting them</p></li>
+<li><p>Deleting data that’s either unnecessary or irrelevant to the project you’re working on</p></li>
+<li><p>Identifying extreme outliers in data and either explaining the discrepancies or removing them so that analysis can take place</p></li>
+</ul>
+<p>Data wrangling can be a manual or automated process. In scenarios where datasets are exceptionally large, automated data cleaning becomes a necessity. In organizations that employ a full data team, a data scientist or other team member is typically responsible for data wrangling. In smaller organizations, non-data professionals are often responsible for cleaning their data before leveraging it <span class="citation" data-cites="stobierski_data_2021">(<a href="references.html#ref-stobierski_data_2021" role="doc-biblioref">Stobierski 2021</a>)</span>.</p>
+<section id="data-wrangling-steps-and-techniques" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="data-wrangling-steps-and-techniques"><span class="header-section-number">4.1.1</span> Data Wrangling Steps and Techniques</h3>
+<p>Each data project requires a unique approach to ensure its final dataset is reliable and accessible. That being said, several processes typically inform the approach. These are commonly referred to as data wrangling steps or activities. <a href="#fig-six-steps-data-wrangling" class="quarto-xref">Figure&nbsp;<span>4.1</span></a> shows the steps in Data Warngling <span class="citation" data-cites="stobierski_data_2021">(<a href="references.html#ref-stobierski_data_2021" role="doc-biblioref">Stobierski 2021</a>)</span>.</p>
+<div id="fig-six-steps-data-wrangling" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-six-steps-data-wrangling-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/6-steps-of-data-wrangling.jpg" class="img-fluid figure-img" style="width:85.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-six-steps-data-wrangling-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.1: Steps in Data Wrangling
+</figcaption>
+</figure>
+</div>
+<section id="discovery" class="level4" data-number="4.1.1.1">
+<h4 data-number="4.1.1.1" class="anchored" data-anchor-id="discovery"><span class="header-section-number">4.1.1.1</span> Discovery</h4>
+<p>Discovery refers to the process of familiarizing yourself with data so you can conceptualize how you might use it. You can liken it to looking in your refrigerator before cooking a meal to see what ingredients you have at your disposal.</p>
+<p>During discovery, you may identify trends or patterns in the data, along with obvious issues, such as missing or incomplete values that need to be addressed. This is an important step, as it will inform every activity that comes afterward <span class="citation" data-cites="stobierski_data_2021">(<a href="references.html#ref-stobierski_data_2021" role="doc-biblioref">Stobierski 2021</a>)</span>.</p>
+</section>
+<section id="structuring" class="level4" data-number="4.1.1.2">
+<h4 data-number="4.1.1.2" class="anchored" data-anchor-id="structuring"><span class="header-section-number">4.1.1.2</span> Structuring</h4>
+<p>Raw data is typically unusable in its raw state because it’s either incomplete or misformatted for its intended application. Data structuring is the process of taking raw data and transforming it to be more readily leveraged. The form your data takes will depend on the analytical model you use to interpret it <span class="citation" data-cites="stobierski_data_2021">(<a href="references.html#ref-stobierski_data_2021" role="doc-biblioref">Stobierski 2021</a>)</span>.</p>
+</section>
+<section id="cleaning" class="level4" data-number="4.1.1.3">
+<h4 data-number="4.1.1.3" class="anchored" data-anchor-id="cleaning"><span class="header-section-number">4.1.1.3</span> Cleaning</h4>
+<p>Data cleaning is the process of removing inherent errors in data that might distort your analysis or render it less valuable. Cleaning can come in different forms, including deleting empty cells or rows, removing outliers, and standardizing inputs. The goal of data cleaning is to ensure there are no errors (or as few as possible) that could influence your final analysis. Identifying and removing any bad data greatly impacts the rest of the wrangling processes <span class="citation" data-cites="stobierski_data_2021">(<a href="references.html#ref-stobierski_data_2021" role="doc-biblioref">Stobierski 2021</a>)</span>.</p>
+</section>
+<section id="enriching" class="level4" data-number="4.1.1.4">
+<h4 data-number="4.1.1.4" class="anchored" data-anchor-id="enriching"><span class="header-section-number">4.1.1.4</span> Enriching</h4>
+<p>Once you understand your existing data and have transformed it into a more usable state, you must determine whether you have all of the data necessary for the project at hand. If not, you may choose to enrich or augment your data by incorporating values from other datasets. For this reason, it’s important to understand what other data is available for use <span class="citation" data-cites="stobierski_data_2021">(<a href="references.html#ref-stobierski_data_2021" role="doc-biblioref">Stobierski 2021</a>)</span>.</p>
+<p>If you decide that enrichment is necessary, you need to repeat the steps above for any new data.</p>
+</section>
+<section id="validating" class="level4" data-number="4.1.1.5">
+<h4 data-number="4.1.1.5" class="anchored" data-anchor-id="validating"><span class="header-section-number">4.1.1.5</span> Validating</h4>
+<p>Data validation refers to the process of verifying that your data is both consistent and of a high enough quality. During validation, you may discover issues you need to resolve or conclude that your data is ready to be analyzed. Validation is typically achieved through various automated processes and requires programming <span class="citation" data-cites="stobierski_data_2021">(<a href="references.html#ref-stobierski_data_2021" role="doc-biblioref">Stobierski 2021</a>)</span>.</p>
+</section>
+<section id="publishing" class="level4" data-number="4.1.1.6">
+<h4 data-number="4.1.1.6" class="anchored" data-anchor-id="publishing"><span class="header-section-number">4.1.1.6</span> Publishing</h4>
+<p>Once your data has been validated, you can publish it. This involves making it available to others within your organization for analysis. The format you use to share the information—such as a written report or electronic file—will depend on your data and the organization’s goals <span class="citation" data-cites="stobierski_data_2021">(<a href="references.html#ref-stobierski_data_2021" role="doc-biblioref">Stobierski 2021</a>)</span>.</p>
+</section>
+</section>
+<section id="data-wrangling-vs.-data-cleaning" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="data-wrangling-vs.-data-cleaning"><span class="header-section-number">4.1.2</span> Data Wrangling vs.&nbsp;Data Cleaning</h3>
+<p>Despite the terms being used interchangeably, data wrangling and data cleaning are two different processes. It’s important to make the distinction that data cleaning is a critical step in the data wrangling process to remove inaccurate and inconsistent data. Meanwhile, data-wrangling is the overall process of transforming raw data into a more usable form <span class="citation" data-cites="stobierski_data_2021">(<a href="references.html#ref-stobierski_data_2021" role="doc-biblioref">Stobierski 2021</a>)</span>. <a href="#fig-data-wrangling-vs-data-cleaning" class="quarto-xref">Figure&nbsp;<span>4.2</span></a> compares both.</p>
+<div id="fig-data-wrangling-vs-data-cleaning" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-data-wrangling-vs-data-cleaning-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/data-wrangling-vs-data-cleaning.jpg" class="img-fluid figure-img" style="width:85.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-wrangling-vs-data-cleaning-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.2: Data Wrangling vs Data Cleaning
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="importance-of-data-wrangling" class="level3" data-number="4.1.3">
+<h3 data-number="4.1.3" class="anchored" data-anchor-id="importance-of-data-wrangling"><span class="header-section-number">4.1.3</span> Importance of Data Wrangling</h3>
+<p>Any analyses an accountant or CPA performs will ultimately be constrained by the data that informs them. If data is incomplete, unreliable, or faulty, then analyses will be too—diminishing the value of any critical insights gleaned.</p>
+<p>Data wrangling seeks to remove that risk by ensuring data is in a reliable state before it’s analyzed and leveraged. This makes it a critical part of the analytical process.</p>
+<p>It’s important to note that data wrangling can be time-consuming and taxing on resources, particularly when done manually. This is why many organizations institute policies and best practices that help employees streamline the data cleanup process—for example, requiring that data include certain information or be in a specific format before it’s uploaded to a database.</p>
+<p>For this reason, it’s vital to understand the steps of the data wrangling process and the negative outcomes associated with incorrect or faulty data <span class="citation" data-cites="stobierski_data_2021">(<a href="references.html#ref-stobierski_data_2021" role="doc-biblioref">Stobierski 2021</a>)</span>.</p>
+</section>
+</section>
+<section id="two-tools-one-set-of-concepts" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="two-tools-one-set-of-concepts"><span class="header-section-number">4.2</span> Two Tools, One Set of Concepts</h2>
+<p>This chapter teaches data wrangling using <strong>two</strong> Python libraries side by side: <strong>pandas</strong>, the long-standing standard for tabular data analysis in Python, and <strong>polars</strong>, a newer library built for speed on large datasets.</p>
+<p>The good news: the underlying <em>concepts</em> — filtering, joining, grouping, reshaping — are identical no matter which library you use. Only the syntax changes. Learning both at once actually reinforces the concepts, because you’ll see the same logic expressed two different ways.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>pandas</th>
+<th>polars</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Maturity</strong></td>
+<td>Released 2008; the long-standing standard</td>
+<td>Released 2020; newer, rapidly growing</td>
+</tr>
+<tr class="even">
+<td><strong>Performance</strong></td>
+<td>Good for small-to-medium data; single-threaded by default</td>
+<td>Built for speed; multi-threaded, memory-efficient</td>
+</tr>
+<tr class="odd">
+<td><strong>Syntax style</strong></td>
+<td>Label-based indexing (<code>df[df["x"] &gt; 0]</code>)</td>
+<td>Expression-based API (<code>pl.col("x") &gt; 0</code>)</td>
+</tr>
+<tr class="even">
+<td><strong>Industry adoption (accounting/audit)</strong></td>
+<td>Still the dominant tool in most firms and tutorials</td>
+<td>Growing adoption, especially for large transaction datasets</td>
+</tr>
+<tr class="odd">
+<td><strong>Lazy evaluation</strong></td>
+<td>Not built in (see Dask/Modin for scaling, not covered here)</td>
+<td>Built in — covered in this chapter</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Connect to Practice
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You are very likely to encounter pandas in an internship or entry-level role today. Polars is worth learning now because its adoption is accelerating quickly, especially anywhere teams work with large general ledger exports (multi-million-row datasets), where its performance advantage becomes very noticeable.</p>
+</div>
+</div>
+<p>We’ll use two datasets you already have from previous chapters — <code>general_ledger_sample.csv</code> and <code>trial_balance.csv</code> — plus two new ones for this chapter: <code>chart_of_accounts.csv</code> (for joins) and <code>messy_general_ledger.csv</code> (for cleaning practice).</p>
+</section>
+<section id="reading-data-in" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="reading-data-in"><span class="header-section-number">4.3</span> Reading Data In</h2>
+<p>Let’s start by loading the general ledger sample into both libraries and inspecting its structure.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="" aria-current="page">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div id="8c54d659" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># pandas</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>gl_pd <span class="op">=</span> pd.read_csv(<span class="st">"data/general_ledger_sample.csv"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(gl_pd.shape)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(gl_pd.dtypes)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>gl_pd.head(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(20, 9)
+entry_id          str
+entry_date        str
+account           str
+account_type      str
+description       str
+debit           int64
+credit          int64
+department        str
+posted_by         str
+dtype: object</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div>
 
 
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">entry_id</th>
+<th data-quarto-table-cell-role="th">entry_date</th>
+<th data-quarto-table-cell-role="th">account</th>
+<th data-quarto-table-cell-role="th">account_type</th>
+<th data-quarto-table-cell-role="th">description</th>
+<th data-quarto-table-cell-role="th">debit</th>
+<th data-quarto-table-cell-role="th">credit</th>
+<th data-quarto-table-cell-role="th">department</th>
+<th data-quarto-table-cell-role="th">posted_by</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>JE1001</td>
+<td>2025-01-03</td>
+<td>Cash</td>
+<td>Asset</td>
+<td>Customer payment received</td>
+<td>4500</td>
+<td>0</td>
+<td>Sales</td>
+<td>jsmith</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>JE1001</td>
+<td>2025-01-03</td>
+<td>Accounts Receivable</td>
+<td>Asset</td>
+<td>Customer payment received</td>
+<td>0</td>
+<td>4500</td>
+<td>Sales</td>
+<td>jsmith</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>JE1002</td>
+<td>2025-01-05</td>
+<td>Inventory</td>
+<td>Asset</td>
+<td>Purchase of merchandise</td>
+<td>7200</td>
+<td>0</td>
+<td>Operations</td>
+<td>mchen</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div id="3285e1f4" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># polars</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>gl_pl <span class="op">=</span> pl.read_csv(<span class="st">"data/general_ledger_sample.csv"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(gl_pl.shape)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(gl_pl.dtypes)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>gl_pl.head(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(20, 9)
+[String, String, String, String, String, Int64, Int64, String, String]</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (3, 9)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">entry_id</th>
+<th data-quarto-table-cell-role="th">entry_date</th>
+<th data-quarto-table-cell-role="th">account</th>
+<th data-quarto-table-cell-role="th">account_type</th>
+<th data-quarto-table-cell-role="th">description</th>
+<th data-quarto-table-cell-role="th">debit</th>
+<th data-quarto-table-cell-role="th">credit</th>
+<th data-quarto-table-cell-role="th">department</th>
+<th data-quarto-table-cell-role="th">posted_by</th>
+</tr>
+<tr class="even">
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>i64</td>
+<td>i64</td>
+<td>str</td>
+<td>str</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"JE1001"</td>
+<td>"2025-01-03"</td>
+<td>"Cash"</td>
+<td>"Asset"</td>
+<td>"Customer payment received"</td>
+<td>4500</td>
+<td>0</td>
+<td>"Sales"</td>
+<td>"jsmith"</td>
+</tr>
+<tr class="even">
+<td>"JE1001"</td>
+<td>"2025-01-03"</td>
+<td>"Accounts Receivable"</td>
+<td>"Asset"</td>
+<td>"Customer payment received"</td>
+<td>0</td>
+<td>4500</td>
+<td>"Sales"</td>
+<td>"jsmith"</td>
+</tr>
+<tr class="odd">
+<td>"JE1002"</td>
+<td>"2025-01-05"</td>
+<td>"Inventory"</td>
+<td>"Asset"</td>
+<td>"Purchase of merchandise"</td>
+<td>7200</td>
+<td>0</td>
+<td>"Operations"</td>
+<td>"mchen"</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Both libraries correctly infer that <code>debit</code> and <code>credit</code> are numeric and everything else is text. You can get quick summary statistics with <code>.describe()</code> in both libraries:</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<div id="bb258364" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>gl_pd.describe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">debit</th>
+<th data-quarto-table-cell-role="th">credit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">count</th>
+<td>20.000000</td>
+<td>20.000000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">mean</th>
+<td>3012.500000</td>
+<td>3012.500000</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">std</th>
+<td>4296.873864</td>
+<td>4296.873864</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">min</th>
+<td>0.000000</td>
+<td>0.000000</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">25%</th>
+<td>0.000000</td>
+<td>0.000000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">50%</th>
+<td>425.000000</td>
+<td>425.000000</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">75%</th>
+<td>5375.000000</td>
+<td>5375.000000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">max</th>
+<td>15400.000000</td>
+<td>15400.000000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div id="a7d4bbd4" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>gl_pl.describe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (9, 10)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">statistic</th>
+<th data-quarto-table-cell-role="th">entry_id</th>
+<th data-quarto-table-cell-role="th">entry_date</th>
+<th data-quarto-table-cell-role="th">account</th>
+<th data-quarto-table-cell-role="th">account_type</th>
+<th data-quarto-table-cell-role="th">description</th>
+<th data-quarto-table-cell-role="th">debit</th>
+<th data-quarto-table-cell-role="th">credit</th>
+<th data-quarto-table-cell-role="th">department</th>
+<th data-quarto-table-cell-role="th">posted_by</th>
+</tr>
+<tr class="even">
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>f64</td>
+<td>f64</td>
+<td>str</td>
+<td>str</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"count"</td>
+<td>"20"</td>
+<td>"20"</td>
+<td>"20"</td>
+<td>"20"</td>
+<td>"20"</td>
+<td>20.0</td>
+<td>20.0</td>
+<td>"20"</td>
+<td>"20"</td>
+</tr>
+<tr class="even">
+<td>"null_count"</td>
+<td>"0"</td>
+<td>"0"</td>
+<td>"0"</td>
+<td>"0"</td>
+<td>"0"</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>"0"</td>
+<td>"0"</td>
+</tr>
+<tr class="odd">
+<td>"mean"</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>3012.5</td>
+<td>3012.5</td>
+<td>null</td>
+<td>null</td>
+</tr>
+<tr class="even">
+<td>"std"</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>4296.873864</td>
+<td>4296.873864</td>
+<td>null</td>
+<td>null</td>
+</tr>
+<tr class="odd">
+<td>"min"</td>
+<td>"JE1001"</td>
+<td>"2025-01-03"</td>
+<td>"Accounts Payable"</td>
+<td>"Asset"</td>
+<td>"Biweekly payroll"</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>"HR"</td>
+<td>"jsmith"</td>
+</tr>
+<tr class="even">
+<td>"25%"</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>null</td>
+<td>null</td>
+</tr>
+<tr class="odd">
+<td>"50%"</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>850.0</td>
+<td>850.0</td>
+<td>null</td>
+<td>null</td>
+</tr>
+<tr class="even">
+<td>"75%"</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>5100.0</td>
+<td>5100.0</td>
+<td>null</td>
+<td>null</td>
+</tr>
+<tr class="odd">
+<td>"max"</td>
+<td>"JE1010"</td>
+<td>"2025-01-31"</td>
+<td>"Utilities Expense"</td>
+<td>"Revenue"</td>
+<td>"Vendor payment"</td>
+<td>15400.0</td>
+<td>15400.0</td>
+<td>"Sales"</td>
+<td>"mchen"</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section id="reading-with-an-explicit-schema" class="level3" data-number="4.3.1">
+<h3 data-number="4.3.1" class="anchored" data-anchor-id="reading-with-an-explicit-schema"><span class="header-section-number">4.3.1</span> Reading with an Explicit Schema</h3>
+<p>By default, both libraries <em>guess</em> each column’s data type. This usually works, but for accounting data it’s good practice to be explicit — especially for ID columns that look numeric but should stay text (an <code>entry_id</code> of <code>1001</code> should never be treated as a number you could accidentally average).</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<div id="ce7aaf61" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pandas: force entry_id to stay text</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>gl_pd2 <span class="op">=</span> pd.read_csv(<span class="st">"data/general_ledger_sample.csv"</span>, dtype<span class="op">=</span>{<span class="st">"entry_id"</span>: <span class="bu">str</span>})</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(gl_pd2[<span class="st">"entry_id"</span>].dtype)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>str</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<div id="259de632" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># polars: same idea, using schema_overrides</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>gl_pl2 <span class="op">=</span> pl.read_csv(</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"data/general_ledger_sample.csv"</span>,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    schema_overrides<span class="op">=</span>{<span class="st">"entry_id"</span>: pl.Utf8}</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(gl_pl2[<span class="st">"entry_id"</span>].dtype)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>String</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Connect to Practice
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Excel files are just as common as CSVs in accounting practice. Both libraries can read them directly: <code>pd.read_excel("file.xlsx")</code> and <code>pl.read_excel("file.xlsx")</code> (polars requires the <code>fastexcel</code> package, installable with <code>pip install fastexcel</code>).</p>
+</div>
+</div>
+</section>
+</section>
+<section id="selecting-filtering-and-sorting" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="selecting-filtering-and-sorting"><span class="header-section-number">4.4</span> Selecting, Filtering, and Sorting</h2>
+<section id="filtering-on-a-single-condition" class="level3" data-number="4.4.1">
+<h3 data-number="4.4.1" class="anchored" data-anchor-id="filtering-on-a-single-condition"><span class="header-section-number">4.4.1</span> Filtering on a Single Condition</h3>
+<p>Let’s find every transaction with a debit over $5,000 — a common first step in transaction testing.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
+<div id="ff3695fa" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pandas</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>large_pd <span class="op">=</span> gl_pd[gl_pd[<span class="st">"debit"</span>] <span class="op">&gt;</span> <span class="dv">5000</span>]</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>large_pd[[<span class="st">"entry_id"</span>, <span class="st">"account"</span>, <span class="st">"debit"</span>]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">entry_id</th>
+<th data-quarto-table-cell-role="th">account</th>
+<th data-quarto-table-cell-role="th">debit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>JE1002</td>
+<td>Inventory</td>
+<td>7200</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">4</th>
+<td>JE1003</td>
+<td>Salaries Expense</td>
+<td>15400</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>JE1004</td>
+<td>Accounts Receivable</td>
+<td>9800</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">12</th>
+<td>JE1007</td>
+<td>Cash</td>
+<td>6200</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">14</th>
+<td>JE1008</td>
+<td>Cost of Goods Sold</td>
+<td>5100</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">16</th>
+<td>JE1009</td>
+<td>Accounts Payable</td>
+<td>7200</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
+<div id="1e30cf6f" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># polars</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>large_pl <span class="op">=</span> gl_pl.<span class="bu">filter</span>(pl.col(<span class="st">"debit"</span>) <span class="op">&gt;</span> <span class="dv">5000</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>large_pl.select([<span class="st">"entry_id"</span>, <span class="st">"account"</span>, <span class="st">"debit"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (6, 3)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">entry_id</th>
+<th data-quarto-table-cell-role="th">account</th>
+<th data-quarto-table-cell-role="th">debit</th>
+</tr>
+<tr class="even">
+<td>str</td>
+<td>str</td>
+<td>i64</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"JE1002"</td>
+<td>"Inventory"</td>
+<td>7200</td>
+</tr>
+<tr class="even">
+<td>"JE1003"</td>
+<td>"Salaries Expense"</td>
+<td>15400</td>
+</tr>
+<tr class="odd">
+<td>"JE1004"</td>
+<td>"Accounts Receivable"</td>
+<td>9800</td>
+</tr>
+<tr class="even">
+<td>"JE1007"</td>
+<td>"Cash"</td>
+<td>6200</td>
+</tr>
+<tr class="odd">
+<td>"JE1008"</td>
+<td>"Cost of Goods Sold"</td>
+<td>5100</td>
+</tr>
+<tr class="even">
+<td>"JE1009"</td>
+<td>"Accounts Payable"</td>
+<td>7200</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="combining-multiple-conditions" class="level3" data-number="4.4.2">
+<h3 data-number="4.4.2" class="anchored" data-anchor-id="combining-multiple-conditions"><span class="header-section-number">4.4.2</span> Combining Multiple Conditions</h3>
+<p>Now let’s narrow this to transactions in the Operations department with a nonzero debit — combining two conditions with <code>&amp;</code> (AND).</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
+<div id="974ad5b7" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pandas</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>combo_pd <span class="op">=</span> gl_pd[(gl_pd[<span class="st">"department"</span>] <span class="op">==</span> <span class="st">"Operations"</span>) <span class="op">&amp;</span> (gl_pd[<span class="st">"debit"</span>] <span class="op">&gt;</span> <span class="dv">0</span>)]</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>combo_pd[[<span class="st">"entry_id"</span>, <span class="st">"account"</span>, <span class="st">"debit"</span>, <span class="st">"department"</span>]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">entry_id</th>
+<th data-quarto-table-cell-role="th">account</th>
+<th data-quarto-table-cell-role="th">debit</th>
+<th data-quarto-table-cell-role="th">department</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>JE1002</td>
+<td>Inventory</td>
+<td>7200</td>
+<td>Operations</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">8</th>
+<td>JE1005</td>
+<td>Rent Expense</td>
+<td>3000</td>
+<td>Operations</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">10</th>
+<td>JE1006</td>
+<td>Utilities Expense</td>
+<td>850</td>
+<td>Operations</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">14</th>
+<td>JE1008</td>
+<td>Cost of Goods Sold</td>
+<td>5100</td>
+<td>Operations</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">16</th>
+<td>JE1009</td>
+<td>Accounts Payable</td>
+<td>7200</td>
+<td>Operations</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">18</th>
+<td>JE1010</td>
+<td>Depreciation Expense</td>
+<td>1000</td>
+<td>Operations</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
+<div id="9e41ad97" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># polars</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>combo_pl <span class="op">=</span> gl_pl.<span class="bu">filter</span>(</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    (pl.col(<span class="st">"department"</span>) <span class="op">==</span> <span class="st">"Operations"</span>) <span class="op">&amp;</span> (pl.col(<span class="st">"debit"</span>) <span class="op">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>combo_pl.select([<span class="st">"entry_id"</span>, <span class="st">"account"</span>, <span class="st">"debit"</span>, <span class="st">"department"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (6, 4)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">entry_id</th>
+<th data-quarto-table-cell-role="th">account</th>
+<th data-quarto-table-cell-role="th">debit</th>
+<th data-quarto-table-cell-role="th">department</th>
+</tr>
+<tr class="even">
+<td>str</td>
+<td>str</td>
+<td>i64</td>
+<td>str</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"JE1002"</td>
+<td>"Inventory"</td>
+<td>7200</td>
+<td>"Operations"</td>
+</tr>
+<tr class="even">
+<td>"JE1005"</td>
+<td>"Rent Expense"</td>
+<td>3000</td>
+<td>"Operations"</td>
+</tr>
+<tr class="odd">
+<td>"JE1006"</td>
+<td>"Utilities Expense"</td>
+<td>850</td>
+<td>"Operations"</td>
+</tr>
+<tr class="even">
+<td>"JE1008"</td>
+<td>"Cost of Goods Sold"</td>
+<td>5100</td>
+<td>"Operations"</td>
+</tr>
+<tr class="odd">
+<td>"JE1009"</td>
+<td>"Accounts Payable"</td>
+<td>7200</td>
+<td>"Operations"</td>
+</tr>
+<tr class="even">
+<td>"JE1010"</td>
+<td>"Depreciation Expense"</td>
+<td>1000</td>
+<td>"Operations"</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>A Common Mistake
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In pandas, you must use <code>&amp;</code> and <code>|</code> (not Python’s <code>and</code>/<code>or</code>) when combining conditions, and each condition needs its own parentheses: <code>(gl_pd["department"] == "Operations") &amp; (gl_pd["debit"] &gt; 0)</code>. Forgetting the parentheses is one of the most common pandas errors for beginners.</p>
+</div>
+</div>
+</section>
+<section id="sorting" class="level3" data-number="4.4.3">
+<h3 data-number="4.4.3" class="anchored" data-anchor-id="sorting"><span class="header-section-number">4.4.3</span> Sorting</h3>
+<p>Let’s sort by debit amount (largest first), breaking ties by date (earliest first):</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-6-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-1" role="tab" aria-controls="tabset-6-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-6-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-2" role="tab" aria-controls="tabset-6-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-6-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-6-1-tab">
+<div id="052b63da" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pandas</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>gl_pd.sort_values([<span class="st">"debit"</span>, <span class="st">"entry_date"</span>], ascending<span class="op">=</span>[<span class="va">False</span>, <span class="va">True</span>]).head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">entry_id</th>
+<th data-quarto-table-cell-role="th">entry_date</th>
+<th data-quarto-table-cell-role="th">account</th>
+<th data-quarto-table-cell-role="th">account_type</th>
+<th data-quarto-table-cell-role="th">description</th>
+<th data-quarto-table-cell-role="th">debit</th>
+<th data-quarto-table-cell-role="th">credit</th>
+<th data-quarto-table-cell-role="th">department</th>
+<th data-quarto-table-cell-role="th">posted_by</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>JE1003</td>
+<td>2025-01-08</td>
+<td>Salaries Expense</td>
+<td>Expense</td>
+<td>Biweekly payroll</td>
+<td>15400</td>
+<td>0</td>
+<td>HR</td>
+<td>ktaylor</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">6</th>
+<td>JE1004</td>
+<td>2025-01-12</td>
+<td>Accounts Receivable</td>
+<td>Asset</td>
+<td>Sale on account</td>
+<td>9800</td>
+<td>0</td>
+<td>Sales</td>
+<td>jsmith</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>JE1002</td>
+<td>2025-01-05</td>
+<td>Inventory</td>
+<td>Asset</td>
+<td>Purchase of merchandise</td>
+<td>7200</td>
+<td>0</td>
+<td>Operations</td>
+<td>mchen</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">16</th>
+<td>JE1009</td>
+<td>2025-01-29</td>
+<td>Accounts Payable</td>
+<td>Liability</td>
+<td>Vendor payment</td>
+<td>7200</td>
+<td>0</td>
+<td>Operations</td>
+<td>ktaylor</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">12</th>
+<td>JE1007</td>
+<td>2025-01-22</td>
+<td>Cash</td>
+<td>Asset</td>
+<td>Customer payment received</td>
+<td>6200</td>
+<td>0</td>
+<td>Sales</td>
+<td>jsmith</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-6-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-6-2-tab">
+<div id="7db6b264" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># polars</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>gl_pl.sort([<span class="st">"debit"</span>, <span class="st">"entry_date"</span>], descending<span class="op">=</span>[<span class="va">True</span>, <span class="va">False</span>]).head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (5, 9)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">entry_id</th>
+<th data-quarto-table-cell-role="th">entry_date</th>
+<th data-quarto-table-cell-role="th">account</th>
+<th data-quarto-table-cell-role="th">account_type</th>
+<th data-quarto-table-cell-role="th">description</th>
+<th data-quarto-table-cell-role="th">debit</th>
+<th data-quarto-table-cell-role="th">credit</th>
+<th data-quarto-table-cell-role="th">department</th>
+<th data-quarto-table-cell-role="th">posted_by</th>
+</tr>
+<tr class="even">
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>i64</td>
+<td>i64</td>
+<td>str</td>
+<td>str</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"JE1003"</td>
+<td>"2025-01-08"</td>
+<td>"Salaries Expense"</td>
+<td>"Expense"</td>
+<td>"Biweekly payroll"</td>
+<td>15400</td>
+<td>0</td>
+<td>"HR"</td>
+<td>"ktaylor"</td>
+</tr>
+<tr class="even">
+<td>"JE1004"</td>
+<td>"2025-01-12"</td>
+<td>"Accounts Receivable"</td>
+<td>"Asset"</td>
+<td>"Sale on account"</td>
+<td>9800</td>
+<td>0</td>
+<td>"Sales"</td>
+<td>"jsmith"</td>
+</tr>
+<tr class="odd">
+<td>"JE1002"</td>
+<td>"2025-01-05"</td>
+<td>"Inventory"</td>
+<td>"Asset"</td>
+<td>"Purchase of merchandise"</td>
+<td>7200</td>
+<td>0</td>
+<td>"Operations"</td>
+<td>"mchen"</td>
+</tr>
+<tr class="even">
+<td>"JE1009"</td>
+<td>"2025-01-29"</td>
+<td>"Accounts Payable"</td>
+<td>"Liability"</td>
+<td>"Vendor payment"</td>
+<td>7200</td>
+<td>0</td>
+<td>"Operations"</td>
+<td>"ktaylor"</td>
+</tr>
+<tr class="odd">
+<td>"JE1007"</td>
+<td>"2025-01-22"</td>
+<td>"Cash"</td>
+<td>"Asset"</td>
+<td>"Customer payment received"</td>
+<td>6200</td>
+<td>0</td>
+<td>"Sales"</td>
+<td>"jsmith"</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="cleaning-data" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="cleaning-data"><span class="header-section-number">4.5</span> Cleaning Data</h2>
+<p>Real accounting data is rarely as clean as <code>general_ledger_sample.csv</code>. Let’s work through <code>messy_general_ledger.csv</code>, which has the same kinds of issues introduced in Chapter 3: currency symbols, inconsistent formatting, an impossible date, a missing value, and a likely duplicate entry.</p>
+<section id="step-1-fix-currency-formatting" class="level3" data-number="4.5.1">
+<h3 data-number="4.5.1" class="anchored" data-anchor-id="step-1-fix-currency-formatting"><span class="header-section-number">4.5.1</span> Step 1: Fix Currency Formatting</h3>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-7-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-7-1-tab">
+<div id="95a4d76a" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>messy_pd <span class="op">=</span> pd.read_csv(<span class="st">"data/messy_general_ledger.csv"</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>messy_pd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">entry_id</th>
+<th data-quarto-table-cell-role="th">entry_date</th>
+<th data-quarto-table-cell-role="th">account</th>
+<th data-quarto-table-cell-role="th">debit</th>
+<th data-quarto-table-cell-role="th">credit</th>
+<th data-quarto-table-cell-role="th">department</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>JE2001</td>
+<td>01/15/2025</td>
+<td>Cash</td>
+<td>$4,500.00</td>
+<td>0</td>
+<td>Sales</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>JE2001</td>
+<td>1-15-2025</td>
+<td>cash</td>
+<td>4500</td>
+<td>0</td>
+<td>sales</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>JE2002</td>
+<td>01/16/2025</td>
+<td>Accounts Receivable</td>
+<td>0</td>
+<td>$4,500.00</td>
+<td>Sales</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>JE2003</td>
+<td>01/18/2025</td>
+<td>Inventory</td>
+<td>7200</td>
+<td>0</td>
+<td>Operations</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>JE2003</td>
+<td>01/18/2025</td>
+<td>Accounts Payable</td>
+<td>0</td>
+<td>7200</td>
+<td>Operations</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>JE2004</td>
+<td>02/30/2025</td>
+<td>Rent Expense</td>
+<td>3000</td>
+<td>0</td>
+<td>Operations</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>JE2004</td>
+<td>02/30/2025</td>
+<td>Cash</td>
+<td>0</td>
+<td>3000</td>
+<td>Operations</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>JE2005</td>
+<td>01/22/2025</td>
+<td>SALARIES EXPENSE</td>
+<td>15400</td>
+<td>0</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8</th>
+<td>JE2005</td>
+<td>01/22/2025</td>
+<td>Cash</td>
+<td>0</td>
+<td>15400</td>
+<td>HR</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">9</th>
+<td>JE2006</td>
+<td>01/25/2025</td>
+<td>Utilities Expense</td>
+<td>850</td>
+<td>0</td>
+<td>Operations</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">10</th>
+<td>JE2006</td>
+<td>01/25/2025</td>
+<td>Accounts Payable</td>
+<td>0</td>
+<td>8500</td>
+<td>Operations</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="c5795883" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pandas</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>df_pd <span class="op">=</span> messy_pd.copy()</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> col <span class="kw">in</span> [<span class="st">"debit"</span>, <span class="st">"credit"</span>]:</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    df_pd[col] <span class="op">=</span> (</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>        df_pd[col].astype(<span class="bu">str</span>)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>        .<span class="bu">str</span>.replace(<span class="st">"$"</span>, <span class="st">""</span>, regex<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>        .<span class="bu">str</span>.replace(<span class="st">","</span>, <span class="st">""</span>, regex<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    df_pd[col] <span class="op">=</span> pd.to_numeric(df_pd[col])</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>df_pd[[<span class="st">"entry_id"</span>, <span class="st">"debit"</span>, <span class="st">"credit"</span>]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">entry_id</th>
+<th data-quarto-table-cell-role="th">debit</th>
+<th data-quarto-table-cell-role="th">credit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>JE2001</td>
+<td>4500.0</td>
+<td>0.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>JE2001</td>
+<td>4500.0</td>
+<td>0.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>JE2002</td>
+<td>0.0</td>
+<td>4500.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>JE2003</td>
+<td>7200.0</td>
+<td>0.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>JE2003</td>
+<td>0.0</td>
+<td>7200.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>JE2004</td>
+<td>3000.0</td>
+<td>0.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>JE2004</td>
+<td>0.0</td>
+<td>3000.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>JE2005</td>
+<td>15400.0</td>
+<td>0.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8</th>
+<td>JE2005</td>
+<td>0.0</td>
+<td>15400.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">9</th>
+<td>JE2006</td>
+<td>850.0</td>
+<td>0.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">10</th>
+<td>JE2006</td>
+<td>0.0</td>
+<td>8500.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-7-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-7-2-tab">
+<div id="31aade93" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># polars</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>messy_pl <span class="op">=</span> pl.read_csv(<span class="st">"data/messy_general_ledger.csv"</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>df_pl <span class="op">=</span> messy_pl.with_columns([</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    pl.col(<span class="st">"debit"</span>).<span class="bu">str</span>.replace_all(<span class="vs">r"</span><span class="ch">\$</span><span class="vs">"</span>, <span class="st">""</span>).<span class="bu">str</span>.replace_all(<span class="st">","</span>, <span class="st">""</span>).cast(pl.Float64),</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    pl.col(<span class="st">"credit"</span>).<span class="bu">str</span>.replace_all(<span class="vs">r"</span><span class="ch">\$</span><span class="vs">"</span>, <span class="st">""</span>).<span class="bu">str</span>.replace_all(<span class="st">","</span>, <span class="st">""</span>).cast(pl.Float64),</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>df_pl.select([<span class="st">"entry_id"</span>, <span class="st">"debit"</span>, <span class="st">"credit"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (11, 3)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">entry_id</th>
+<th data-quarto-table-cell-role="th">debit</th>
+<th data-quarto-table-cell-role="th">credit</th>
+</tr>
+<tr class="even">
+<td>str</td>
+<td>f64</td>
+<td>f64</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"JE2001"</td>
+<td>4500.0</td>
+<td>0.0</td>
+</tr>
+<tr class="even">
+<td>"JE2001"</td>
+<td>4500.0</td>
+<td>0.0</td>
+</tr>
+<tr class="odd">
+<td>"JE2002"</td>
+<td>0.0</td>
+<td>4500.0</td>
+</tr>
+<tr class="even">
+<td>"JE2003"</td>
+<td>7200.0</td>
+<td>0.0</td>
+</tr>
+<tr class="odd">
+<td>"JE2003"</td>
+<td>0.0</td>
+<td>7200.0</td>
+</tr>
+<tr class="even">
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr class="odd">
+<td>"JE2004"</td>
+<td>0.0</td>
+<td>3000.0</td>
+</tr>
+<tr class="even">
+<td>"JE2005"</td>
+<td>15400.0</td>
+<td>0.0</td>
+</tr>
+<tr class="odd">
+<td>"JE2005"</td>
+<td>0.0</td>
+<td>15400.0</td>
+</tr>
+<tr class="even">
+<td>"JE2006"</td>
+<td>850.0</td>
+<td>0.0</td>
+</tr>
+<tr class="odd">
+<td>"JE2006"</td>
+<td>0.0</td>
+<td>8500.0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>The <code>debit</code> and <code>credit</code> columns contain <code>$</code> and <code>,</code> characters, which force them to be read as text instead of numbers.</p>
+</section>
+<section id="step-2-standardize-text-fields" class="level3" data-number="4.5.2">
+<h3 data-number="4.5.2" class="anchored" data-anchor-id="step-2-standardize-text-fields"><span class="header-section-number">4.5.2</span> Step 2: Standardize Text Fields</h3>
+<p>The <code>account</code> and <code>department</code> columns have inconsistent capitalization and stray whitespace.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-8-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-1" role="tab" aria-controls="tabset-8-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-2" role="tab" aria-controls="tabset-8-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-8-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-8-1-tab">
+<div id="f7af876d" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pandas</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>df_pd[<span class="st">"account"</span>] <span class="op">=</span> df_pd[<span class="st">"account"</span>].<span class="bu">str</span>.strip().<span class="bu">str</span>.title()</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>df_pd[<span class="st">"department"</span>] <span class="op">=</span> df_pd[<span class="st">"department"</span>].<span class="bu">str</span>.strip().<span class="bu">str</span>.title()</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>df_pd[[<span class="st">"account"</span>, <span class="st">"department"</span>]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="16">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">account</th>
+<th data-quarto-table-cell-role="th">department</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Cash</td>
+<td>Sales</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Cash</td>
+<td>Sales</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Accounts Receivable</td>
+<td>Sales</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Inventory</td>
+<td>Operations</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>Accounts Payable</td>
+<td>Operations</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>Rent Expense</td>
+<td>Operations</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>Cash</td>
+<td>Operations</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>Salaries Expense</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8</th>
+<td>Cash</td>
+<td>Hr</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">9</th>
+<td>Utilities Expense</td>
+<td>Operations</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">10</th>
+<td>Accounts Payable</td>
+<td>Operations</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-8-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-8-2-tab">
+<div id="780c0b31" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># polars</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>df_pl <span class="op">=</span> df_pl.with_columns([</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    pl.col(<span class="st">"account"</span>).<span class="bu">str</span>.strip_chars().<span class="bu">str</span>.to_titlecase(),</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    pl.col(<span class="st">"department"</span>).<span class="bu">str</span>.strip_chars().<span class="bu">str</span>.to_titlecase(),</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>df_pl.select([<span class="st">"account"</span>, <span class="st">"department"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="17">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (11, 2)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">account</th>
+<th data-quarto-table-cell-role="th">department</th>
+</tr>
+<tr class="even">
+<td>str</td>
+<td>str</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"Cash"</td>
+<td>"Sales"</td>
+</tr>
+<tr class="even">
+<td>"Cash"</td>
+<td>"Sales"</td>
+</tr>
+<tr class="odd">
+<td>"Accounts Receivable"</td>
+<td>"Sales"</td>
+</tr>
+<tr class="even">
+<td>"Inventory"</td>
+<td>"Operations"</td>
+</tr>
+<tr class="odd">
+<td>"Accounts Payable"</td>
+<td>"Operations"</td>
+</tr>
+<tr class="even">
+<td>…</td>
+<td>…</td>
+</tr>
+<tr class="odd">
+<td>"Cash"</td>
+<td>"Operations"</td>
+</tr>
+<tr class="even">
+<td>"Salaries Expense"</td>
+<td>null</td>
+</tr>
+<tr class="odd">
+<td>"Cash"</td>
+<td>"Hr"</td>
+</tr>
+<tr class="even">
+<td>"Utilities Expense"</td>
+<td>"Operations"</td>
+</tr>
+<tr class="odd">
+<td>"Accounts Payable"</td>
+<td>"Operations"</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Automated Cleaning Still Needs a Human Check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Look closely at the department column: <code>"HR"</code> became <code>"Hr"</code> after title-casing, since <code>.title()</code> (and its polars equivalent) simply capitalizes the first letter of each word — it doesn’t know <code>HR</code> is an acronym that should stay fully capitalized. This is a good example of why you should always spot-check the results of automated cleaning steps rather than assuming they worked perfectly. A more robust fix here would be an explicit mapping (e.g., <code>{"hr": "HR", "Hr": "HR"}</code>) for known acronyms in your data.</p>
+</div>
+</div>
+</section>
+<section id="step-3-fix-inconsistent-dates" class="level3" data-number="4.5.3">
+<h3 data-number="4.5.3" class="anchored" data-anchor-id="step-3-fix-inconsistent-dates"><span class="header-section-number">4.5.3</span> Step 3: Fix Inconsistent Dates</h3>
+<p>The <code>entry_date</code> column mixes <code>01/15/2025</code> and <code>1-15-2025</code> formats, and contains one impossible date (<code>02/30/2025</code> — February never has 30 days).</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-9-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-1" role="tab" aria-controls="tabset-9-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-9-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-2" role="tab" aria-controls="tabset-9-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-9-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-9-1-tab">
+<div id="297e7eae" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pandas: format="mixed" handles multiple formats; errors="coerce" turns bad dates into NaT</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>df_pd[<span class="st">"entry_date"</span>] <span class="op">=</span> pd.to_datetime(df_pd[<span class="st">"entry_date"</span>], <span class="bu">format</span><span class="op">=</span><span class="st">"mixed"</span>, errors<span class="op">=</span><span class="st">"coerce"</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>df_pd[[<span class="st">"entry_id"</span>, <span class="st">"entry_date"</span>]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">entry_id</th>
+<th data-quarto-table-cell-role="th">entry_date</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>JE2001</td>
+<td>2025-01-15</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>JE2001</td>
+<td>2025-01-15</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>JE2002</td>
+<td>2025-01-16</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>JE2003</td>
+<td>2025-01-18</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>JE2003</td>
+<td>2025-01-18</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>JE2004</td>
+<td>NaT</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>JE2004</td>
+<td>NaT</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>JE2005</td>
+<td>2025-01-22</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8</th>
+<td>JE2005</td>
+<td>2025-01-22</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">9</th>
+<td>JE2006</td>
+<td>2025-01-25</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">10</th>
+<td>JE2006</td>
+<td>2025-01-25</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="0d3a47cd" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pandas: find the rows that failed to parse</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>df_pd[df_pd[<span class="st">"entry_date"</span>].isna()]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="19">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">entry_id</th>
+<th data-quarto-table-cell-role="th">entry_date</th>
+<th data-quarto-table-cell-role="th">account</th>
+<th data-quarto-table-cell-role="th">debit</th>
+<th data-quarto-table-cell-role="th">credit</th>
+<th data-quarto-table-cell-role="th">department</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">5</th>
+<td>JE2004</td>
+<td>NaT</td>
+<td>Rent Expense</td>
+<td>3000.0</td>
+<td>0.0</td>
+<td>Operations</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">6</th>
+<td>JE2004</td>
+<td>NaT</td>
+<td>Cash</td>
+<td>0.0</td>
+<td>3000.0</td>
+<td>Operations</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-9-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-9-2-tab">
+<p>Polars doesn’t have an automatic “mixed format” parser, so we normalize the separators first, then parse with <code>strict=False</code> so invalid dates become <code>null</code> instead of raising an error.</p>
+<div id="4a63eb67" class="cell" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># polars</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>df_pl <span class="op">=</span> df_pl.with_columns(</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    pl.col(<span class="st">"entry_date"</span>)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>      .<span class="bu">str</span>.replace_all(<span class="st">"-"</span>, <span class="st">"/"</span>)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>      .<span class="bu">str</span>.to_date(<span class="bu">format</span><span class="op">=</span><span class="st">"%m/</span><span class="sc">%d</span><span class="st">/%Y"</span>, strict<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>      .alias(<span class="st">"entry_date"</span>)</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>df_pl.select([<span class="st">"entry_id"</span>, <span class="st">"entry_date"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="20">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (11, 2)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">entry_id</th>
+<th data-quarto-table-cell-role="th">entry_date</th>
+</tr>
+<tr class="even">
+<td>str</td>
+<td>date</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"JE2001"</td>
+<td>2025-01-15</td>
+</tr>
+<tr class="even">
+<td>"JE2001"</td>
+<td>2025-01-15</td>
+</tr>
+<tr class="odd">
+<td>"JE2002"</td>
+<td>2025-01-16</td>
+</tr>
+<tr class="even">
+<td>"JE2003"</td>
+<td>2025-01-18</td>
+</tr>
+<tr class="odd">
+<td>"JE2003"</td>
+<td>2025-01-18</td>
+</tr>
+<tr class="even">
+<td>…</td>
+<td>…</td>
+</tr>
+<tr class="odd">
+<td>"JE2004"</td>
+<td>null</td>
+</tr>
+<tr class="even">
+<td>"JE2005"</td>
+<td>2025-01-22</td>
+</tr>
+<tr class="odd">
+<td>"JE2005"</td>
+<td>2025-01-22</td>
+</tr>
+<tr class="even">
+<td>"JE2006"</td>
+<td>2025-01-25</td>
+</tr>
+<tr class="odd">
+<td>"JE2006"</td>
+<td>2025-01-25</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>What Should You Do With an Invalid Date?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Notice that <code>02/30/2025</code> became a missing value (<code>NaT</code> in pandas, <code>null</code> in polars) rather than an error that stops your code. This is intentional — but it means <em>you</em> now have to decide what to do about it: go back to the source system to find the correct date, exclude the transaction, or flag it for follow-up. Silently ignoring nulls at this point is how real errors slip through into financial reports.</p>
+</div>
+</div>
+</section>
+<section id="step-4-handle-missing-values" class="level3" data-number="4.5.4">
+<h3 data-number="4.5.4" class="anchored" data-anchor-id="step-4-handle-missing-values"><span class="header-section-number">4.5.4</span> Step 4: Handle Missing Values</h3>
+<p>The <code>department</code> column has one missing value.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-10-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-1" role="tab" aria-controls="tabset-10-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-10-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-2" role="tab" aria-controls="tabset-10-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-10-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-10-1-tab">
+<div id="c2ffbdba" class="cell" data-execution_count="21">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pandas</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>df_pd[<span class="st">"department"</span>] <span class="op">=</span> df_pd[<span class="st">"department"</span>].fillna(<span class="st">"Unassigned"</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>df_pd[[<span class="st">"entry_id"</span>, <span class="st">"department"</span>]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="21">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">entry_id</th>
+<th data-quarto-table-cell-role="th">department</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>JE2001</td>
+<td>Sales</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>JE2001</td>
+<td>Sales</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>JE2002</td>
+<td>Sales</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>JE2003</td>
+<td>Operations</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>JE2003</td>
+<td>Operations</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>JE2004</td>
+<td>Operations</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>JE2004</td>
+<td>Operations</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>JE2005</td>
+<td>Unassigned</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8</th>
+<td>JE2005</td>
+<td>Hr</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">9</th>
+<td>JE2006</td>
+<td>Operations</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">10</th>
+<td>JE2006</td>
+<td>Operations</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-10-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-10-2-tab">
+<div id="fa507333" class="cell" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># polars</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>df_pl <span class="op">=</span> df_pl.with_columns(</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    pl.col(<span class="st">"department"</span>).fill_null(<span class="st">"Unassigned"</span>)</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>df_pl.select([<span class="st">"entry_id"</span>, <span class="st">"department"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="22">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (11, 2)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">entry_id</th>
+<th data-quarto-table-cell-role="th">department</th>
+</tr>
+<tr class="even">
+<td>str</td>
+<td>str</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"JE2001"</td>
+<td>"Sales"</td>
+</tr>
+<tr class="even">
+<td>"JE2001"</td>
+<td>"Sales"</td>
+</tr>
+<tr class="odd">
+<td>"JE2002"</td>
+<td>"Sales"</td>
+</tr>
+<tr class="even">
+<td>"JE2003"</td>
+<td>"Operations"</td>
+</tr>
+<tr class="odd">
+<td>"JE2003"</td>
+<td>"Operations"</td>
+</tr>
+<tr class="even">
+<td>…</td>
+<td>…</td>
+</tr>
+<tr class="odd">
+<td>"JE2004"</td>
+<td>"Operations"</td>
+</tr>
+<tr class="even">
+<td>"JE2005"</td>
+<td>"Unassigned"</td>
+</tr>
+<tr class="odd">
+<td>"JE2005"</td>
+<td>"Hr"</td>
+</tr>
+<tr class="even">
+<td>"JE2006"</td>
+<td>"Operations"</td>
+</tr>
+<tr class="odd">
+<td>"JE2006"</td>
+<td>"Operations"</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-5-check-for-duplicates" class="level3" data-number="4.5.5">
+<h3 data-number="4.5.5" class="anchored" data-anchor-id="step-5-check-for-duplicates"><span class="header-section-number">4.5.5</span> Step 5: Check for Duplicates</h3>
+<p>After cleaning, compare rows on the fields that should uniquely identify a real transaction line.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-11-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-11-1" role="tab" aria-controls="tabset-11-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-11-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-11-2" role="tab" aria-controls="tabset-11-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-11-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-11-1-tab">
+<div id="1f933a13" class="cell" data-execution_count="23">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pandas</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>dupes_pd <span class="op">=</span> df_pd[df_pd.duplicated(subset<span class="op">=</span>[<span class="st">"account"</span>, <span class="st">"debit"</span>, <span class="st">"credit"</span>], keep<span class="op">=</span><span class="va">False</span>)]</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>dupes_pd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="23">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">entry_id</th>
+<th data-quarto-table-cell-role="th">entry_date</th>
+<th data-quarto-table-cell-role="th">account</th>
+<th data-quarto-table-cell-role="th">debit</th>
+<th data-quarto-table-cell-role="th">credit</th>
+<th data-quarto-table-cell-role="th">department</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>JE2001</td>
+<td>2025-01-15</td>
+<td>Cash</td>
+<td>4500.0</td>
+<td>0.0</td>
+<td>Sales</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>JE2001</td>
+<td>2025-01-15</td>
+<td>Cash</td>
+<td>4500.0</td>
+<td>0.0</td>
+<td>Sales</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-11-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-11-2-tab">
+<div id="e0d8a772" class="cell" data-execution_count="24">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>dupes_pl <span class="op">=</span> df_pl.<span class="bu">filter</span>(df_pl.is_duplicated())</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>dupes_pl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="24">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (2, 6)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">entry_id</th>
+<th data-quarto-table-cell-role="th">entry_date</th>
+<th data-quarto-table-cell-role="th">account</th>
+<th data-quarto-table-cell-role="th">debit</th>
+<th data-quarto-table-cell-role="th">credit</th>
+<th data-quarto-table-cell-role="th">department</th>
+</tr>
+<tr class="even">
+<td>str</td>
+<td>date</td>
+<td>str</td>
+<td>f64</td>
+<td>f64</td>
+<td>str</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"JE2001"</td>
+<td>2025-01-15</td>
+<td>"Cash"</td>
+<td>4500.0</td>
+<td>0.0</td>
+<td>"Sales"</td>
+</tr>
+<tr class="even">
+<td>"JE2001"</td>
+<td>2025-01-15</td>
+<td>"Cash"</td>
+<td>4500.0</td>
+<td>0.0</td>
+<td>"Sales"</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>The two <code>JE2001</code> rows for <code>Cash</code> are now revealed as duplicates once formatting differences are removed — before cleaning, <code>"cash "</code> (lowercase, trailing space) looked like a different value from <code>"Cash"</code>, hiding the duplicate.</p>
+</section>
+</section>
+<section id="merging-and-joining-tables" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="merging-and-joining-tables"><span class="header-section-number">4.6</span> Merging and Joining Tables</h2>
+<p>Accounting data rarely lives in a single table. Let’s enrich the general ledger with account type information from <code>chart_of_accounts.csv</code>.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-12-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-12-1" role="tab" aria-controls="tabset-12-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-12-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-12-2" role="tab" aria-controls="tabset-12-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-12-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-12-1-tab">
+<div id="66f15f8a" class="cell" data-execution_count="25">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>coa_pd <span class="op">=</span> pd.read_csv(<span class="st">"data/chart_of_accounts.csv"</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>coa_pd.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="25">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">account</th>
+<th data-quarto-table-cell-role="th">account_number</th>
+<th data-quarto-table-cell-role="th">account_type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Cash</td>
+<td>1000</td>
+<td>Asset</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Accounts Receivable</td>
+<td>1100</td>
+<td>Asset</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Inventory</td>
+<td>1200</td>
+<td>Asset</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Prepaid Insurance</td>
+<td>1300</td>
+<td>Asset</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>Equipment</td>
+<td>1500</td>
+<td>Asset</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-12-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-12-2-tab">
+<div id="6c5369de" class="cell" data-execution_count="26">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># polars</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>coa_pl <span class="op">=</span> pl.read_csv(<span class="st">"data/chart_of_accounts.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+<section id="inner-join" class="level3" data-number="4.6.1">
+<h3 data-number="4.6.1" class="anchored" data-anchor-id="inner-join"><span class="header-section-number">4.6.1</span> Inner Join</h3>
+<p>An <strong>inner join</strong> keeps only rows where the join key (<code>account</code>) matches in <em>both</em> tables.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-13-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-13-1" role="tab" aria-controls="tabset-13-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-13-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-13-2" role="tab" aria-controls="tabset-13-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-13-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-13-1-tab">
+<div id="1ede21b7" class="cell" data-execution_count="27">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pandas</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>inner_pd <span class="op">=</span> gl_pd.merge(coa_pd, on<span class="op">=</span><span class="st">"account"</span>, how<span class="op">=</span><span class="st">"inner"</span>)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(inner_pd.shape)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="bu">sorted</span>(inner_pd[<span class="st">"account"</span>].unique())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(19, 11)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="27">
+<pre><code>['Accounts Payable',
+ 'Accounts Receivable',
+ 'Accumulated Depreciation - Equipment',
+ 'Cash',
+ 'Cost of Goods Sold',
+ 'Depreciation Expense',
+ 'Inventory',
+ 'Rent Expense',
+ 'Salaries Expense',
+ 'Sales Revenue']</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-13-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-13-2-tab">
+<div id="ebfd1280" class="cell" data-execution_count="28">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># polars</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>inner_pl <span class="op">=</span> gl_pl.join(coa_pl, on<span class="op">=</span><span class="st">"account"</span>, how<span class="op">=</span><span class="st">"inner"</span>)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(inner_pl.shape)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(19, 11)</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Notice the inner join result has fewer rows than the original general ledger (19 vs.&nbsp;20). One account is missing.</p>
+</section>
+<section id="left-join" class="level3" data-number="4.6.2">
+<h3 data-number="4.6.2" class="anchored" data-anchor-id="left-join"><span class="header-section-number">4.6.2</span> Left Join</h3>
+<p>A <strong>left join</strong> keeps <em>every</em> row from the left table (the general ledger), filling in <code>null</code>/<code>NaN</code> where there’s no match in the chart of accounts.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-14-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-14-1" role="tab" aria-controls="tabset-14-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-14-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-14-2" role="tab" aria-controls="tabset-14-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-14-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-14-1-tab">
+<div id="e39476fb" class="cell" data-execution_count="29">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pandas</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>left_pd <span class="op">=</span> gl_pd.merge(coa_pd, on<span class="op">=</span><span class="st">"account"</span>, how<span class="op">=</span><span class="st">"left"</span>)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>missing_pd <span class="op">=</span> left_pd[left_pd[<span class="st">"account_number"</span>].isna()]</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>missing_pd[[<span class="st">"entry_id"</span>, <span class="st">"account"</span>]].drop_duplicates()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="29">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">entry_id</th>
+<th data-quarto-table-cell-role="th">account</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">10</th>
+<td>JE1006</td>
+<td>Utilities Expense</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-14-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-14-2-tab">
+<div id="f7631e93" class="cell" data-execution_count="30">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># polars</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>left_pl <span class="op">=</span> gl_pl.join(coa_pl, on<span class="op">=</span><span class="st">"account"</span>, how<span class="op">=</span><span class="st">"left"</span>)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>missing_pl <span class="op">=</span> left_pl.<span class="bu">filter</span>(pl.col(<span class="st">"account_number"</span>).is_null())</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>missing_pl.select([<span class="st">"entry_id"</span>, <span class="st">"account"</span>]).unique()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="30">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (1, 2)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">entry_id</th>
+<th data-quarto-table-cell-role="th">account</th>
+</tr>
+<tr class="even">
+<td>str</td>
+<td>str</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"JE1006"</td>
+<td>"Utilities Expense"</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Both approaches reveal the same finding: <strong>“Utilities Expense”</strong> appears in the general ledger but not in the chart of accounts — likely a new account that hasn’t been added to the COA yet, or a naming mismatch (e.g., “Utilities” vs.&nbsp;“Utilities Expense”) that needs investigation.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Why This Matters
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>An inner join would have silently <em>dropped</em> the Utilities Expense transactions from any analysis without telling you — the row count would just be smaller, with no error or warning. A left join preserves every general ledger transaction and makes the mismatch visible. When enriching transaction data with reference tables, prefer a left join and explicitly check for unmatched rows, rather than defaulting to an inner join.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="reshaping-data" class="level2" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="reshaping-data"><span class="header-section-number">4.7</span> Reshaping Data</h2>
+<p>Recall the tidy data discussion from Chapter 3. Let’s build a <strong>wide</strong> summary table — one common way accountants like to view data — and then reshape it back to <strong>long</strong> (tidy) format.</p>
+<section id="wide-total-debits-by-account-and-department" class="level3" data-number="4.7.1">
+<h3 data-number="4.7.1" class="anchored" data-anchor-id="wide-total-debits-by-account-and-department"><span class="header-section-number">4.7.1</span> Wide: Total Debits by Account and Department</h3>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-15-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-15-1" role="tab" aria-controls="tabset-15-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-15-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-15-2" role="tab" aria-controls="tabset-15-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-15-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-15-1-tab">
+<div id="c2ee19fc" class="cell" data-execution_count="31">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pandas</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>wide_pd <span class="op">=</span> gl_pd.pivot_table(</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span><span class="st">"account"</span>, columns<span class="op">=</span><span class="st">"department"</span>, values<span class="op">=</span><span class="st">"debit"</span>,</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>    aggfunc<span class="op">=</span><span class="st">"sum"</span>, fill_value<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>wide_pd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="31">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">department</th>
+<th data-quarto-table-cell-role="th">HR</th>
+<th data-quarto-table-cell-role="th">Operations</th>
+<th data-quarto-table-cell-role="th">Sales</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">account</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Accounts Payable</th>
+<td>0</td>
+<td>7200</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Accounts Receivable</th>
+<td>0</td>
+<td>0</td>
+<td>9800</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Accumulated Depreciation - Equipment</th>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Cash</th>
+<td>0</td>
+<td>0</td>
+<td>10700</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Cost of Goods Sold</th>
+<td>0</td>
+<td>5100</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Depreciation Expense</th>
+<td>0</td>
+<td>1000</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Inventory</th>
+<td>0</td>
+<td>7200</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Rent Expense</th>
+<td>0</td>
+<td>3000</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Salaries Expense</th>
+<td>15400</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Sales Revenue</th>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Utilities Expense</th>
+<td>0</td>
+<td>850</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-15-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-15-2-tab">
+<div id="61e21d29" class="cell" data-execution_count="32">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># polars</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>wide_pl <span class="op">=</span> gl_pl.pivot(</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span><span class="st">"account"</span>, on<span class="op">=</span><span class="st">"department"</span>, values<span class="op">=</span><span class="st">"debit"</span>,</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>    aggregate_function<span class="op">=</span><span class="st">"sum"</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>).fill_null(<span class="dv">0</span>)</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>wide_pl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="32">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (11, 4)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">account</th>
+<th data-quarto-table-cell-role="th">Sales</th>
+<th data-quarto-table-cell-role="th">Operations</th>
+<th data-quarto-table-cell-role="th">HR</th>
+</tr>
+<tr class="even">
+<td>str</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"Cash"</td>
+<td>10700</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>"Accounts Receivable"</td>
+<td>9800</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>"Inventory"</td>
+<td>0</td>
+<td>7200</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>"Accounts Payable"</td>
+<td>0</td>
+<td>7200</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>"Salaries Expense"</td>
+<td>0</td>
+<td>0</td>
+<td>15400</td>
+</tr>
+<tr class="even">
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr class="odd">
+<td>"Rent Expense"</td>
+<td>0</td>
+<td>3000</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>"Utilities Expense"</td>
+<td>0</td>
+<td>850</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>"Cost of Goods Sold"</td>
+<td>0</td>
+<td>5100</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>"Depreciation Expense"</td>
+<td>0</td>
+<td>1000</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>"Accumulated Depreciation - Equ…</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="back-to-long-tidy-format" class="level3" data-number="4.7.2">
+<h3 data-number="4.7.2" class="anchored" data-anchor-id="back-to-long-tidy-format"><span class="header-section-number">4.7.2</span> Back to Long (Tidy) Format</h3>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-16-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-16-1" role="tab" aria-controls="tabset-16-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-16-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-16-2" role="tab" aria-controls="tabset-16-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-16-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-16-1-tab">
+<div id="8804ba32" class="cell" data-execution_count="33">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pandas</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>long_pd <span class="op">=</span> wide_pd.reset_index().melt(</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>    id_vars<span class="op">=</span><span class="st">"account"</span>, var_name<span class="op">=</span><span class="st">"department"</span>, value_name<span class="op">=</span><span class="st">"debit"</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>long_pd.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="33">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">account</th>
+<th data-quarto-table-cell-role="th">department</th>
+<th data-quarto-table-cell-role="th">debit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Accounts Payable</td>
+<td>HR</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Accounts Receivable</td>
+<td>HR</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Accumulated Depreciation - Equipment</td>
+<td>HR</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Cash</td>
+<td>HR</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>Cost of Goods Sold</td>
+<td>HR</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-16-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-16-2-tab">
+<div id="237cf602" class="cell" data-execution_count="34">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># polars</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>long_pl <span class="op">=</span> wide_pl.unpivot(</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span><span class="st">"account"</span>, variable_name<span class="op">=</span><span class="st">"department"</span>, value_name<span class="op">=</span><span class="st">"debit"</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>long_pl.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="34">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (5, 3)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">account</th>
+<th data-quarto-table-cell-role="th">department</th>
+<th data-quarto-table-cell-role="th">debit</th>
+</tr>
+<tr class="even">
+<td>str</td>
+<td>str</td>
+<td>i64</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"Cash"</td>
+<td>"Sales"</td>
+<td>10700</td>
+</tr>
+<tr class="even">
+<td>"Accounts Receivable"</td>
+<td>"Sales"</td>
+<td>9800</td>
+</tr>
+<tr class="odd">
+<td>"Inventory"</td>
+<td>"Sales"</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>"Accounts Payable"</td>
+<td>"Sales"</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>"Salaries Expense"</td>
+<td>"Sales"</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Both directions matter in practice: the wide format is easy for a human to scan in a report, while the long/tidy format is what you want as an input to further analysis, grouping, or plotting (Chapter 6).</p>
+</section>
+</section>
+<section id="grouping-and-aggregating" class="level2" data-number="4.8">
+<h2 data-number="4.8" class="anchored" data-anchor-id="grouping-and-aggregating"><span class="header-section-number">4.8</span> Grouping and Aggregating</h2>
+<p>One of the most common accounting analytics tasks is summarizing transaction-level data into account-level totals — in other words, <strong>rebuilding a trial balance from the general ledger.</strong></p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-17-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-17-1" role="tab" aria-controls="tabset-17-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-17-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-17-2" role="tab" aria-controls="tabset-17-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-17-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-17-1-tab">
+<div id="02b50421" class="cell" data-execution_count="35">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pandas</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>tb_pd <span class="op">=</span> gl_pd.groupby(<span class="st">"account"</span>, as_index<span class="op">=</span><span class="va">False</span>)[[<span class="st">"debit"</span>, <span class="st">"credit"</span>]].<span class="bu">sum</span>()</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>tb_pd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="35">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">account</th>
+<th data-quarto-table-cell-role="th">debit</th>
+<th data-quarto-table-cell-role="th">credit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Accounts Payable</td>
+<td>7200</td>
+<td>8050</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Accounts Receivable</td>
+<td>9800</td>
+<td>10700</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Accumulated Depreciation - Equipment</td>
+<td>0</td>
+<td>1000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Cash</td>
+<td>10700</td>
+<td>25600</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>Cost of Goods Sold</td>
+<td>5100</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>Depreciation Expense</td>
+<td>1000</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>Inventory</td>
+<td>7200</td>
+<td>5100</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>Rent Expense</td>
+<td>3000</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8</th>
+<td>Salaries Expense</td>
+<td>15400</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">9</th>
+<td>Sales Revenue</td>
+<td>0</td>
+<td>9800</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">10</th>
+<td>Utilities Expense</td>
+<td>850</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="9ef80bce" class="cell" data-execution_count="36">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Total debits:"</span>, tb_pd[<span class="st">"debit"</span>].<span class="bu">sum</span>())</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Total credits:"</span>, tb_pd[<span class="st">"credit"</span>].<span class="bu">sum</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Total debits: 60250
+Total credits: 60250</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-17-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-17-2-tab">
+<div id="1dfe3aad" class="cell" data-execution_count="37">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># polars</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>tb_pl <span class="op">=</span> (</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>    gl_pl.group_by(<span class="st">"account"</span>)</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>    .agg([pl.col(<span class="st">"debit"</span>).<span class="bu">sum</span>(), pl.col(<span class="st">"credit"</span>).<span class="bu">sum</span>()])</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>    .sort(<span class="st">"account"</span>)</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>tb_pl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="37">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (11, 3)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">account</th>
+<th data-quarto-table-cell-role="th">debit</th>
+<th data-quarto-table-cell-role="th">credit</th>
+</tr>
+<tr class="even">
+<td>str</td>
+<td>i64</td>
+<td>i64</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"Accounts Payable"</td>
+<td>7200</td>
+<td>8050</td>
+</tr>
+<tr class="even">
+<td>"Accounts Receivable"</td>
+<td>9800</td>
+<td>10700</td>
+</tr>
+<tr class="odd">
+<td>"Accumulated Depreciation - Equ…</td>
+<td>0</td>
+<td>1000</td>
+</tr>
+<tr class="even">
+<td>"Cash"</td>
+<td>10700</td>
+<td>25600</td>
+</tr>
+<tr class="odd">
+<td>"Cost of Goods Sold"</td>
+<td>5100</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr class="odd">
+<td>"Inventory"</td>
+<td>7200</td>
+<td>5100</td>
+</tr>
+<tr class="even">
+<td>"Rent Expense"</td>
+<td>3000</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>"Salaries Expense"</td>
+<td>15400</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>"Sales Revenue"</td>
+<td>0</td>
+<td>9800</td>
+</tr>
+<tr class="odd">
+<td>"Utilities Expense"</td>
+<td>850</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Notice that total debits equal total credits ($60,250 each) — exactly what we’d expect, since this confirms the sample general ledger is internally balanced, the same check you’d run on any real trial balance.</p>
+<section id="multi-level-grouping" class="level3" data-number="4.8.1">
+<h3 data-number="4.8.1" class="anchored" data-anchor-id="multi-level-grouping"><span class="header-section-number">4.8.1</span> Multi-Level Grouping</h3>
+<p>You can group by more than one column at once — for example, account <em>within</em> department:</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-18-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-18-1" role="tab" aria-controls="tabset-18-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-18-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-18-2" role="tab" aria-controls="tabset-18-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-18-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-18-1-tab">
+<div id="34ea5251" class="cell" data-execution_count="38">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pandas</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>multi_pd <span class="op">=</span> gl_pd.groupby([<span class="st">"department"</span>, <span class="st">"account"</span>], as_index<span class="op">=</span><span class="va">False</span>)[[<span class="st">"debit"</span>, <span class="st">"credit"</span>]].<span class="bu">sum</span>()</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>multi_pd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="38">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">department</th>
+<th data-quarto-table-cell-role="th">account</th>
+<th data-quarto-table-cell-role="th">debit</th>
+<th data-quarto-table-cell-role="th">credit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>HR</td>
+<td>Cash</td>
+<td>0</td>
+<td>15400</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>HR</td>
+<td>Salaries Expense</td>
+<td>15400</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Operations</td>
+<td>Accounts Payable</td>
+<td>7200</td>
+<td>8050</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Operations</td>
+<td>Accumulated Depreciation - Equipment</td>
+<td>0</td>
+<td>1000</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>Operations</td>
+<td>Cash</td>
+<td>0</td>
+<td>10200</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>Operations</td>
+<td>Cost of Goods Sold</td>
+<td>5100</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>Operations</td>
+<td>Depreciation Expense</td>
+<td>1000</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>Operations</td>
+<td>Inventory</td>
+<td>7200</td>
+<td>5100</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8</th>
+<td>Operations</td>
+<td>Rent Expense</td>
+<td>3000</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">9</th>
+<td>Operations</td>
+<td>Utilities Expense</td>
+<td>850</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">10</th>
+<td>Sales</td>
+<td>Accounts Receivable</td>
+<td>9800</td>
+<td>10700</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">11</th>
+<td>Sales</td>
+<td>Cash</td>
+<td>10700</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">12</th>
+<td>Sales</td>
+<td>Sales Revenue</td>
+<td>0</td>
+<td>9800</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-18-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-18-2-tab">
+<div id="df171277" class="cell" data-execution_count="39">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># polars</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>multi_pl <span class="op">=</span> (</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>    gl_pl.group_by([<span class="st">"department"</span>, <span class="st">"account"</span>])</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>    .agg([pl.col(<span class="st">"debit"</span>).<span class="bu">sum</span>(), pl.col(<span class="st">"credit"</span>).<span class="bu">sum</span>()])</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>    .sort([<span class="st">"department"</span>, <span class="st">"account"</span>])</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>multi_pl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="39">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (13, 4)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">department</th>
+<th data-quarto-table-cell-role="th">account</th>
+<th data-quarto-table-cell-role="th">debit</th>
+<th data-quarto-table-cell-role="th">credit</th>
+</tr>
+<tr class="even">
+<td>str</td>
+<td>str</td>
+<td>i64</td>
+<td>i64</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"HR"</td>
+<td>"Cash"</td>
+<td>0</td>
+<td>15400</td>
+</tr>
+<tr class="even">
+<td>"HR"</td>
+<td>"Salaries Expense"</td>
+<td>15400</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>"Operations"</td>
+<td>"Accounts Payable"</td>
+<td>7200</td>
+<td>8050</td>
+</tr>
+<tr class="even">
+<td>"Operations"</td>
+<td>"Accumulated Depreciation - Equ…</td>
+<td>0</td>
+<td>1000</td>
+</tr>
+<tr class="odd">
+<td>"Operations"</td>
+<td>"Cash"</td>
+<td>0</td>
+<td>10200</td>
+</tr>
+<tr class="even">
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr class="odd">
+<td>"Operations"</td>
+<td>"Rent Expense"</td>
+<td>3000</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>"Operations"</td>
+<td>"Utilities Expense"</td>
+<td>850</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>"Sales"</td>
+<td>"Accounts Receivable"</td>
+<td>9800</td>
+<td>10700</td>
+</tr>
+<tr class="even">
+<td>"Sales"</td>
+<td>"Cash"</td>
+<td>10700</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>"Sales"</td>
+<td>"Sales Revenue"</td>
+<td>0</td>
+<td>9800</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="polars-lazy-frames-wrangling-large-accounting-datasets" class="level2" data-number="4.9">
+<h2 data-number="4.9" class="anchored" data-anchor-id="polars-lazy-frames-wrangling-large-accounting-datasets"><span class="header-section-number">4.9</span> Polars Lazy Frames: Wrangling Large Accounting Datasets</h2>
+<p>Everything so far has used <strong>eager evaluation</strong> — each line of code runs immediately, and the result is fully computed and stored in memory before you move to the next step. This is how pandas always works, and how polars works by default with <code>pl.read_csv()</code>.</p>
+<p>Polars also offers <strong>lazy evaluation</strong>: instead of running each step immediately, you build up a <em>query plan</em> describing everything you want to do, and only execute it once, at the end, with <code>.collect()</code>. This matters enormously for large datasets, because polars can look at your <em>entire</em> pipeline before running anything and optimize it — for example, reading only the columns you actually use, or applying filters before an expensive join instead of after.</p>
+<section id="eager-vs.-lazy-the-same-pipeline-two-ways" class="level3" data-number="4.9.1">
+<h3 data-number="4.9.1" class="anchored" data-anchor-id="eager-vs.-lazy-the-same-pipeline-two-ways"><span class="header-section-number">4.9.1</span> Eager vs.&nbsp;Lazy: The Same Pipeline, Two Ways</h3>
+<p>Let’s take a realistic pipeline — filter to nonzero debits, join to the chart of accounts, then total debits by account type — and run it both ways.</p>
+<div id="301ee5d9" class="cell" data-execution_count="40">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># EAGER: every step executes immediately and materializes a full result in memory</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>result_eager <span class="op">=</span> (</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>    gl_pl</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">filter</span>(pl.col(<span class="st">"debit"</span>) <span class="op">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>    .join(coa_pl, on<span class="op">=</span><span class="st">"account"</span>, how<span class="op">=</span><span class="st">"inner"</span>)</span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>    .group_by(<span class="st">"account_type"</span>)</span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>    .agg(pl.col(<span class="st">"debit"</span>).<span class="bu">sum</span>().alias(<span class="st">"total_debit"</span>))</span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>    .sort(<span class="st">"account_type"</span>)</span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a>result_eager</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="40">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (3, 2)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">account_type</th>
+<th data-quarto-table-cell-role="th">total_debit</th>
+</tr>
+<tr class="even">
+<td>str</td>
+<td>i64</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"Asset"</td>
+<td>27700</td>
+</tr>
+<tr class="even">
+<td>"Expense"</td>
+<td>24500</td>
+</tr>
+<tr class="odd">
+<td>"Liability"</td>
+<td>7200</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="b86013d7" class="cell" data-execution_count="41">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># LAZY: scan_csv builds a query plan; nothing runs until .collect()</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>lazy_query <span class="op">=</span> (</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>    pl.scan_csv(<span class="st">"data/general_ledger_sample.csv"</span>)</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">filter</span>(pl.col(<span class="st">"debit"</span>) <span class="op">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>    .join(pl.scan_csv(<span class="st">"data/chart_of_accounts.csv"</span>), on<span class="op">=</span><span class="st">"account"</span>, how<span class="op">=</span><span class="st">"inner"</span>)</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>    .group_by(<span class="st">"account_type"</span>)</span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>    .agg(pl.col(<span class="st">"debit"</span>).<span class="bu">sum</span>().alias(<span class="st">"total_debit"</span>))</span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>    .sort(<span class="st">"account_type"</span>)</span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a>result_lazy <span class="op">=</span> lazy_query.collect()</span>
+<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a>result_lazy</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="41">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (3, 2)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">account_type</th>
+<th data-quarto-table-cell-role="th">total_debit</th>
+</tr>
+<tr class="even">
+<td>str</td>
+<td>i64</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"Asset"</td>
+<td>27700</td>
+</tr>
+<tr class="even">
+<td>"Expense"</td>
+<td>24500</td>
+</tr>
+<tr class="odd">
+<td>"Liability"</td>
+<td>7200</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Both approaches give an identical result — but they got there differently. You can inspect <em>how</em> polars plans to execute the lazy version before running it, using <code>.explain()</code>:</p>
+<div id="0a740083" class="cell" data-execution_count="42">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(lazy_query.explain())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>SORT BY [col("account_type")]
+  AGGREGATE[maintain_order: false]
+    [col("debit").sum().alias("total_debit")] BY [col("account_type")]
+    FROM
+    simple π 2/2 ["account_type", "debit"]
+      INNER JOIN:
+      LEFT PLAN ON: [col("account")]
+        simple π 3/3 ["account_type", "debit", ... 1 other column]
+          Csv SCAN [data/general_ledger_sample.csv]
+          PROJECT 3/9 COLUMNS
+          SELECTION: [(col("debit")) &gt; (0)]
+          ESTIMATED ROWS: 23
+      RIGHT PLAN ON: [col("account")]
+        Csv SCAN [data/chart_of_accounts.csv]
+        PROJECT 1/3 COLUMNS
+        ESTIMATED ROWS: 37
+      END INNER JOIN</code></pre>
+</div>
+</div>
+<p>Look closely at the plan: notice it shows <code>PROJECT 3/9 COLUMNS</code> for the general ledger scan. Polars has figured out — entirely on its own — that only 3 of the 9 available columns are actually needed anywhere in this pipeline, and it will only read those columns from disk. It has also pushed the <code>debit &gt; 0</code> filter down to happen <em>during</em> the file scan, rather than loading the full dataset first and filtering afterward.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Why This Matters for Real Accounting Data
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A university dataset like <code>general_ledger_sample.csv</code> has 20 rows — the difference between eager and lazy evaluation is invisible here. But a real company’s general ledger for a single fiscal year can easily contain <strong>millions of transaction lines</strong> across dozens of columns. In that setting:</p>
+<ul>
+<li>Reading only the 3 needed columns instead of all 9 can cut memory use dramatically</li>
+<li>Filtering before a join (rather than joining everything, then filtering) avoids doing expensive join work on rows you’re about to discard anyway</li>
+<li>These optimizations happen <strong>automatically</strong> once you write your pipeline in lazy form — you don’t have to manually reorder your steps for performance</li>
+</ul>
+<p>This is precisely the kind of workload common in audit analytics (Chapter 8) and fraud detection (Chapter 9), where you may need to scan an entire year of transactions rather than a sample. Lazy evaluation is one reason polars is gaining adoption for exactly this kind of large-scale accounting analytics work.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>A Note on Pandas and Scale
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Pandas itself doesn’t have a lazy evaluation mode. For very large datasets in a pandas-based workflow, teams sometimes turn to libraries like <strong>Dask</strong> or <strong>Modin</strong>, which mimic the pandas API while distributing computation — these are beyond the scope of this book, but worth knowing the names of if you encounter a pandas dataset too large to fit comfortably in memory.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="chapter-summary" class="level2" data-number="4.10">
+<h2 data-number="4.10" class="anchored" data-anchor-id="chapter-summary"><span class="header-section-number">4.10</span> Chapter Summary</h2>
+<ul>
+<li>pandas and polars share the same core wrangling concepts — filtering, sorting, cleaning, joining, reshaping, grouping — but express them with different syntax; pandas remains the current industry standard, while polars is a fast-growing alternative especially suited to large datasets.</li>
+<li>Cleaning real accounting data typically involves fixing currency formatting, standardizing inconsistent text, parsing unreliable dates, filling missing values, and checking for duplicates — and automated cleaning steps (like <code>.title()</code>) still need a human sanity check.</li>
+<li>Inner joins silently drop unmatched rows; left joins preserve every row from your primary table and reveal mismatches — prefer left joins when enriching transaction data with a reference table like a chart of accounts.</li>
+<li>Reshaping between wide (human-readable) and long/tidy (analysis-ready) formats is a routine step, supported in both libraries via pivot/melt (pandas) and pivot/unpivot (polars).</li>
+<li>Grouping and aggregating transaction-level data lets you rebuild summary views — like a trial balance — directly from the general ledger, and is a natural way to sanity-check that debits equal credits.</li>
+<li>Polars’ lazy evaluation (<code>pl.scan_csv()</code> + <code>.collect()</code>) lets the library optimize an entire pipeline before running it — reading only needed columns and pushing filters earlier — which becomes increasingly valuable as accounting datasets grow into the millions of rows.</li>
+</ul>
+</section>
+<section id="discussion-questions" class="level2" data-number="4.11">
+<h2 data-number="4.11" class="anchored" data-anchor-id="discussion-questions"><span class="header-section-number">4.11</span> Discussion Questions</h2>
+<ol type="1">
+<li>Why might an inner join be the <em>wrong</em> default choice when enriching general ledger transactions with chart-of-accounts data, even though it produces a “cleaner-looking” result with fewer rows to review?</li>
+<li>The <code>.title()</code> cleaning step turned <code>"HR"</code> into <code>"Hr"</code>. Can you think of another accounting example (an account name, a department, an abbreviation) where automatic text cleaning could introduce a <em>new</em> error while fixing another?</li>
+<li>In your own words, explain why lazy evaluation matters more for a company with millions of general ledger transactions than for the 20-row sample used in this chapter.</li>
+</ol>
+</section>
+<section id="exercises" class="level2" data-number="4.12">
+<h2 data-number="4.12" class="anchored" data-anchor-id="exercises"><span class="header-section-number">4.12</span> Exercises</h2>
+<ol type="1">
+<li>Load <code>general_ledger_sample.csv</code> in both pandas and polars, and confirm both libraries produce the same total debits and total credits when grouped by account.</li>
+<li>Using <code>messy_general_ledger.csv</code>, complete the full cleaning workflow (currency formatting, text standardization, dates, missing values, duplicates) in whichever library you’re more comfortable with, then repeat it in the other library.</li>
+<li>Using <code>chart_of_accounts.csv</code> and <code>general_ledger_sample.csv</code>, perform a left join and identify every general ledger account with no chart-of-accounts match. Write one sentence describing what you’d do next if this were a real client engagement.</li>
+<li>Rewrite the eager pipeline in the Lazy Frames section as your own lazy pipeline, but group by <code>department</code> instead of <code>account_type</code>. Run <code>.explain()</code> on your version and describe, in your own words, what optimization(s) you can identify in the output.</li>
+</ol>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-stobierski_data_2021" class="csl-entry" role="listitem">
+Stobierski, Tim. 2021. <span>“Data <span>Wrangling</span>: <span>What</span> <span>It</span> <span>Is</span> &amp; <span>Why</span> <span>It</span>’s <span>Important</span>.”</span> In <em>Harvard Business School Online</em>. <a href="https://online.hbs.edu/blog/post/data-wrangling">https://online.hbs.edu/blog/post/data-wrangling</a>.
+</div>
+</div>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -768,9 +4214,9 @@ ul.task-list li input[type="checkbox"] {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><ul><li><a href="https://github.com/msharifbd/accounting-analytics-book/edit/main/04-data-wrangling-pandas.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/blob/main/04-data-wrangling-pandas.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/msharifbd/accounting-analytics-book/edit/main/04-data-wrangling-pandas.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/blob/main/04-data-wrangling-pandas.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
-
+<p>This book was built with <a href="https://quarto.org/">Quarto</a></p>
 </div>
   </div>
 </footer>

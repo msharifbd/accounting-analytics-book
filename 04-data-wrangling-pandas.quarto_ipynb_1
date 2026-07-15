@@ -1,0 +1,1205 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "# Data Wrangling with `Pandas` and `Polars`\n",
+        "\n",
+        "::: {.callout-note}\n",
+        "## Learning Objectives\n",
+        "By the end of this chapter, you should be able to:\n",
+        "\n",
+        "- Understand what data wrangling is and its importance\n",
+        "- Import tabular accounting data (CSV) into both pandas and polars DataFrames\n",
+        "- Select, filter, and sort accounting data using both libraries\n",
+        "- Clean messy accounting data: fix currency formatting, inconsistent text, bad dates, and missing values\n",
+        "- Merge/join accounting tables and explain the difference between inner and left joins\n",
+        "- Reshape data between wide and long formats\n",
+        "- Group and aggregate transaction-level data into account-level summaries\n",
+        "- Explain lazy vs. eager evaluation in polars, and why it matters for large accounting datasets\n",
+        ":::\n",
+        "\n",
+        "\n",
+        "## What is Data Wrangling? \n",
+        "\n",
+        "**Data wrangling**—also called *data cleaning*, *data remediation*, or *data munging*—refers to a variety of processes designed to transform raw data into more readily used formats. The exact methods differ from project to project depending on the data you’re leveraging and the goal you’re trying to achieve [@stobierski_data_2021].\n",
+        "\n",
+        "Some examples of data wrangling include:\n",
+        "\n",
+        "* Merging multiple data sources into a single dataset for analysis\n",
+        "\n",
+        "* Identifying gaps in data (for example, empty cells in a spreadsheet) and either filling or deleting them\n",
+        "\n",
+        "* Deleting data that’s either unnecessary or irrelevant to the project you’re working on\n",
+        "\n",
+        "* Identifying extreme outliers in data and either explaining the discrepancies or removing them so that analysis can take place\n",
+        "\n",
+        "Data wrangling can be a manual or automated process. In scenarios where datasets are exceptionally large, automated data cleaning becomes a necessity. In organizations that employ a full data team, a data scientist or other team member is typically responsible for data wrangling. In smaller organizations, non-data professionals are often responsible for cleaning their data before leveraging it [@stobierski_data_2021].\n",
+        "\n",
+        "### Data Wrangling Steps and Techniques\n",
+        "\n",
+        "Each data project requires a unique approach to ensure its final dataset is reliable and accessible. That being said, several processes typically inform the approach. These are commonly referred to as data wrangling steps or activities. @fig-six-steps-data-wrangling shows the steps in Data Warngling [@stobierski_data_2021].\n",
+        "\n",
+        "![Steps in Data Wrangling](images/6-steps-of-data-wrangling.jpg){#fig-six-steps-data-wrangling width=85%}\n",
+        "\n",
+        "#### Discovery\n",
+        "\n",
+        "Discovery refers to the process of familiarizing yourself with data so you can conceptualize how you might use it. You can liken it to looking in your refrigerator before cooking a meal to see what ingredients you have at your disposal.\n",
+        "\n",
+        "During discovery, you may identify trends or patterns in the data, along with obvious issues, such as missing or incomplete values that need to be addressed. This is an important step, as it will inform every activity that comes afterward [@stobierski_data_2021].\n",
+        "\n",
+        "#### Structuring\n",
+        "\n",
+        "Raw data is typically unusable in its raw state because it’s either incomplete or misformatted for its intended application. Data structuring is the process of taking raw data and transforming it to be more readily leveraged. The form your data takes will depend on the analytical model you use to interpret it [@stobierski_data_2021].\n",
+        "\n",
+        "#### Cleaning \n",
+        "\n",
+        "Data cleaning is the process of removing inherent errors in data that might distort your analysis or render it less valuable. Cleaning can come in different forms, including deleting empty cells or rows, removing outliers, and standardizing inputs. The goal of data cleaning is to ensure there are no errors (or as few as possible) that could influence your final analysis. Identifying and removing any bad data greatly impacts the rest of the wrangling processes [@stobierski_data_2021].\n",
+        "\n",
+        "#### Enriching\n",
+        "\n",
+        "Once you understand your existing data and have transformed it into a more usable state, you must determine whether you have all of the data necessary for the project at hand. If not, you may choose to enrich or augment your data by incorporating values from other datasets. For this reason, it’s important to understand what other data is available for use [@stobierski_data_2021].\n",
+        "\n",
+        "If you decide that enrichment is necessary, you need to repeat the steps above for any new data.\n",
+        "\n",
+        "#### Validating\n",
+        "\n",
+        "Data validation refers to the process of verifying that your data is both consistent and of a high enough quality. During validation, you may discover issues you need to resolve or conclude that your data is ready to be analyzed. Validation is typically achieved through various automated processes and requires programming [@stobierski_data_2021].\n",
+        "\n",
+        "#### Publishing\n",
+        "\n",
+        "Once your data has been validated, you can publish it. This involves making it available to others within your organization for analysis. The format you use to share the information—such as a written report or electronic file—will depend on your data and the organization’s goals [@stobierski_data_2021].\n",
+        "\n",
+        "### Data Wrangling vs. Data Cleaning\n",
+        "\n",
+        "Despite the terms being used interchangeably, data wrangling and data cleaning are two different processes. It’s important to make the distinction that data cleaning is a critical step in the data wrangling process to remove inaccurate and inconsistent data. Meanwhile, data-wrangling is the overall process of transforming raw data into a more usable form [@stobierski_data_2021]. @fig-data-wrangling-vs-data-cleaning compares both. \n",
+        "\n",
+        "![Data Wrangling vs Data Cleaning](images/data-wrangling-vs-data-cleaning.jpg){#fig-data-wrangling-vs-data-cleaning width=85%}\n",
+        "\n",
+        "### Importance of Data Wrangling  \n",
+        "\n",
+        "Any analyses an accountant or CPA performs will ultimately be constrained by the data that informs them. If data is incomplete, unreliable, or faulty, then analyses will be too—diminishing the value of any critical insights gleaned.\n",
+        "\n",
+        "Data wrangling seeks to remove that risk by ensuring data is in a reliable state before it’s analyzed and leveraged. This makes it a critical part of the analytical process.\n",
+        "\n",
+        "It’s important to note that data wrangling can be time-consuming and taxing on resources, particularly when done manually. This is why many organizations institute policies and best practices that help employees streamline the data cleanup process—for example, requiring that data include certain information or be in a specific format before it’s uploaded to a database.\n",
+        "\n",
+        "For this reason, it’s vital to understand the steps of the data wrangling process and the negative outcomes associated with incorrect or faulty data [@stobierski_data_2021].\n",
+        "\n",
+        "## Two Tools, One Set of Concepts\n",
+        "\n",
+        "This chapter teaches data wrangling using **two** Python libraries side by side: **pandas**, the long-standing standard for tabular data analysis in Python, and **polars**, a newer library built for speed on large datasets.\n",
+        "\n",
+        "The good news: the underlying *concepts* — filtering, joining, grouping, reshaping — are identical no matter which library you use. Only the syntax changes. Learning both at once actually reinforces the concepts, because you'll see the same logic expressed two different ways.\n",
+        "\n",
+        "| | pandas | polars |\n",
+        "|---|---|---|\n",
+        "| **Maturity** | Released 2008; the long-standing standard | Released 2020; newer, rapidly growing |\n",
+        "| **Performance** | Good for small-to-medium data; single-threaded by default | Built for speed; multi-threaded, memory-efficient |\n",
+        "| **Syntax style** | Label-based indexing (`df[df[\"x\"] > 0]`) | Expression-based API (`pl.col(\"x\") > 0`) |\n",
+        "| **Industry adoption (accounting/audit)** | Still the dominant tool in most firms and tutorials | Growing adoption, especially for large transaction datasets |\n",
+        "| **Lazy evaluation** | Not built in (see Dask/Modin for scaling, not covered here) | Built in — covered in this chapter |\n",
+        "\n",
+        "::: {.callout-tip}\n",
+        "## Connect to Practice\n",
+        "You are very likely to encounter pandas in an internship or entry-level role today. Polars is worth learning now because its adoption is accelerating quickly, especially anywhere teams work with large general ledger exports (multi-million-row datasets), where its performance advantage becomes very noticeable.\n",
+        ":::\n",
+        "\n",
+        "We'll use two datasets you already have from previous chapters — `general_ledger_sample.csv` and `trial_balance.csv` — plus two new ones for this chapter: `chart_of_accounts.csv` (for joins) and `messy_general_ledger.csv` (for cleaning practice).\n",
+        "\n",
+        "## Reading Data In\n",
+        "\n",
+        "Let's start by loading the general ledger sample into both libraries and inspecting its structure.\n",
+        "\n",
+        "::: {.panel-tabset}\n",
+        "## pandas "
+      ],
+      "id": "4d8ee2cd"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "import pandas as pd\n",
+        "import polars as pl\n",
+        "\n",
+        "# pandas\n",
+        "gl_pd = pd.read_csv(\"data/general_ledger_sample.csv\")\n",
+        "print(gl_pd.shape)\n",
+        "print(gl_pd.dtypes)\n",
+        "gl_pd.head(3)"
+      ],
+      "id": "f13850da",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## polars"
+      ],
+      "id": "0a72078e"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# polars\n",
+        "gl_pl = pl.read_csv(\"data/general_ledger_sample.csv\")\n",
+        "print(gl_pl.shape)\n",
+        "print(gl_pl.dtypes)\n",
+        "gl_pl.head(3)"
+      ],
+      "id": "0dc2889d",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::\n",
+        "\n",
+        "Both libraries correctly infer that `debit` and `credit` are numeric and everything else is text. You can get quick summary statistics with `.describe()` in both libraries:\n",
+        "\n",
+        "::: {.panel-tabset}\n",
+        "## pandas "
+      ],
+      "id": "65cf90dd"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "gl_pd.describe()"
+      ],
+      "id": "666962a9",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## polars"
+      ],
+      "id": "5dbbf0af"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "gl_pl.describe()"
+      ],
+      "id": "8c508ea7",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::\n",
+        "### Reading with an Explicit Schema\n",
+        "\n",
+        "By default, both libraries *guess* each column's data type. This usually works, but for accounting data it's good practice to be explicit — especially for ID columns that look numeric but should stay text (an `entry_id` of `1001` should never be treated as a number you could accidentally average).\n",
+        "\n",
+        "::: {.panel-tabset}\n",
+        "## pandas "
+      ],
+      "id": "03ee2bb2"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# pandas: force entry_id to stay text\n",
+        "gl_pd2 = pd.read_csv(\"data/general_ledger_sample.csv\", dtype={\"entry_id\": str})\n",
+        "print(gl_pd2[\"entry_id\"].dtype)"
+      ],
+      "id": "ef00a2f7",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## polars"
+      ],
+      "id": "53efec14"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# polars: same idea, using schema_overrides\n",
+        "gl_pl2 = pl.read_csv(\n",
+        "    \"data/general_ledger_sample.csv\",\n",
+        "    schema_overrides={\"entry_id\": pl.Utf8}\n",
+        ")\n",
+        "print(gl_pl2[\"entry_id\"].dtype)"
+      ],
+      "id": "98bb6ea5",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::\n",
+        "\n",
+        "\n",
+        "::: {.callout-tip}\n",
+        "## Connect to Practice\n",
+        "Excel files are just as common as CSVs in accounting practice. Both libraries can read them directly: `pd.read_excel(\"file.xlsx\")` and `pl.read_excel(\"file.xlsx\")` (polars requires the `fastexcel` package, installable with `pip install fastexcel`).\n",
+        ":::\n",
+        "\n",
+        "## Selecting, Filtering, and Sorting\n",
+        "\n",
+        "### Filtering on a Single Condition\n",
+        "\n",
+        "Let's find every transaction with a debit over $5,000 — a common first step in transaction testing.\n",
+        "\n",
+        "::: {.panel-tabset}\n",
+        "## pandas "
+      ],
+      "id": "59077c95"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# pandas\n",
+        "large_pd = gl_pd[gl_pd[\"debit\"] > 5000]\n",
+        "large_pd[[\"entry_id\", \"account\", \"debit\"]]"
+      ],
+      "id": "ca3680da",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## polars "
+      ],
+      "id": "2a16ed87"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# polars\n",
+        "large_pl = gl_pl.filter(pl.col(\"debit\") > 5000)\n",
+        "large_pl.select([\"entry_id\", \"account\", \"debit\"])"
+      ],
+      "id": "92dfb838",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::\n",
+        "### Combining Multiple Conditions\n",
+        "\n",
+        "Now let's narrow this to transactions in the Operations department with a nonzero debit — combining two conditions with `&` (AND).\n",
+        "\n",
+        "::: {.panel-tabset}\n",
+        "## pandas "
+      ],
+      "id": "f90ec406"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# pandas\n",
+        "combo_pd = gl_pd[(gl_pd[\"department\"] == \"Operations\") & (gl_pd[\"debit\"] > 0)]\n",
+        "combo_pd[[\"entry_id\", \"account\", \"debit\", \"department\"]]"
+      ],
+      "id": "fa07c693",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## polars "
+      ],
+      "id": "b658eb8a"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# polars\n",
+        "combo_pl = gl_pl.filter(\n",
+        "    (pl.col(\"department\") == \"Operations\") & (pl.col(\"debit\") > 0)\n",
+        ")\n",
+        "combo_pl.select([\"entry_id\", \"account\", \"debit\", \"department\"])"
+      ],
+      "id": "4e3fb6bb",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::\n",
+        "\n",
+        "::: {.callout-important}\n",
+        "## A Common Mistake\n",
+        "In pandas, you must use `&` and `|` (not Python's `and`/`or`) when combining conditions, and each condition needs its own parentheses: `(gl_pd[\"department\"] == \"Operations\") & (gl_pd[\"debit\"] > 0)`. Forgetting the parentheses is one of the most common pandas errors for beginners.\n",
+        ":::\n",
+        "\n",
+        "### Sorting\n",
+        "\n",
+        "Let's sort by debit amount (largest first), breaking ties by date (earliest first):\n",
+        "\n",
+        "::: {.panel-tabset}\n",
+        "## pandas "
+      ],
+      "id": "968a39ed"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# pandas\n",
+        "gl_pd.sort_values([\"debit\", \"entry_date\"], ascending=[False, True]).head()"
+      ],
+      "id": "9eb63ffd",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## polars "
+      ],
+      "id": "2c8ffcb0"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# polars\n",
+        "gl_pl.sort([\"debit\", \"entry_date\"], descending=[True, False]).head()"
+      ],
+      "id": "223e3049",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::\n",
+        "\n",
+        "## Cleaning Data\n",
+        "\n",
+        "Real accounting data is rarely as clean as `general_ledger_sample.csv`. Let's work through `messy_general_ledger.csv`, which has the same kinds of issues introduced in Chapter 3: currency symbols, inconsistent formatting, an impossible date, a missing value, and a likely duplicate entry.\n",
+        "\n",
+        "### Step 1: Fix Currency Formatting\n",
+        "\n",
+        "::: {.panel-tabset}\n",
+        "## pandas "
+      ],
+      "id": "654e9ed3"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "messy_pd = pd.read_csv(\"data/messy_general_ledger.csv\")\n",
+        "messy_pd"
+      ],
+      "id": "a63c9de4",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# pandas\n",
+        "df_pd = messy_pd.copy()\n",
+        "for col in [\"debit\", \"credit\"]:\n",
+        "    df_pd[col] = (\n",
+        "        df_pd[col].astype(str)\n",
+        "        .str.replace(\"$\", \"\", regex=False)\n",
+        "        .str.replace(\",\", \"\", regex=False)\n",
+        "    )\n",
+        "    df_pd[col] = pd.to_numeric(df_pd[col])\n",
+        "\n",
+        "df_pd[[\"entry_id\", \"debit\", \"credit\"]]"
+      ],
+      "id": "6630cc78",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## polars "
+      ],
+      "id": "1d4c8c2e"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# polars\n",
+        "messy_pl = pl.read_csv(\"data/messy_general_ledger.csv\")\n",
+        "\n",
+        "df_pl = messy_pl.with_columns([\n",
+        "    pl.col(\"debit\").str.replace_all(r\"\\$\", \"\").str.replace_all(\",\", \"\").cast(pl.Float64),\n",
+        "    pl.col(\"credit\").str.replace_all(r\"\\$\", \"\").str.replace_all(\",\", \"\").cast(pl.Float64),\n",
+        "])\n",
+        "df_pl.select([\"entry_id\", \"debit\", \"credit\"])"
+      ],
+      "id": "9abfa12d",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "::: \n",
+        "\n",
+        "The `debit` and `credit` columns contain `$` and `,` characters, which force them to be read as text instead of numbers.\n",
+        "\n",
+        "\n",
+        "### Step 2: Standardize Text Fields\n",
+        "\n",
+        "The `account` and `department` columns have inconsistent capitalization and stray whitespace.\n",
+        "\n",
+        "::: {.panel-tabset}\n",
+        "## pandas "
+      ],
+      "id": "7c4beb20"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# pandas\n",
+        "df_pd[\"account\"] = df_pd[\"account\"].str.strip().str.title()\n",
+        "df_pd[\"department\"] = df_pd[\"department\"].str.strip().str.title()\n",
+        "df_pd[[\"account\", \"department\"]]"
+      ],
+      "id": "75187f00",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## polars "
+      ],
+      "id": "b75d42ba"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# polars\n",
+        "df_pl = df_pl.with_columns([\n",
+        "    pl.col(\"account\").str.strip_chars().str.to_titlecase(),\n",
+        "    pl.col(\"department\").str.strip_chars().str.to_titlecase(),\n",
+        "])\n",
+        "df_pl.select([\"account\", \"department\"])"
+      ],
+      "id": "04bf6a33",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::\n",
+        "\n",
+        "::: {.callout-warning}\n",
+        "## Automated Cleaning Still Needs a Human Check\n",
+        "Look closely at the department column: `\"HR\"` became `\"Hr\"` after title-casing, since `.title()` (and its polars equivalent) simply capitalizes the first letter of each word — it doesn't know `HR` is an acronym that should stay fully capitalized. This is a good example of why you should always spot-check the results of automated cleaning steps rather than assuming they worked perfectly. A more robust fix here would be an explicit mapping (e.g., `{\"hr\": \"HR\", \"Hr\": \"HR\"}`) for known acronyms in your data.\n",
+        ":::\n",
+        "\n",
+        "### Step 3: Fix Inconsistent Dates\n",
+        "\n",
+        "The `entry_date` column mixes `01/15/2025` and `1-15-2025` formats, and contains one impossible date (`02/30/2025` — February never has 30 days).\n",
+        "\n",
+        "::: {.panel-tabset}\n",
+        "## pandas "
+      ],
+      "id": "6adae736"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# pandas: format=\"mixed\" handles multiple formats; errors=\"coerce\" turns bad dates into NaT\n",
+        "df_pd[\"entry_date\"] = pd.to_datetime(df_pd[\"entry_date\"], format=\"mixed\", errors=\"coerce\")\n",
+        "df_pd[[\"entry_id\", \"entry_date\"]]"
+      ],
+      "id": "98302aa7",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# pandas: find the rows that failed to parse\n",
+        "df_pd[df_pd[\"entry_date\"].isna()]"
+      ],
+      "id": "df2f0cc2",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## polars \n",
+        "Polars doesn't have an automatic \"mixed format\" parser, so we normalize the separators first, then parse with `strict=False` so invalid dates become `null` instead of raising an error."
+      ],
+      "id": "c77d4cff"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# polars\n",
+        "df_pl = df_pl.with_columns(\n",
+        "    pl.col(\"entry_date\")\n",
+        "      .str.replace_all(\"-\", \"/\")\n",
+        "      .str.to_date(format=\"%m/%d/%Y\", strict=False)\n",
+        "      .alias(\"entry_date\")\n",
+        ")\n",
+        "df_pl.select([\"entry_id\", \"entry_date\"])"
+      ],
+      "id": "fe0f0fe6",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::\n",
+        "\n",
+        "::: {.callout-important}\n",
+        "## What Should You Do With an Invalid Date?\n",
+        "Notice that `02/30/2025` became a missing value (`NaT` in pandas, `null` in polars) rather than an error that stops your code. This is intentional — but it means *you* now have to decide what to do about it: go back to the source system to find the correct date, exclude the transaction, or flag it for follow-up. Silently ignoring nulls at this point is how real errors slip through into financial reports.\n",
+        ":::\n",
+        "\n",
+        "### Step 4: Handle Missing Values\n",
+        "\n",
+        "The `department` column has one missing value.\n",
+        "\n",
+        "::: {.panel-tabset}\n",
+        "## pandas "
+      ],
+      "id": "d28aef26"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# pandas\n",
+        "df_pd[\"department\"] = df_pd[\"department\"].fillna(\"Unassigned\")\n",
+        "df_pd[[\"entry_id\", \"department\"]]"
+      ],
+      "id": "41362fe4",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## polars "
+      ],
+      "id": "8c1c9c13"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# polars\n",
+        "df_pl = df_pl.with_columns(\n",
+        "    pl.col(\"department\").fill_null(\"Unassigned\")\n",
+        ")\n",
+        "df_pl.select([\"entry_id\", \"department\"])"
+      ],
+      "id": "623b319b",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::\n",
+        "\n",
+        "### Step 5: Check for Duplicates\n",
+        "\n",
+        "After cleaning, compare rows on the fields that should uniquely identify a real transaction line.\n",
+        "\n",
+        "::: {.panel-tabset}\n",
+        "## pandas "
+      ],
+      "id": "751cfe9e"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# pandas\n",
+        "dupes_pd = df_pd[df_pd.duplicated(subset=[\"account\", \"debit\", \"credit\"], keep=False)]\n",
+        "dupes_pd"
+      ],
+      "id": "736ca701",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## polars "
+      ],
+      "id": "0a506be3"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "dupes_pl = df_pl.filter(df_pl.is_duplicated())\n",
+        "dupes_pl"
+      ],
+      "id": "d1cf62ed",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "::: \n",
+        "\n",
+        "\n",
+        "The two `JE2001` rows for `Cash` are now revealed as duplicates once formatting differences are removed — before cleaning, `\"cash \"` (lowercase, trailing space) looked like a different value from `\"Cash\"`, hiding the duplicate.\n",
+        "\n",
+        "## Merging and Joining Tables\n",
+        "\n",
+        "Accounting data rarely lives in a single table. Let's enrich the general ledger with account type information from `chart_of_accounts.csv`.\n",
+        "\n",
+        "::: {.panel-tabset}\n",
+        "## pandas "
+      ],
+      "id": "76220c94"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "coa_pd = pd.read_csv(\"data/chart_of_accounts.csv\")\n",
+        "coa_pd.head()"
+      ],
+      "id": "8b304a0b",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## polars"
+      ],
+      "id": "154eaf10"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# polars\n",
+        "coa_pl = pl.read_csv(\"data/chart_of_accounts.csv\")"
+      ],
+      "id": "e7f70548",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::\n",
+        "\n",
+        "\n",
+        "### Inner Join\n",
+        "\n",
+        "An **inner join** keeps only rows where the join key (`account`) matches in *both* tables.\n",
+        "\n",
+        "::: {.panel-tabset}\n",
+        "## pandas"
+      ],
+      "id": "7ac19432"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# pandas\n",
+        "inner_pd = gl_pd.merge(coa_pd, on=\"account\", how=\"inner\")\n",
+        "print(inner_pd.shape)\n",
+        "sorted(inner_pd[\"account\"].unique())"
+      ],
+      "id": "21af58e8",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## polars "
+      ],
+      "id": "212c5d79"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# polars\n",
+        "inner_pl = gl_pl.join(coa_pl, on=\"account\", how=\"inner\")\n",
+        "print(inner_pl.shape)"
+      ],
+      "id": "d34a1a4c",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::\n",
+        "Notice the inner join result has fewer rows than the original general ledger (19 vs. 20). One account is missing.\n",
+        "\n",
+        "### Left Join\n",
+        "\n",
+        "A **left join** keeps *every* row from the left table (the general ledger), filling in `null`/`NaN` where there's no match in the chart of accounts.\n",
+        "\n",
+        "::: {.panel-tabset}\n",
+        "## pandas"
+      ],
+      "id": "34b9f38b"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# pandas\n",
+        "left_pd = gl_pd.merge(coa_pd, on=\"account\", how=\"left\")\n",
+        "missing_pd = left_pd[left_pd[\"account_number\"].isna()]\n",
+        "missing_pd[[\"entry_id\", \"account\"]].drop_duplicates()"
+      ],
+      "id": "150f6bb6",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## polars "
+      ],
+      "id": "132c2729"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# polars\n",
+        "left_pl = gl_pl.join(coa_pl, on=\"account\", how=\"left\")\n",
+        "missing_pl = left_pl.filter(pl.col(\"account_number\").is_null())\n",
+        "missing_pl.select([\"entry_id\", \"account\"]).unique()"
+      ],
+      "id": "f19e5eb5",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::\n",
+        "Both approaches reveal the same finding: **\"Utilities Expense\"** appears in the general ledger but not in the chart of accounts — likely a new account that hasn't been added to the COA yet, or a naming mismatch (e.g., \"Utilities\" vs. \"Utilities Expense\") that needs investigation.\n",
+        "\n",
+        "::: {.callout-important}\n",
+        "## Why This Matters\n",
+        "An inner join would have silently *dropped* the Utilities Expense transactions from any analysis without telling you — the row count would just be smaller, with no error or warning. A left join preserves every general ledger transaction and makes the mismatch visible. When enriching transaction data with reference tables, prefer a left join and explicitly check for unmatched rows, rather than defaulting to an inner join.\n",
+        ":::\n",
+        "\n",
+        "## Reshaping Data\n",
+        "\n",
+        "Recall the tidy data discussion from Chapter 3. Let's build a **wide** summary table — one common way accountants like to view data — and then reshape it back to **long** (tidy) format.\n",
+        "\n",
+        "### Wide: Total Debits by Account and Department\n",
+        "\n",
+        "::: {.panel-tabset}\n",
+        "## pandas"
+      ],
+      "id": "9a196c5b"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# pandas\n",
+        "wide_pd = gl_pd.pivot_table(\n",
+        "    index=\"account\", columns=\"department\", values=\"debit\",\n",
+        "    aggfunc=\"sum\", fill_value=0\n",
+        ")\n",
+        "wide_pd"
+      ],
+      "id": "218f9e44",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## polars "
+      ],
+      "id": "e20ff82a"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# polars\n",
+        "wide_pl = gl_pl.pivot(\n",
+        "    index=\"account\", on=\"department\", values=\"debit\",\n",
+        "    aggregate_function=\"sum\"\n",
+        ").fill_null(0)\n",
+        "wide_pl"
+      ],
+      "id": "2bb76b24",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::\n",
+        "\n",
+        "### Back to Long (Tidy) Format\n",
+        "\n",
+        "::: {.panel-tabset}\n",
+        "## pandas"
+      ],
+      "id": "ec8053a5"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# pandas\n",
+        "long_pd = wide_pd.reset_index().melt(\n",
+        "    id_vars=\"account\", var_name=\"department\", value_name=\"debit\"\n",
+        ")\n",
+        "long_pd.head()"
+      ],
+      "id": "26c615a9",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## polars "
+      ],
+      "id": "94f3e505"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# polars\n",
+        "long_pl = wide_pl.unpivot(\n",
+        "    index=\"account\", variable_name=\"department\", value_name=\"debit\"\n",
+        ")\n",
+        "long_pl.head()"
+      ],
+      "id": "9e8d969c",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "::: \n",
+        "\n",
+        "Both directions matter in practice: the wide format is easy for a human to scan in a report, while the long/tidy format is what you want as an input to further analysis, grouping, or plotting (Chapter 6).\n",
+        "\n",
+        "## Grouping and Aggregating\n",
+        "\n",
+        "One of the most common accounting analytics tasks is summarizing transaction-level data into account-level totals — in other words, **rebuilding a trial balance from the general ledger.**\n",
+        "\n",
+        "::: {.panel-tabset}\n",
+        "## pandas"
+      ],
+      "id": "bb99593d"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# pandas\n",
+        "tb_pd = gl_pd.groupby(\"account\", as_index=False)[[\"debit\", \"credit\"]].sum()\n",
+        "tb_pd"
+      ],
+      "id": "2830ce7b",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "print(\"Total debits:\", tb_pd[\"debit\"].sum())\n",
+        "print(\"Total credits:\", tb_pd[\"credit\"].sum())"
+      ],
+      "id": "45402f81",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## polars "
+      ],
+      "id": "b6aede98"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# polars\n",
+        "tb_pl = (\n",
+        "    gl_pl.group_by(\"account\")\n",
+        "    .agg([pl.col(\"debit\").sum(), pl.col(\"credit\").sum()])\n",
+        "    .sort(\"account\")\n",
+        ")\n",
+        "tb_pl"
+      ],
+      "id": "58c6faaf",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "::: \n",
+        "\n",
+        "Notice that total debits equal total credits ($60,250 each) — exactly what we'd expect, since this confirms the sample general ledger is internally balanced, the same check you'd run on any real trial balance.\n",
+        "\n",
+        "### Multi-Level Grouping\n",
+        "\n",
+        "You can group by more than one column at once — for example, account *within* department:\n",
+        "\n",
+        "::: {.panel-tabset}\n",
+        "## pandas"
+      ],
+      "id": "03b8f04d"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# pandas\n",
+        "multi_pd = gl_pd.groupby([\"department\", \"account\"], as_index=False)[[\"debit\", \"credit\"]].sum()\n",
+        "multi_pd"
+      ],
+      "id": "9bb423f8",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## polars "
+      ],
+      "id": "cd38fb54"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# polars\n",
+        "multi_pl = (\n",
+        "    gl_pl.group_by([\"department\", \"account\"])\n",
+        "    .agg([pl.col(\"debit\").sum(), pl.col(\"credit\").sum()])\n",
+        "    .sort([\"department\", \"account\"])\n",
+        ")\n",
+        "multi_pl"
+      ],
+      "id": "eda22b2d",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "::: \n",
+        "\n",
+        "## Polars Lazy Frames: Wrangling Large Accounting Datasets\n",
+        "\n",
+        "Everything so far has used **eager evaluation** — each line of code runs immediately, and the result is fully computed and stored in memory before you move to the next step. This is how pandas always works, and how polars works by default with `pl.read_csv()`.\n",
+        "\n",
+        "Polars also offers **lazy evaluation**: instead of running each step immediately, you build up a *query plan* describing everything you want to do, and only execute it once, at the end, with `.collect()`. This matters enormously for large datasets, because polars can look at your *entire* pipeline before running anything and optimize it — for example, reading only the columns you actually use, or applying filters before an expensive join instead of after.\n",
+        "\n",
+        "### Eager vs. Lazy: The Same Pipeline, Two Ways\n",
+        "\n",
+        "Let's take a realistic pipeline — filter to nonzero debits, join to the chart of accounts, then total debits by account type — and run it both ways."
+      ],
+      "id": "02b819fc"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# EAGER: every step executes immediately and materializes a full result in memory\n",
+        "result_eager = (\n",
+        "    gl_pl\n",
+        "    .filter(pl.col(\"debit\") > 0)\n",
+        "    .join(coa_pl, on=\"account\", how=\"inner\")\n",
+        "    .group_by(\"account_type\")\n",
+        "    .agg(pl.col(\"debit\").sum().alias(\"total_debit\"))\n",
+        "    .sort(\"account_type\")\n",
+        ")\n",
+        "result_eager"
+      ],
+      "id": "b5c523e3",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# LAZY: scan_csv builds a query plan; nothing runs until .collect()\n",
+        "lazy_query = (\n",
+        "    pl.scan_csv(\"data/general_ledger_sample.csv\")\n",
+        "    .filter(pl.col(\"debit\") > 0)\n",
+        "    .join(pl.scan_csv(\"data/chart_of_accounts.csv\"), on=\"account\", how=\"inner\")\n",
+        "    .group_by(\"account_type\")\n",
+        "    .agg(pl.col(\"debit\").sum().alias(\"total_debit\"))\n",
+        "    .sort(\"account_type\")\n",
+        ")\n",
+        "\n",
+        "result_lazy = lazy_query.collect()\n",
+        "result_lazy"
+      ],
+      "id": "cdaa68dd",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Both approaches give an identical result — but they got there differently. You can inspect *how* polars plans to execute the lazy version before running it, using `.explain()`:"
+      ],
+      "id": "bf30cf12"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "print(lazy_query.explain())"
+      ],
+      "id": "8ecb6af5",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Look closely at the plan: notice it shows `PROJECT 3/9 COLUMNS` for the general ledger scan. Polars has figured out — entirely on its own — that only 3 of the 9 available columns are actually needed anywhere in this pipeline, and it will only read those columns from disk. It has also pushed the `debit > 0` filter down to happen *during* the file scan, rather than loading the full dataset first and filtering afterward.\n",
+        "\n",
+        "::: {.callout-important}\n",
+        "## Why This Matters for Real Accounting Data\n",
+        "A university dataset like `general_ledger_sample.csv` has 20 rows — the difference between eager and lazy evaluation is invisible here. But a real company's general ledger for a single fiscal year can easily contain **millions of transaction lines** across dozens of columns. In that setting:\n",
+        "\n",
+        "- Reading only the 3 needed columns instead of all 9 can cut memory use dramatically\n",
+        "- Filtering before a join (rather than joining everything, then filtering) avoids doing expensive join work on rows you're about to discard anyway\n",
+        "- These optimizations happen **automatically** once you write your pipeline in lazy form — you don't have to manually reorder your steps for performance\n",
+        "\n",
+        "This is precisely the kind of workload common in audit analytics (Chapter 8) and fraud detection (Chapter 9), where you may need to scan an entire year of transactions rather than a sample. Lazy evaluation is one reason polars is gaining adoption for exactly this kind of large-scale accounting analytics work.\n",
+        ":::\n",
+        "\n",
+        "::: {.callout-tip}\n",
+        "## A Note on Pandas and Scale\n",
+        "Pandas itself doesn't have a lazy evaluation mode. For very large datasets in a pandas-based workflow, teams sometimes turn to libraries like **Dask** or **Modin**, which mimic the pandas API while distributing computation — these are beyond the scope of this book, but worth knowing the names of if you encounter a pandas dataset too large to fit comfortably in memory.\n",
+        ":::\n",
+        "\n",
+        "## Chapter Summary\n",
+        "\n",
+        "- pandas and polars share the same core wrangling concepts — filtering, sorting, cleaning, joining, reshaping, grouping — but express them with different syntax; pandas remains the current industry standard, while polars is a fast-growing alternative especially suited to large datasets.\n",
+        "- Cleaning real accounting data typically involves fixing currency formatting, standardizing inconsistent text, parsing unreliable dates, filling missing values, and checking for duplicates — and automated cleaning steps (like `.title()`) still need a human sanity check.\n",
+        "- Inner joins silently drop unmatched rows; left joins preserve every row from your primary table and reveal mismatches — prefer left joins when enriching transaction data with a reference table like a chart of accounts.\n",
+        "- Reshaping between wide (human-readable) and long/tidy (analysis-ready) formats is a routine step, supported in both libraries via pivot/melt (pandas) and pivot/unpivot (polars).\n",
+        "- Grouping and aggregating transaction-level data lets you rebuild summary views — like a trial balance — directly from the general ledger, and is a natural way to sanity-check that debits equal credits.\n",
+        "- Polars' lazy evaluation (`pl.scan_csv()` + `.collect()`) lets the library optimize an entire pipeline before running it — reading only needed columns and pushing filters earlier — which becomes increasingly valuable as accounting datasets grow into the millions of rows.\n",
+        "\n",
+        "## Discussion Questions\n",
+        "\n",
+        "1. Why might an inner join be the *wrong* default choice when enriching general ledger transactions with chart-of-accounts data, even though it produces a \"cleaner-looking\" result with fewer rows to review?\n",
+        "2. The `.title()` cleaning step turned `\"HR\"` into `\"Hr\"`. Can you think of another accounting example (an account name, a department, an abbreviation) where automatic text cleaning could introduce a *new* error while fixing another?\n",
+        "3. In your own words, explain why lazy evaluation matters more for a company with millions of general ledger transactions than for the 20-row sample used in this chapter.\n",
+        "\n",
+        "## Exercises\n",
+        "\n",
+        "1. Load `general_ledger_sample.csv` in both pandas and polars, and confirm both libraries produce the same total debits and total credits when grouped by account.\n",
+        "2. Using `messy_general_ledger.csv`, complete the full cleaning workflow (currency formatting, text standardization, dates, missing values, duplicates) in whichever library you're more comfortable with, then repeat it in the other library.\n",
+        "3. Using `chart_of_accounts.csv` and `general_ledger_sample.csv`, perform a left join and identify every general ledger account with no chart-of-accounts match. Write one sentence describing what you'd do next if this were a real client engagement.\n",
+        "4. Rewrite the eager pipeline in the Lazy Frames section as your own lazy pipeline, but group by `department` instead of `account_type`. Run `.explain()` on your version and describe, in your own words, what optimization(s) you can identify in the output."
+      ],
+      "id": "35c62210"
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "D:\\ACCOUNTING-ANALYTICS-BOOK\\.venv\\share\\jupyter\\kernels\\python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}
