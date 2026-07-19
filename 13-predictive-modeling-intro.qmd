@@ -1,0 +1,468 @@
+# Introduction to Predictive Modeling
+
+::: {.callout-note}
+## Learning Objectives
+By the end of this chapter, you should be able to:
+
+- Explain the difference between regression and classification, and identify which fits a given accounting question
+- Split data into training and test sets, and explain why this matters for evaluating a model honestly
+- Fit and interpret a linear regression model for a continuous accounting outcome
+- Fit and interpret a logistic regression model for a binary accounting outcome (financial distress)
+- Evaluate regression models with MAE, RMSE, and R², and classification models with accuracy, precision, recall, F1, and ROC-AUC
+- Recognize the "accuracy trap" that arises with imbalanced outcomes, and avoid over-trusting a single metric
+- Perform all of the above using both pandas and polars, and visualize results with both seaborn and plotnine
+:::
+
+## From Descriptive to Predictive Analytics
+
+Recall the four types of analytics from Chapter 1: descriptive, diagnostic, predictive, and prescriptive. Every chapter so far has lived mostly in the first two — summarizing what happened (Chapter 5), and investigating why (Chapters 8-11). This chapter takes the first step into **predictive analytics**: using historical data to estimate an outcome we don't yet know.
+
+We'll build two models on two different accounting questions:
+
+1. **Regression** — predicting a continuous outcome: how many days will it take to collect a given invoice? (using `sales_transactions.csv` from Chapter 10)
+2. **Classification** — predicting a binary outcome: is this company financially distressed? (using a new dataset, `company_financial_distress.csv`)
+
+::: {.panel-tabset}
+## pandas
+```{python}
+import pandas as pd
+import numpy as np
+
+sales_pd = pd.read_csv("data/sales_transactions.csv", parse_dates=["invoice_date", "ship_date", "payment_date"])
+distress_pd = pd.read_csv("data/company_financial_distress.csv")
+print(sales_pd.shape, distress_pd.shape)
+```
+
+## polars 
+
+```{python}
+import polars as pl
+
+sales_pl = pl.read_csv("data/sales_transactions.csv", try_parse_dates=True)
+distress_pl = pl.read_csv("data/company_financial_distress.csv")
+print(sales_pl.shape, distress_pl.shape)
+```
+
+:::
+## Regression: Predicting Days to Collect
+
+### Feature Engineering
+
+::: {.panel-tabset}
+## pandas
+```{python}
+paid_pd = sales_pd[sales_pd["is_paid"]].copy()
+paid_pd["days_to_collect"] = (paid_pd["payment_date"] - paid_pd["invoice_date"]).dt.days
+paid_pd["ship_lag_days"] = (paid_pd["ship_date"] - paid_pd["invoice_date"]).dt.days
+paid_pd["log_amount"] = np.log1p(paid_pd["amount"])
+
+paid_pd[["amount", "payment_terms_days", "quarter", "ship_lag_days", "days_to_collect"]].describe()
+```
+
+## polars
+```{python}
+paid_pl = sales_pl.filter(pl.col("is_paid")).with_columns([
+    (pl.col("payment_date") - pl.col("invoice_date")).dt.total_days().alias("days_to_collect"),
+    (pl.col("ship_date") - pl.col("invoice_date")).dt.total_days().alias("ship_lag_days"),
+    pl.col("amount").log1p().alias("log_amount"),
+])
+
+paid_pl.select(["amount", "payment_terms_days", "quarter", "ship_lag_days", "days_to_collect"]).describe()
+```
+:::
+
+::: {.callout-tip}
+## Connect to Practice
+Recall from Chapter 10 that restricting to *paid* invoices introduces survivorship bias when comparing DSO across recent periods. The same caution applies here: this model is trained only on invoices that have already been collected, which may not perfectly represent the invoices still outstanding. Keep this in mind when interpreting the model's real-world usefulness later in this chapter.
+:::
+
+### Train/Test Split
+
+Before fitting any model, we set aside a portion of the data the model never sees during training, so we can honestly evaluate how well it generalizes to new invoices.
+
+
+```{python}
+from sklearn.model_selection import train_test_split
+
+features_reg = ["log_amount", "payment_terms_days", "quarter", "ship_lag_days"]
+X = paid_pd[features_reg]
+y = paid_pd["days_to_collect"]
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
+print(f"Training set: {len(X_train)} invoices, Test set: {len(X_test)} invoices")
+```
+
+
+
+
+
+
+::: {.callout-important}
+## Why Not Just Use All the Data?
+If we fit a model on all 360 invoices and evaluated it on those same 360 invoices, we'd be measuring how well the model *memorized* this specific data, not how well it will perform on the next new invoice. Setting aside a test set the model never sees during training is the standard way to get an honest estimate of real-world performance.
+:::
+
+### Fitting and Interpreting the Model
+
+:::{.panel-tabset}
+## scikit-learn
+```{python}
+from sklearn.linear_model import LinearRegression
+
+reg_model = LinearRegression()
+reg_model.fit(X_train, y_train)
+
+for feature, coef in zip(features_reg, reg_model.coef_):
+    print(f"{feature}: {coef:.3f}")
+print(f"Intercept: {reg_model.intercept_:.3f}")
+```
+
+## pyfixest 
+
+```{python}
+import pyfixest as pf
+from pyfixest.estimation import feols
+
+model = feols("days_to_collect ~ log_amount + payment_terms_days +  quarter + ship_lag_days", data = paid_pd)
+
+pf.etable([model])
+```
+
+```{python}
+model.summary()
+```
+
+```{python}
+pf.summary(model)
+```
+
+```{python}
+model.tidy()
+```
+
+```{python}
+model.coef()
+model.se()
+model.tstat()
+model.confint()
+```
+
+```{python}
+#| fig-cap: "Factors Affecting Days to Collect (DTC)"
+#| label: fig-dtc
+model.coefplot()
+# or pf.coefplot(model)
+```
+
+:::
+
+
+A few coefficients are worth reading carefully:
+
+- **`payment_terms_days` (+0.97)**: each additional day of payment terms offered is associated with almost exactly one additional day to collect — customers largely pay according to the terms they're given, which is reassuring and expected.
+- **`quarter` (-6.2)**: later quarters are associated with *faster* collection. This should look familiar — it's the same declining-DSO pattern from Chapter 10, which we already know is partly a survivorship bias artifact from measuring near a fixed cutoff date, not necessarily a genuine operational improvement.
+- **`log_amount` (-3.3)**: larger invoices tend to be collected slightly faster, plausibly because larger balances get more collections attention.
+
+@fig-dtc presents the importance of coefficients.
+
+### Evaluating the Model
+
+```{python}
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+
+y_pred = reg_model.predict(X_test)
+
+mae = mean_absolute_error(y_test, y_pred)
+rmse = np.sqrt(mean_squared_error(y_test, y_pred))
+r2 = r2_score(y_test, y_pred)
+
+print(f"MAE:  {mae:.1f} days")
+print(f"RMSE: {rmse:.1f} days")
+print(f"R²:   {r2:.3f}")
+```
+
+```{python}
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+pred_df = pd.DataFrame({"actual": y_test, "predicted": y_pred})
+```
+
+::: {.panel-tabset}
+## seaborn
+```{python}
+plt.figure(figsize=(6, 5))
+sns.scatterplot(data=pred_df, x="actual", y="predicted", alpha=0.6, color="#1c7c73")
+lims = [0, max(pred_df["actual"].max(), pred_df["predicted"].max())]
+plt.plot(lims, lims, "--", color="gray")
+plt.title("Predicted vs. Actual Days to Collect")
+plt.xlabel("Actual Days to Collect")
+plt.ylabel("Predicted Days to Collect")
+plt.tight_layout()
+plt.show()
+```
+
+## plotnine
+```{python}
+from plotnine import *
+
+(
+    ggplot(pred_df, aes(x="actual", y="predicted"))
+    + geom_point(alpha=0.6, color="#1c7c73")
+    + geom_abline(slope=1, intercept=0, linetype="dashed", color="gray")
+    + labs(title="Predicted vs. Actual Days to Collect", x="Actual Days to Collect", y="Predicted Days to Collect")
+    + theme_minimal()
+)
+```
+:::
+
+::: {.callout-important}
+## An Honest Look at a Weak Model
+An R² of roughly 0.14 means this model explains only about **14% of the variation** in how long invoices take to collect — the rest is essentially unmodeled from these four features alone. The scatter plot makes this concrete: predictions cluster in a fairly narrow band regardless of the actual outcome, which swings far more widely. This is a realistic and important result, not a failure of the chapter. **Not every accounting prediction problem yields a strong model**, and reporting a weak R² honestly is far more useful than cherry-picking features until a chart looks better. Collection timing likely depends on factors we haven't captured here at all — a specific customer's cash position, an ongoing dispute, or a change in the customer's own collections priorities.
+:::
+
+## Classification: Predicting Financial Distress
+
+Our second dataset, `company_financial_distress.csv`, contains financial ratios for 320 companies along with a binary outcome: whether each company experienced **financial distress** in the following year. The ratios mirror those used in classic bankruptcy prediction research (e.g., the Altman Z-score): liquidity, leverage, profitability, and efficiency measures.
+
+```{python}
+distress_pd.head()
+```
+
+```{python}
+print("Distress rate:", distress_pd["financial_distress"].mean().round(3))
+distress_pd["financial_distress"].value_counts()
+```
+
+Only about 17% of companies in this dataset are labeled distressed — an imbalance worth keeping in mind, since it will matter a great deal when we evaluate the model shortly.
+
+### Comparing Distressed vs. Healthy Companies
+
+::: {.panel-tabset}
+## pandas
+```{python}
+distress_pd.groupby("financial_distress")[
+    ["current_ratio", "debt_to_equity", "roa", "interest_coverage"]
+].mean().round(3)
+```
+
+## polars
+```{python}
+distress_pl.group_by("financial_distress").agg([
+    pl.col("current_ratio").mean(),
+    pl.col("debt_to_equity").mean(),
+    pl.col("roa").mean(),
+    pl.col("interest_coverage").mean(),
+]).sort("financial_distress")
+```
+:::
+
+The direction of every difference matches financial theory: distressed companies show a lower current ratio (less liquidity), higher debt-to-equity (more leverage), lower ROA (less profitable), and lower interest coverage (less cushion to service debt).
+
+### Train/Test Split and Standardization
+
+```{python}
+features_clf = [
+    "current_ratio", "debt_to_equity", "roa", "net_margin",
+    "asset_turnover", "interest_coverage", "working_capital_to_assets", "retained_earnings_to_assets",
+]
+
+Xc = distress_pd[features_clf]
+yc = distress_pd["financial_distress"]
+
+Xc_train, Xc_test, yc_train, yc_test = train_test_split(
+    Xc, yc, test_size=0.25, random_state=42, stratify=yc
+)
+print("Train distress rate:", yc_train.mean().round(3), " Test distress rate:", yc_test.mean().round(3))
+```
+
+Notice `stratify=yc` — this ensures the train and test sets both preserve the same 17% distress rate, rather than risking a split where, by chance, the test set ends up with very few (or zero) distressed companies.
+
+```{python}
+from sklearn.preprocessing import StandardScaler
+
+scaler = StandardScaler()
+Xc_train_scaled = scaler.fit_transform(Xc_train)
+Xc_test_scaled = scaler.transform(Xc_test)
+```
+
+::: {.callout-tip}
+## Why Standardize for Logistic Regression?
+Our features span very different scales — `debt_to_equity` typically ranges from 0 to 4, while `interest_coverage` ranges from -5 to 30. Standardizing (subtracting the mean, dividing by the standard deviation) puts every feature on a comparable scale, which makes the resulting coefficients directly comparable to each other — a larger coefficient genuinely means a stronger effect, not just a feature with bigger raw numbers.
+:::
+
+### Fitting the Model
+
+:::{.panel-tabset}
+## scikit-learn
+```{python}
+from sklearn.linear_model import LogisticRegression
+
+clf_model = LogisticRegression(random_state=42)
+clf_model.fit(Xc_train_scaled, yc_train)
+
+coef_df = pd.DataFrame({"feature": features_clf, "coefficient": clf_model.coef_[0]}).sort_values("coefficient")
+coef_df["direction"] = coef_df["coefficient"].apply(lambda c: "Increases Risk" if c > 0 else "Decreases Risk")
+coef_df
+```
+
+## pyfixest 
+
+```{python}
+model_2 = pf.feglm("financial_distress ~ current_ratio +  debt_to_equity + roa + net_margin + asset_turnover + interest_coverage +  working_capital_to_assets +  retained_earnings_to_assets", data = distress_pd, family = "logit")
+
+pf.etable([model_2])
+```
+
+```{python}
+pf.summary(model_2)
+```
+
+```{python}
+model_2.tidy()
+```
+
+```{python}
+#| fig-cap: "Factors Affecting Financial Distress of a Company"
+#| label: fig-distress
+model_2.coefplot()
+```
+
+:::
+
+
+
+::: {.panel-tabset}
+## seaborn
+```{python}
+plt.figure(figsize=(7, 4.5))
+sns.barplot(
+    data=coef_df, x="coefficient", y="feature", hue="direction",
+    palette={"Increases Risk": "#c9482f", "Decreases Risk": "#1c7c73"}, legend=False
+)
+plt.title("Logistic Regression Coefficients (standardized features)")
+plt.axvline(0, color="black", linewidth=0.8)
+plt.tight_layout()
+plt.show()
+```
+
+## plotnine
+```{python}
+(
+    ggplot(coef_df, aes(x="reorder(feature, coefficient)", y="coefficient", fill="direction"))
+    + geom_col()
+    + coord_flip()
+    + scale_fill_manual(values={"Increases Risk": "#c9482f", "Decreases Risk": "#1c7c73"})
+    + labs(title="Logistic Regression Coefficients (standardized features)", x="", y="Coefficient", fill="")
+    + theme_minimal()
+)
+```
+:::
+
+`debt_to_equity` has the largest positive coefficient (higher leverage → higher distress risk), while `current_ratio` and `roa` show the largest negative coefficients (more liquidity and profitability → lower risk) — all consistent with the differences we saw in the group comparison above. @fig-distress presents the importance of coefficients. 
+
+### Evaluating the Model
+
+```{python}
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score, confusion_matrix
+
+yc_pred = clf_model.predict(Xc_test_scaled)
+yc_prob = clf_model.predict_proba(Xc_test_scaled)[:, 1]
+
+print("Accuracy: ", round(accuracy_score(yc_test, yc_pred), 3))
+print("Precision:", round(precision_score(yc_test, yc_pred), 3))
+print("Recall:   ", round(recall_score(yc_test, yc_pred), 3))
+print("F1:       ", round(f1_score(yc_test, yc_pred), 3))
+print("ROC-AUC:  ", round(roc_auc_score(yc_test, yc_prob), 3))
+```
+
+::: {.callout-important}
+## The Accuracy Trap
+88.8% accuracy sounds impressive — until you notice that simply predicting "no distress" for *every single company* would already achieve **83.75% accuracy**, since only about 16% of companies in the test set are actually distressed. Our model's real improvement over that naive baseline is much smaller than the headline accuracy number suggests.
+
+This is exactly why **precision, recall, and ROC-AUC matter more than accuracy alone** whenever the outcome you're predicting is rare — which describes most consequential accounting prediction problems (fraud, bankruptcy, default). A model can post a very high accuracy score while still being nearly useless at its actual job: identifying the rare cases that matter.
+:::
+
+```{python}
+baseline_accuracy = 1 - yc_test.mean()
+print(f"Baseline accuracy (always predict 'no distress'): {baseline_accuracy:.3f}")
+```
+
+Our **recall** of roughly 0.46 means the model correctly identifies fewer than half of the companies that actually become distressed — a real limitation worth stating plainly rather than glossing over.
+
+### Confusion Matrix and ROC Curve
+
+```{python}
+cm = confusion_matrix(yc_test, yc_pred)
+cm_df = pd.DataFrame(
+    cm,
+    index=["Actual: No Distress", "Actual: Distress"],
+    columns=["Pred: No Distress", "Pred: Distress"],
+)
+cm_df
+```
+
+```{python}
+plt.figure(figsize=(5, 4))
+sns.heatmap(cm_df, annot=True, fmt="d", cmap="Blues")
+plt.title("Confusion Matrix")
+plt.tight_layout()
+plt.show()
+```
+
+```{python}
+from sklearn.metrics import roc_curve
+
+fpr, tpr, thresholds = roc_curve(yc_test, yc_prob)
+roc_df = pd.DataFrame({"fpr": fpr, "tpr": tpr})
+```
+
+::: {.panel-tabset}
+## seaborn
+```{python}
+plt.figure(figsize=(5.5, 5))
+plt.plot(fpr, tpr, color="#c9482f", label="Logistic Regression")
+plt.plot([0, 1], [0, 1], "--", color="gray", label="Random guess")
+plt.xlabel("False Positive Rate")
+plt.ylabel("True Positive Rate")
+plt.title("ROC Curve: Predicting Financial Distress")
+plt.legend()
+plt.tight_layout()
+plt.show()
+```
+
+## plotnine
+```{python}
+(
+    ggplot(roc_df, aes(x="fpr", y="tpr"))
+    + geom_line(color="#c9482f", size=1)
+    + geom_abline(slope=1, intercept=0, linetype="dashed", color="gray")
+    + labs(title="ROC Curve: Predicting Financial Distress", x="False Positive Rate", y="True Positive Rate")
+    + theme_minimal()
+)
+```
+:::
+
+A ROC-AUC of 0.84 means the model does meaningfully better than random guessing at ranking companies by risk (an AUC of 0.5 would be no better than a coin flip), even though its **recall** at the default 50% probability threshold is modest. This is a useful reminder that a model's *ranking* ability and its performance at any *one specific threshold* are related but distinct questions — a point we return to in the exercises.
+
+## Chapter Summary
+
+- Predictive analytics uses historical data to estimate an outcome that hasn't happened yet, building on the descriptive and diagnostic foundations from earlier chapters.
+- Regression predicts a continuous outcome (days to collect); classification predicts a categorical outcome (financial distress) — the right choice depends entirely on the nature of the outcome you're trying to predict.
+- Splitting data into training and test sets is essential for honestly evaluating whether a model generalizes, rather than just memorizing the data it was fit on.
+- A weak regression result (R² of 0.14) is a legitimate and informative finding — not every prediction problem yields a strong model, and honestly reporting a weak fit is more valuable than manufacturing an artificially strong one.
+- Standardizing features before logistic regression puts coefficients on a comparable scale, making it possible to compare which factors matter most.
+- With imbalanced outcomes (here, ~17% distress), accuracy alone can be deeply misleading — a naive "always predict the majority class" baseline can already achieve high accuracy, so precision, recall, F1, and ROC-AUC are essential companions to any accuracy figure.
+
+## Discussion Questions
+
+1. The regression model's R² was only 0.14. If you were presenting this result to a manager who wanted a "good" model, how would you explain why this result is still useful, rather than a failure?
+2. Our classification model's recall was about 0.46 — it misses more than half of truly distressed companies. If you were designing a real early-warning system, would you rather have higher recall (catch more distressed companies, at the cost of more false alarms) or higher precision (fewer false alarms, but miss more real cases)? What accounting or business context would change your answer?
+3. Explain, in your own words, why a model can have high accuracy but still be practically useless, using the baseline accuracy comparison from this chapter as your example.
+
+## Exercises
+
+1. Add `quarter` as a categorical (one-hot encoded) feature instead of a numeric one in the regression model. Does R² improve, and does the interpretation of the `quarter` effect change?
+2. Refit the logistic regression model using only four features of your choice (rather than all eight). How much do accuracy, recall, and ROC-AUC change compared to the full model?
+3. The default classification threshold is 50% predicted probability. Using `clf_model.predict_proba()`, manually apply a lower threshold (e.g., 30%) to classify companies as distressed, and recompute precision and recall. How do they change, and why?
+4. Using `paid_pd`, engineer one new feature not used in this chapter (for example, a flag for whether the customer is one of the four high-risk customers identified in Chapter 10) and add it to the regression model. Does it improve R² meaningfully?

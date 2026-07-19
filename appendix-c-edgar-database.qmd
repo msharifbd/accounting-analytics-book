@@ -1,1 +1,155 @@
 # An Introduction to EDGAR Database
+
+::: {.callout-note}
+## Learning Objectives
+By the end of this Appendix, you should be able to:
+
+- Gain an Understanding about `EDGAR` Database and its importance
+- Learn how to extract financial statements from `EDGAR` database
+- Learn how to extract non-structured data from `EDGAR` database 
+- Learn about `XBRL`  
+
+:::
+
+## EDGAR Database and Its Implications
+
+The Electronic Data Gathering, Analysis, and Retrieval (EDGAR) database is an online filing system maintained by the U.S. Securities and Exchange Commission (SEC). Established in 1992, EDGAR serves as a centralized repository for corporate disclosures required under U.S. federal securities laws. The system provides investors, researchers, analysts, and the general public with free access to millions of regulatory filings submitted by publicly traded companies and other reporting entities. The url of EDGAR database is - <https://www.sec.gov/edgar.>
+
+Public companies are required to submit various financial and non-financial reports through EDGAR, including annual reports (Form 10-K), quarterly reports (Form 10-Q), current reports (Form 8-K), proxy statements (Form DEF 14A), and registration statements. These filings contain important information about a company's financial performance, operating activities, risk factors, management discussion and analysis (MD&A), executive compensation, and corporate governance practices.
+
+For financial analysis and academic research, EDGAR is an important source of primary corporate information because the data comes directly from company filings submitted to regulators. Researchers can use EDGAR filings to analyze financial statements, calculate financial ratios, evaluate business performance, study corporate decisions, and conduct empirical research in accounting, finance, and economics. The database also supports automated data collection through SEC-provided APIs and structured filing formats, making it useful for large-scale financial data analysis.
+
+Overall, EDGAR plays a critical role in promoting transparency and efficiency in U.S. capital markets by ensuring that investors have timely and reliable access to corporate disclosure information.
+
+
+## XBRL 
+
+`XBRL`, or eXtensible Business Reporting Language, is an XML-based language for the electronic transmission of business and financial data. It is designed to improve the way financial data is communicated and shared, making it easier to prepare, analyze, and exchange financial information. XBRL uses tags to identify each piece of financial data, which then allows it to be used programmatically by an XBRL-compatible program.
+
+According to [XBRL](www.xbrl.org), XBRL plays a huge role in increasing *corporate transparency*, *reducing information asymmetries*, and *improving the efficiency of capital markets*. When digital reporting – supplying clear, consistent digital meanings – is combined with rigorous management oversight and assurance processes, users can have a high degree of confidence in business data and in the insights they draw from it.
+
+* For **investors**, finding information, comparing corporate performance and uncovering new opportunities all becomes easier, cheaper, faster and more accurate. XBRL data can open up wider possibilities for investment, less limited by language and location.
+
+* **Regulators** too benefit from streamlined data collection, improved understanding of market, sustainability or other risks, and ultimately more efficient and effective oversight.
+
+* **Corporates**, meanwhile, are able to tell their own stories. Digital reporting can open up increased access to capital, potentially at a reduced cost. For companies with an eye on the future, getting to grips with XBRL offers the opportunity to go beyond compliance, for example in monitoring and benchmarking performance.
+
+XBRL brings reporting into the digital age, and offers powerful capabilities across the reporting chain. Market demand for reliable digital data is high: for users from investors to regulators, XBRL is the gold standard for decision-useful analysis.
+
+## edgartools - Python Package for Parsing EDGAR Database
+
+`edgartools` is a Python library for accessing SEC EDGAR filings as structured data. SEC EDGAR has every filing back to 1994, free — and almost none of it is ready to use. `edgartools` turns any filing into a tidy data object. To learn more about the `edgartools`, you can go through [documentation](https://edgartools.readthedocs.io/en/latest/).
+
+After installing the `edgartools`, you need to identify yourself to the SEC because EDGAR requires an email with every request. 
+
+```{python}
+from edgar import *
+set_identity("Sharif Islam mdshariful.islam@siu.edu")  # required by SEC
+
+```
+
+```{python}
+from edgar import Company, set_identity
+from edgar.xbrl import XBRLS
+```
+
+```{python}
+company = Company("AAPL")
+
+# Get all 10-K filings, then filter to the date range you want
+filings = company.get_filings(form="10-K", date="2010-01-01:2015-12-31")
+# Stitch multiple filings' financials into one multi-period view
+xbrls = XBRLS.from_filings(filings)
+```
+```{python}
+# Income Statement
+income_statement = xbrls.statements.income_statement()
+# Convert to a DataFrame for easier analysis/plotting
+income_df = income_statement.to_dataframe()
+```
+
+
+```{python}
+# Balance Sheet
+balance_sheet = xbrls.statements.balance_sheet()
+balance_df = balance_sheet.to_dataframe()
+```
+```{python}
+# Cash Flow Statement 
+cash_flow_statement = xbrls.statements.cash_flow_statement()
+cash_flow_statement_df = cash_flow_statement.to_dataframe()
+cash_flow_statement2 = xbrls.statements.cashflow_statement()
+cash_flow_statement_df2 = cash_flow_statement2.to_dataframe()
+```
+```{python}
+# Statement of Equity 
+statement_of_equity = xbrls.statements.statement_of_equity()
+statement_of_equity_df = statement_of_equity.to_dataframe()
+```
+```{python}
+# Comprehensive Income Statement
+comp_income_statement = xbrls.statements.comprehensive_income()
+comp_income_statement_df = comp_income_statement.to_dataframe()
+```
+
+```{python}
+income_statement_detailed = xbrls.statements.income_statement(view="detailed")
+income_df_detailed = income_statement_detailed.to_dataframe()
+```
+
+Alternatively, you can get some specific values from the financial statements instead of the whole financial statements to calculate different ratios using `edgartools`. 
+
+```{python}
+#| eval: false
+financials = company.get_financials()
+revenue = financials.get_revenue()
+net_income = financials.get_net_income()
+total_assets = financials.get_total_assets()
+total_liabilities = financials.get_total_liabilities()
+stockholders_equity = financials.get_stockholders_equity()
+current_assets = financials.get_current_assets()
+current_liabilities = financials.get_current_liabilities()
+operating_cf = financials.get_operating_cash_flow()
+capex = financials.get_capital_expenditures()
+free_cash_flow = financials.get_free_cash_flow()  # calculated automatically
+
+# Roll your own ratio
+debt_to_equity = total_liabilities / stockholders_equity
+net_margin = net_income / revenue
+```
+
+## edgar-analytics - Python Package Built on edgartools for Analytics
+```{python}
+import edgar_analytics as ea
+import os
+import pandas as pd
+os.environ["EDGAR_IDENTITY"] = os.getenv("EDGAR_IDENTITY")
+
+result = ea.analyze("AAPL", peers=["MSFT", "GOOGL"], identity= "Sharif Islam mdshariful.islam@siu.edu")
+# Multi-period trends (FCF, ROE, D/E over time)
+annual = result.main.multiyear.annual_data
+annual
+print(f"ROE % by year: {annual.get('ROE %', {})}")
+pd.DataFrame(annual)
+#annual.keys()
+#annual.items()
+```
+
+```{python}
+from edgar_analytics.multi_period_analysis import retrieve_multi_year_data
+aapl = retrieve_multi_year_data("AAPL", n_years=15)
+msft = retrieve_multi_year_data("MSFT", n_years=15)
+googl = retrieve_multi_year_data("GOOGL", n_years=15) 
+```
+
+
+```{python}
+aapl_df = pd.DataFrame(aapl["annual_data"])
+msft_df = pd.DataFrame(msft["annual_data"])
+googl_df = pd.DataFrame(googl['annual_data'])
+```
+
+
+```{python}
+aapl_df
+```

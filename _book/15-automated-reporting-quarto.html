@@ -1,0 +1,1824 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>15&nbsp; Automated Reporting and Dashboards with Quarto – Accounting Analytics with Python</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./16-data-ethics-reproducibility.html" rel="next">
+<link href="./14-genai-in-accounting.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-9e3e5b9121e68b3f077afb32f2c64d95.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-fe9f69af69d9b0acfce0412d1605ee06.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-9e3e5b9121e68b3f077afb32f2c64d95.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+<script>
+
+window.PlotlyConfig = {MathJaxConfig: 'local'};
+
+if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}
+
+</script>
+
+<script type="module">import "https://cdn.plot.ly/plotly-3.7.0.min"</script>
+
+
+
+<style>
+.scrollable-table {
+  overflow-x: auto !important;
+}
+.scrollable-table table {
+  width: max-content !important;
+  max-width: none !important;
+}
+a.citation, a.citation:visited {
+  color: #1a56db !important;
+}
+#refs a {
+  color: #1a56db !important;
+}
+</style>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./15-automated-reporting-quarto.html">Part V: Communication and Capstone</a></li><li class="breadcrumb-item"><a href="./15-automated-reporting-quarto.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Automated Reporting and Dashboards with Quarto</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Accounting Analytics with Python</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/msharifbd/accounting-analytics-book" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Download"><i class="bi bi-download"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./Accounting-Analytics-with-Python.pdf">
+              <i class="bi bi-file-pdf pe-1"></i>
+            Download PDF
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./Accounting-Analytics-with-Python.epub">
+              <i class="bi bi-journal pe-1"></i>
+            Download ePub
+            </a>
+          </li>
+      </ul>
+    </div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Part I: Foundations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-introduction-to-accounting-analytics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Accounting Analytics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-python-quarto-setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Python and Quarto Environment Setup</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-data-fundamentals.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Fundamentals for Accountants</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Part II: Core Data Skills</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-data-wrangling-pandas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Wrangling with <code>Pandas</code> and <code>Polars</code></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-exploratory-data-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis for Financial Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-data-visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Visualization for Accounting</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Part III: Applied Accounting Analytics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-financial-statement-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Financial Statement Analytics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-management-accounting-analytics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Management Accounting Analytics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-audit-analytics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Audit Analytics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-fraud-anomaly-detection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Fraud and Anomaly Detection</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-revenue-recognition-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Revenue Recognition and Transaction-Level Analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-tax-analytics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Tax Analytics</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Part IV: Predictive Methods and GenAI</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-predictive-modeling-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Introduction to Predictive Modeling</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-genai-in-accounting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Generative AI in Accounting</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Part V: Communication and Capstone</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-automated-reporting-quarto.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Automated Reporting and Dashboards with Quarto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-data-ethics-reproducibility.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Data Ethics, Governance, and Reproducibility</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-capstone-project.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Capstone Project</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendix-a-python-primer.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">A Primer on Python</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendix-b-financial-statement-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Financial Statement Basics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendix-c-edgar-database.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">An Introduction to EDGAR Database</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#from-one-off-analysis-to-repeatable-reporting" id="toc-from-one-off-analysis-to-repeatable-reporting" class="nav-link active" data-scroll-target="#from-one-off-analysis-to-repeatable-reporting"><span class="header-section-number">15.1</span> From One-Off Analysis to Repeatable Reporting</a></li>
+  <li><a href="#parameterized-reports" id="toc-parameterized-reports" class="nav-link" data-scroll-target="#parameterized-reports"><span class="header-section-number">15.2</span> Parameterized Reports</a>
+  <ul class="collapse">
+  <li><a href="#declaring-a-parameter" id="toc-declaring-a-parameter" class="nav-link" data-scroll-target="#declaring-a-parameter"><span class="header-section-number">15.2.1</span> Declaring a Parameter</a></li>
+  <li><a href="#building-the-rest-of-the-report-around-the-parameter" id="toc-building-the-rest-of-the-report-around-the-parameter" class="nav-link" data-scroll-target="#building-the-rest-of-the-report-around-the-parameter"><span class="header-section-number">15.2.2</span> Building the Rest of the Report Around the Parameter</a></li>
+  <li><a href="#rendering-the-same-template-for-a-different-department" id="toc-rendering-the-same-template-for-a-different-department" class="nav-link" data-scroll-target="#rendering-the-same-template-for-a-different-department"><span class="header-section-number">15.2.3</span> Rendering the Same Template for a Different Department</a></li>
+  </ul></li>
+  <li><a href="#batch-rendering-multiple-reports" id="toc-batch-rendering-multiple-reports" class="nav-link" data-scroll-target="#batch-rendering-multiple-reports"><span class="header-section-number">15.3</span> Batch Rendering Multiple Reports</a></li>
+  <li><a href="#quarto-dashboards" id="toc-quarto-dashboards" class="nav-link" data-scroll-target="#quarto-dashboards"><span class="header-section-number">15.4</span> Quarto Dashboards</a>
+  <ul class="collapse">
+  <li><a href="#building-the-dashboards-content" id="toc-building-the-dashboards-content" class="nav-link" data-scroll-target="#building-the-dashboards-content"><span class="header-section-number">15.4.1</span> Building the Dashboard’s Content</a></li>
+  <li><a href="#an-interactive-chart-with-plotly" id="toc-an-interactive-chart-with-plotly" class="nav-link" data-scroll-target="#an-interactive-chart-with-plotly"><span class="header-section-number">15.4.2</span> An Interactive Chart with Plotly</a></li>
+  <li><a href="#assembling-the-full-dashboard" id="toc-assembling-the-full-dashboard" class="nav-link" data-scroll-target="#assembling-the-full-dashboard"><span class="header-section-number">15.4.3</span> Assembling the Full Dashboard</a></li>
+  </ul></li>
+  <li><a href="#putting-it-together-a-recurring-reporting-workflow" id="toc-putting-it-together-a-recurring-reporting-workflow" class="nav-link" data-scroll-target="#putting-it-together-a-recurring-reporting-workflow"><span class="header-section-number">15.5</span> Putting It Together: A Recurring Reporting Workflow</a></li>
+  <li><a href="#chapter-summary" id="toc-chapter-summary" class="nav-link" data-scroll-target="#chapter-summary"><span class="header-section-number">15.6</span> Chapter Summary</a></li>
+  <li><a href="#discussion-questions" id="toc-discussion-questions" class="nav-link" data-scroll-target="#discussion-questions"><span class="header-section-number">15.7</span> Discussion Questions</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">15.8</span> Exercises</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/msharifbd/accounting-analytics-book/edit/main/15-automated-reporting-quarto.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/blob/main/15-automated-reporting-quarto.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./15-automated-reporting-quarto.html">Part V: Communication and Capstone</a></li><li class="breadcrumb-item"><a href="./15-automated-reporting-quarto.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Automated Reporting and Dashboards with Quarto</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Automated Reporting and Dashboards with Quarto</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Learning Objectives
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>By the end of this chapter, you should be able to:</p>
+<ul>
+<li>Explain what a parameterized report is and why it matters for recurring accounting deliverables</li>
+<li>Build a parameterized Quarto document using Python’s parameters cell</li>
+<li>Render the same template multiple times with different parameter values, both manually and in a batch script</li>
+<li>Explain the difference between a Quarto Dashboard and the book/document format used throughout this course</li>
+<li>Build a simple interactive dashboard using value boxes, a Plotly chart, and a data table</li>
+<li>Understand where interactive tools like Plotly fit relative to the static charting tools (seaborn, plotnine) used earlier in this book</li>
+</ul>
+</div>
+</div>
+<section id="from-one-off-analysis-to-repeatable-reporting" class="level2" data-number="15.1">
+<h2 data-number="15.1" class="anchored" data-anchor-id="from-one-off-analysis-to-repeatable-reporting"><span class="header-section-number">15.1</span> From One-Off Analysis to Repeatable Reporting</h2>
+<p>Every chapter so far has produced a single analysis, once. In practice, much of accounting reporting is <strong>recurring</strong>: the same audit risk summary needs to go out every department, every month; the same financial dashboard needs refreshing every quarter. Rewriting or manually re-running an analysis each time is slow and error-prone. This chapter covers two Quarto features built exactly for this problem: <strong>parameterized reports</strong> (one template, many rendered outputs) and <strong>dashboards</strong> (an interactive, at-a-glance layout rather than a linear document).</p>
+</section>
+<section id="parameterized-reports" class="level2" data-number="15.2">
+<h2 data-number="15.2" class="anchored" data-anchor-id="parameterized-reports"><span class="header-section-number">15.2</span> Parameterized Reports</h2>
+<p>A <strong>parameterized report</strong> is a single Quarto template that can be rendered multiple times with different input values, producing a different output each time — for example, one audit risk report per department, generated from the exact same underlying code.</p>
+<section id="declaring-a-parameter" class="level3" data-number="15.2.1">
+<h3 data-number="15.2.1" class="anchored" data-anchor-id="declaring-a-parameter"><span class="header-section-number">15.2.1</span> Declaring a Parameter</h3>
+<p>With Python (the Jupyter engine, which is what this book uses throughout), parameters are declared in a code chunk tagged <code>#| tags: [parameters]</code>. Any variable assigned in that chunk becomes overridable from the command line when rendering.</p>
+<div id="029798b1" class="cell" data-tags="[&quot;parameters&quot;]" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>department <span class="op">=</span> <span class="st">"Sales"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>When this file is rendered normally (as we’re doing here, without any override), <code>department</code> simply takes its default value, <code>"Sales"</code>. The rest of the document can now use <code>department</code> like any other variable:</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="" aria-current="page">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div id="5be861f1" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>audit_gl <span class="op">=</span> pd.read_csv(<span class="st">"data/audit_test_transactions.csv"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>audit_gl[<span class="st">"entry_date"</span>] <span class="op">=</span> pd.to_datetime(audit_gl[<span class="st">"entry_date"</span>])</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>audit_gl[<span class="st">"amount"</span>] <span class="op">=</span> audit_gl[[<span class="st">"debit"</span>, <span class="st">"credit"</span>]].<span class="bu">max</span>(axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>department_data <span class="op">=</span> audit_gl[audit_gl[<span class="st">"department"</span>] <span class="op">==</span> department]</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Department: </span><span class="sc">{</span>department<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Transaction lines: </span><span class="sc">{</span><span class="bu">len</span>(department_data)<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Department: Sales
+Transaction lines: 58</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div id="451a6bf9" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the data</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>audit_gl_pl <span class="op">=</span> pl.read_csv(</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"data/audit_test_transactions.csv"</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    try_parse_dates<span class="op">=</span><span class="va">True</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the amount column</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>audit_gl_pl <span class="op">=</span> audit_gl_pl.with_columns(</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    pl.max_horizontal(<span class="st">"debit"</span>, <span class="st">"credit"</span>).alias(<span class="st">"amount"</span>)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter for the selected department</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>department_data_pl <span class="op">=</span> (</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    audit_gl_pl</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">filter</span>(pl.col(<span class="st">"department"</span>) <span class="op">==</span> department)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Department: </span><span class="sc">{</span>department<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Transaction lines: </span><span class="sc">{</span>department_data_pl<span class="sc">.</span>height<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Department: Sales
+Transaction lines: 58</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="building-the-rest-of-the-report-around-the-parameter" class="level3" data-number="15.2.2">
+<h3 data-number="15.2.2" class="anchored" data-anchor-id="building-the-rest-of-the-report-around-the-parameter"><span class="header-section-number">15.2.2</span> Building the Rest of the Report Around the Parameter</h3>
+<p>The same risk-scoring logic from Chapter 8 works unchanged — it just now operates on whichever department the parameter specifies.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<div id="77718731" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>entry_level <span class="op">=</span> department_data.groupby(<span class="st">"entry_id"</span>).agg(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    entry_date<span class="op">=</span>(<span class="st">"entry_date"</span>, <span class="st">"first"</span>),</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    amount<span class="op">=</span>(<span class="st">"amount"</span>, <span class="st">"max"</span>),</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    posted_by<span class="op">=</span>(<span class="st">"posted_by"</span>, <span class="st">"first"</span>),</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>).reset_index()</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>entry_level[<span class="st">"is_weekend"</span>] <span class="op">=</span> entry_level[<span class="st">"entry_date"</span>].dt.weekday <span class="op">&gt;=</span> <span class="dv">5</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>entry_level[<span class="st">"is_round_dollar"</span>] <span class="op">=</span> (entry_level[<span class="st">"amount"</span>] <span class="op">%</span> <span class="dv">500</span> <span class="op">==</span> <span class="dv">0</span>) <span class="op">&amp;</span> (entry_level[<span class="st">"amount"</span>] <span class="op">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>entry_level[<span class="st">"is_year_end"</span>] <span class="op">=</span> entry_level[<span class="st">"entry_date"</span>] <span class="op">&gt;=</span> pd.Timestamp(<span class="st">"2025-12-27"</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>full_poster_counts <span class="op">=</span> audit_gl.groupby(<span class="st">"posted_by"</span>)[<span class="st">"entry_id"</span>].nunique()</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>rare_threshold <span class="op">=</span> full_poster_counts.quantile(<span class="fl">0.1</span>)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>entry_level[<span class="st">"is_rare_poster"</span>] <span class="op">=</span> entry_level[<span class="st">"posted_by"</span>].<span class="bu">map</span>(full_poster_counts) <span class="op">&lt;=</span> rare_threshold</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>flag_cols <span class="op">=</span> [<span class="st">"is_weekend"</span>, <span class="st">"is_round_dollar"</span>, <span class="st">"is_year_end"</span>, <span class="st">"is_rare_poster"</span>]</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>entry_level[<span class="st">"risk_score"</span>] <span class="op">=</span> entry_level[flag_cols].<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="sc">{</span>department<span class="sc">}</span><span class="ss"> department: </span><span class="sc">{</span><span class="bu">len</span>(entry_level)<span class="sc">}</span><span class="ss"> journal entries"</span>)</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Average risk score: </span><span class="sc">{</span>entry_level[<span class="st">'risk_score'</span>]<span class="sc">.</span>mean()<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>entry_level.sort_values(<span class="st">"risk_score"</span>, ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">5</span>)[[<span class="st">"entry_id"</span>, <span class="st">"amount"</span>, <span class="st">"posted_by"</span>, <span class="st">"risk_score"</span>]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Sales department: 29 journal entries
+Average risk score: 0.31</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">entry_id</th>
+<th data-quarto-table-cell-role="th">amount</th>
+<th data-quarto-table-cell-role="th">posted_by</th>
+<th data-quarto-table-cell-role="th">risk_score</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">28</th>
+<td>JE5906</td>
+<td>75000.00</td>
+<td>ceverett</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">26</th>
+<td>JE5900</td>
+<td>50000.00</td>
+<td>jsmith</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">27</th>
+<td>JE5902</td>
+<td>92500.00</td>
+<td>rpatel</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">0</th>
+<td>JE5105</td>
+<td>1851.67</td>
+<td>rpatel</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">1</th>
+<td>JE5109</td>
+<td>5812.50</td>
+<td>agarcia</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div id="2a2c446b" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Roll transaction lines up to journal-entry level</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>entry_level_pl <span class="op">=</span> (</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    department_data_pl</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    .group_by(<span class="st">"entry_id"</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    .agg(</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        pl.col(<span class="st">"entry_date"</span>).first().alias(<span class="st">"entry_date"</span>),</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        pl.col(<span class="st">"amount"</span>).<span class="bu">max</span>().alias(<span class="st">"amount"</span>),</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>        pl.col(<span class="st">"posted_by"</span>).first().alias(<span class="st">"posted_by"</span>),</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate poster counts from the FULL audit file</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>poster_counts_pl <span class="op">=</span> (</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    audit_gl_pl</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    .group_by(<span class="st">"posted_by"</span>)</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    .agg(</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>        pl.col(<span class="st">"entry_id"</span>)</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>        .n_unique()</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>        .alias(<span class="st">"entry_count"</span>)</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="co"># 10th percentile threshold</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>rare_threshold <span class="op">=</span> (</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>    poster_counts_pl</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>    .select(pl.col(<span class="st">"entry_count"</span>).quantile(<span class="fl">0.1</span>, interpolation<span class="op">=</span><span class="st">"linear"</span>))</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>    .item()</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Join poster counts and create risk flags</span></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>entry_level_pl <span class="op">=</span> (</span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>    entry_level_pl</span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>    .join(</span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>        poster_counts_pl,</span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>        on<span class="op">=</span><span class="st">"posted_by"</span>,</span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>        how<span class="op">=</span><span class="st">"left"</span></span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>    .with_columns(</span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>        [</span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Saturday/Sunday</span></span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>            (pl.col(<span class="st">"entry_date"</span>).dt.weekday() <span class="op">&gt;=</span> <span class="dv">6</span>)</span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>                .alias(<span class="st">"is_weekend"</span>),</span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>            (</span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>                (pl.col(<span class="st">"amount"</span>) <span class="op">%</span> <span class="dv">500</span> <span class="op">==</span> <span class="dv">0</span>)</span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>                <span class="op">&amp;</span> (pl.col(<span class="st">"amount"</span>) <span class="op">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>            ).alias(<span class="st">"is_round_dollar"</span>),</span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a>            (</span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>                pl.col(<span class="st">"entry_date"</span>) <span class="op">&gt;=</span> pl.date(<span class="dv">2025</span>, <span class="dv">12</span>, <span class="dv">27</span>)</span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>            ).alias(<span class="st">"is_year_end"</span>),</span>
+<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a>            (</span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a>                pl.col(<span class="st">"entry_count"</span>) <span class="op">&lt;=</span> rare_threshold</span>
+<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a>            ).alias(<span class="st">"is_rare_poster"</span>),</span>
+<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a>        ]</span>
+<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a>    .with_columns(</span>
+<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a>        (</span>
+<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a>            pl.col(<span class="st">"is_weekend"</span>).cast(pl.Int8)</span>
+<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a>            <span class="op">+</span> pl.col(<span class="st">"is_round_dollar"</span>).cast(pl.Int8)</span>
+<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a>            <span class="op">+</span> pl.col(<span class="st">"is_year_end"</span>).cast(pl.Int8)</span>
+<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a>            <span class="op">+</span> pl.col(<span class="st">"is_rare_poster"</span>).cast(pl.Int8)</span>
+<span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a>        ).alias(<span class="st">"risk_score"</span>)</span>
+<span id="cb8-67"><a href="#cb8-67" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb8-68"><a href="#cb8-68" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-69"><a href="#cb8-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-70"><a href="#cb8-70" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="sc">{</span>department<span class="sc">}</span><span class="ss"> department: </span><span class="sc">{</span>entry_level_pl<span class="sc">.</span>height<span class="sc">}</span><span class="ss"> journal entries"</span>)</span>
+<span id="cb8-71"><a href="#cb8-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-72"><a href="#cb8-72" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
+<span id="cb8-73"><a href="#cb8-73" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"Average risk score: "</span></span>
+<span id="cb8-74"><a href="#cb8-74" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"</span><span class="sc">{</span>entry_level_pl[<span class="st">'risk_score'</span>]<span class="sc">.</span>mean()<span class="sc">:.2f}</span><span class="ss">"</span></span>
+<span id="cb8-75"><a href="#cb8-75" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-76"><a href="#cb8-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-77"><a href="#cb8-77" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb8-78"><a href="#cb8-78" aria-hidden="true" tabindex="-1"></a>    entry_level_pl</span>
+<span id="cb8-79"><a href="#cb8-79" aria-hidden="true" tabindex="-1"></a>    .sort( [<span class="st">"risk_score"</span>, <span class="st">"entry_id"</span>], descending<span class="op">=</span>[<span class="va">True</span>, <span class="va">False</span>])</span>
+<span id="cb8-80"><a href="#cb8-80" aria-hidden="true" tabindex="-1"></a>    .head(<span class="dv">5</span>)</span>
+<span id="cb8-81"><a href="#cb8-81" aria-hidden="true" tabindex="-1"></a>    .select(</span>
+<span id="cb8-82"><a href="#cb8-82" aria-hidden="true" tabindex="-1"></a>        <span class="st">"entry_id"</span>,</span>
+<span id="cb8-83"><a href="#cb8-83" aria-hidden="true" tabindex="-1"></a>        <span class="st">"amount"</span>,</span>
+<span id="cb8-84"><a href="#cb8-84" aria-hidden="true" tabindex="-1"></a>        <span class="st">"posted_by"</span>,</span>
+<span id="cb8-85"><a href="#cb8-85" aria-hidden="true" tabindex="-1"></a>        <span class="st">"risk_score"</span>,</span>
+<span id="cb8-86"><a href="#cb8-86" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb8-87"><a href="#cb8-87" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Sales department: 29 journal entries
+Average risk score: 0.31</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (5, 4)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">entry_id</th>
+<th data-quarto-table-cell-role="th">amount</th>
+<th data-quarto-table-cell-role="th">posted_by</th>
+<th data-quarto-table-cell-role="th">risk_score</th>
+</tr>
+<tr class="even">
+<td>str</td>
+<td>f64</td>
+<td>str</td>
+<td>i8</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"JE5906"</td>
+<td>75000.0</td>
+<td>"ceverett"</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>"JE5900"</td>
+<td>50000.0</td>
+<td>"jsmith"</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>"JE5902"</td>
+<td>92500.0</td>
+<td>"rpatel"</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>"JE5105"</td>
+<td>1851.67</td>
+<td>"rpatel"</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>"JE5109"</td>
+<td>5812.5</td>
+<td>"agarcia"</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>This is a complete, working department risk report — for Sales, since that’s the parameter’s default value.</p>
+</section>
+<section id="rendering-the-same-template-for-a-different-department" class="level3" data-number="15.2.3">
+<h3 data-number="15.2.3" class="anchored" data-anchor-id="rendering-the-same-template-for-a-different-department"><span class="header-section-number">15.2.3</span> Rendering the Same Template for a Different Department</h3>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Turning This Into a Reusable Template
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>To actually use this as a parameterized report, save the code above (the parameters cell plus the analysis that follows it) into its own file — for example, <code>department-risk-report.qmd</code> — separate from this book’s chapters. Then, from the terminal, you can render it for any department without touching the code:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render department-risk-report.qmd <span class="at">-P</span> department:<span class="st">"Operations"</span> <span class="at">--output</span> operations-report.html</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render department-risk-report.qmd <span class="at">-P</span> department:<span class="st">"HR"</span> <span class="at">--output</span> hr-report.html</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render department-risk-report.qmd <span class="at">-P</span> department:<span class="st">"Finance"</span> <span class="at">--output</span> finance-report.html</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Each command produces a fully independent HTML report for that one department, using identical code — exactly the same relationship between a template and its output as calling a function with different arguments.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="batch-rendering-multiple-reports" class="level2" data-number="15.3">
+<h2 data-number="15.3" class="anchored" data-anchor-id="batch-rendering-multiple-reports"><span class="header-section-number">15.3</span> Batch Rendering Multiple Reports</h2>
+<p>Running four <code>quarto render</code> commands by hand is manageable. Running fifty is not. A short script automates the repetition.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># render_all_departments.sh</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="va">departments</span><span class="op">=</span><span class="va">(</span><span class="st">"Sales"</span> <span class="st">"Operations"</span> <span class="st">"HR"</span> <span class="st">"Finance"</span><span class="va">)</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> dept <span class="kw">in</span> <span class="st">"</span><span class="va">${departments</span><span class="op">[@]</span><span class="va">}</span><span class="st">"</span><span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="va">output_name</span><span class="op">=</span><span class="va">$(</span><span class="bu">echo</span> <span class="st">"</span><span class="va">$dept</span><span class="st">"</span> <span class="kw">|</span> <span class="fu">tr</span> <span class="st">'[:upper:]'</span> <span class="st">'[:lower:]'</span><span class="va">)</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="ex">quarto</span> render department-risk-report.qmd <span class="dt">\</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">-P</span> department:<span class="st">"</span><span class="va">$dept</span><span class="st">"</span> <span class="dt">\</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">--output</span> <span class="st">"</span><span class="va">${output_name}</span><span class="st">-risk-report.html"</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"Rendered report for </span><span class="va">$dept</span><span class="st">"</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Running <code>bash render_all_departments.sh</code> once produces all four department reports automatically. This is the practical payoff of parameterization: what would be an evening of manual copy-pasting and re-running becomes a single command.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>A Python-Native Alternative
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you’d rather stay inside Python entirely, the <code>quarto</code> PyPI package (<code>pip install quarto</code>) provides a <code>render()</code> function that does the same thing programmatically:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> quarto <span class="im">import</span> render</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>departments <span class="op">=</span> [<span class="st">"Sales"</span>, <span class="st">"Operations"</span>, <span class="st">"HR"</span>, <span class="st">"Finance"</span>]</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> dept <span class="kw">in</span> departments:</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    render(</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"department-risk-report.qmd"</span>,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>        execute_params<span class="op">=</span>{<span class="st">"department"</span>: dept},</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>        output_file<span class="op">=</span><span class="ss">f"</span><span class="sc">{</span>dept<span class="sc">.</span>lower()<span class="sc">}</span><span class="ss">-risk-report.html"</span>,</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Both approaches accomplish the same thing; use whichever fits more naturally into your existing workflow. A script like either of these is also exactly what you’d hand off to a scheduler (a cron job, a scheduled task, or a CI pipeline step) to regenerate reports automatically on a recurring basis, without any manual steps at all.</p>
+</div>
+</div>
+</section>
+<section id="quarto-dashboards" class="level2" data-number="15.4">
+<h2 data-number="15.4" class="anchored" data-anchor-id="quarto-dashboards"><span class="header-section-number">15.4</span> Quarto Dashboards</h2>
+<p>A <strong>dashboard</strong> is a different kind of output entirely: instead of a linear document meant to be read top to bottom (like every chapter in this book), it arranges content into cards, value boxes, and panels meant to be scanned at a glance. Quarto supports this natively via <code>format: dashboard</code>.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Why This Book Doesn’t Use Dashboards Directly
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>format: dashboard</code> is a distinct project type from the <code>format: html</code>/<code>format: pdf</code> book you’ve built throughout this course — a dashboard can’t be one chapter inside your book the way earlier chapters have been. To build one, you’d create it as its own separate <code>.qmd</code> file with <code>format: dashboard</code> in its YAML header, rendered independently of your book project.</p>
+</div>
+</div>
+<section id="building-the-dashboards-content" class="level3" data-number="15.4.1">
+<h3 data-number="15.4.1" class="anchored" data-anchor-id="building-the-dashboards-content"><span class="header-section-number">15.4.1</span> Building the Dashboard’s Content</h3>
+<p>The data and chart that would populate a dashboard can be built and tested exactly like everything else in this book — it’s only the surrounding layout markup that’s dashboard-specific.</p>
+<div id="86611d10" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>full_entry_level <span class="op">=</span> audit_gl.groupby(<span class="st">"entry_id"</span>).agg(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    entry_date<span class="op">=</span>(<span class="st">"entry_date"</span>, <span class="st">"first"</span>),</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    amount<span class="op">=</span>(<span class="st">"amount"</span>, <span class="st">"max"</span>),</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    department<span class="op">=</span>(<span class="st">"department"</span>, <span class="st">"first"</span>),</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    posted_by<span class="op">=</span>(<span class="st">"posted_by"</span>, <span class="st">"first"</span>),</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>).reset_index()</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>full_entry_level[<span class="st">"is_weekend"</span>] <span class="op">=</span> full_entry_level[<span class="st">"entry_date"</span>].dt.weekday <span class="op">&gt;=</span> <span class="dv">5</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>full_entry_level[<span class="st">"is_round_dollar"</span>] <span class="op">=</span> (full_entry_level[<span class="st">"amount"</span>] <span class="op">%</span> <span class="dv">500</span> <span class="op">==</span> <span class="dv">0</span>) <span class="op">&amp;</span> (full_entry_level[<span class="st">"amount"</span>] <span class="op">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>full_entry_level[<span class="st">"is_year_end"</span>] <span class="op">=</span> full_entry_level[<span class="st">"entry_date"</span>] <span class="op">&gt;=</span> pd.Timestamp(<span class="st">"2025-12-27"</span>)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>full_entry_level[<span class="st">"is_rare_poster"</span>] <span class="op">=</span> full_entry_level[<span class="st">"posted_by"</span>].<span class="bu">map</span>(full_poster_counts) <span class="op">&lt;=</span> rare_threshold</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>full_flag_cols <span class="op">=</span> [<span class="st">"is_weekend"</span>, <span class="st">"is_round_dollar"</span>, <span class="st">"is_year_end"</span>, <span class="st">"is_rare_poster"</span>]</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>full_entry_level[<span class="st">"risk_score"</span>] <span class="op">=</span> full_entry_level[full_flag_cols].<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>total_entries <span class="op">=</span> <span class="bu">len</span>(full_entry_level)</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>high_risk_count <span class="op">=</span> (full_entry_level[<span class="st">"risk_score"</span>] <span class="op">&gt;=</span> <span class="dv">3</span>).<span class="bu">sum</span>()</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>avg_risk_score <span class="op">=</span> full_entry_level[<span class="st">"risk_score"</span>].mean()</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Total entries: </span><span class="sc">{</span>total_entries<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"High-risk entries (score &gt;= 3): </span><span class="sc">{</span>high_risk_count<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Average risk score: </span><span class="sc">{</span>avg_risk_score<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Total entries: 117
+High-risk entries (score &gt;= 3): 2
+Average risk score: 0.16</code></pre>
+</div>
+</div>
+</section>
+<section id="an-interactive-chart-with-plotly" class="level3" data-number="15.4.2">
+<h3 data-number="15.4.2" class="anchored" data-anchor-id="an-interactive-chart-with-plotly"><span class="header-section-number">15.4.2</span> An Interactive Chart with Plotly</h3>
+<p>Everywhere else in this book, we’ve used seaborn and plotnine — both produce <strong>static images</strong>, which is exactly what’s needed for a document that renders to both HTML and PDF, since a PDF page can’t respond to a mouse hover. A dashboard, by contrast, is HTML-only and interactive by nature, which makes <strong>Plotly</strong> a natural fit: its charts support hovering for details, zooming, and panning directly in the browser.</p>
+<div id="118c4106" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.scatter(</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    full_entry_level, x<span class="op">=</span><span class="st">"entry_date"</span>, y<span class="op">=</span><span class="st">"amount"</span>, color<span class="op">=</span><span class="st">"risk_score"</span>,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    size<span class="op">=</span><span class="st">"risk_score"</span>, hover_data<span class="op">=</span>[<span class="st">"entry_id"</span>, <span class="st">"posted_by"</span>, <span class="st">"department"</span>],</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    color_continuous_scale<span class="op">=</span><span class="st">"OrRd"</span>,</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Journal Entries by Risk Score"</span>,</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    labels<span class="op">=</span>{<span class="st">"entry_date"</span>: <span class="st">"Entry Date"</span>, <span class="st">"amount"</span>: <span class="st">"Amount ($)"</span>, <span class="st">"risk_score"</span>: <span class="st">"Risk Score"</span>},</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>fig.update_layout(height<span class="op">=</span><span class="dv">400</span>)</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div style="height:400px; width:100%;">            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script>if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.7.0.min.js" integrity="sha256-jvTGqxNp8AGWEcvNLVuKr+8j5dGe9Yw51LQkmDH+IYA=" crossorigin="anonymous"></script>                <div id="f985237f-b5ef-4b5a-91fc-c7917f68c8d3" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("f985237f-b5ef-4b5a-91fc-c7917f68c8d3")) {                    Plotly.newPlot(                        "f985237f-b5ef-4b5a-91fc-c7917f68c8d3",                        [{"customdata":[["JE5100","mchen","Operations"],["JE5101","rpatel","Operations"],["JE5102","jsmith","Operations"],["JE5103","dwilson","Operations"],["JE5104","ktaylor","Operations"],["JE5105","rpatel","Sales"],["JE5106","agarcia","Operations"],["JE5107","ktaylor","Operations"],["JE5108","dwilson","Operations"],["JE5109","agarcia","Sales"],["JE5110","agarcia","Operations"],["JE5111","agarcia","Operations"],["JE5112","agarcia","HR"],["JE5113","dwilson","Operations"],["JE5114","ktaylor","HR"],["JE5115","jsmith","Sales"],["JE5116","dwilson","Operations"],["JE5117","mchen","Operations"],["JE5118","mchen","Operations"],["JE5119","rpatel","Operations"],["JE5120","jsmith","Operations"],["JE5121","jsmith","Sales"],["JE5122","dwilson","Operations"],["JE5123","rpatel","HR"],["JE5124","mchen","Operations"],["JE5125","rpatel","Operations"],["JE5126","ktaylor","Operations"],["JE5127","jsmith","Operations"],["JE5128","dwilson","Sales"],["JE5129","dwilson","HR"],["JE5130","dwilson","Sales"],["JE5131","mchen","Sales"],["JE5132","jsmith","Sales"],["JE5133","agarcia","Sales"],["JE5134","ktaylor","Operations"],["JE5135","agarcia","Operations"],["JE5136","agarcia","Sales"],["JE5137","dwilson","Sales"],["JE5138","ktaylor","Operations"],["JE5139","rpatel","Operations"],["JE5140","ktaylor","Operations"],["JE5141","rpatel","Operations"],["JE5142","agarcia","Operations"],["JE5143","agarcia","Operations"],["JE5144","mchen","Operations"],["JE5145","dwilson","Operations"],["JE5146","ktaylor","Sales"],["JE5147","jsmith","Operations"],["JE5148","jsmith","Sales"],["JE5149","rpatel","Operations"],["JE5150","jsmith","Sales"],["JE5151","mchen","Operations"],["JE5152","rpatel","Sales"],["JE5153","jsmith","Operations"],["JE5154","mchen","Sales"],["JE5155","rpatel","Operations"],["JE5156","mchen","Operations"],["JE5157","ktaylor","Operations"],["JE5158","agarcia","Operations"],["JE5159","mchen","Operations"],["JE5160","rpatel","Operations"],["JE5161","jsmith","HR"],["JE5162","dwilson","Operations"],["JE5163","mchen","Operations"],["JE5164","dwilson","Operations"],["JE5165","jsmith","Operations"],["JE5166","rpatel","Operations"],["JE5167","jsmith","Operations"],["JE5168","dwilson","Operations"],["JE5169","mchen","Operations"],["JE5170","dwilson","HR"],["JE5171","mchen","Operations"],["JE5172","dwilson","Sales"],["JE5173","ktaylor","Sales"],["JE5174","rpatel","Sales"],["JE5175","agarcia","Operations"],["JE5176","dwilson","Sales"],["JE5177","agarcia","Operations"],["JE5178","mchen","Operations"],["JE5179","rpatel","Operations"],["JE5180","mchen","HR"],["JE5181","mchen","Operations"],["JE5182","rpatel","Operations"],["JE5183","dwilson","Operations"],["JE5184","jsmith","HR"],["JE5185","agarcia","HR"],["JE5186","ktaylor","Operations"],["JE5187","dwilson","HR"],["JE5188","jsmith","Sales"],["JE5189","agarcia","HR"],["JE5190","mchen","Operations"],["JE5191","mchen","Operations"],["JE5192","mchen","Operations"],["JE5193","agarcia","Operations"],["JE5194","ktaylor","Operations"],["JE5195","ktaylor","Operations"],["JE5196","ktaylor","HR"],["JE5197","rpatel","Sales"],["JE5198","jsmith","Sales"],["JE5199","agarcia","Sales"],["JE5200","mchen","Operations"],["JE5201","dwilson","Sales"],["JE5202","jsmith","Operations"],["JE5203","agarcia","Operations"],["JE5204","ktaylor","Operations"],["JE5205","agarcia","Operations"],["JE5206","mchen","Operations"],["JE5207","jsmith","Sales"],["JE5208","jsmith","HR"],["JE5209","jsmith","Operations"],["JE5900","jsmith","Sales"],["JE5901","mchen","Operations"],["JE5902","rpatel","Sales"],["JE5903","mchen","Operations"],["JE5904","mchen","Operations"],["JE5905","ceverett","HR"],["JE5906","ceverett","Sales"]],"hovertemplate":"Entry Date=%{x}\u003cbr\u003eAmount ($)=%{y}\u003cbr\u003eRisk Score=%{marker.color}\u003cbr\u003eentry_id=%{customdata[0]}\u003cbr\u003eposted_by=%{customdata[1]}\u003cbr\u003edepartment=%{customdata[2]}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":{"dtype":"i1","bdata":"AAAAAAABAAABAAAAAAAAAAEAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAQIBAQME"},"coloraxis":"coloraxis","size":{"dtype":"i1","bdata":"AAAAAAABAAABAAAAAAAAAAEAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAQIBAQME"},"sizemode":"area","sizeref":0.01,"symbol":"circle"},"mode":"markers","name":"","orientation":"v","showlegend":false,"x":["2025-08-18T00:00:00.000000","2025-11-25T00:00:00.000000","2025-10-10T00:00:00.000000","2025-03-24T00:00:00.000000","2025-04-21T00:00:00.000000","2025-11-15T00:00:00.000000","2025-01-02T00:00:00.000000","2025-10-28T00:00:00.000000","2025-10-19T00:00:00.000000","2025-06-20T00:00:00.000000","2025-04-22T00:00:00.000000","2025-04-11T00:00:00.000000","2025-04-03T00:00:00.000000","2025-06-12T00:00:00.000000","2025-07-03T00:00:00.000000","2025-07-22T00:00:00.000000","2025-12-30T00:00:00.000000","2025-10-16T00:00:00.000000","2025-08-15T00:00:00.000000","2025-12-29T00:00:00.000000","2025-03-20T00:00:00.000000","2025-02-27T00:00:00.000000","2025-08-12T00:00:00.000000","2025-01-16T00:00:00.000000","2025-01-14T00:00:00.000000","2025-07-08T00:00:00.000000","2025-06-19T00:00:00.000000","2025-12-02T00:00:00.000000","2025-08-19T00:00:00.000000","2025-07-08T00:00:00.000000","2025-07-01T00:00:00.000000","2025-04-01T00:00:00.000000","2025-01-06T00:00:00.000000","2025-03-12T00:00:00.000000","2025-09-10T00:00:00.000000","2025-03-14T00:00:00.000000","2025-05-15T00:00:00.000000","2025-01-01T00:00:00.000000","2025-10-30T00:00:00.000000","2025-02-26T00:00:00.000000","2025-04-08T00:00:00.000000","2025-11-18T00:00:00.000000","2025-07-07T00:00:00.000000","2025-11-06T00:00:00.000000","2025-08-21T00:00:00.000000","2025-09-29T00:00:00.000000","2025-02-03T00:00:00.000000","2025-07-17T00:00:00.000000","2025-07-04T00:00:00.000000","2025-11-14T00:00:00.000000","2025-05-13T00:00:00.000000","2025-08-07T00:00:00.000000","2025-01-22T00:00:00.000000","2025-05-22T00:00:00.000000","2025-04-29T00:00:00.000000","2025-02-25T00:00:00.000000","2025-10-27T00:00:00.000000","2025-05-20T00:00:00.000000","2025-12-24T00:00:00.000000","2025-08-04T00:00:00.000000","2025-08-08T00:00:00.000000","2025-08-21T00:00:00.000000","2025-09-04T00:00:00.000000","2025-02-25T00:00:00.000000","2025-06-10T00:00:00.000000","2025-03-28T00:00:00.000000","2025-05-28T00:00:00.000000","2025-02-05T00:00:00.000000","2025-12-19T00:00:00.000000","2025-03-20T00:00:00.000000","2025-09-03T00:00:00.000000","2025-04-21T00:00:00.000000","2025-11-17T00:00:00.000000","2025-08-29T00:00:00.000000","2025-02-18T00:00:00.000000","2025-11-05T00:00:00.000000","2025-12-11T00:00:00.000000","2025-11-26T00:00:00.000000","2025-07-28T00:00:00.000000","2025-02-22T00:00:00.000000","2025-03-12T00:00:00.000000","2025-12-05T00:00:00.000000","2025-07-22T00:00:00.000000","2025-03-07T00:00:00.000000","2025-11-19T00:00:00.000000","2025-08-22T00:00:00.000000","2025-07-28T00:00:00.000000","2025-05-19T00:00:00.000000","2025-05-30T00:00:00.000000","2025-03-28T00:00:00.000000","2025-01-14T00:00:00.000000","2025-11-17T00:00:00.000000","2025-06-20T00:00:00.000000","2025-07-18T00:00:00.000000","2025-04-29T00:00:00.000000","2025-10-02T00:00:00.000000","2025-01-09T00:00:00.000000","2025-05-16T00:00:00.000000","2025-01-10T00:00:00.000000","2025-02-14T00:00:00.000000","2025-12-19T00:00:00.000000","2025-08-28T00:00:00.000000","2025-06-05T00:00:00.000000","2025-07-10T00:00:00.000000","2025-11-14T00:00:00.000000","2025-05-06T00:00:00.000000","2025-08-05T00:00:00.000000","2025-09-08T00:00:00.000000","2025-05-09T00:00:00.000000","2025-07-09T00:00:00.000000","2025-06-14T00:00:00.000000","2025-04-08T00:00:00.000000","2025-12-30T00:00:00.000000","2025-08-19T00:00:00.000000","2025-08-19T00:00:00.000000","2025-09-21T00:00:00.000000","2025-12-28T00:00:00.000000"],"xaxis":"x","y":{"dtype":"f8","bdata":"hetRuJ4TqECF61G4ntqkQArXo3C9aqRA16NwPQqBgkBSuB6F651+QEjhehSu7pxAexSuR+GxpECPwvUoXLd9QFyPwvUoKJFAAAAAAIC0tkD2KFyPwliUQClcj8J1CaVAH4XrUbiTsUAfhetROL+lQK5H4XrUErJApHA9CtdOpUBSuB6Fa1mmQJqZmZkZG6RASOF6FK58pECPwvUo3BimQI\u002fC9Shcm4NA9ihcj0KJrkDsUbgehemlQPYoXI9CFbdAH4XrUbjBnECuR+F6lMyjQJqZmZmZGYNA4XoUrsfvokBcj8L1aMu9QD0K16Nwia5AcT0K16MdkkAAAAAAAF+ZQDMzMzMz8aRAexSuR+GGkkBcj8L1KCxyQK5H4XoU0pxAUrgehWuYpECamZmZmWibQPYoXI\u002fC1ZJA7FG4HoU+kkBcj8L1KPiKQKRwPQrXU35ApHA9CleBpUBI4XoUrgKTQJqZmZmZ\u002fXdAUrgehevYnkAAAAAAAH6cQClcj8J1daBAKVyPwtUGwED2KFyPwjmDQOxRuB6FJqRArkfhehRSk0AK16Nwvb2gQNejcD0KK35ASOF6FK7xpUCamZmZGX2lQPYoXI\u002fCoX5A9ihcj8K4kkCPwvUoXNNyQPYoXI\u002fC8XlAKVyPwnWFpEDNzMzMTGGzQPYoXI\u002fCKY5AhetRuB5CpUAK16NwPT2lQArXo3A946BAAAAAAAAYf0BSuB6F662BQI\u002fC9ShcIZ9ArkfhepQqpUBI4XoULr6wQPYoXI\u002fCaXZAKVyPwnW9pUDD9ShcjwSYQGZmZmZm7LhA4XoUrkeqnED2KFyPwv6uQB+F61G4in9APQrXo3CcnED2KFyPwnF\u002fQClcj8L19K5ASOF6FK4SmkAK16NwvVymQMP1KFwPEaVA16NwPcoQukAAAAAAgMKxQArXo3A98ohACtejcD1It0AfhetR+KmwQArXo3A9oLNAXI\u002fC9ShAgEDNzMzMzER9QK5H4XoU85xAUrgehWsjokDXo3A9CuaYQAAAAAAAxJpASOF6FO5zukB7FK5H4culQFyPwvUouaFAZmZmZuaFpkAfhetROHioQFyPwvUoz6JAPQrXo3CTmUCuR+F6FK50QD0K16Nw06RA7FG4HoUGpkCPwvUoXBKSQK5H4XoUcJdAAAAAAMAKukAzMzMzs8OgQAAAAAAAauhAAAAAAACIw0AAAAAAQJX2QAAAAAAAcKdAAAAAAABwp0AAAAAAAAXkQAAAAACAT\u002fJA"},"yaxis":"y","type":"scatter"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Entry Date"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Amount ($)"}},"coloraxis":{"colorbar":{"title":{"text":"Risk Score"}},"colorscale":[[0.0,"rgb(255,247,236)"],[0.125,"rgb(254,232,200)"],[0.25,"rgb(253,212,158)"],[0.375,"rgb(253,187,132)"],[0.5,"rgb(252,141,89)"],[0.625,"rgb(239,101,72)"],[0.75,"rgb(215,48,31)"],[0.875,"rgb(179,0,0)"],[1.0,"rgb(127,0,0)"]],"autocolorscale":false},"legend":{"tracegroupgap":0,"itemsizing":"constant"},"title":{"text":"Journal Entries by Risk Score"},"height":400},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('f985237f-b5ef-4b5a-91fc-c7917f68c8d3');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };            </script>        </div>
+</div>
+</div>
+<p>Hovering over any point in this chart (when rendered to HTML) reveals the entry ID, poster, and department — detail that a static chart could only show by cluttering the plot with labels.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Plotly and PDF Output
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you ever do need a Plotly chart to appear in a PDF (outside of a dashboard, which is HTML-only anyway), Quarto converts it to a static image automatically — but this requires the <code>kaleido</code> package (<code>pip install kaleido</code>). Without it, rendering a Plotly chunk to PDF will fail. This is exactly the kind of cross-format consideration that shaped this book’s own tooling choices back in Chapter 6: seaborn and plotnine were chosen specifically because they produce static images that work identically well in both this book’s HTML and PDF outputs, with no extra dependency required.</p>
+</div>
+</div>
+</section>
+<section id="assembling-the-full-dashboard" class="level3" data-number="15.4.3">
+<h3 data-number="15.4.3" class="anchored" data-anchor-id="assembling-the-full-dashboard"><span class="header-section-number">15.4.3</span> Assembling the Full Dashboard</h3>
+<p>Here’s what the complete standalone dashboard file would look like, combining value boxes, the chart above, and a data table into a proper dashboard layout:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Audit Risk Dashboard"</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> dashboard</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="fu">## Row</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>::: {#77736f88 .cell content='valuebox' title='Total Entries' execution_count=9}</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="in">``` {.python .cell-code}</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="bu">dict</span>(icon <span class="op">=</span> <span class="st">"list-ul"</span>, color <span class="op">=</span> <span class="st">"primary"</span>, value <span class="op">=</span> total_entries)</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>::: {.cell-output .cell-output-display execution_count=9}</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="in">{'icon': 'list-ul', 'color': 'primary', 'value': 117}</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>::: {#730f4c4f .cell content='valuebox' title='High-Risk Entries' execution_count=10}</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="in">``` {.python .cell-code}</span></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="bu">dict</span>(icon <span class="op">=</span> <span class="st">"exclamation-triangle"</span>, color <span class="op">=</span> <span class="st">"danger"</span>, value <span class="op">=</span> <span class="bu">int</span>(high_risk_count))</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>::: {.cell-output .cell-output-display execution_count=10}</span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a><span class="in">{'icon': 'exclamation-triangle', 'color': 'danger', 'value': 2}</span></span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>::: {#336c6504 .cell content='valuebox' title='Average Risk Score' execution_count=11}</span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a><span class="in">``` {.python .cell-code}</span></span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a><span class="bu">dict</span>(icon <span class="op">=</span> <span class="st">"speedometer2"</span>, color <span class="op">=</span> <span class="st">"info"</span>, value <span class="op">=</span> <span class="bu">round</span>(avg_risk_score, <span class="dv">2</span>))</span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>::: {.cell-output .cell-output-display execution_count=11}</span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a><span class="in">{'icon': 'speedometer2', 'color': 'info', 'value': np.float64(0.16)}</span></span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a><span class="fu">## Row</span></span>
+<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a><span class="fu">### Column {width="65%"}</span></span>
+<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a>::: {#ef7e218e .cell title='Journal Entries by Risk Score' execution_count=12}</span>
+<span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a><span class="in">``` {.python .cell-code}</span></span>
+<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
+<span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a>::: {.cell-output .cell-output-display}</span>
+<span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a><span class="in">```{=html}</span></span>
+<span id="cb16-59"><a href="#cb16-59" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div style="height:400px; width:100%;"&gt;            &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"&gt;&lt;/script&gt;&lt;script&gt;if (window.MathJax &amp;&amp; window.MathJax.Hub &amp;&amp; window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}&lt;/script&gt;                &lt;script&gt;window.PlotlyConfig = {MathJaxConfig: 'local'};&lt;/script&gt;</span></span>
+<span id="cb16-60"><a href="#cb16-60" aria-hidden="true" tabindex="-1"></a><span class="in">        &lt;script charset="utf-8" src="https://cdn.plot.ly/plotly-3.7.0.min.js" integrity="sha256-jvTGqxNp8AGWEcvNLVuKr+8j5dGe9Yw51LQkmDH+IYA=" crossorigin="anonymous"&gt;&lt;/script&gt;                &lt;div id="8fbed0b2-7dbf-4263-a82a-666d544d6941" class="plotly-graph-div" style="height:100%; width:100%;"&gt;&lt;/div&gt;            &lt;script&gt;                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("8fbed0b2-7dbf-4263-a82a-666d544d6941")) {                    Plotly.newPlot(                        "8fbed0b2-7dbf-4263-a82a-666d544d6941",                        [{"customdata":[["JE5100","mchen","Operations"],["JE5101","rpatel","Operations"],["JE5102","jsmith","Operations"],["JE5103","dwilson","Operations"],["JE5104","ktaylor","Operations"],["JE5105","rpatel","Sales"],["JE5106","agarcia","Operations"],["JE5107","ktaylor","Operations"],["JE5108","dwilson","Operations"],["JE5109","agarcia","Sales"],["JE5110","agarcia","Operations"],["JE5111","agarcia","Operations"],["JE5112","agarcia","HR"],["JE5113","dwilson","Operations"],["JE5114","ktaylor","HR"],["JE5115","jsmith","Sales"],["JE5116","dwilson","Operations"],["JE5117","mchen","Operations"],["JE5118","mchen","Operations"],["JE5119","rpatel","Operations"],["JE5120","jsmith","Operations"],["JE5121","jsmith","Sales"],["JE5122","dwilson","Operations"],["JE5123","rpatel","HR"],["JE5124","mchen","Operations"],["JE5125","rpatel","Operations"],["JE5126","ktaylor","Operations"],["JE5127","jsmith","Operations"],["JE5128","dwilson","Sales"],["JE5129","dwilson","HR"],["JE5130","dwilson","Sales"],["JE5131","mchen","Sales"],["JE5132","jsmith","Sales"],["JE5133","agarcia","Sales"],["JE5134","ktaylor","Operations"],["JE5135","agarcia","Operations"],["JE5136","agarcia","Sales"],["JE5137","dwilson","Sales"],["JE5138","ktaylor","Operations"],["JE5139","rpatel","Operations"],["JE5140","ktaylor","Operations"],["JE5141","rpatel","Operations"],["JE5142","agarcia","Operations"],["JE5143","agarcia","Operations"],["JE5144","mchen","Operations"],["JE5145","dwilson","Operations"],["JE5146","ktaylor","Sales"],["JE5147","jsmith","Operations"],["JE5148","jsmith","Sales"],["JE5149","rpatel","Operations"],["JE5150","jsmith","Sales"],["JE5151","mchen","Operations"],["JE5152","rpatel","Sales"],["JE5153","jsmith","Operations"],["JE5154","mchen","Sales"],["JE5155","rpatel","Operations"],["JE5156","mchen","Operations"],["JE5157","ktaylor","Operations"],["JE5158","agarcia","Operations"],["JE5159","mchen","Operations"],["JE5160","rpatel","Operations"],["JE5161","jsmith","HR"],["JE5162","dwilson","Operations"],["JE5163","mchen","Operations"],["JE5164","dwilson","Operations"],["JE5165","jsmith","Operations"],["JE5166","rpatel","Operations"],["JE5167","jsmith","Operations"],["JE5168","dwilson","Operations"],["JE5169","mchen","Operations"],["JE5170","dwilson","HR"],["JE5171","mchen","Operations"],["JE5172","dwilson","Sales"],["JE5173","ktaylor","Sales"],["JE5174","rpatel","Sales"],["JE5175","agarcia","Operations"],["JE5176","dwilson","Sales"],["JE5177","agarcia","Operations"],["JE5178","mchen","Operations"],["JE5179","rpatel","Operations"],["JE5180","mchen","HR"],["JE5181","mchen","Operations"],["JE5182","rpatel","Operations"],["JE5183","dwilson","Operations"],["JE5184","jsmith","HR"],["JE5185","agarcia","HR"],["JE5186","ktaylor","Operations"],["JE5187","dwilson","HR"],["JE5188","jsmith","Sales"],["JE5189","agarcia","HR"],["JE5190","mchen","Operations"],["JE5191","mchen","Operations"],["JE5192","mchen","Operations"],["JE5193","agarcia","Operations"],["JE5194","ktaylor","Operations"],["JE5195","ktaylor","Operations"],["JE5196","ktaylor","HR"],["JE5197","rpatel","Sales"],["JE5198","jsmith","Sales"],["JE5199","agarcia","Sales"],["JE5200","mchen","Operations"],["JE5201","dwilson","Sales"],["JE5202","jsmith","Operations"],["JE5203","agarcia","Operations"],["JE5204","ktaylor","Operations"],["JE5205","agarcia","Operations"],["JE5206","mchen","Operations"],["JE5207","jsmith","Sales"],["JE5208","jsmith","HR"],["JE5209","jsmith","Operations"],["JE5900","jsmith","Sales"],["JE5901","mchen","Operations"],["JE5902","rpatel","Sales"],["JE5903","mchen","Operations"],["JE5904","mchen","Operations"],["JE5905","ceverett","HR"],["JE5906","ceverett","Sales"]],"hovertemplate":"Entry Date=%{x}\u003cbr\u003eAmount ($)=%{y}\u003cbr\u003eRisk Score=%{marker.color}\u003cbr\u003eentry_id=%{customdata[0]}\u003cbr\u003eposted_by=%{customdata[1]}\u003cbr\u003edepartment=%{customdata[2]}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":{"dtype":"i1","bdata":"AAAAAAABAAABAAAAAAAAAAEAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAQIBAQME"},"coloraxis":"coloraxis","size":{"dtype":"i1","bdata":"AAAAAAABAAABAAAAAAAAAAEAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAQIBAQME"},"sizemode":"area","sizeref":0.01,"symbol":"circle"},"mode":"markers","name":"","orientation":"v","showlegend":false,"x":["2025-08-18T00:00:00.000000","2025-11-25T00:00:00.000000","2025-10-10T00:00:00.000000","2025-03-24T00:00:00.000000","2025-04-21T00:00:00.000000","2025-11-15T00:00:00.000000","2025-01-02T00:00:00.000000","2025-10-28T00:00:00.000000","2025-10-19T00:00:00.000000","2025-06-20T00:00:00.000000","2025-04-22T00:00:00.000000","2025-04-11T00:00:00.000000","2025-04-03T00:00:00.000000","2025-06-12T00:00:00.000000","2025-07-03T00:00:00.000000","2025-07-22T00:00:00.000000","2025-12-30T00:00:00.000000","2025-10-16T00:00:00.000000","2025-08-15T00:00:00.000000","2025-12-29T00:00:00.000000","2025-03-20T00:00:00.000000","2025-02-27T00:00:00.000000","2025-08-12T00:00:00.000000","2025-01-16T00:00:00.000000","2025-01-14T00:00:00.000000","2025-07-08T00:00:00.000000","2025-06-19T00:00:00.000000","2025-12-02T00:00:00.000000","2025-08-19T00:00:00.000000","2025-07-08T00:00:00.000000","2025-07-01T00:00:00.000000","2025-04-01T00:00:00.000000","2025-01-06T00:00:00.000000","2025-03-12T00:00:00.000000","2025-09-10T00:00:00.000000","2025-03-14T00:00:00.000000","2025-05-15T00:00:00.000000","2025-01-01T00:00:00.000000","2025-10-30T00:00:00.000000","2025-02-26T00:00:00.000000","2025-04-08T00:00:00.000000","2025-11-18T00:00:00.000000","2025-07-07T00:00:00.000000","2025-11-06T00:00:00.000000","2025-08-21T00:00:00.000000","2025-09-29T00:00:00.000000","2025-02-03T00:00:00.000000","2025-07-17T00:00:00.000000","2025-07-04T00:00:00.000000","2025-11-14T00:00:00.000000","2025-05-13T00:00:00.000000","2025-08-07T00:00:00.000000","2025-01-22T00:00:00.000000","2025-05-22T00:00:00.000000","2025-04-29T00:00:00.000000","2025-02-25T00:00:00.000000","2025-10-27T00:00:00.000000","2025-05-20T00:00:00.000000","2025-12-24T00:00:00.000000","2025-08-04T00:00:00.000000","2025-08-08T00:00:00.000000","2025-08-21T00:00:00.000000","2025-09-04T00:00:00.000000","2025-02-25T00:00:00.000000","2025-06-10T00:00:00.000000","2025-03-28T00:00:00.000000","2025-05-28T00:00:00.000000","2025-02-05T00:00:00.000000","2025-12-19T00:00:00.000000","2025-03-20T00:00:00.000000","2025-09-03T00:00:00.000000","2025-04-21T00:00:00.000000","2025-11-17T00:00:00.000000","2025-08-29T00:00:00.000000","2025-02-18T00:00:00.000000","2025-11-05T00:00:00.000000","2025-12-11T00:00:00.000000","2025-11-26T00:00:00.000000","2025-07-28T00:00:00.000000","2025-02-22T00:00:00.000000","2025-03-12T00:00:00.000000","2025-12-05T00:00:00.000000","2025-07-22T00:00:00.000000","2025-03-07T00:00:00.000000","2025-11-19T00:00:00.000000","2025-08-22T00:00:00.000000","2025-07-28T00:00:00.000000","2025-05-19T00:00:00.000000","2025-05-30T00:00:00.000000","2025-03-28T00:00:00.000000","2025-01-14T00:00:00.000000","2025-11-17T00:00:00.000000","2025-06-20T00:00:00.000000","2025-07-18T00:00:00.000000","2025-04-29T00:00:00.000000","2025-10-02T00:00:00.000000","2025-01-09T00:00:00.000000","2025-05-16T00:00:00.000000","2025-01-10T00:00:00.000000","2025-02-14T00:00:00.000000","2025-12-19T00:00:00.000000","2025-08-28T00:00:00.000000","2025-06-05T00:00:00.000000","2025-07-10T00:00:00.000000","2025-11-14T00:00:00.000000","2025-05-06T00:00:00.000000","2025-08-05T00:00:00.000000","2025-09-08T00:00:00.000000","2025-05-09T00:00:00.000000","2025-07-09T00:00:00.000000","2025-06-14T00:00:00.000000","2025-04-08T00:00:00.000000","2025-12-30T00:00:00.000000","2025-08-19T00:00:00.000000","2025-08-19T00:00:00.000000","2025-09-21T00:00:00.000000","2025-12-28T00:00:00.000000"],"xaxis":"x","y":{"dtype":"f8","bdata":"hetRuJ4TqECF61G4ntqkQArXo3C9aqRA16NwPQqBgkBSuB6F651+QEjhehSu7pxAexSuR+GxpECPwvUoXLd9QFyPwvUoKJFAAAAAAIC0tkD2KFyPwliUQClcj8J1CaVAH4XrUbiTsUAfhetROL+lQK5H4XrUErJApHA9CtdOpUBSuB6Fa1mmQJqZmZkZG6RASOF6FK58pECPwvUo3BimQI\u002fC9Shcm4NA9ihcj0KJrkDsUbgehemlQPYoXI9CFbdAH4XrUbjBnECuR+F6lMyjQJqZmZmZGYNA4XoUrsfvokBcj8L1aMu9QD0K16Nwia5AcT0K16MdkkAAAAAAAF+ZQDMzMzMz8aRAexSuR+GGkkBcj8L1KCxyQK5H4XoU0pxAUrgehWuYpECamZmZmWibQPYoXI\u002fC1ZJA7FG4HoU+kkBcj8L1KPiKQKRwPQrXU35ApHA9CleBpUBI4XoUrgKTQJqZmZmZ\u002fXdAUrgehevYnkAAAAAAAH6cQClcj8J1daBAKVyPwtUGwED2KFyPwjmDQOxRuB6FJqRArkfhehRSk0AK16Nwvb2gQNejcD0KK35ASOF6FK7xpUCamZmZGX2lQPYoXI\u002fCoX5A9ihcj8K4kkCPwvUoXNNyQPYoXI\u002fC8XlAKVyPwnWFpEDNzMzMTGGzQPYoXI\u002fCKY5AhetRuB5CpUAK16NwPT2lQArXo3A946BAAAAAAAAYf0BSuB6F662BQI\u002fC9ShcIZ9ArkfhepQqpUBI4XoULr6wQPYoXI\u002fCaXZAKVyPwnW9pUDD9ShcjwSYQGZmZmZm7LhA4XoUrkeqnED2KFyPwv6uQB+F61G4in9APQrXo3CcnED2KFyPwnF\u002fQClcj8L19K5ASOF6FK4SmkAK16NwvVymQMP1KFwPEaVA16NwPcoQukAAAAAAgMKxQArXo3A98ohACtejcD1It0AfhetR+KmwQArXo3A9oLNAXI\u002fC9ShAgEDNzMzMzER9QK5H4XoU85xAUrgehWsjokDXo3A9CuaYQAAAAAAAxJpASOF6FO5zukB7FK5H4culQFyPwvUouaFAZmZmZuaFpkAfhetROHioQFyPwvUoz6JAPQrXo3CTmUCuR+F6FK50QD0K16Nw06RA7FG4HoUGpkCPwvUoXBKSQK5H4XoUcJdAAAAAAMAKukAzMzMzs8OgQAAAAAAAauhAAAAAAACIw0AAAAAAQJX2QAAAAAAAcKdAAAAAAABwp0AAAAAAAAXkQAAAAACAT\u002fJA"},"yaxis":"y","type":"scatter"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Entry Date"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Amount ($)"}},"coloraxis":{"colorbar":{"title":{"text":"Risk Score"}},"colorscale":[[0.0,"rgb(255,247,236)"],[0.125,"rgb(254,232,200)"],[0.25,"rgb(253,212,158)"],[0.375,"rgb(253,187,132)"],[0.5,"rgb(252,141,89)"],[0.625,"rgb(239,101,72)"],[0.75,"rgb(215,48,31)"],[0.875,"rgb(179,0,0)"],[1.0,"rgb(127,0,0)"]],"autocolorscale":false},"legend":{"tracegroupgap":0,"itemsizing":"constant"},"title":{"text":"Journal Entries by Risk Score"},"height":400},                        {"responsive": true}                    ).then(function(){</span></span>
+<span id="cb16-61"><a href="#cb16-61" aria-hidden="true" tabindex="-1"></a><span class="in">                            </span></span>
+<span id="cb16-62"><a href="#cb16-62" aria-hidden="true" tabindex="-1"></a><span class="in">var gd = document.getElementById('8fbed0b2-7dbf-4263-a82a-666d544d6941');</span></span>
+<span id="cb16-63"><a href="#cb16-63" aria-hidden="true" tabindex="-1"></a><span class="in">var x = new MutationObserver(function (mutations, observer) {{</span></span>
+<span id="cb16-64"><a href="#cb16-64" aria-hidden="true" tabindex="-1"></a><span class="in">        var display = window.getComputedStyle(gd).display;</span></span>
+<span id="cb16-65"><a href="#cb16-65" aria-hidden="true" tabindex="-1"></a><span class="in">        if (!display || display === 'none') {{</span></span>
+<span id="cb16-66"><a href="#cb16-66" aria-hidden="true" tabindex="-1"></a><span class="in">            console.log([gd, 'removed!']);</span></span>
+<span id="cb16-67"><a href="#cb16-67" aria-hidden="true" tabindex="-1"></a><span class="in">            Plotly.purge(gd);</span></span>
+<span id="cb16-68"><a href="#cb16-68" aria-hidden="true" tabindex="-1"></a><span class="in">            observer.disconnect();</span></span>
+<span id="cb16-69"><a href="#cb16-69" aria-hidden="true" tabindex="-1"></a><span class="in">        }}</span></span>
+<span id="cb16-70"><a href="#cb16-70" aria-hidden="true" tabindex="-1"></a><span class="in">}});</span></span>
+<span id="cb16-71"><a href="#cb16-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-72"><a href="#cb16-72" aria-hidden="true" tabindex="-1"></a><span class="in">// Listen for the removal of the full notebook cells</span></span>
+<span id="cb16-73"><a href="#cb16-73" aria-hidden="true" tabindex="-1"></a><span class="in">var notebookContainer = gd.closest('#notebook-container');</span></span>
+<span id="cb16-74"><a href="#cb16-74" aria-hidden="true" tabindex="-1"></a><span class="in">if (notebookContainer) {{</span></span>
+<span id="cb16-75"><a href="#cb16-75" aria-hidden="true" tabindex="-1"></a><span class="in">    x.observe(notebookContainer, {childList: true});</span></span>
+<span id="cb16-76"><a href="#cb16-76" aria-hidden="true" tabindex="-1"></a><span class="in">}}</span></span>
+<span id="cb16-77"><a href="#cb16-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-78"><a href="#cb16-78" aria-hidden="true" tabindex="-1"></a><span class="in">// Listen for the clearing of the current output cell</span></span>
+<span id="cb16-79"><a href="#cb16-79" aria-hidden="true" tabindex="-1"></a><span class="in">var outputEl = gd.closest('.output');</span></span>
+<span id="cb16-80"><a href="#cb16-80" aria-hidden="true" tabindex="-1"></a><span class="in">if (outputEl) {{</span></span>
+<span id="cb16-81"><a href="#cb16-81" aria-hidden="true" tabindex="-1"></a><span class="in">    x.observe(outputEl, {childList: true});</span></span>
+<span id="cb16-82"><a href="#cb16-82" aria-hidden="true" tabindex="-1"></a><span class="in">}}</span></span>
+<span id="cb16-83"><a href="#cb16-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-84"><a href="#cb16-84" aria-hidden="true" tabindex="-1"></a><span class="in">                        })                };            &lt;/script&gt;        &lt;/div&gt;</span></span>
+<span id="cb16-85"><a href="#cb16-85" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-86"><a href="#cb16-86" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb16-87"><a href="#cb16-87" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb16-88"><a href="#cb16-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-89"><a href="#cb16-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-90"><a href="#cb16-90" aria-hidden="true" tabindex="-1"></a><span class="fu">### Column {width="35%"}</span></span>
+<span id="cb16-91"><a href="#cb16-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-92"><a href="#cb16-92" aria-hidden="true" tabindex="-1"></a>::: {#80fe1764 .cell title='Highest-Risk Entries' execution_count=13}</span>
+<span id="cb16-93"><a href="#cb16-93" aria-hidden="true" tabindex="-1"></a><span class="in">``` {.python .cell-code}</span></span>
+<span id="cb16-94"><a href="#cb16-94" aria-hidden="true" tabindex="-1"></a>full_entry_level.sort_values(<span class="st">"risk_score"</span>, ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)[</span>
+<span id="cb16-95"><a href="#cb16-95" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"entry_id"</span>, <span class="st">"department"</span>, <span class="st">"amount"</span>, <span class="st">"risk_score"</span>]</span>
+<span id="cb16-96"><a href="#cb16-96" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb16-97"><a href="#cb16-97" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-98"><a href="#cb16-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-99"><a href="#cb16-99" aria-hidden="true" tabindex="-1"></a>::: {.cell-output .cell-output-display execution_count=13}</span>
+<span id="cb16-100"><a href="#cb16-100" aria-hidden="true" tabindex="-1"></a><span class="in">```{=html}</span></span>
+<span id="cb16-101"><a href="#cb16-101" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div&gt;</span></span>
+<span id="cb16-102"><a href="#cb16-102" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;style scoped&gt;</span></span>
+<span id="cb16-103"><a href="#cb16-103" aria-hidden="true" tabindex="-1"></a><span class="in">    .dataframe tbody tr th:only-of-type {</span></span>
+<span id="cb16-104"><a href="#cb16-104" aria-hidden="true" tabindex="-1"></a><span class="in">        vertical-align: middle;</span></span>
+<span id="cb16-105"><a href="#cb16-105" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
+<span id="cb16-106"><a href="#cb16-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-107"><a href="#cb16-107" aria-hidden="true" tabindex="-1"></a><span class="in">    .dataframe tbody tr th {</span></span>
+<span id="cb16-108"><a href="#cb16-108" aria-hidden="true" tabindex="-1"></a><span class="in">        vertical-align: top;</span></span>
+<span id="cb16-109"><a href="#cb16-109" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
+<span id="cb16-110"><a href="#cb16-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-111"><a href="#cb16-111" aria-hidden="true" tabindex="-1"></a><span class="in">    .dataframe thead th {</span></span>
+<span id="cb16-112"><a href="#cb16-112" aria-hidden="true" tabindex="-1"></a><span class="in">        text-align: right;</span></span>
+<span id="cb16-113"><a href="#cb16-113" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
+<span id="cb16-114"><a href="#cb16-114" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/style&gt;</span></span>
+<span id="cb16-115"><a href="#cb16-115" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;table border="1" class="dataframe"&gt;</span></span>
+<span id="cb16-116"><a href="#cb16-116" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;thead&gt;</span></span>
+<span id="cb16-117"><a href="#cb16-117" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;tr style="text-align: right;"&gt;</span></span>
+<span id="cb16-118"><a href="#cb16-118" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;th&gt;&lt;/th&gt;</span></span>
+<span id="cb16-119"><a href="#cb16-119" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;th&gt;entry_id&lt;/th&gt;</span></span>
+<span id="cb16-120"><a href="#cb16-120" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;th&gt;department&lt;/th&gt;</span></span>
+<span id="cb16-121"><a href="#cb16-121" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;th&gt;amount&lt;/th&gt;</span></span>
+<span id="cb16-122"><a href="#cb16-122" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;th&gt;risk_score&lt;/th&gt;</span></span>
+<span id="cb16-123"><a href="#cb16-123" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;/tr&gt;</span></span>
+<span id="cb16-124"><a href="#cb16-124" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;/thead&gt;</span></span>
+<span id="cb16-125"><a href="#cb16-125" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;tbody&gt;</span></span>
+<span id="cb16-126"><a href="#cb16-126" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;tr&gt;</span></span>
+<span id="cb16-127"><a href="#cb16-127" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;th&gt;116&lt;/th&gt;</span></span>
+<span id="cb16-128"><a href="#cb16-128" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;JE5906&lt;/td&gt;</span></span>
+<span id="cb16-129"><a href="#cb16-129" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;Sales&lt;/td&gt;</span></span>
+<span id="cb16-130"><a href="#cb16-130" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;75000.00&lt;/td&gt;</span></span>
+<span id="cb16-131"><a href="#cb16-131" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;4&lt;/td&gt;</span></span>
+<span id="cb16-132"><a href="#cb16-132" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;/tr&gt;</span></span>
+<span id="cb16-133"><a href="#cb16-133" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;tr&gt;</span></span>
+<span id="cb16-134"><a href="#cb16-134" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;th&gt;115&lt;/th&gt;</span></span>
+<span id="cb16-135"><a href="#cb16-135" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;JE5905&lt;/td&gt;</span></span>
+<span id="cb16-136"><a href="#cb16-136" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;HR&lt;/td&gt;</span></span>
+<span id="cb16-137"><a href="#cb16-137" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;41000.00&lt;/td&gt;</span></span>
+<span id="cb16-138"><a href="#cb16-138" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;3&lt;/td&gt;</span></span>
+<span id="cb16-139"><a href="#cb16-139" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;/tr&gt;</span></span>
+<span id="cb16-140"><a href="#cb16-140" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;tr&gt;</span></span>
+<span id="cb16-141"><a href="#cb16-141" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;th&gt;112&lt;/th&gt;</span></span>
+<span id="cb16-142"><a href="#cb16-142" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;JE5902&lt;/td&gt;</span></span>
+<span id="cb16-143"><a href="#cb16-143" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;Sales&lt;/td&gt;</span></span>
+<span id="cb16-144"><a href="#cb16-144" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;92500.00&lt;/td&gt;</span></span>
+<span id="cb16-145"><a href="#cb16-145" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;2&lt;/td&gt;</span></span>
+<span id="cb16-146"><a href="#cb16-146" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;/tr&gt;</span></span>
+<span id="cb16-147"><a href="#cb16-147" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;tr&gt;</span></span>
+<span id="cb16-148"><a href="#cb16-148" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;th&gt;110&lt;/th&gt;</span></span>
+<span id="cb16-149"><a href="#cb16-149" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;JE5900&lt;/td&gt;</span></span>
+<span id="cb16-150"><a href="#cb16-150" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;Sales&lt;/td&gt;</span></span>
+<span id="cb16-151"><a href="#cb16-151" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;50000.00&lt;/td&gt;</span></span>
+<span id="cb16-152"><a href="#cb16-152" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;2&lt;/td&gt;</span></span>
+<span id="cb16-153"><a href="#cb16-153" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;/tr&gt;</span></span>
+<span id="cb16-154"><a href="#cb16-154" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;tr&gt;</span></span>
+<span id="cb16-155"><a href="#cb16-155" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;th&gt;5&lt;/th&gt;</span></span>
+<span id="cb16-156"><a href="#cb16-156" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;JE5105&lt;/td&gt;</span></span>
+<span id="cb16-157"><a href="#cb16-157" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;Sales&lt;/td&gt;</span></span>
+<span id="cb16-158"><a href="#cb16-158" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;1851.67&lt;/td&gt;</span></span>
+<span id="cb16-159"><a href="#cb16-159" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;1&lt;/td&gt;</span></span>
+<span id="cb16-160"><a href="#cb16-160" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;/tr&gt;</span></span>
+<span id="cb16-161"><a href="#cb16-161" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;tr&gt;</span></span>
+<span id="cb16-162"><a href="#cb16-162" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;th&gt;113&lt;/th&gt;</span></span>
+<span id="cb16-163"><a href="#cb16-163" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;JE5903&lt;/td&gt;</span></span>
+<span id="cb16-164"><a href="#cb16-164" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;Operations&lt;/td&gt;</span></span>
+<span id="cb16-165"><a href="#cb16-165" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;3000.00&lt;/td&gt;</span></span>
+<span id="cb16-166"><a href="#cb16-166" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;1&lt;/td&gt;</span></span>
+<span id="cb16-167"><a href="#cb16-167" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;/tr&gt;</span></span>
+<span id="cb16-168"><a href="#cb16-168" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;tr&gt;</span></span>
+<span id="cb16-169"><a href="#cb16-169" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;th&gt;114&lt;/th&gt;</span></span>
+<span id="cb16-170"><a href="#cb16-170" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;JE5904&lt;/td&gt;</span></span>
+<span id="cb16-171"><a href="#cb16-171" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;Operations&lt;/td&gt;</span></span>
+<span id="cb16-172"><a href="#cb16-172" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;3000.00&lt;/td&gt;</span></span>
+<span id="cb16-173"><a href="#cb16-173" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;1&lt;/td&gt;</span></span>
+<span id="cb16-174"><a href="#cb16-174" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;/tr&gt;</span></span>
+<span id="cb16-175"><a href="#cb16-175" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;tr&gt;</span></span>
+<span id="cb16-176"><a href="#cb16-176" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;th&gt;111&lt;/th&gt;</span></span>
+<span id="cb16-177"><a href="#cb16-177" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;JE5901&lt;/td&gt;</span></span>
+<span id="cb16-178"><a href="#cb16-178" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;Operations&lt;/td&gt;</span></span>
+<span id="cb16-179"><a href="#cb16-179" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;10000.00&lt;/td&gt;</span></span>
+<span id="cb16-180"><a href="#cb16-180" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;1&lt;/td&gt;</span></span>
+<span id="cb16-181"><a href="#cb16-181" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;/tr&gt;</span></span>
+<span id="cb16-182"><a href="#cb16-182" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;tr&gt;</span></span>
+<span id="cb16-183"><a href="#cb16-183" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;th&gt;79&lt;/th&gt;</span></span>
+<span id="cb16-184"><a href="#cb16-184" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;JE5179&lt;/td&gt;</span></span>
+<span id="cb16-185"><a href="#cb16-185" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;Operations&lt;/td&gt;</span></span>
+<span id="cb16-186"><a href="#cb16-186" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;503.11&lt;/td&gt;</span></span>
+<span id="cb16-187"><a href="#cb16-187" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;1&lt;/td&gt;</span></span>
+<span id="cb16-188"><a href="#cb16-188" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;/tr&gt;</span></span>
+<span id="cb16-189"><a href="#cb16-189" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;tr&gt;</span></span>
+<span id="cb16-190"><a href="#cb16-190" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;th&gt;16&lt;/th&gt;</span></span>
+<span id="cb16-191"><a href="#cb16-191" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;JE5116&lt;/td&gt;</span></span>
+<span id="cb16-192"><a href="#cb16-192" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;Operations&lt;/td&gt;</span></span>
+<span id="cb16-193"><a href="#cb16-193" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;2860.71&lt;/td&gt;</span></span>
+<span id="cb16-194"><a href="#cb16-194" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;td&gt;1&lt;/td&gt;</span></span>
+<span id="cb16-195"><a href="#cb16-195" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;/tr&gt;</span></span>
+<span id="cb16-196"><a href="#cb16-196" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;/tbody&gt;</span></span>
+<span id="cb16-197"><a href="#cb16-197" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/table&gt;</span></span>
+<span id="cb16-198"><a href="#cb16-198" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
+<span id="cb16-199"><a href="#cb16-199" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-200"><a href="#cb16-200" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb16-201"><a href="#cb16-201" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb16-202"><a href="#cb16-202" aria-hidden="true" tabindex="-1"></a></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A few things worth noting about this structure:</p>
+<ul>
+<li><code>## Row</code> and <code>### Column</code> headings define the dashboard’s layout grid — no CSS or HTML required.</li>
+<li><code>#| content: valuebox</code> turns a code chunk’s output into one of those large single-number summary cards, commonly seen atop real business dashboards.</li>
+<li>Everything below the value boxes is still just pandas and Plotly code you already know how to write — the dashboard format only changes how the <em>output</em> is arranged, not how you compute it.</li>
+</ul>
+<p>Saved as <code>audit-risk-dashboard.qmd</code> and rendered with <code>quarto render audit-risk-dashboard.qmd</code>, this produces a single interactive HTML page: three value boxes across the top, an interactive scatter plot, and a sortable table of the highest-risk entries — a genuinely useful artifact you could share with an audit team lead for daily monitoring, built entirely from tools covered in this book.</p>
+</section>
+</section>
+<section id="putting-it-together-a-recurring-reporting-workflow" class="level2" data-number="15.5">
+<h2 data-number="15.5" class="anchored" data-anchor-id="putting-it-together-a-recurring-reporting-workflow"><span class="header-section-number">15.5</span> Putting It Together: A Recurring Reporting Workflow</h2>
+<p>Combining everything in this chapter, a realistic recurring reporting setup looks like this:</p>
+<ol type="1">
+<li><strong>A parameterized template</strong> (like <code>department-risk-report.qmd</code>) containing the actual analysis logic</li>
+<li><strong>A batch script</strong> (like <code>render_all_departments.sh</code>) that renders one output per department, or per period, automatically</li>
+<li><strong>A dashboard</strong> (like <code>audit-risk-dashboard.qmd</code>) giving a real-time, interactive summary view, refreshed by simply re-running its render command whenever the underlying data updates</li>
+<li><strong>A scheduler</strong> (cron, a CI pipeline, or your organization’s task scheduler) that runs the batch script on a recurring basis, so reports regenerate automatically without anyone remembering to run them by hand</li>
+</ol>
+<p>None of these pieces require new analytical skills beyond what earlier chapters already taught — this chapter is entirely about <em>packaging</em> that same analytical work so it can run repeatedly, for different inputs, with minimal ongoing manual effort.</p>
+</section>
+<section id="chapter-summary" class="level2" data-number="15.6">
+<h2 data-number="15.6" class="anchored" data-anchor-id="chapter-summary"><span class="header-section-number">15.6</span> Chapter Summary</h2>
+<ul>
+<li>Parameterized reports let one Quarto template produce many customized outputs by declaring parameters in a <code>#| tags: [parameters]</code> cell (for Python) and overriding them at render time with <code>-P key:value</code>.</li>
+<li>A batch script (bash or Python) automates rendering a template across many parameter values in one run, turning what would be repetitive manual work into a single command.</li>
+<li>Quarto Dashboards (<code>format: dashboard</code>) are a distinct output type from the book/document format used throughout this course, built for at-a-glance scanning rather than linear reading, using value boxes, rows, and columns.</li>
+<li>Plotly is well-suited to dashboards specifically because dashboards are HTML-only and benefit from interactivity (hover, zoom); seaborn and plotnine remain the right choice for this book’s chapters because they need to render identically well to both HTML and PDF.</li>
+<li>A complete recurring reporting workflow combines a parameterized template, a batch rendering script, an optional dashboard for real-time monitoring, and a scheduler — all built from skills already covered earlier in this book.</li>
+</ul>
+</section>
+<section id="discussion-questions" class="level2" data-number="15.7">
+<h2 data-number="15.7" class="anchored" data-anchor-id="discussion-questions"><span class="header-section-number">15.7</span> Discussion Questions</h2>
+<ol type="1">
+<li>Why can’t a Quarto Dashboard simply be added as another chapter in this book’s <code>_quarto.yml</code>, the way Chapters 1-13 were?</li>
+<li>If you were building a monthly reporting package for four regional offices, would you use a parameterized report, a dashboard, or both? Explain your reasoning.</li>
+<li>Why does this book use seaborn and plotnine for its own charts rather than Plotly, given that Plotly charts are arguably more impressive to look at?</li>
+</ol>
+</section>
+<section id="exercises" class="level2" data-number="15.8">
+<h2 data-number="15.8" class="anchored" data-anchor-id="exercises"><span class="header-section-number">15.8</span> Exercises</h2>
+<ol type="1">
+<li>Save this chapter’s parameterized code (the parameters cell plus the analysis that follows it) into its own file, <code>department-risk-report.qmd</code>, and render it for each of the four departments in <code>audit_test_transactions.csv</code> using the <code>-P</code> flag from the terminal.</li>
+<li>Extend <code>render_all_departments.sh</code> to also print each department’s average risk score to the terminal as it renders (hint: this requires a small Python helper script called from the bash loop, since bash itself can’t easily compute a pandas aggregation).</li>
+<li>Add a fourth value box to the dashboard listing in this chapter showing the single highest-risk department (by average risk score) rather than a company-wide total.</li>
+<li>Rebuild this chapter’s Plotly scatter plot as a bar chart instead, showing average risk score by department, and add it as a second chart to the dashboard layout shown in this chapter.</li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./14-genai-in-accounting.html" class="pagination-link" aria-label="Generative AI in Accounting">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Generative AI in Accounting</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./16-data-ethics-reproducibility.html" class="pagination-link" aria-label="Data Ethics, Governance, and Reproducibility">
+        <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Data Ethics, Governance, and Reproducibility</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Accounting Analytics with Python</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/msharifbd/accounting-analytics-book/edit/main/15-automated-reporting-quarto.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/blob/main/15-automated-reporting-quarto.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>This book was built with <a href="https://quarto.org/">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

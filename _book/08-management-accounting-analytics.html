@@ -1,0 +1,3097 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>8&nbsp; Management Accounting Analytics – Accounting Analytics with Python</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./09-audit-analytics.html" rel="next">
+<link href="./07-financial-statement-analysis.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-9e3e5b9121e68b3f077afb32f2c64d95.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-fe9f69af69d9b0acfce0412d1605ee06.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-9e3e5b9121e68b3f077afb32f2c64d95.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+<style>
+.scrollable-table {
+  overflow-x: auto !important;
+}
+.scrollable-table table {
+  width: max-content !important;
+  max-width: none !important;
+}
+a.citation, a.citation:visited {
+  color: #1a56db !important;
+}
+#refs a {
+  color: #1a56db !important;
+}
+</style>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./07-financial-statement-analysis.html">Part III: Applied Accounting Analytics</a></li><li class="breadcrumb-item"><a href="./08-management-accounting-analytics.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Management Accounting Analytics</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Accounting Analytics with Python</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/msharifbd/accounting-analytics-book" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Download"><i class="bi bi-download"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./Accounting-Analytics-with-Python.pdf">
+              <i class="bi bi-file-pdf pe-1"></i>
+            Download PDF
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./Accounting-Analytics-with-Python.epub">
+              <i class="bi bi-journal pe-1"></i>
+            Download ePub
+            </a>
+          </li>
+      </ul>
+    </div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Part I: Foundations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-introduction-to-accounting-analytics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Accounting Analytics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-python-quarto-setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Python and Quarto Environment Setup</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-data-fundamentals.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Fundamentals for Accountants</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Part II: Core Data Skills</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-data-wrangling-pandas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Wrangling with <code>Pandas</code> and <code>Polars</code></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-exploratory-data-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis for Financial Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-data-visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Visualization for Accounting</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Part III: Applied Accounting Analytics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-financial-statement-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Financial Statement Analytics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-management-accounting-analytics.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Management Accounting Analytics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-audit-analytics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Audit Analytics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-fraud-anomaly-detection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Fraud and Anomaly Detection</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-revenue-recognition-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Revenue Recognition and Transaction-Level Analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-tax-analytics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Tax Analytics</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Part IV: Predictive Methods and GenAI</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-predictive-modeling-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Introduction to Predictive Modeling</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-genai-in-accounting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Generative AI in Accounting</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Part V: Communication and Capstone</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-automated-reporting-quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Automated Reporting and Dashboards with Quarto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-data-ethics-reproducibility.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Data Ethics, Governance, and Reproducibility</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-capstone-project.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Capstone Project</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendix-a-python-primer.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">A Primer on Python</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendix-b-financial-statement-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Financial Statement Basics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendix-c-edgar-database.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">An Introduction to EDGAR Database</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#financial-vs.-management-accounting-analytics" id="toc-financial-vs.-management-accounting-analytics" class="nav-link active" data-scroll-target="#financial-vs.-management-accounting-analytics"><span class="header-section-number">8.1</span> Financial vs.&nbsp;Management Accounting Analytics</a></li>
+  <li><a href="#standard-costing-variance-analysis" id="toc-standard-costing-variance-analysis" class="nav-link" data-scroll-target="#standard-costing-variance-analysis"><span class="header-section-number">8.2</span> Standard Costing Variance Analysis</a>
+  <ul class="collapse">
+  <li><a href="#materials-variances" id="toc-materials-variances" class="nav-link" data-scroll-target="#materials-variances"><span class="header-section-number">8.2.1</span> Materials Variances</a></li>
+  <li><a href="#labor-variances" id="toc-labor-variances" class="nav-link" data-scroll-target="#labor-variances"><span class="header-section-number">8.2.2</span> Labor Variances</a></li>
+  <li><a href="#overhead-variances" id="toc-overhead-variances" class="nav-link" data-scroll-target="#overhead-variances"><span class="header-section-number">8.2.3</span> Overhead Variances</a></li>
+  <li><a href="#visualizing-the-full-variance-picture" id="toc-visualizing-the-full-variance-picture" class="nav-link" data-scroll-target="#visualizing-the-full-variance-picture"><span class="header-section-number">8.2.4</span> Visualizing the Full Variance Picture</a></li>
+  </ul></li>
+  <li><a href="#cost-volume-profit-cvp-analysis" id="toc-cost-volume-profit-cvp-analysis" class="nav-link" data-scroll-target="#cost-volume-profit-cvp-analysis"><span class="header-section-number">8.3</span> Cost-Volume-Profit (CVP) Analysis</a>
+  <ul class="collapse">
+  <li><a href="#contribution-margin-and-break-even" id="toc-contribution-margin-and-break-even" class="nav-link" data-scroll-target="#contribution-margin-and-break-even"><span class="header-section-number">8.3.1</span> Contribution Margin and Break-Even</a></li>
+  <li><a href="#the-break-even-chart" id="toc-the-break-even-chart" class="nav-link" data-scroll-target="#the-break-even-chart"><span class="header-section-number">8.3.2</span> The Break-Even Chart</a></li>
+  <li><a href="#target-profit-analysis" id="toc-target-profit-analysis" class="nav-link" data-scroll-target="#target-profit-analysis"><span class="header-section-number">8.3.3</span> Target Profit Analysis</a></li>
+  </ul></li>
+  <li><a href="#activity-based-costing-abc" id="toc-activity-based-costing-abc" class="nav-link" data-scroll-target="#activity-based-costing-abc"><span class="header-section-number">8.4</span> Activity-Based Costing (ABC)</a>
+  <ul class="collapse">
+  <li><a href="#traditional-allocation-single-base-machine-hours" id="toc-traditional-allocation-single-base-machine-hours" class="nav-link" data-scroll-target="#traditional-allocation-single-base-machine-hours"><span class="header-section-number">8.4.1</span> Traditional Allocation (Single Base: Machine Hours)</a></li>
+  <li><a href="#activity-based-allocation-three-cost-pools" id="toc-activity-based-allocation-three-cost-pools" class="nav-link" data-scroll-target="#activity-based-allocation-three-cost-pools"><span class="header-section-number">8.4.2</span> Activity-Based Allocation (Three Cost Pools)</a></li>
+  </ul></li>
+  <li><a href="#chapter-summary" id="toc-chapter-summary" class="nav-link" data-scroll-target="#chapter-summary"><span class="header-section-number">8.5</span> Chapter Summary</a></li>
+  <li><a href="#discussion-questions" id="toc-discussion-questions" class="nav-link" data-scroll-target="#discussion-questions"><span class="header-section-number">8.6</span> Discussion Questions</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">8.7</span> Exercises</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/msharifbd/accounting-analytics-book/edit/main/08-management-accounting-analytics.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/blob/main/08-management-accounting-analytics.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./07-financial-statement-analysis.html">Part III: Applied Accounting Analytics</a></li><li class="breadcrumb-item"><a href="./08-management-accounting-analytics.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Management Accounting Analytics</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Management Accounting Analytics</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Learning Objectives
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>By the end of this chapter, you should be able to:</p>
+<ul>
+<li>Distinguish management accounting analytics from the financial accounting analytics covered in Chapter 7</li>
+<li>Compute and interpret standard costing variances for materials, labor, and overhead</li>
+<li>Perform cost-volume-profit (CVP) analysis, including break-even point, margin of safety, and target profit</li>
+<li>Compare traditional overhead allocation to activity-based costing (ABC), and explain when the two produce meaningfully different product costs</li>
+<li>Build management-facing visualizations for internal decision-making</li>
+<li>Perform all of the above using both pandas and polars, and visualize results with both seaborn and plotnine</li>
+</ul>
+</div>
+</div>
+<section id="financial-vs.-management-accounting-analytics" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="financial-vs.-management-accounting-analytics"><span class="header-section-number">8.1</span> Financial vs.&nbsp;Management Accounting Analytics</h2>
+<p>Chapter 7 analyzed financial statements the way an outside investor or lender would: ratios computed from GAAP-based, externally reported numbers, governed by accounting standards and audited for accuracy. <strong>Management accounting</strong> serves a different audience entirely — the people running the business day to day — and follows different rules, or more precisely, no externally mandated rules at all. A budget variance report, a break-even analysis, or an internal product costing model never gets filed with the SEC or audited by an external firm; it exists purely to help managers make better decisions, which means it can be structured however is most useful internally.</p>
+<p>This chapter covers three of the most common management accounting analytics tasks: <strong>standard costing variance analysis</strong> (did we spend what we expected to, and why not?), <strong>cost-volume-profit analysis</strong> (how many units do we need to sell to be profitable?), and <strong>activity-based costing</strong> (are we allocating overhead to products in a way that reflects how they actually consume resources?).</p>
+<p>We’ll use a fictional manufacturer’s data: <code>manufacturing_variance_data.csv</code> (12 months of standard costing detail), <code>cvp_monthly_data.csv</code> (monthly unit economics), and <code>abc_cost_data.csv</code> (a five-product overhead allocation comparison).</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="" aria-current="page">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div id="f34bc4e6" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>variance_pd <span class="op">=</span> pd.read_csv(<span class="st">"data/manufacturing_variance_data.csv"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>variance_pd.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">month</th>
+<th data-quarto-table-cell-role="th">units_produced</th>
+<th data-quarto-table-cell-role="th">std_materials_qty_per_unit</th>
+<th data-quarto-table-cell-role="th">std_materials_price</th>
+<th data-quarto-table-cell-role="th">actual_materials_qty_total</th>
+<th data-quarto-table-cell-role="th">actual_materials_price</th>
+<th data-quarto-table-cell-role="th">std_labor_hours_per_unit</th>
+<th data-quarto-table-cell-role="th">std_labor_rate</th>
+<th data-quarto-table-cell-role="th">actual_labor_hours_total</th>
+<th data-quarto-table-cell-role="th">actual_labor_rate</th>
+<th data-quarto-table-cell-role="th">std_var_oh_rate_per_labor_hr</th>
+<th data-quarto-table-cell-role="th">actual_var_oh_total</th>
+<th data-quarto-table-cell-role="th">budgeted_fixed_oh</th>
+<th data-quarto-table-cell-role="th">actual_fixed_oh</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>2025-01</td>
+<td>3943</td>
+<td>3.0</td>
+<td>4.5</td>
+<td>11453.4</td>
+<td>4.464</td>
+<td>0.75</td>
+<td>22.0</td>
+<td>2910.5</td>
+<td>22.19</td>
+<td>8.0</td>
+<td>24575.32</td>
+<td>42000</td>
+<td>44003.67</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>2025-02</td>
+<td>4022</td>
+<td>3.0</td>
+<td>4.5</td>
+<td>11680.0</td>
+<td>4.620</td>
+<td>0.75</td>
+<td>22.0</td>
+<td>2884.4</td>
+<td>21.34</td>
+<td>8.0</td>
+<td>22296.78</td>
+<td>42000</td>
+<td>43327.21</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>2025-03</td>
+<td>4882</td>
+<td>3.0</td>
+<td>4.5</td>
+<td>14888.6</td>
+<td>4.499</td>
+<td>0.75</td>
+<td>22.0</td>
+<td>3724.7</td>
+<td>22.26</td>
+<td>8.0</td>
+<td>30528.45</td>
+<td>42000</td>
+<td>43944.08</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>2025-04</td>
+<td>4162</td>
+<td>3.0</td>
+<td>4.5</td>
+<td>12359.6</td>
+<td>4.548</td>
+<td>0.75</td>
+<td>22.0</td>
+<td>2915.8</td>
+<td>22.51</td>
+<td>8.0</td>
+<td>22697.34</td>
+<td>42000</td>
+<td>39148.50</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>2025-05</td>
+<td>3915</td>
+<td>3.0</td>
+<td>4.5</td>
+<td>12050.9</td>
+<td>4.573</td>
+<td>0.75</td>
+<td>22.0</td>
+<td>3028.8</td>
+<td>21.61</td>
+<td>8.0</td>
+<td>23269.99</td>
+<td>42000</td>
+<td>43761.73</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div id="ce6711aa" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>variance_pl <span class="op">=</span> pl.read_csv(<span class="st">"data/manufacturing_variance_data.csv"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>variance_pl.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (5, 14)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">month</th>
+<th data-quarto-table-cell-role="th">units_produced</th>
+<th data-quarto-table-cell-role="th">std_materials_qty_per_unit</th>
+<th data-quarto-table-cell-role="th">std_materials_price</th>
+<th data-quarto-table-cell-role="th">actual_materials_qty_total</th>
+<th data-quarto-table-cell-role="th">actual_materials_price</th>
+<th data-quarto-table-cell-role="th">std_labor_hours_per_unit</th>
+<th data-quarto-table-cell-role="th">std_labor_rate</th>
+<th data-quarto-table-cell-role="th">actual_labor_hours_total</th>
+<th data-quarto-table-cell-role="th">actual_labor_rate</th>
+<th data-quarto-table-cell-role="th">std_var_oh_rate_per_labor_hr</th>
+<th data-quarto-table-cell-role="th">actual_var_oh_total</th>
+<th data-quarto-table-cell-role="th">budgeted_fixed_oh</th>
+<th data-quarto-table-cell-role="th">actual_fixed_oh</th>
+</tr>
+<tr class="even">
+<td>str</td>
+<td>i64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>i64</td>
+<td>f64</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"2025-01"</td>
+<td>3943</td>
+<td>3.0</td>
+<td>4.5</td>
+<td>11453.4</td>
+<td>4.464</td>
+<td>0.75</td>
+<td>22.0</td>
+<td>2910.5</td>
+<td>22.19</td>
+<td>8.0</td>
+<td>24575.32</td>
+<td>42000</td>
+<td>44003.67</td>
+</tr>
+<tr class="even">
+<td>"2025-02"</td>
+<td>4022</td>
+<td>3.0</td>
+<td>4.5</td>
+<td>11680.0</td>
+<td>4.62</td>
+<td>0.75</td>
+<td>22.0</td>
+<td>2884.4</td>
+<td>21.34</td>
+<td>8.0</td>
+<td>22296.78</td>
+<td>42000</td>
+<td>43327.21</td>
+</tr>
+<tr class="odd">
+<td>"2025-03"</td>
+<td>4882</td>
+<td>3.0</td>
+<td>4.5</td>
+<td>14888.6</td>
+<td>4.499</td>
+<td>0.75</td>
+<td>22.0</td>
+<td>3724.7</td>
+<td>22.26</td>
+<td>8.0</td>
+<td>30528.45</td>
+<td>42000</td>
+<td>43944.08</td>
+</tr>
+<tr class="even">
+<td>"2025-04"</td>
+<td>4162</td>
+<td>3.0</td>
+<td>4.5</td>
+<td>12359.6</td>
+<td>4.548</td>
+<td>0.75</td>
+<td>22.0</td>
+<td>2915.8</td>
+<td>22.51</td>
+<td>8.0</td>
+<td>22697.34</td>
+<td>42000</td>
+<td>39148.5</td>
+</tr>
+<tr class="odd">
+<td>"2025-05"</td>
+<td>3915</td>
+<td>3.0</td>
+<td>4.5</td>
+<td>12050.9</td>
+<td>4.573</td>
+<td>0.75</td>
+<td>22.0</td>
+<td>3028.8</td>
+<td>21.61</td>
+<td>8.0</td>
+<td>23269.99</td>
+<td>42000</td>
+<td>43761.73</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="standard-costing-variance-analysis" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="standard-costing-variance-analysis"><span class="header-section-number">8.2</span> Standard Costing Variance Analysis</h2>
+<p>A <strong>standard cost</strong> is the cost a company <em>expects</em> to incur per unit under normal, efficient operating conditions — a predetermined benchmark set before the period begins. Comparing actual costs to this standard, and breaking the difference into specific causes, is the foundation of management accounting’s cost control toolkit.</p>
+<section id="materials-variances" class="level3" data-number="8.2.1">
+<h3 data-number="8.2.1" class="anchored" data-anchor-id="materials-variances"><span class="header-section-number">8.2.1</span> Materials Variances</h3>
+<p>The total difference between actual and standard materials cost splits into two independent causes: did we pay a different <strong>price</strong> per unit of material, and did we use a different <strong>quantity</strong> than the standard allows for the output we actually produced? <a href="#fig-materials-variance" class="quarto-xref">Figure&nbsp;<span>8.1</span></a> shows the total material variance.</p>
+<div id="fig-materials-variance" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-materials-variance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/materials-variance.jpg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-materials-variance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.1: Materials Variance
+</figcaption>
+</figure>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<div id="79884955" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Materials price variance = (Actual Price - Standard Price) x Actual Quantity</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>variance_pd[<span class="st">"materials_price_variance"</span>] <span class="op">=</span> (</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    (variance_pd[<span class="st">"actual_materials_price"</span>] <span class="op">-</span> variance_pd[<span class="st">"std_materials_price"</span>])</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">*</span> variance_pd[<span class="st">"actual_materials_qty_total"</span>]</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Materials quantity variance = (Actual Qty - Standard Qty Allowed) x Standard Price</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>variance_pd[<span class="st">"std_qty_allowed"</span>] <span class="op">=</span> variance_pd[<span class="st">"std_materials_qty_per_unit"</span>] <span class="op">*</span> variance_pd[<span class="st">"units_produced"</span>]</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>variance_pd[<span class="st">"materials_qty_variance"</span>] <span class="op">=</span> (</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    (variance_pd[<span class="st">"actual_materials_qty_total"</span>] <span class="op">-</span> variance_pd[<span class="st">"std_qty_allowed"</span>])</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">*</span> variance_pd[<span class="st">"std_materials_price"</span>]</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>variance_pd[[<span class="st">"month"</span>, <span class="st">"materials_price_variance"</span>, <span class="st">"materials_qty_variance"</span>]].<span class="bu">round</span>(<span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">month</th>
+<th data-quarto-table-cell-role="th">materials_price_variance</th>
+<th data-quarto-table-cell-role="th">materials_qty_variance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>2025-01</td>
+<td>-412.0</td>
+<td>-1690.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>2025-02</td>
+<td>1402.0</td>
+<td>-1737.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>2025-03</td>
+<td>-15.0</td>
+<td>1092.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>2025-04</td>
+<td>593.0</td>
+<td>-569.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>2025-05</td>
+<td>880.0</td>
+<td>1377.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>2025-06</td>
+<td>1142.0</td>
+<td>2859.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>2025-07</td>
+<td>2585.0</td>
+<td>538.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>2025-08</td>
+<td>1063.0</td>
+<td>2038.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8</th>
+<td>2025-09</td>
+<td>1750.0</td>
+<td>-521.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">9</th>
+<td>2025-10</td>
+<td>515.0</td>
+<td>-1292.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">10</th>
+<td>2025-11</td>
+<td>1534.0</td>
+<td>991.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">11</th>
+<td>2025-12</td>
+<td>2583.0</td>
+<td>-423.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div id="808b2f6d" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>variance_pl <span class="op">=</span> variance_pl.with_columns([</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    ((pl.col(<span class="st">"actual_materials_price"</span>) <span class="op">-</span> pl.col(<span class="st">"std_materials_price"</span>)) <span class="op">*</span> pl.col(<span class="st">"actual_materials_qty_total"</span>))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        .alias(<span class="st">"materials_price_variance"</span>),</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    (pl.col(<span class="st">"std_materials_qty_per_unit"</span>) <span class="op">*</span> pl.col(<span class="st">"units_produced"</span>)).alias(<span class="st">"std_qty_allowed"</span>),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>]).with_columns(</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    ((pl.col(<span class="st">"actual_materials_qty_total"</span>) <span class="op">-</span> pl.col(<span class="st">"std_qty_allowed"</span>)) <span class="op">*</span> pl.col(<span class="st">"std_materials_price"</span>))</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        .alias(<span class="st">"materials_qty_variance"</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>variance_pl.select([<span class="st">"month"</span>, <span class="st">"materials_price_variance"</span>, <span class="st">"materials_qty_variance"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (12, 3)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">month</th>
+<th data-quarto-table-cell-role="th">materials_price_variance</th>
+<th data-quarto-table-cell-role="th">materials_qty_variance</th>
+</tr>
+<tr class="even">
+<td>str</td>
+<td>f64</td>
+<td>f64</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"2025-01"</td>
+<td>-412.3224</td>
+<td>-1690.2</td>
+</tr>
+<tr class="even">
+<td>"2025-02"</td>
+<td>1401.6</td>
+<td>-1737.0</td>
+</tr>
+<tr class="odd">
+<td>"2025-03"</td>
+<td>-14.8886</td>
+<td>1091.7</td>
+</tr>
+<tr class="even">
+<td>"2025-04"</td>
+<td>593.2608</td>
+<td>-568.8</td>
+</tr>
+<tr class="odd">
+<td>"2025-05"</td>
+<td>879.7157</td>
+<td>1376.55</td>
+</tr>
+<tr class="even">
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr class="odd">
+<td>"2025-08"</td>
+<td>1062.7833</td>
+<td>2038.05</td>
+</tr>
+<tr class="even">
+<td>"2025-09"</td>
+<td>1750.4384</td>
+<td>-520.65</td>
+</tr>
+<tr class="odd">
+<td>"2025-10"</td>
+<td>514.6011</td>
+<td>-1291.95</td>
+</tr>
+<tr class="even">
+<td>"2025-11"</td>
+<td>1534.4496</td>
+<td>990.9</td>
+</tr>
+<tr class="odd">
+<td>"2025-12"</td>
+<td>2583.2154</td>
+<td>-422.55</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Reading Variance Signs
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>By convention, a <strong>positive</strong> variance here means actual cost exceeded standard cost — <strong>unfavorable</strong>. A <strong>negative</strong> variance means actual cost was less than standard — <strong>favorable</strong>. This convention (rather than always reporting an absolute value) preserves the direction of the difference, which is exactly the information a manager needs to know whether to investigate a problem or recognize an improvement.</p>
+</div>
+</div>
+<div id="7263ba51" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Annual materials price variance:"</span>, <span class="bu">round</span>(variance_pd[<span class="st">"materials_price_variance"</span>].<span class="bu">sum</span>(), <span class="dv">0</span>))</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Annual materials quantity variance:"</span>, <span class="bu">round</span>(variance_pd[<span class="st">"materials_qty_variance"</span>].<span class="bu">sum</span>(), <span class="dv">0</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Annual materials price variance: 13620.0
+Annual materials quantity variance: 2663.0</code></pre>
+</div>
+</div>
+<p>The materials <strong>price</strong> variance is unfavorable by about $13,600 for the year — actual material prices ran above standard, consistent with a gradual price increase over the year. The materials <strong>quantity</strong> variance is a smaller unfavorable $2,700 — usage was close to standard, with only modest waste.</p>
+</section>
+<section id="labor-variances" class="level3" data-number="8.2.2">
+<h3 data-number="8.2.2" class="anchored" data-anchor-id="labor-variances"><span class="header-section-number">8.2.2</span> Labor Variances</h3>
+<p>Labor variances follow the same logic: a <strong>rate</strong> variance (did we pay a different wage than standard?) and an <strong>efficiency</strong> variance (did it take more or fewer hours than standard for the output produced?).</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<div id="b21e1f04" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>variance_pd[<span class="st">"labor_rate_variance"</span>] <span class="op">=</span> (</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    (variance_pd[<span class="st">"actual_labor_rate"</span>] <span class="op">-</span> variance_pd[<span class="st">"std_labor_rate"</span>]) <span class="op">*</span> variance_pd[<span class="st">"actual_labor_hours_total"</span>]</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>variance_pd[<span class="st">"std_hours_allowed"</span>] <span class="op">=</span> variance_pd[<span class="st">"std_labor_hours_per_unit"</span>] <span class="op">*</span> variance_pd[<span class="st">"units_produced"</span>]</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>variance_pd[<span class="st">"labor_efficiency_variance"</span>] <span class="op">=</span> (</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    (variance_pd[<span class="st">"actual_labor_hours_total"</span>] <span class="op">-</span> variance_pd[<span class="st">"std_hours_allowed"</span>]) <span class="op">*</span> variance_pd[<span class="st">"std_labor_rate"</span>]</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>variance_pd[[<span class="st">"month"</span>, <span class="st">"labor_rate_variance"</span>, <span class="st">"labor_efficiency_variance"</span>]].<span class="bu">round</span>(<span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">month</th>
+<th data-quarto-table-cell-role="th">labor_rate_variance</th>
+<th data-quarto-table-cell-role="th">labor_efficiency_variance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>2025-01</td>
+<td>553.0</td>
+<td>-1028.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>2025-02</td>
+<td>-1904.0</td>
+<td>-2906.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>2025-03</td>
+<td>968.0</td>
+<td>1390.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>2025-04</td>
+<td>1487.0</td>
+<td>-4525.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>2025-05</td>
+<td>-1181.0</td>
+<td>2036.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>2025-06</td>
+<td>-104.0</td>
+<td>-3975.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>2025-07</td>
+<td>1725.0</td>
+<td>-3870.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>2025-08</td>
+<td>590.0</td>
+<td>-5662.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8</th>
+<td>2025-09</td>
+<td>-1681.0</td>
+<td>-3356.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">9</th>
+<td>2025-10</td>
+<td>-273.0</td>
+<td>796.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">10</th>
+<td>2025-11</td>
+<td>1283.0</td>
+<td>-4632.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">11</th>
+<td>2025-12</td>
+<td>-1127.0</td>
+<td>-4898.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<div id="fea1ac0a" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>variance_pl <span class="op">=</span> variance_pl.with_columns([</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    ((pl.col(<span class="st">"actual_labor_rate"</span>) <span class="op">-</span> pl.col(<span class="st">"std_labor_rate"</span>)) <span class="op">*</span> pl.col(<span class="st">"actual_labor_hours_total"</span>))</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>        .alias(<span class="st">"labor_rate_variance"</span>),</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    (pl.col(<span class="st">"std_labor_hours_per_unit"</span>) <span class="op">*</span> pl.col(<span class="st">"units_produced"</span>)).alias(<span class="st">"std_hours_allowed"</span>),</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>]).with_columns(</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    ((pl.col(<span class="st">"actual_labor_hours_total"</span>) <span class="op">-</span> pl.col(<span class="st">"std_hours_allowed"</span>)) <span class="op">*</span> pl.col(<span class="st">"std_labor_rate"</span>))</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>        .alias(<span class="st">"labor_efficiency_variance"</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>variance_pl.select([<span class="st">"month"</span>, <span class="st">"labor_rate_variance"</span>, <span class="st">"labor_efficiency_variance"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (12, 3)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">month</th>
+<th data-quarto-table-cell-role="th">labor_rate_variance</th>
+<th data-quarto-table-cell-role="th">labor_efficiency_variance</th>
+</tr>
+<tr class="even">
+<td>str</td>
+<td>f64</td>
+<td>f64</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"2025-01"</td>
+<td>552.995</td>
+<td>-1028.5</td>
+</tr>
+<tr class="even">
+<td>"2025-02"</td>
+<td>-1903.704</td>
+<td>-2906.2</td>
+</tr>
+<tr class="odd">
+<td>"2025-03"</td>
+<td>968.422</td>
+<td>1390.4</td>
+</tr>
+<tr class="even">
+<td>"2025-04"</td>
+<td>1487.058</td>
+<td>-4525.4</td>
+</tr>
+<tr class="odd">
+<td>"2025-05"</td>
+<td>-1181.232</td>
+<td>2036.1</td>
+</tr>
+<tr class="even">
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr class="odd">
+<td>"2025-08"</td>
+<td>590.348</td>
+<td>-5661.7</td>
+</tr>
+<tr class="even">
+<td>"2025-09"</td>
+<td>-1680.552</td>
+<td>-3356.1</td>
+</tr>
+<tr class="odd">
+<td>"2025-10"</td>
+<td>-272.536</td>
+<td>796.4</td>
+</tr>
+<tr class="even">
+<td>"2025-11"</td>
+<td>1282.972</td>
+<td>-4632.1</td>
+</tr>
+<tr class="odd">
+<td>"2025-12"</td>
+<td>-1127.44</td>
+<td>-4898.3</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="aec9d8fc" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Annual labor rate variance:"</span>, <span class="bu">round</span>(variance_pd[<span class="st">"labor_rate_variance"</span>].<span class="bu">sum</span>(), <span class="dv">0</span>))</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Annual labor efficiency variance:"</span>, <span class="bu">round</span>(variance_pd[<span class="st">"labor_efficiency_variance"</span>].<span class="bu">sum</span>(), <span class="dv">0</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Annual labor rate variance: 338.0
+Annual labor efficiency variance: -30631.0</code></pre>
+</div>
+</div>
+<p>The labor <strong>efficiency</strong> variance is favorable by roughly $30,600 — the workforce is completing units in meaningfully fewer hours than the standard allows, consistent with a learning-curve effect as workers become more practiced over the year. This is the single largest variance in the whole dataset, and it’s favorable — a genuinely positive operational story.</p>
+</section>
+<section id="overhead-variances" class="level3" data-number="8.2.3">
+<h3 data-number="8.2.3" class="anchored" data-anchor-id="overhead-variances"><span class="header-section-number">8.2.3</span> Overhead Variances</h3>
+<p>Overhead variances measure the difference between actual manufacturing overhead costs and <strong>applied</strong> standard costs. Variable overhead splits into <em>spending</em> and <em>efficiency</em> variances based on activity levels. Variable overhead variances are very similar in terms of computation to materials and labor variances. Fixed overhead splits into spending (budget) and volume variances based on capacity and production.</p>
+<p><span class="math display">\[\small \text{VC Spending Variance} = \text{Actual Hours} \times (\text{Actual Rate} - \text{Standard Rate})\]</span></p>
+<p><span class="math display">\[\small \text{VC Efficiency Variance} = \text{Standard Rate} \times (\text{Actual Hours} - \text{Standard Hours})\]</span></p>
+<p>Fixed overhead costs remain constant in total regardless of changes in production volume within a relevant range. <a href="#fig-overhead-variance" class="quarto-xref">Figure&nbsp;<span>8.2</span></a> shows total fixed cost overhead variance breakdown.</p>
+<div id="fig-overhead-variance" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-overhead-variance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/fixed-overhead-variance.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-overhead-variance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.2: Fixed Overhead Variance
+</figcaption>
+</figure>
+</div>
+<div id="47a601fe" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>variance_pd[<span class="st">"var_oh_applied"</span>] <span class="op">=</span> variance_pd[<span class="st">"actual_labor_hours_total"</span>] <span class="op">*</span> variance_pd[<span class="st">"std_var_oh_rate_per_labor_hr"</span>]</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>variance_pd[<span class="st">"var_oh_spending_variance"</span>] <span class="op">=</span> variance_pd[<span class="st">"actual_var_oh_total"</span>] <span class="op">-</span> variance_pd[<span class="st">"var_oh_applied"</span>]</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>variance_pd[<span class="st">"fixed_oh_budget_variance"</span>] <span class="op">=</span> variance_pd[<span class="st">"actual_fixed_oh"</span>] <span class="op">-</span> variance_pd[<span class="st">"budgeted_fixed_oh"</span>]</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Annual variable overhead spending variance:"</span>, <span class="bu">round</span>(variance_pd[<span class="st">"var_oh_spending_variance"</span>].<span class="bu">sum</span>(), <span class="dv">0</span>))</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Annual fixed overhead budget variance:"</span>, <span class="bu">round</span>(variance_pd[<span class="st">"fixed_oh_budget_variance"</span>].<span class="bu">sum</span>(), <span class="dv">0</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Annual variable overhead spending variance: 1218.0
+Annual fixed overhead budget variance: 5070.0</code></pre>
+</div>
+</div>
+</section>
+<section id="visualizing-the-full-variance-picture" class="level3" data-number="8.2.4">
+<h3 data-number="8.2.4" class="anchored" data-anchor-id="visualizing-the-full-variance-picture"><span class="header-section-number">8.2.4</span> Visualizing the Full Variance Picture</h3>
+<div id="f404c9ea" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>variance_summary <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"variance"</span>: [<span class="st">"Materials Price"</span>, <span class="st">"Materials Quantity"</span>, <span class="st">"Labor Rate"</span>, <span class="st">"Labor Efficiency"</span>],</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"amount"</span>: [</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>        variance_pd[<span class="st">"materials_price_variance"</span>].<span class="bu">sum</span>(),</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>        variance_pd[<span class="st">"materials_qty_variance"</span>].<span class="bu">sum</span>(),</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>        variance_pd[<span class="st">"labor_rate_variance"</span>].<span class="bu">sum</span>(),</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>        variance_pd[<span class="st">"labor_efficiency_variance"</span>].<span class="bu">sum</span>(),</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>variance_summary[<span class="st">"type"</span>] <span class="op">=</span> variance_summary[<span class="st">"amount"</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="st">"Unfavorable"</span> <span class="cf">if</span> x <span class="op">&gt;</span> <span class="dv">0</span> <span class="cf">else</span> <span class="st">"Favorable"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href="">seaborn</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false" href="">plotnine</a></li></ul>
+<div class="tab-content">
+<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
+<div id="e7cd9fcb" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="fl">4.5</span>))</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>sns.barplot(</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>variance_summary, x<span class="op">=</span><span class="st">"amount"</span>, y<span class="op">=</span><span class="st">"variance"</span>, hue<span class="op">=</span><span class="st">"type"</span>,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    palette<span class="op">=</span>{<span class="st">"Unfavorable"</span>: <span class="st">"#c9482f"</span>, <span class="st">"Favorable"</span>: <span class="st">"#1c7c73"</span>}</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Annual Standard Costing Variances"</span>)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Variance ($)"</span>)</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>plt.axvline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">"black"</span>, linewidth<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="08-management-accounting-analytics_files/figure-html/cell-12-output-1.png" width="669" height="422" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
+<div id="a50ae8fd" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    ggplot(variance_summary, aes(x<span class="op">=</span><span class="st">"reorder(variance, amount)"</span>, y<span class="op">=</span><span class="st">"amount"</span>, fill<span class="op">=</span><span class="st">"type"</span>))</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_col()</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> coord_flip()</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> scale_fill_manual(values<span class="op">=</span>{<span class="st">"Unfavorable"</span>: <span class="st">"#c9482f"</span>, <span class="st">"Favorable"</span>: <span class="st">"#1c7c73"</span>})</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> labs(title<span class="op">=</span><span class="st">"Annual Standard Costing Variances"</span>, x<span class="op">=</span><span class="st">""</span>, y<span class="op">=</span><span class="st">"Variance ($)"</span>, fill<span class="op">=</span><span class="st">""</span>)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> theme_minimal()</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<div>
+<figure class="figure">
+<p><img src="08-management-accounting-analytics_files/figure-html/cell-13-output-1.png" width="672" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Reading the Full Picture Together
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>No single variance tells the whole story. Rising material prices (unfavorable) are being more than offset by a strong labor efficiency gain (favorable) — a pattern only visible by looking at all four variances side by side. A manager who only reviewed the materials price variance might conclude the year was purely a story of rising input costs, missing the larger, favorable efficiency story happening in labor. This is the same lesson from Chapter 7’s DuPont analysis: a single number in isolation can mislead, and decomposition reveals the real drivers.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="cost-volume-profit-cvp-analysis" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="cost-volume-profit-cvp-analysis"><span class="header-section-number">8.3</span> Cost-Volume-Profit (CVP) Analysis</h2>
+<p>CVP analysis answers a different question: given our <strong>cost structure</strong><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, how many units do we need to sell to break even, and how much cushion do we currently have above that point?</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
+<div id="e3588e99" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>cvp_pd <span class="op">=</span> pd.read_csv(<span class="st">"data/cvp_monthly_data.csv"</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>cvp_pd.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">month</th>
+<th data-quarto-table-cell-role="th">units_sold</th>
+<th data-quarto-table-cell-role="th">selling_price_per_unit</th>
+<th data-quarto-table-cell-role="th">variable_cost_per_unit</th>
+<th data-quarto-table-cell-role="th">fixed_costs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>2025-01</td>
+<td>3783</td>
+<td>52.0</td>
+<td>35.58</td>
+<td>44003.67</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>2025-02</td>
+<td>3866</td>
+<td>52.0</td>
+<td>34.26</td>
+<td>43327.21</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>2025-03</td>
+<td>4809</td>
+<td>52.0</td>
+<td>36.96</td>
+<td>43944.08</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>2025-04</td>
+<td>4079</td>
+<td>52.0</td>
+<td>34.73</td>
+<td>39148.50</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>2025-05</td>
+<td>3760</td>
+<td>52.0</td>
+<td>36.74</td>
+<td>43761.73</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
+<div id="02ae75c7" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>cvp_pl <span class="op">=</span> pl.read_csv(<span class="st">"data/cvp_monthly_data.csv"</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>cvp_pl.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (5, 5)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">month</th>
+<th data-quarto-table-cell-role="th">units_sold</th>
+<th data-quarto-table-cell-role="th">selling_price_per_unit</th>
+<th data-quarto-table-cell-role="th">variable_cost_per_unit</th>
+<th data-quarto-table-cell-role="th">fixed_costs</th>
+</tr>
+<tr class="even">
+<td>str</td>
+<td>i64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"2025-01"</td>
+<td>3783</td>
+<td>52.0</td>
+<td>35.58</td>
+<td>44003.67</td>
+</tr>
+<tr class="even">
+<td>"2025-02"</td>
+<td>3866</td>
+<td>52.0</td>
+<td>34.26</td>
+<td>43327.21</td>
+</tr>
+<tr class="odd">
+<td>"2025-03"</td>
+<td>4809</td>
+<td>52.0</td>
+<td>36.96</td>
+<td>43944.08</td>
+</tr>
+<tr class="even">
+<td>"2025-04"</td>
+<td>4079</td>
+<td>52.0</td>
+<td>34.73</td>
+<td>39148.5</td>
+</tr>
+<tr class="odd">
+<td>"2025-05"</td>
+<td>3760</td>
+<td>52.0</td>
+<td>36.74</td>
+<td>43761.73</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section id="contribution-margin-and-break-even" class="level3" data-number="8.3.1">
+<h3 data-number="8.3.1" class="anchored" data-anchor-id="contribution-margin-and-break-even"><span class="header-section-number">8.3.1</span> Contribution Margin and Break-Even</h3>
+<p>The <strong>contribution margin per unit</strong> represents the amount of money each individual item sold contributes toward covering your company’s fixed costs. It isolates profitability at the product level by stripping away fixed constraints, subtracting only the variable costs—such as raw materials, direct labor, and sales commissions—from the unit’s selling price.</p>
+<p>The <strong>contribution margin ratio</strong> expresses your profit margins as a clean percentage of total sales revenue rather than a flat dollar amount. By dividing the contribution margin by total sales, you instantly see what percentage of each dollar generated is available to pay down fixed overhead and fund bottom-line profits. This ratio is a vital tool for managers forecasting profitability, as it allows you to quickly calculate how a sudden 10% increase or decrease in gross sales volume will mathematically impact net income.</p>
+<p>The <strong>break-even point in units</strong> calculates the exact physical quantity of product your business must manufacture and sell to achieve a net income of zero. To find this number, total fixed costs are divided by the contribution margin per unit, revealing the baseline production target required to avoid losing money. Tracking this metric gives operations managers a clear, tangible daily or monthly sales quota that production teams must hit before the business can claim true profitability.</p>
+<p>The <strong>break-even point in dollars</strong> translates your operational baseline into a concrete financial revenue target, dictating the total sales volume needed to perfectly balance the books. By dividing total fixed costs by the <em>contribution margin ratio</em>, this formula determines the gross cash inflow required to cover all combined variable and fixed expenses. This dollar-centric metric is highly prized by executives and lenders, as it provides a universal benchmark to evaluate financial risk and measure safety margins against actual sales forecasts.</p>
+<p>The <strong>Margin of Safety (or safety margin)</strong> is a financial metric that measures the cushion a business has between its current or projected sales volume and its break-even point. It represents the amount by which sales can drop before the business begins to lose money, serving as a critical indicator of financial risk. A high margin of safety means the business is well-protected against economic downturns or sales drops, while a low margin indicates high risk.</p>
+<p><span class="math display">\[
+\begin{split}
+\text{Contribution Margin per Unit} = &amp; \text{Selling Price per Unit} \\
+&amp; - \text{Variable Cost per Unit}
+\end{split}
+\]</span></p>
+<p><span class="math display">\[
+\begin{split}
+\text{Contribution Margin Ratio} = &amp; \frac{\text{Contribution Margin per Unit}}{\text{Selling Price per Unit}}
+\end{split}
+\]</span></p>
+<p><span class="math display">\[
+\begin{split}
+\text{Break-Even Point (Units)} = &amp; \frac{\text{Fixed Costs}}{\text{Contribution Margin per Unit}}
+\end{split}
+\]</span></p>
+<p><span class="math display">\[
+\begin{split}
+\text{Break-Even Point (Dollars)} = &amp; \frac{\text{Fixed Costs}}{\text{Contribution Margin Ratio}}
+\end{split}
+\]</span></p>
+<p><span class="math display">\[
+\begin{split}
+\text{Margin of Safety (Dollars)} = &amp; \text{Current or Budgeted Sales} \\
+&amp; - \text{Break-Even Sales}
+\end{split}
+\]</span> <span class="math display">\[
+\begin{split}
+\text{Margin of Safety (Units)} = &amp; \text{Current or Budgeted Units Sold} \\
+&amp; - \text{Break-Even Units}
+\end{split}
+\]</span> <span class="math display">\[
+\begin{split}
+\text{Margin of Safety Percentage} = &amp; \frac{\text{Margin of Safety (Dollars)}}{\text{Current or Budgeted Sales}} \times 100
+\end{split}
+\]</span></p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-6-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-1" role="tab" aria-controls="tabset-6-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-6-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-2" role="tab" aria-controls="tabset-6-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-6-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-6-1-tab">
+<div id="2404e363" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>cvp_pd[<span class="st">"contribution_margin_per_unit"</span>] <span class="op">=</span> cvp_pd[<span class="st">"selling_price_per_unit"</span>] <span class="op">-</span> cvp_pd[<span class="st">"variable_cost_per_unit"</span>]</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>cvp_pd[<span class="st">"cm_ratio"</span>] <span class="op">=</span> cvp_pd[<span class="st">"contribution_margin_per_unit"</span>] <span class="op">/</span> cvp_pd[<span class="st">"selling_price_per_unit"</span>]</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>cvp_pd[<span class="st">"breakeven_units"</span>] <span class="op">=</span> cvp_pd[<span class="st">"fixed_costs"</span>] <span class="op">/</span> cvp_pd[<span class="st">"contribution_margin_per_unit"</span>]</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>cvp_pd[<span class="st">"margin_of_safety_pct"</span>] <span class="op">=</span> (cvp_pd[<span class="st">"units_sold"</span>] <span class="op">-</span> cvp_pd[<span class="st">"breakeven_units"</span>]) <span class="op">/</span> cvp_pd[<span class="st">"units_sold"</span>] <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>cvp_pd[[<span class="st">"month"</span>, <span class="st">"contribution_margin_per_unit"</span>, <span class="st">"cm_ratio"</span>, <span class="st">"breakeven_units"</span>, <span class="st">"margin_of_safety_pct"</span>]].<span class="bu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">month</th>
+<th data-quarto-table-cell-role="th">contribution_margin_per_unit</th>
+<th data-quarto-table-cell-role="th">cm_ratio</th>
+<th data-quarto-table-cell-role="th">breakeven_units</th>
+<th data-quarto-table-cell-role="th">margin_of_safety_pct</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>2025-01</td>
+<td>16.42</td>
+<td>0.32</td>
+<td>2679.88</td>
+<td>29.16</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>2025-02</td>
+<td>17.74</td>
+<td>0.34</td>
+<td>2442.35</td>
+<td>36.82</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>2025-03</td>
+<td>15.04</td>
+<td>0.29</td>
+<td>2921.81</td>
+<td>39.24</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>2025-04</td>
+<td>17.27</td>
+<td>0.33</td>
+<td>2266.85</td>
+<td>44.43</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>2025-05</td>
+<td>15.26</td>
+<td>0.29</td>
+<td>2867.74</td>
+<td>23.73</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>2025-06</td>
+<td>16.39</td>
+<td>0.32</td>
+<td>2592.71</td>
+<td>46.06</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>2025-07</td>
+<td>16.41</td>
+<td>0.32</td>
+<td>2590.94</td>
+<td>34.51</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>2025-08</td>
+<td>16.51</td>
+<td>0.32</td>
+<td>2485.33</td>
+<td>34.80</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8</th>
+<td>2025-09</td>
+<td>17.04</td>
+<td>0.33</td>
+<td>2518.38</td>
+<td>43.92</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">9</th>
+<td>2025-10</td>
+<td>15.71</td>
+<td>0.30</td>
+<td>2633.82</td>
+<td>40.49</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">10</th>
+<td>2025-11</td>
+<td>16.50</td>
+<td>0.32</td>
+<td>2534.58</td>
+<td>40.15</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">11</th>
+<td>2025-12</td>
+<td>17.56</td>
+<td>0.34</td>
+<td>2433.35</td>
+<td>38.98</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-6-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-6-2-tab">
+<div id="ab9a37de" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>cvp_pl <span class="op">=</span> cvp_pl.with_columns([</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    (pl.col(<span class="st">"selling_price_per_unit"</span>) <span class="op">-</span> pl.col(<span class="st">"variable_cost_per_unit"</span>)).alias(<span class="st">"contribution_margin_per_unit"</span>),</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>]).with_columns([</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    (pl.col(<span class="st">"contribution_margin_per_unit"</span>) <span class="op">/</span> pl.col(<span class="st">"selling_price_per_unit"</span>)).alias(<span class="st">"cm_ratio"</span>),</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    (pl.col(<span class="st">"fixed_costs"</span>) <span class="op">/</span> pl.col(<span class="st">"contribution_margin_per_unit"</span>)).alias(<span class="st">"breakeven_units"</span>),</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>]).with_columns(</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    ((pl.col(<span class="st">"units_sold"</span>) <span class="op">-</span> pl.col(<span class="st">"breakeven_units"</span>)) <span class="op">/</span> pl.col(<span class="st">"units_sold"</span>) <span class="op">*</span> <span class="dv">100</span>).alias(<span class="st">"margin_of_safety_pct"</span>)</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>cvp_pl.select([<span class="st">"month"</span>, <span class="st">"contribution_margin_per_unit"</span>, <span class="st">"cm_ratio"</span>, <span class="st">"breakeven_units"</span>, <span class="st">"margin_of_safety_pct"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="16">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (12, 5)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">month</th>
+<th data-quarto-table-cell-role="th">contribution_margin_per_unit</th>
+<th data-quarto-table-cell-role="th">cm_ratio</th>
+<th data-quarto-table-cell-role="th">breakeven_units</th>
+<th data-quarto-table-cell-role="th">margin_of_safety_pct</th>
+</tr>
+<tr class="even">
+<td>str</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"2025-01"</td>
+<td>16.42</td>
+<td>0.315769</td>
+<td>2679.88246</td>
+<td>29.159861</td>
+</tr>
+<tr class="even">
+<td>"2025-02"</td>
+<td>17.74</td>
+<td>0.341154</td>
+<td>2442.345547</td>
+<td>36.824999</td>
+</tr>
+<tr class="odd">
+<td>"2025-03"</td>
+<td>15.04</td>
+<td>0.289231</td>
+<td>2921.81383</td>
+<td>39.242798</td>
+</tr>
+<tr class="even">
+<td>"2025-04"</td>
+<td>17.27</td>
+<td>0.332115</td>
+<td>2266.850029</td>
+<td>44.426329</td>
+</tr>
+<tr class="odd">
+<td>"2025-05"</td>
+<td>15.26</td>
+<td>0.293462</td>
+<td>2867.741153</td>
+<td>23.730288</td>
+</tr>
+<tr class="even">
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr class="odd">
+<td>"2025-08"</td>
+<td>16.51</td>
+<td>0.3175</td>
+<td>2485.327075</td>
+<td>34.802543</td>
+</tr>
+<tr class="even">
+<td>"2025-09"</td>
+<td>17.04</td>
+<td>0.327692</td>
+<td>2518.38439</td>
+<td>43.92375</td>
+</tr>
+<tr class="odd">
+<td>"2025-10"</td>
+<td>15.71</td>
+<td>0.302115</td>
+<td>2633.81795</td>
+<td>40.492138</td>
+</tr>
+<tr class="even">
+<td>"2025-11"</td>
+<td>16.5</td>
+<td>0.317308</td>
+<td>2534.575758</td>
+<td>40.151694</td>
+</tr>
+<tr class="odd">
+<td>"2025-12"</td>
+<td>17.56</td>
+<td>0.337692</td>
+<td>2433.346811</td>
+<td>38.98328</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>The contribution margin ratio sits consistently around 30-33%, and the margin of safety — how far actual sales exceed the break-even point — ranges from roughly 24% to 46% across months. Every month in this dataset operated safely above break-even, but with meaningfully more cushion in some months (June, September) than others (January, May).</p>
+</section>
+<section id="the-break-even-chart" class="level3" data-number="8.3.2">
+<h3 data-number="8.3.2" class="anchored" data-anchor-id="the-break-even-chart"><span class="header-section-number">8.3.2</span> The Break-Even Chart</h3>
+<div id="25989d43" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>avg_price <span class="op">=</span> cvp_pd[<span class="st">"selling_price_per_unit"</span>].mean()</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>avg_vc <span class="op">=</span> cvp_pd[<span class="st">"variable_cost_per_unit"</span>].mean()</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>avg_fc <span class="op">=</span> cvp_pd[<span class="st">"fixed_costs"</span>].mean()</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>breakeven_units <span class="op">=</span> avg_fc <span class="op">/</span> (avg_price <span class="op">-</span> avg_vc)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>units_range <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">6000</span>, <span class="dv">100</span>)</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>be_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"units"</span>: units_range,</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"revenue"</span>: units_range <span class="op">*</span> avg_price,</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"total_cost"</span>: avg_fc <span class="op">+</span> units_range <span class="op">*</span> avg_vc,</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true" href="">seaborn</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false" href="">plotnine</a></li></ul>
+<div class="tab-content">
+<div id="tabset-7-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-7-1-tab">
+<div id="63bee5b7" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>plt.plot(be_df[<span class="st">"units"</span>], be_df[<span class="st">"revenue"</span>], label<span class="op">=</span><span class="st">"Revenue"</span>, color<span class="op">=</span><span class="st">"#1c7c73"</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>plt.plot(be_df[<span class="st">"units"</span>], be_df[<span class="st">"total_cost"</span>], label<span class="op">=</span><span class="st">"Total Cost"</span>, color<span class="op">=</span><span class="st">"#c9482f"</span>)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>plt.axvline(breakeven_units, linestyle<span class="op">=</span><span class="st">"--"</span>, color<span class="op">=</span><span class="st">"gray"</span>, label<span class="op">=</span><span class="ss">f"Break-even (</span><span class="sc">{</span>breakeven_units<span class="sc">:.0f}</span><span class="ss"> units)"</span>)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Cost-Volume-Profit (Break-Even) Chart"</span>)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Units"</span>)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Dollars ($)"</span>)</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="08-management-accounting-analytics_files/figure-html/cell-19-output-1.png" width="665" height="471" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-7-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-7-2-tab">
+<div id="72e8d41e" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>be_long <span class="op">=</span> be_df.melt(id_vars<span class="op">=</span><span class="st">"units"</span>, value_vars<span class="op">=</span>[<span class="st">"revenue"</span>, <span class="st">"total_cost"</span>], var_name<span class="op">=</span><span class="st">"line"</span>, value_name<span class="op">=</span><span class="st">"dollars"</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    ggplot(be_long, aes(x<span class="op">=</span><span class="st">"units"</span>, y<span class="op">=</span><span class="st">"dollars"</span>, color<span class="op">=</span><span class="st">"line"</span>))</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_line(size<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_vline(xintercept<span class="op">=</span>breakeven_units, linetype<span class="op">=</span><span class="st">"dashed"</span>, color<span class="op">=</span><span class="st">"gray"</span>)</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> scale_color_manual(values<span class="op">=</span>{<span class="st">"revenue"</span>: <span class="st">"#1c7c73"</span>, <span class="st">"total_cost"</span>: <span class="st">"#c9482f"</span>})</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> labs(title<span class="op">=</span><span class="st">"Cost-Volume-Profit (Break-Even) Chart"</span>, x<span class="op">=</span><span class="st">"Units"</span>, y<span class="op">=</span><span class="st">"Dollars ($)"</span>, color<span class="op">=</span><span class="st">""</span>)</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> theme_minimal()</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="19">
+<div>
+<figure class="figure">
+<p><img src="08-management-accounting-analytics_files/figure-html/cell-20-output-1.png" width="672" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>The break-even point sits at roughly 2,570 units per month — well below every month’s actual sales volume in this dataset (all above 3,700 units), consistent with the healthy margin of safety percentages computed above.</p>
+</section>
+<section id="target-profit-analysis" class="level3" data-number="8.3.3">
+<h3 data-number="8.3.3" class="anchored" data-anchor-id="target-profit-analysis"><span class="header-section-number">8.3.3</span> Target Profit Analysis</h3>
+<p>CVP logic extends naturally to a different question: how many units are needed to hit a specific profit target, not just to break even?</p>
+<div id="5cd040ee" class="cell" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>target_profit <span class="op">=</span> <span class="dv">30000</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>target_units <span class="op">=</span> (avg_fc <span class="op">+</span> target_profit) <span class="op">/</span> (avg_price <span class="op">-</span> avg_vc)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Units needed for a $</span><span class="sc">{</span>target_profit<span class="sc">:,}</span><span class="ss"> monthly target profit: </span><span class="sc">{</span>target_units<span class="sc">:.0f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Units needed for a $30,000 monthly target profit: 4393</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="activity-based-costing-abc" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="activity-based-costing-abc"><span class="header-section-number">8.4</span> Activity-Based Costing (ABC)</h2>
+<p>Traditional overhead allocation spreads all manufacturing overhead across products using a single base — often machine hours or direct labor hours. This works reasonably well when products consume overhead resources in <strong>roughly the same proportions</strong>. When products differ substantially in complexity, it can systematically distort product costs.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-8-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-1" role="tab" aria-controls="tabset-8-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-2" role="tab" aria-controls="tabset-8-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-8-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-8-1-tab">
+<div id="3cc68f2b" class="cell" data-execution_count="21">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>products_pd <span class="op">=</span> pd.read_csv(<span class="st">"data/abc_cost_data.csv"</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>products_pd[[<span class="st">"product"</span>, <span class="st">"units_produced"</span>, <span class="st">"machine_hours"</span>, <span class="st">"num_setups"</span>, <span class="st">"num_inspections"</span>]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="21">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">product</th>
+<th data-quarto-table-cell-role="th">units_produced</th>
+<th data-quarto-table-cell-role="th">machine_hours</th>
+<th data-quarto-table-cell-role="th">num_setups</th>
+<th data-quarto-table-cell-role="th">num_inspections</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Standard-A</td>
+<td>18000</td>
+<td>3600</td>
+<td>12</td>
+<td>40</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Standard-B</td>
+<td>15000</td>
+<td>3000</td>
+<td>10</td>
+<td>35</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Custom-C</td>
+<td>1200</td>
+<td>480</td>
+<td>45</td>
+<td>90</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Custom-D</td>
+<td>900</td>
+<td>360</td>
+<td>40</td>
+<td>85</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>Specialty-E</td>
+<td>300</td>
+<td>180</td>
+<td>30</td>
+<td>60</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-8-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-8-2-tab">
+<div id="692cb1cc" class="cell" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>products_pl <span class="op">=</span> pl.read_csv(<span class="st">"data/abc_cost_data.csv"</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>products_pl.select([<span class="st">"product"</span>, <span class="st">"units_produced"</span>, <span class="st">"machine_hours"</span>, <span class="st">"num_setups"</span>, <span class="st">"num_inspections"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="22">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (5, 5)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">product</th>
+<th data-quarto-table-cell-role="th">units_produced</th>
+<th data-quarto-table-cell-role="th">machine_hours</th>
+<th data-quarto-table-cell-role="th">num_setups</th>
+<th data-quarto-table-cell-role="th">num_inspections</th>
+</tr>
+<tr class="even">
+<td>str</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"Standard-A"</td>
+<td>18000</td>
+<td>3600</td>
+<td>12</td>
+<td>40</td>
+</tr>
+<tr class="even">
+<td>"Standard-B"</td>
+<td>15000</td>
+<td>3000</td>
+<td>10</td>
+<td>35</td>
+</tr>
+<tr class="odd">
+<td>"Custom-C"</td>
+<td>1200</td>
+<td>480</td>
+<td>45</td>
+<td>90</td>
+</tr>
+<tr class="even">
+<td>"Custom-D"</td>
+<td>900</td>
+<td>360</td>
+<td>40</td>
+<td>85</td>
+</tr>
+<tr class="odd">
+<td>"Specialty-E"</td>
+<td>300</td>
+<td>180</td>
+<td>30</td>
+<td>60</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Notice the pattern: <strong>Standard-A</strong> and <strong>Standard-B</strong> are produced in large volumes with relatively few setups or inspections per unit — simple, high-volume products. <strong>Custom-C</strong>, <strong>Custom-D</strong>, and <strong>Specialty-E</strong> are produced in much smaller volumes but require a disproportionate number of setups and inspections — complex, low-volume products.</p>
+<section id="traditional-allocation-single-base-machine-hours" class="level3" data-number="8.4.1">
+<h3 data-number="8.4.1" class="anchored" data-anchor-id="traditional-allocation-single-base-machine-hours"><span class="header-section-number">8.4.1</span> Traditional Allocation (Single Base: Machine Hours)</h3>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-9-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-1" role="tab" aria-controls="tabset-9-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-9-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-2" role="tab" aria-controls="tabset-9-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-9-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-9-1-tab">
+<div id="ed0cdeba" class="cell" data-execution_count="23">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>TOTAL_OVERHEAD <span class="op">=</span> <span class="dv">300_000</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>trad_rate_per_mh <span class="op">=</span> TOTAL_OVERHEAD <span class="op">/</span> products_pd[<span class="st">"machine_hours"</span>].<span class="bu">sum</span>()</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>products_pd[<span class="st">"traditional_oh_allocated"</span>] <span class="op">=</span> products_pd[<span class="st">"machine_hours"</span>] <span class="op">*</span> trad_rate_per_mh</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>products_pd[[<span class="st">"product"</span>, <span class="st">"machine_hours"</span>, <span class="st">"traditional_oh_allocated"</span>]].<span class="bu">round</span>(<span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="23">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">product</th>
+<th data-quarto-table-cell-role="th">machine_hours</th>
+<th data-quarto-table-cell-role="th">traditional_oh_allocated</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Standard-A</td>
+<td>3600</td>
+<td>141732.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Standard-B</td>
+<td>3000</td>
+<td>118110.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Custom-C</td>
+<td>480</td>
+<td>18898.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Custom-D</td>
+<td>360</td>
+<td>14173.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>Specialty-E</td>
+<td>180</td>
+<td>7087.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-9-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-9-2-tab">
+<div id="68867f5a" class="cell" data-execution_count="24">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>total_machine_hours <span class="op">=</span> products_pl.select(pl.col(<span class="st">"machine_hours"</span>).<span class="bu">sum</span>()).item()</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>trad_rate_per_mh_pl <span class="op">=</span> TOTAL_OVERHEAD <span class="op">/</span> total_machine_hours</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>products_pl <span class="op">=</span> products_pl.with_columns(</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    (pl.col(<span class="st">"machine_hours"</span>) <span class="op">*</span> trad_rate_per_mh_pl).alias(<span class="st">"traditional_oh_allocated"</span>)</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>products_pl.select([<span class="st">"product"</span>, <span class="st">"machine_hours"</span>, <span class="st">"traditional_oh_allocated"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="24">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (5, 3)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">product</th>
+<th data-quarto-table-cell-role="th">machine_hours</th>
+<th data-quarto-table-cell-role="th">traditional_oh_allocated</th>
+</tr>
+<tr class="even">
+<td>str</td>
+<td>i64</td>
+<td>f64</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"Standard-A"</td>
+<td>3600</td>
+<td>141732.283465</td>
+</tr>
+<tr class="even">
+<td>"Standard-B"</td>
+<td>3000</td>
+<td>118110.23622</td>
+</tr>
+<tr class="odd">
+<td>"Custom-C"</td>
+<td>480</td>
+<td>18897.637795</td>
+</tr>
+<tr class="even">
+<td>"Custom-D"</td>
+<td>360</td>
+<td>14173.228346</td>
+</tr>
+<tr class="odd">
+<td>"Specialty-E"</td>
+<td>180</td>
+<td>7086.614173</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="activity-based-allocation-three-cost-pools" class="level3" data-number="8.4.2">
+<h3 data-number="8.4.2" class="anchored" data-anchor-id="activity-based-allocation-three-cost-pools"><span class="header-section-number">8.4.2</span> Activity-Based Allocation (Three Cost Pools)</h3>
+<p>ABC instead splits overhead into pools tied to specific activities, each allocated using the cost driver that actually causes that cost — setups, inspections, and machine time each get their own rate.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-10-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-1" role="tab" aria-controls="tabset-10-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-10-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-2" role="tab" aria-controls="tabset-10-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-10-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-10-1-tab">
+<div id="affb2723" class="cell" data-execution_count="25">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>setup_pool, inspection_pool, machine_pool <span class="op">=</span> TOTAL_OVERHEAD <span class="op">*</span> <span class="fl">0.35</span>, TOTAL_OVERHEAD <span class="op">*</span> <span class="fl">0.25</span>, TOTAL_OVERHEAD <span class="op">*</span> <span class="fl">0.40</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>setup_rate <span class="op">=</span> setup_pool <span class="op">/</span> products_pd[<span class="st">"num_setups"</span>].<span class="bu">sum</span>()</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>inspection_rate <span class="op">=</span> inspection_pool <span class="op">/</span> products_pd[<span class="st">"num_inspections"</span>].<span class="bu">sum</span>()</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>machine_rate <span class="op">=</span> machine_pool <span class="op">/</span> products_pd[<span class="st">"machine_hours"</span>].<span class="bu">sum</span>()</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>products_pd[<span class="st">"abc_setup_cost"</span>] <span class="op">=</span> products_pd[<span class="st">"num_setups"</span>] <span class="op">*</span> setup_rate</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>products_pd[<span class="st">"abc_inspection_cost"</span>] <span class="op">=</span> products_pd[<span class="st">"num_inspections"</span>] <span class="op">*</span> inspection_rate</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>products_pd[<span class="st">"abc_machine_cost"</span>] <span class="op">=</span> products_pd[<span class="st">"machine_hours"</span>] <span class="op">*</span> machine_rate</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>products_pd[<span class="st">"abc_oh_allocated"</span>] <span class="op">=</span> (</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>    products_pd[<span class="st">"abc_setup_cost"</span>] <span class="op">+</span> products_pd[<span class="st">"abc_inspection_cost"</span>] <span class="op">+</span> products_pd[<span class="st">"abc_machine_cost"</span>]</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>products_pd[[<span class="st">"product"</span>, <span class="st">"abc_setup_cost"</span>, <span class="st">"abc_inspection_cost"</span>, <span class="st">"abc_machine_cost"</span>, <span class="st">"abc_oh_allocated"</span>]].<span class="bu">round</span>(<span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="25">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">product</th>
+<th data-quarto-table-cell-role="th">abc_setup_cost</th>
+<th data-quarto-table-cell-role="th">abc_inspection_cost</th>
+<th data-quarto-table-cell-role="th">abc_machine_cost</th>
+<th data-quarto-table-cell-role="th">abc_oh_allocated</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Standard-A</td>
+<td>9197.0</td>
+<td>9677.0</td>
+<td>56693.0</td>
+<td>75567.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Standard-B</td>
+<td>7664.0</td>
+<td>8468.0</td>
+<td>47244.0</td>
+<td>63376.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Custom-C</td>
+<td>34489.0</td>
+<td>21774.0</td>
+<td>7559.0</td>
+<td>63822.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Custom-D</td>
+<td>30657.0</td>
+<td>20565.0</td>
+<td>5669.0</td>
+<td>56891.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>Specialty-E</td>
+<td>22993.0</td>
+<td>14516.0</td>
+<td>2835.0</td>
+<td>40343.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-10-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-10-2-tab">
+<div id="1f3978be" class="cell" data-execution_count="26">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>setup_pool_pl, inspection_pool_pl, machine_pool_pl <span class="op">=</span> TOTAL_OVERHEAD <span class="op">*</span> <span class="fl">0.35</span>, TOTAL_OVERHEAD <span class="op">*</span> <span class="fl">0.25</span>, TOTAL_OVERHEAD <span class="op">*</span> <span class="fl">0.40</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>setup_rate_pl <span class="op">=</span> setup_pool_pl <span class="op">/</span> products_pl.select(pl.col(<span class="st">"num_setups"</span>).<span class="bu">sum</span>()).item()</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>inspection_rate_pl <span class="op">=</span> inspection_pool_pl <span class="op">/</span> products_pl.select(pl.col(<span class="st">"num_inspections"</span>).<span class="bu">sum</span>()).item()</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>machine_rate_pl <span class="op">=</span> machine_pool_pl <span class="op">/</span> products_pl.select(pl.col(<span class="st">"machine_hours"</span>).<span class="bu">sum</span>()).item()</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>products_pl <span class="op">=</span> products_pl.with_columns([</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>    (pl.col(<span class="st">"num_setups"</span>) <span class="op">*</span> setup_rate_pl).alias(<span class="st">"abc_setup_cost"</span>),</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>    (pl.col(<span class="st">"num_inspections"</span>) <span class="op">*</span> inspection_rate_pl).alias(<span class="st">"abc_inspection_cost"</span>),</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>    (pl.col(<span class="st">"machine_hours"</span>) <span class="op">*</span> machine_rate_pl).alias(<span class="st">"abc_machine_cost"</span>),</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>]).with_columns(</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>    (pl.col(<span class="st">"abc_setup_cost"</span>) <span class="op">+</span> pl.col(<span class="st">"abc_inspection_cost"</span>) <span class="op">+</span> pl.col(<span class="st">"abc_machine_cost"</span>)).alias(<span class="st">"abc_oh_allocated"</span>)</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>products_pl.select([<span class="st">"product"</span>, <span class="st">"abc_setup_cost"</span>, <span class="st">"abc_inspection_cost"</span>, <span class="st">"abc_machine_cost"</span>, <span class="st">"abc_oh_allocated"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="26">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (5, 5)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">product</th>
+<th data-quarto-table-cell-role="th">abc_setup_cost</th>
+<th data-quarto-table-cell-role="th">abc_inspection_cost</th>
+<th data-quarto-table-cell-role="th">abc_machine_cost</th>
+<th data-quarto-table-cell-role="th">abc_oh_allocated</th>
+</tr>
+<tr class="even">
+<td>str</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"Standard-A"</td>
+<td>9197.080292</td>
+<td>9677.419355</td>
+<td>56692.913386</td>
+<td>75567.413033</td>
+</tr>
+<tr class="even">
+<td>"Standard-B"</td>
+<td>7664.233577</td>
+<td>8467.741935</td>
+<td>47244.094488</td>
+<td>63376.07</td>
+</tr>
+<tr class="odd">
+<td>"Custom-C"</td>
+<td>34489.051095</td>
+<td>21774.193548</td>
+<td>7559.055118</td>
+<td>63822.299761</td>
+</tr>
+<tr class="even">
+<td>"Custom-D"</td>
+<td>30656.934307</td>
+<td>20564.516129</td>
+<td>5669.291339</td>
+<td>56890.741774</td>
+</tr>
+<tr class="odd">
+<td>"Specialty-E"</td>
+<td>22992.70073</td>
+<td>14516.129032</td>
+<td>2834.645669</td>
+<td>40343.475431</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Both methods allocate the same $300,000 total — the only question is <em>how</em> it’s distributed across the five products.</p>
+<div id="95311016" class="cell" data-execution_count="27">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>products_pd[<span class="st">"traditional_cost_per_unit"</span>] <span class="op">=</span> (</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    products_pd[<span class="st">"direct_materials_cost"</span>] <span class="op">+</span> products_pd[<span class="st">"direct_labor_cost"</span>] <span class="op">+</span> products_pd[<span class="st">"traditional_oh_allocated"</span>]</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>) <span class="op">/</span> products_pd[<span class="st">"units_produced"</span>]</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>products_pd[<span class="st">"abc_cost_per_unit"</span>] <span class="op">=</span> (</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>    products_pd[<span class="st">"direct_materials_cost"</span>] <span class="op">+</span> products_pd[<span class="st">"direct_labor_cost"</span>] <span class="op">+</span> products_pd[<span class="st">"abc_oh_allocated"</span>]</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>) <span class="op">/</span> products_pd[<span class="st">"units_produced"</span>]</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>products_pd[<span class="st">"cost_per_unit_difference"</span>] <span class="op">=</span> products_pd[<span class="st">"abc_cost_per_unit"</span>] <span class="op">-</span> products_pd[<span class="st">"traditional_cost_per_unit"</span>]</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>products_pd[[<span class="st">"product"</span>, <span class="st">"traditional_cost_per_unit"</span>, <span class="st">"abc_cost_per_unit"</span>, <span class="st">"cost_per_unit_difference"</span>]].<span class="bu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="27">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">product</th>
+<th data-quarto-table-cell-role="th">traditional_cost_per_unit</th>
+<th data-quarto-table-cell-role="th">abc_cost_per_unit</th>
+<th data-quarto-table-cell-role="th">cost_per_unit_difference</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Standard-A</td>
+<td>16.87</td>
+<td>13.20</td>
+<td>-3.68</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Standard-B</td>
+<td>17.37</td>
+<td>13.73</td>
+<td>-3.65</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Custom-C</td>
+<td>42.75</td>
+<td>80.19</td>
+<td>37.44</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Custom-D</td>
+<td>43.75</td>
+<td>91.21</td>
+<td>47.46</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>Specialty-E</td>
+<td>60.62</td>
+<td>171.48</td>
+<td>110.86</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-11-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-11-1" role="tab" aria-controls="tabset-11-1" aria-selected="true" href="">seaborn</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-11-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-11-2" role="tab" aria-controls="tabset-11-2" aria-selected="false" href="">plotnine</a></li></ul>
+<div class="tab-content">
+<div id="tabset-11-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-11-1-tab">
+<div id="917f3105" class="cell" data-execution_count="28">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>comparison <span class="op">=</span> products_pd.melt(</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    id_vars<span class="op">=</span><span class="st">"product"</span>, value_vars<span class="op">=</span>[<span class="st">"traditional_cost_per_unit"</span>, <span class="st">"abc_cost_per_unit"</span>],</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    var_name<span class="op">=</span><span class="st">"method"</span>, value_name<span class="op">=</span><span class="st">"cost_per_unit"</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>comparison[<span class="st">"method"</span>] <span class="op">=</span> comparison[<span class="st">"method"</span>].<span class="bu">map</span>({</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"traditional_cost_per_unit"</span>: <span class="st">"Traditional"</span>, <span class="st">"abc_cost_per_unit"</span>: <span class="st">"ABC"</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="fl">4.5</span>))</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>sns.barplot(data<span class="op">=</span>comparison, x<span class="op">=</span><span class="st">"product"</span>, y<span class="op">=</span><span class="st">"cost_per_unit"</span>, hue<span class="op">=</span><span class="st">"method"</span>,</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>            palette<span class="op">=</span>{<span class="st">"Traditional"</span>: <span class="st">"#8a4fbe"</span>, <span class="st">"ABC"</span>: <span class="st">"#1c7c73"</span>})</span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Cost per Unit: Traditional vs. Activity-Based Costing"</span>)</span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Cost per Unit ($)"</span>)</span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="08-management-accounting-analytics_files/figure-html/cell-29-output-1.png" width="759" height="421" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-11-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-11-2-tab">
+<div id="ddabfe62" class="cell" data-execution_count="29">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    ggplot(comparison, aes(x<span class="op">=</span><span class="st">"product"</span>, y<span class="op">=</span><span class="st">"cost_per_unit"</span>, fill<span class="op">=</span><span class="st">"method"</span>))</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_col(position<span class="op">=</span><span class="st">"dodge"</span>)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> scale_fill_manual(values<span class="op">=</span>{<span class="st">"Traditional"</span>: <span class="st">"#8a4fbe"</span>, <span class="st">"ABC"</span>: <span class="st">"#1c7c73"</span>})</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> labs(title<span class="op">=</span><span class="st">"Cost per Unit: Traditional vs. Activity-Based Costing"</span>, x<span class="op">=</span><span class="st">""</span>, y<span class="op">=</span><span class="st">"Cost per Unit ($)"</span>, fill<span class="op">=</span><span class="st">""</span>)</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> theme_minimal()</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="29">
+<div>
+<figure class="figure">
+<p><img src="08-management-accounting-analytics_files/figure-html/cell-30-output-1.png" width="672" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>The Classic ABC Finding, Reproduced Here
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Look at the direction of every difference: <strong>Standard-A</strong> and <strong>Standard-B</strong> — the high-volume, simple products — cost <em>less</em> per unit under ABC than under traditional allocation. <strong>Custom-C</strong>, <strong>Custom-D</strong>, and especially <strong>Specialty-E</strong> — the low-volume, complex products — cost dramatically <em>more</em> per unit under ABC, with Specialty-E’s cost increasing by nearly $111 per unit.</p>
+<p>This is precisely the textbook ABC finding: traditional single-base allocation systematically <strong>undercosts</strong> low-volume, complex products (since they don’t consume much machine time, even though they generate disproportionate setup and inspection activity) while <strong>overcosting</strong> high-volume, simple products. A company pricing Specialty-E based on its traditional-costing number could be selling it at a loss without realizing it — exactly the kind of decision-relevant insight management accounting analytics is meant to surface.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="chapter-summary" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="chapter-summary"><span class="header-section-number">8.5</span> Chapter Summary</h2>
+<ul>
+<li>Management accounting analytics serves internal decision-makers rather than external stakeholders, and isn’t bound by GAAP or subject to external audit — its only test is whether it helps managers make better decisions.</li>
+<li>Standard costing variances decompose the gap between actual and expected cost into specific, actionable causes: price/rate variances (did we pay more or less?) and quantity/efficiency variances (did we use more or less than the standard allows?).</li>
+<li>No single variance should be read in isolation — in this chapter, a real cost increase (materials price) was more than offset by a real efficiency gain (labor), a pattern only visible when every variance is viewed together.</li>
+<li>CVP analysis (contribution margin, break-even point, margin of safety, target profit) answers different but related operational questions than variance analysis, focused on volume and profitability rather than cost control.</li>
+<li>Traditional overhead allocation and activity-based costing can produce meaningfully different product costs whenever products vary substantially in production complexity — ABC’s multiple cost-driver approach corrects for a bias that a single allocation base cannot.</li>
+<li>Every technique in this chapter was implemented in both pandas and polars, and visualized in both seaborn and plotnine, following the same dual-tooling approach used throughout this book.</li>
+</ul>
+</section>
+<section id="discussion-questions" class="level2" data-number="8.6">
+<h2 data-number="8.6" class="anchored" data-anchor-id="discussion-questions"><span class="header-section-number">8.6</span> Discussion Questions</h2>
+<ol type="1">
+<li>The labor efficiency variance was the largest single variance in this chapter, and it was favorable. What follow-up questions would you want answered before concluding this reflects genuine, sustainable operational improvement rather than, say, a one-time factor?</li>
+<li>If a manager only reviewed the materials price variance without also looking at the labor efficiency variance, what incorrect conclusion might they draw about the year’s cost performance?</li>
+<li>Specialty-E’s cost per unit rises by nearly $111 under ABC. If this company had been pricing Specialty-E based on the traditional cost figure, what business risk does that create, and what would you recommend management do next?</li>
+</ol>
+</section>
+<section id="exercises" class="level2" data-number="8.7">
+<h2 data-number="8.7" class="anchored" data-anchor-id="exercises"><span class="header-section-number">8.7</span> Exercises</h2>
+<ol type="1">
+<li>Recompute the fixed overhead <strong>volume variance</strong> (the difference between budgeted fixed overhead and fixed overhead applied based on standard hours allowed for actual production) — a variance not covered in this chapter — using <code>manufacturing_variance_data.csv</code>.</li>
+<li>Using <code>cvp_monthly_data.csv</code>, calculate the sales volume (in units) needed to increase monthly target profit by 20% compared to this chapter’s $30,000 example, and explain whether that volume looks achievable given the historical range of <code>units_sold</code> in the dataset.</li>
+<li>Add a sixth, hypothetical product to <code>abc_cost_data.csv</code> with very high volume but also very high setup/inspection activity (unlike any current product). Recompute both traditional and ABC costs for it — does the usual “high volume means ABC lowers cost” pattern still hold?</li>
+<li>Using either pandas or polars, calculate each product’s <strong>overhead allocation as a percentage of total cost</strong> under both traditional and ABC methods. Which product’s overhead percentage changes the most, and does that match your intuition from the cost-per-unit chart in this chapter?</li>
+</ol>
+
+
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Cost structure refers to the proportion of variable and fixed cost in total cost. For example, if total cost is $100, variable cost could be $40 and fixed cost then is $60 or vice versa. Then, cost structure is variable cost is 40% and fixed cost is 60%. Cost structure has critical implications while managers make decisions.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./07-financial-statement-analysis.html" class="pagination-link" aria-label="Financial Statement Analytics">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Financial Statement Analytics</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./09-audit-analytics.html" class="pagination-link" aria-label="Audit Analytics">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Audit Analytics</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Accounting Analytics with Python</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/msharifbd/accounting-analytics-book/edit/main/08-management-accounting-analytics.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/blob/main/08-management-accounting-analytics.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>This book was built with <a href="https://quarto.org/">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

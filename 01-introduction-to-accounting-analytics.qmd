@@ -65,7 +65,7 @@ A common framework in the analytics field breaks analysis into four types, movin
 3. **Predictive analytics** — *What is likely to happen?* Using historical data to forecast. Example: predicting which customers are likely to become uncollectible accounts receivable.
 4. **Prescriptive analytics** — *What should we do?* Recommending an action based on analysis. Example: recommending which vendors to flag for additional audit procedures based on a fraud-risk score.
 
-Most introductory accounting analytics work — including much of this book — lives in the descriptive and diagnostic space, with an introduction to predictive methods later in the book (Chapter 12). Prescriptive analytics tends to require more advanced modeling and is largely beyond the scope of an undergraduate course, but it's useful to know where the field is heading.
+Most introductory accounting analytics work — including much of this book — lives in the descriptive and diagnostic space, with an introduction to predictive methods later in the book (Chapter 13). Prescriptive analytics tends to require more advanced modeling and is largely beyond the scope of an undergraduate course, but it's useful to know where the field is heading.
 
 ## The Accounting Analytics Workflow
 
@@ -87,7 +87,7 @@ A few examples of accounting analytics in action:
 - **External audit** — Using full-population testing and anomaly detection to identify unusual journal entries for further audit procedures, rather than testing a small manual sample.
 - **Internal audit** — Continuous monitoring dashboards that flag control violations or policy exceptions as they occur, not just at year-end.
 - **Financial planning & analysis (FP&A)** — Building forecasting models and variance-analysis dashboards to support budgeting decisions.
-- **Forensic accounting** — Applying techniques like Benford's Law (covered in Chapter 8) to detect potential financial statement fraud.
+- **Forensic accounting** — Applying techniques like Benford's Law (covered in Chapter 9) to detect potential financial statement fraud.
 - **Tax** — Analyzing large transactional datasets to identify tax planning opportunities or compliance risks across jurisdictions.
 
 ## Careers and Certifications

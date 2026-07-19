@@ -1,0 +1,2891 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>12&nbsp; Tax Analytics – Accounting Analytics with Python</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./13-predictive-modeling-intro.html" rel="next">
+<link href="./11-revenue-recognition-analysis.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-9e3e5b9121e68b3f077afb32f2c64d95.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-fe9f69af69d9b0acfce0412d1605ee06.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-9e3e5b9121e68b3f077afb32f2c64d95.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+<style>
+.scrollable-table {
+  overflow-x: auto !important;
+}
+.scrollable-table table {
+  width: max-content !important;
+  max-width: none !important;
+}
+a.citation, a.citation:visited {
+  color: #1a56db !important;
+}
+#refs a {
+  color: #1a56db !important;
+}
+</style>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./07-financial-statement-analysis.html">Part III: Applied Accounting Analytics</a></li><li class="breadcrumb-item"><a href="./12-tax-analytics.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Tax Analytics</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Accounting Analytics with Python</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/msharifbd/accounting-analytics-book" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Download"><i class="bi bi-download"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./Accounting-Analytics-with-Python.pdf">
+              <i class="bi bi-file-pdf pe-1"></i>
+            Download PDF
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./Accounting-Analytics-with-Python.epub">
+              <i class="bi bi-journal pe-1"></i>
+            Download ePub
+            </a>
+          </li>
+      </ul>
+    </div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Part I: Foundations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-introduction-to-accounting-analytics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Accounting Analytics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-python-quarto-setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Python and Quarto Environment Setup</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-data-fundamentals.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Fundamentals for Accountants</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Part II: Core Data Skills</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-data-wrangling-pandas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Wrangling with <code>Pandas</code> and <code>Polars</code></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-exploratory-data-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis for Financial Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-data-visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Visualization for Accounting</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Part III: Applied Accounting Analytics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-financial-statement-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Financial Statement Analytics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-management-accounting-analytics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Management Accounting Analytics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-audit-analytics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Audit Analytics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-fraud-anomaly-detection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Fraud and Anomaly Detection</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-revenue-recognition-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Revenue Recognition and Transaction-Level Analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-tax-analytics.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Tax Analytics</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Part IV: Predictive Methods and GenAI</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-predictive-modeling-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Introduction to Predictive Modeling</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-genai-in-accounting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Generative AI in Accounting</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Part V: Communication and Capstone</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-automated-reporting-quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Automated Reporting and Dashboards with Quarto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-data-ethics-reproducibility.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Data Ethics, Governance, and Reproducibility</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-capstone-project.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Capstone Project</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendix-a-python-primer.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">A Primer on Python</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendix-b-financial-statement-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Financial Statement Basics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendix-c-edgar-database.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">An Introduction to EDGAR Database</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#two-kinds-of-tax-analytics" id="toc-two-kinds-of-tax-analytics" class="nav-link active" data-scroll-target="#two-kinds-of-tax-analytics"><span class="header-section-number">12.1</span> Two Kinds of Tax Analytics</a></li>
+  <li><a href="#effective-tax-rate-by-jurisdiction" id="toc-effective-tax-rate-by-jurisdiction" class="nav-link" data-scroll-target="#effective-tax-rate-by-jurisdiction"><span class="header-section-number">12.2</span> Effective Tax Rate by Jurisdiction</a></li>
+  <li><a href="#consolidated-effective-tax-rate" id="toc-consolidated-effective-tax-rate" class="nav-link" data-scroll-target="#consolidated-effective-tax-rate"><span class="header-section-number">12.3</span> Consolidated Effective Tax Rate</a></li>
+  <li><a href="#spotting-disproportionate-profit-allocation" id="toc-spotting-disproportionate-profit-allocation" class="nav-link" data-scroll-target="#spotting-disproportionate-profit-allocation"><span class="header-section-number">12.4</span> Spotting Disproportionate Profit Allocation</a>
+  <ul class="collapse">
+  <li><a href="#profit-per-employee-a-sharper-view-of-the-same-pattern" id="toc-profit-per-employee-a-sharper-view-of-the-same-pattern" class="nav-link" data-scroll-target="#profit-per-employee-a-sharper-view-of-the-same-pattern"><span class="header-section-number">12.4.1</span> Profit per Employee: A Sharper View of the Same Pattern</a></li>
+  </ul></li>
+  <li><a href="#rate-reconciliation" id="toc-rate-reconciliation" class="nav-link" data-scroll-target="#rate-reconciliation"><span class="header-section-number">12.5</span> Rate Reconciliation</a></li>
+  <li><a href="#sales-tax-compliance-testing" id="toc-sales-tax-compliance-testing" class="nav-link" data-scroll-target="#sales-tax-compliance-testing"><span class="header-section-number">12.6</span> Sales Tax Compliance Testing</a>
+  <ul class="collapse">
+  <li><a href="#quantifying-the-exposure" id="toc-quantifying-the-exposure" class="nav-link" data-scroll-target="#quantifying-the-exposure"><span class="header-section-number">12.6.1</span> Quantifying the Exposure</a></li>
+  <li><a href="#the-materiality-threshold-matters" id="toc-the-materiality-threshold-matters" class="nav-link" data-scroll-target="#the-materiality-threshold-matters"><span class="header-section-number">12.6.2</span> The Materiality Threshold Matters</a></li>
+  </ul></li>
+  <li><a href="#chapter-summary" id="toc-chapter-summary" class="nav-link" data-scroll-target="#chapter-summary"><span class="header-section-number">12.7</span> Chapter Summary</a></li>
+  <li><a href="#discussion-questions" id="toc-discussion-questions" class="nav-link" data-scroll-target="#discussion-questions"><span class="header-section-number">12.8</span> Discussion Questions</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">12.9</span> Exercises</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/msharifbd/accounting-analytics-book/edit/main/12-tax-analytics.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/blob/main/12-tax-analytics.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./07-financial-statement-analysis.html">Part III: Applied Accounting Analytics</a></li><li class="breadcrumb-item"><a href="./12-tax-analytics.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Tax Analytics</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Tax Analytics</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Learning Objectives
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>By the end of this chapter, you should be able to:</p>
+<ul>
+<li>Compute effective tax rates (ETR) at the jurisdiction and consolidated level</li>
+<li>Build a rate reconciliation bridging statutory to effective tax rates</li>
+<li>Identify disproportionate profit allocation across jurisdictions using profit-per-employee and profit-to-revenue metrics</li>
+<li>Recompute expected sales tax from transaction-level data and flag compliance discrepancies</li>
+<li>Apply both pandas and polars to multi-jurisdiction and transaction-level tax data</li>
+<li>Recognize the limits of a chosen materiality threshold when flagging compliance exceptions</li>
+</ul>
+</div>
+</div>
+<section id="two-kinds-of-tax-analytics" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="two-kinds-of-tax-analytics"><span class="header-section-number">12.1</span> Two Kinds of Tax Analytics</h2>
+<p>This chapter covers two related but distinct areas of tax analytics:</p>
+<ol type="1">
+<li><strong>Income tax analytics</strong> — analyzing effective tax rates across jurisdictions and over time, and understanding what drives the gap between a company’s statutory and effective tax rate</li>
+<li><strong>Indirect tax compliance testing</strong> — recomputing sales tax at the transaction level to verify it was calculated and collected correctly</li>
+</ol>
+<p>We’ll use two datasets: <code>tax_provision_by_jurisdiction.csv</code> (a multinational company’s income tax provision by country and year) and <code>sales_tax_test_transactions.csv</code> (300 transaction-level sales with sales tax detail).</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="" aria-current="page">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div id="03ce9947" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>tax_pd <span class="op">=</span> pd.read_csv(<span class="st">"data/tax_provision_by_jurisdiction.csv"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>tax_pd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">jurisdiction</th>
+<th data-quarto-table-cell-role="th">revenue</th>
+<th data-quarto-table-cell-role="th">employees</th>
+<th data-quarto-table-cell-role="th">pretax_income</th>
+<th data-quarto-table-cell-role="th">statutory_rate</th>
+<th data-quarto-table-cell-role="th">tax_expense</th>
+<th data-quarto-table-cell-role="th">revenue_per_employee</th>
+<th data-quarto-table-cell-role="th">effective_tax_rate</th>
+<th data-quarto-table-cell-role="th">profit_per_employee</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>2023</td>
+<td>United States</td>
+<td>21329009</td>
+<td>420</td>
+<td>3673682</td>
+<td>0.210</td>
+<td>726076</td>
+<td>50783</td>
+<td>0.197643</td>
+<td>8.746862e+03</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>2023</td>
+<td>United Kingdom</td>
+<td>7460194</td>
+<td>160</td>
+<td>1115781</td>
+<td>0.250</td>
+<td>286045</td>
+<td>46626</td>
+<td>0.256363</td>
+<td>6.973631e+03</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>2023</td>
+<td>Germany</td>
+<td>6204232</td>
+<td>130</td>
+<td>1097064</td>
+<td>0.300</td>
+<td>309781</td>
+<td>47725</td>
+<td>0.282373</td>
+<td>8.438954e+03</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>2023</td>
+<td>Ireland</td>
+<td>2294657</td>
+<td>35</td>
+<td>7349868</td>
+<td>0.125</td>
+<td>886646</td>
+<td>65562</td>
+<td>0.120634</td>
+<td>2.099962e+05</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>2023</td>
+<td>Singapore</td>
+<td>3203999</td>
+<td>60</td>
+<td>400186</td>
+<td>0.170</td>
+<td>73632</td>
+<td>53400</td>
+<td>0.183994</td>
+<td>6.669767e+03</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>2023</td>
+<td>Bermuda</td>
+<td>208878</td>
+<td>4</td>
+<td>5964247</td>
+<td>0.000</td>
+<td>3310</td>
+<td>52219</td>
+<td>0.000555</td>
+<td>1.491062e+06</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>2024</td>
+<td>United States</td>
+<td>20910072</td>
+<td>420</td>
+<td>3165520</td>
+<td>0.210</td>
+<td>607806</td>
+<td>49786</td>
+<td>0.192008</td>
+<td>7.536952e+03</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>2024</td>
+<td>United Kingdom</td>
+<td>7471163</td>
+<td>160</td>
+<td>1034235</td>
+<td>0.250</td>
+<td>259165</td>
+<td>46695</td>
+<td>0.250586</td>
+<td>6.463969e+03</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8</th>
+<td>2024</td>
+<td>Germany</td>
+<td>6447472</td>
+<td>130</td>
+<td>842126</td>
+<td>0.300</td>
+<td>244953</td>
+<td>49596</td>
+<td>0.290875</td>
+<td>6.477892e+03</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">9</th>
+<td>2024</td>
+<td>Ireland</td>
+<td>2609897</td>
+<td>35</td>
+<td>8353045</td>
+<td>0.125</td>
+<td>1043015</td>
+<td>74568</td>
+<td>0.124866</td>
+<td>2.386584e+05</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">10</th>
+<td>2024</td>
+<td>Singapore</td>
+<td>3714296</td>
+<td>60</td>
+<td>515627</td>
+<td>0.170</td>
+<td>88072</td>
+<td>61905</td>
+<td>0.170806</td>
+<td>8.593783e+03</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">11</th>
+<td>2024</td>
+<td>Bermuda</td>
+<td>187779</td>
+<td>4</td>
+<td>5712833</td>
+<td>0.000</td>
+<td>0</td>
+<td>46945</td>
+<td>0.000000</td>
+<td>1.428208e+06</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">12</th>
+<td>2025</td>
+<td>United States</td>
+<td>23445443</td>
+<td>420</td>
+<td>4022515</td>
+<td>0.210</td>
+<td>868518</td>
+<td>55822</td>
+<td>0.215914</td>
+<td>9.577417e+03</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">13</th>
+<td>2025</td>
+<td>United Kingdom</td>
+<td>8220750</td>
+<td>160</td>
+<td>1229443</td>
+<td>0.250</td>
+<td>324860</td>
+<td>51380</td>
+<td>0.264233</td>
+<td>7.684019e+03</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">14</th>
+<td>2025</td>
+<td>Germany</td>
+<td>7095661</td>
+<td>130</td>
+<td>1200687</td>
+<td>0.300</td>
+<td>338194</td>
+<td>54582</td>
+<td>0.281667</td>
+<td>9.236054e+03</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">15</th>
+<td>2025</td>
+<td>Ireland</td>
+<td>2332291</td>
+<td>35</td>
+<td>7921309</td>
+<td>0.125</td>
+<td>972589</td>
+<td>66637</td>
+<td>0.122781</td>
+<td>2.263231e+05</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">16</th>
+<td>2025</td>
+<td>Singapore</td>
+<td>3781970</td>
+<td>60</td>
+<td>671177</td>
+<td>0.170</td>
+<td>107459</td>
+<td>63033</td>
+<td>0.160105</td>
+<td>1.118628e+04</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">17</th>
+<td>2025</td>
+<td>Bermuda</td>
+<td>266682</td>
+<td>4</td>
+<td>8037523</td>
+<td>0.000</td>
+<td>0</td>
+<td>66670</td>
+<td>0.000000</td>
+<td>2.009381e+06</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div id="9e73ccd3" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>tax_pl <span class="op">=</span> pl.read_csv(<span class="st">"data/tax_provision_by_jurisdiction.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+<p>Our fictional company operates in six jurisdictions with very different statutory tax rates, from Bermuda (0%) to Germany (30%).</p>
+</section>
+<section id="effective-tax-rate-by-jurisdiction" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="effective-tax-rate-by-jurisdiction"><span class="header-section-number">12.2</span> Effective Tax Rate by Jurisdiction</h2>
+<p>The <strong>effective tax rate (ETR)</strong> is tax expense divided by pretax income — the tax rate a company actually experiences, which can differ substantially from any jurisdiction’s statutory rate due to credits, deductions, and other adjustments.</p>
+<div id="9904b413" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>tax_pd[[<span class="st">"jurisdiction"</span>, <span class="st">"year"</span>, <span class="st">"statutory_rate"</span>, <span class="st">"effective_tax_rate"</span>]].<span class="bu">round</span>(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">jurisdiction</th>
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">statutory_rate</th>
+<th data-quarto-table-cell-role="th">effective_tax_rate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>United States</td>
+<td>2023</td>
+<td>0.210</td>
+<td>0.198</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>United Kingdom</td>
+<td>2023</td>
+<td>0.250</td>
+<td>0.256</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Germany</td>
+<td>2023</td>
+<td>0.300</td>
+<td>0.282</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Ireland</td>
+<td>2023</td>
+<td>0.125</td>
+<td>0.121</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>Singapore</td>
+<td>2023</td>
+<td>0.170</td>
+<td>0.184</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>Bermuda</td>
+<td>2023</td>
+<td>0.000</td>
+<td>0.001</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>United States</td>
+<td>2024</td>
+<td>0.210</td>
+<td>0.192</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>United Kingdom</td>
+<td>2024</td>
+<td>0.250</td>
+<td>0.251</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8</th>
+<td>Germany</td>
+<td>2024</td>
+<td>0.300</td>
+<td>0.291</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">9</th>
+<td>Ireland</td>
+<td>2024</td>
+<td>0.125</td>
+<td>0.125</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">10</th>
+<td>Singapore</td>
+<td>2024</td>
+<td>0.170</td>
+<td>0.171</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">11</th>
+<td>Bermuda</td>
+<td>2024</td>
+<td>0.000</td>
+<td>0.000</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">12</th>
+<td>United States</td>
+<td>2025</td>
+<td>0.210</td>
+<td>0.216</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">13</th>
+<td>United Kingdom</td>
+<td>2025</td>
+<td>0.250</td>
+<td>0.264</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">14</th>
+<td>Germany</td>
+<td>2025</td>
+<td>0.300</td>
+<td>0.282</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">15</th>
+<td>Ireland</td>
+<td>2025</td>
+<td>0.125</td>
+<td>0.123</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">16</th>
+<td>Singapore</td>
+<td>2025</td>
+<td>0.170</td>
+<td>0.160</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">17</th>
+<td>Bermuda</td>
+<td>2025</td>
+<td>0.000</td>
+<td>0.000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Most jurisdictions show an effective rate reasonably close to their statutory rate. Ireland and Bermuda, however, show <em>very</em> low effective rates — but that alone isn’t unusual, since their statutory rates are also low (12.5% and 0%, respectively). The more interesting question is how much <em>profit</em> is being taxed at those low rates, relative to the actual business activity happening there.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">seaborn</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">plotnine</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<div id="6beeb279" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="fl">4.5</span>))</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>sns.lineplot(data<span class="op">=</span>tax_pd, x<span class="op">=</span><span class="st">"year"</span>, y<span class="op">=</span><span class="st">"effective_tax_rate"</span>, hue<span class="op">=</span><span class="st">"jurisdiction"</span>, marker<span class="op">=</span><span class="st">"o"</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Effective Tax Rate by Jurisdiction, 2023-2025"</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Effective Tax Rate"</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>plt.gca().yaxis.set_major_formatter(plt.matplotlib.ticker.PercentFormatter(<span class="fl">1.0</span>))</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="12-tax-analytics_files/figure-html/cell-5-output-1.png" width="761" height="422" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div id="ae52f6bc" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    ggplot(tax_pd, aes(x<span class="op">=</span><span class="st">"year"</span>, y<span class="op">=</span><span class="st">"effective_tax_rate"</span>, color<span class="op">=</span><span class="st">"jurisdiction"</span>))</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_line(size<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_point()</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> scale_y_continuous(labels<span class="op">=</span><span class="kw">lambda</span> l: [<span class="ss">f"</span><span class="sc">{</span>v<span class="sc">:.0%}</span><span class="ss">"</span> <span class="cf">for</span> v <span class="kw">in</span> l])</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> labs(title<span class="op">=</span><span class="st">"Effective Tax Rate by Jurisdiction, 2023-2025"</span>, x<span class="op">=</span><span class="st">"Year"</span>, y<span class="op">=</span><span class="st">"Effective Tax Rate"</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> theme_minimal()</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<div>
+<figure class="figure">
+<p><img src="12-tax-analytics_files/figure-html/cell-6-output-1.png" width="672" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Every major operating jurisdiction (US, UK, Germany, Singapore) tracks fairly close to a stable band each year. Ireland and Bermuda sit visibly apart, near the bottom of the chart — consistent with their low statutory rates, but worth keeping in mind as we look at profit allocation next.</p>
+</section>
+<section id="consolidated-effective-tax-rate" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="consolidated-effective-tax-rate"><span class="header-section-number">12.3</span> Consolidated Effective Tax Rate</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<div id="6169d7ce" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>consolidated_pd <span class="op">=</span> tax_pd.groupby(<span class="st">"year"</span>, as_index<span class="op">=</span><span class="va">False</span>)[[<span class="st">"pretax_income"</span>, <span class="st">"tax_expense"</span>]].<span class="bu">sum</span>()</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>consolidated_pd[<span class="st">"consolidated_etr"</span>] <span class="op">=</span> consolidated_pd[<span class="st">"tax_expense"</span>] <span class="op">/</span> consolidated_pd[<span class="st">"pretax_income"</span>]</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>consolidated_pd.<span class="bu">round</span>(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">pretax_income</th>
+<th data-quarto-table-cell-role="th">tax_expense</th>
+<th data-quarto-table-cell-role="th">consolidated_etr</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>2023</td>
+<td>19600828</td>
+<td>2285490</td>
+<td>0.117</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>2024</td>
+<td>19623386</td>
+<td>2243011</td>
+<td>0.114</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>2025</td>
+<td>23082654</td>
+<td>2611620</td>
+<td>0.113</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<div id="8cca5395" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>consolidated_pl <span class="op">=</span> (</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    tax_pl.group_by(<span class="st">"year"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    .agg([pl.col(<span class="st">"pretax_income"</span>).<span class="bu">sum</span>(), pl.col(<span class="st">"tax_expense"</span>).<span class="bu">sum</span>()])</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    .with_columns((pl.col(<span class="st">"tax_expense"</span>) <span class="op">/</span> pl.col(<span class="st">"pretax_income"</span>)).alias(<span class="st">"consolidated_etr"</span>))</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    .sort(<span class="st">"year"</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>consolidated_pl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (3, 4)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">pretax_income</th>
+<th data-quarto-table-cell-role="th">tax_expense</th>
+<th data-quarto-table-cell-role="th">consolidated_etr</th>
+</tr>
+<tr class="even">
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>f64</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2023</td>
+<td>19600828</td>
+<td>2285490</td>
+<td>0.116602</td>
+</tr>
+<tr class="even">
+<td>2024</td>
+<td>19623386</td>
+<td>2243011</td>
+<td>0.114303</td>
+</tr>
+<tr class="odd">
+<td>2025</td>
+<td>23082654</td>
+<td>2611620</td>
+<td>0.113142</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>The consolidated ETR is roughly <strong>11-12%</strong> — noticeably lower than <em>any</em> individual major jurisdiction’s statutory rate (21% to 30%). This gap is the first clue that something in the jurisdictional mix is pulling the blended rate down substantially.</p>
+</section>
+<section id="spotting-disproportionate-profit-allocation" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="spotting-disproportionate-profit-allocation"><span class="header-section-number">12.4</span> Spotting Disproportionate Profit Allocation</h2>
+<p>A standard analytical test for profit-shifting risk compares each jurisdiction’s <strong>share of profit</strong> to its <strong>share of real economic activity</strong> — typically proxied by revenue or headcount. A jurisdiction booking far more profit than its business substance would suggest is a classic red flag.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
+<div id="258967df" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>totals_pd <span class="op">=</span> tax_pd.groupby(<span class="st">"year"</span>).agg(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    total_revenue<span class="op">=</span>(<span class="st">"revenue"</span>, <span class="st">"sum"</span>),</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    total_profit<span class="op">=</span>(<span class="st">"pretax_income"</span>, <span class="st">"sum"</span>),</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    total_employees<span class="op">=</span>(<span class="st">"employees"</span>, <span class="st">"sum"</span>),</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>low_substance_pd <span class="op">=</span> (</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    tax_pd[tax_pd[<span class="st">"jurisdiction"</span>].isin([<span class="st">"Ireland"</span>, <span class="st">"Bermuda"</span>])]</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    .groupby(<span class="st">"year"</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    .agg(ls_revenue<span class="op">=</span>(<span class="st">"revenue"</span>, <span class="st">"sum"</span>), ls_profit<span class="op">=</span>(<span class="st">"pretax_income"</span>, <span class="st">"sum"</span>), ls_employees<span class="op">=</span>(<span class="st">"employees"</span>, <span class="st">"sum"</span>))</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>combined_pd <span class="op">=</span> totals_pd.join(low_substance_pd)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>combined_pd[<span class="st">"pct_of_revenue"</span>] <span class="op">=</span> combined_pd[<span class="st">"ls_revenue"</span>] <span class="op">/</span> combined_pd[<span class="st">"total_revenue"</span>] <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>combined_pd[<span class="st">"pct_of_employees"</span>] <span class="op">=</span> combined_pd[<span class="st">"ls_employees"</span>] <span class="op">/</span> combined_pd[<span class="st">"total_employees"</span>] <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>combined_pd[<span class="st">"pct_of_profit"</span>] <span class="op">=</span> combined_pd[<span class="st">"ls_profit"</span>] <span class="op">/</span> combined_pd[<span class="st">"total_profit"</span>] <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>combined_pd[[<span class="st">"pct_of_revenue"</span>, <span class="st">"pct_of_employees"</span>, <span class="st">"pct_of_profit"</span>]].<span class="bu">round</span>(<span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">pct_of_revenue</th>
+<th data-quarto-table-cell-role="th">pct_of_employees</th>
+<th data-quarto-table-cell-role="th">pct_of_profit</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2023</th>
+<td>6.2</td>
+<td>4.8</td>
+<td>67.9</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2024</th>
+<td>6.8</td>
+<td>4.8</td>
+<td>71.7</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2025</th>
+<td>5.8</td>
+<td>4.8</td>
+<td>69.1</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
+<div id="f1ab9504" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>totals_pl <span class="op">=</span> tax_pl.group_by(<span class="st">"year"</span>).agg([</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    pl.col(<span class="st">"revenue"</span>).<span class="bu">sum</span>().alias(<span class="st">"total_revenue"</span>),</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    pl.col(<span class="st">"pretax_income"</span>).<span class="bu">sum</span>().alias(<span class="st">"total_profit"</span>),</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    pl.col(<span class="st">"employees"</span>).<span class="bu">sum</span>().alias(<span class="st">"total_employees"</span>),</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>low_substance_pl <span class="op">=</span> (</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    tax_pl.<span class="bu">filter</span>(pl.col(<span class="st">"jurisdiction"</span>).is_in([<span class="st">"Ireland"</span>, <span class="st">"Bermuda"</span>]))</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    .group_by(<span class="st">"year"</span>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    .agg([</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>        pl.col(<span class="st">"revenue"</span>).<span class="bu">sum</span>().alias(<span class="st">"ls_revenue"</span>),</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>        pl.col(<span class="st">"pretax_income"</span>).<span class="bu">sum</span>().alias(<span class="st">"ls_profit"</span>),</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>        pl.col(<span class="st">"employees"</span>).<span class="bu">sum</span>().alias(<span class="st">"ls_employees"</span>),</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    ])</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>combined_pl <span class="op">=</span> totals_pl.join(low_substance_pl, on<span class="op">=</span><span class="st">"year"</span>).with_columns([</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    (pl.col(<span class="st">"ls_revenue"</span>) <span class="op">/</span> pl.col(<span class="st">"total_revenue"</span>) <span class="op">*</span> <span class="dv">100</span>).alias(<span class="st">"pct_of_revenue"</span>),</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    (pl.col(<span class="st">"ls_employees"</span>) <span class="op">/</span> pl.col(<span class="st">"total_employees"</span>) <span class="op">*</span> <span class="dv">100</span>).alias(<span class="st">"pct_of_employees"</span>),</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    (pl.col(<span class="st">"ls_profit"</span>) <span class="op">/</span> pl.col(<span class="st">"total_profit"</span>) <span class="op">*</span> <span class="dv">100</span>).alias(<span class="st">"pct_of_profit"</span>),</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>]).sort(<span class="st">"year"</span>)</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>combined_pl.select([<span class="st">"year"</span>, <span class="st">"pct_of_revenue"</span>, <span class="st">"pct_of_employees"</span>, <span class="st">"pct_of_profit"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (3, 4)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">pct_of_revenue</th>
+<th data-quarto-table-cell-role="th">pct_of_employees</th>
+<th data-quarto-table-cell-role="th">pct_of_profit</th>
+</tr>
+<tr class="even">
+<td>i64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2023</td>
+<td>6.151045</td>
+<td>4.820766</td>
+<td>67.926289</td>
+</tr>
+<tr class="even">
+<td>2024</td>
+<td>6.767368</td>
+<td>4.820766</td>
+<td>71.679159</td>
+</tr>
+<tr class="odd">
+<td>2025</td>
+<td>5.757226</td>
+<td>4.820766</td>
+<td>69.137769</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>A Textbook Profit-Shifting Pattern
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ireland and Bermuda together account for only about <strong>6% of consolidated revenue</strong> and <strong>under 5% of employees</strong> — yet they generate roughly <strong>68-72% of consolidated pretax profit</strong>. This is exactly the kind of mismatch that international tax authorities (and analysts studying a company’s tax footprint) look for: profit concentrated in low-tax jurisdictions far out of proportion to the actual business substance (people, sales activity) located there. It directly explains why the consolidated ETR is so much lower than any major operating jurisdiction’s statutory rate — a small, low-taxed slice of the business is generating most of the reported profit.</p>
+</div>
+</div>
+<section id="profit-per-employee-a-sharper-view-of-the-same-pattern" class="level3" data-number="12.4.1">
+<h3 data-number="12.4.1" class="anchored" data-anchor-id="profit-per-employee-a-sharper-view-of-the-same-pattern"><span class="header-section-number">12.4.1</span> Profit per Employee: A Sharper View of the Same Pattern</h3>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
+<div id="460683b0" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>tax_pd[<span class="st">"profit_per_employee"</span>].groupby(tax_pd[<span class="st">"jurisdiction"</span>]).mean().sort_values(ascending<span class="op">=</span><span class="va">False</span>).<span class="bu">round</span>(<span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<pre><code>jurisdiction
+Bermuda           1642884.0
+Ireland            224993.0
+Singapore            8817.0
+United States        8620.0
+Germany              8051.0
+United Kingdom       7041.0
+Name: profit_per_employee, dtype: float64</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
+<div id="25ceb40e" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    tax_pl</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    .group_by(<span class="st">"jurisdiction"</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    .agg(</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>        pl.col(<span class="st">"profit_per_employee"</span>)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>        .mean()</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>        .<span class="bu">round</span>(<span class="dv">0</span>)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>        .alias(<span class="st">"profit_per_employee"</span>)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    .sort(<span class="st">"profit_per_employee"</span>, descending<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (6, 2)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">jurisdiction</th>
+<th data-quarto-table-cell-role="th">profit_per_employee</th>
+</tr>
+<tr class="even">
+<td>str</td>
+<td>f64</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"Bermuda"</td>
+<td>1.642884e6</td>
+</tr>
+<tr class="even">
+<td>"Ireland"</td>
+<td>224993.0</td>
+</tr>
+<tr class="odd">
+<td>"Singapore"</td>
+<td>8817.0</td>
+</tr>
+<tr class="even">
+<td>"United States"</td>
+<td>8620.0</td>
+</tr>
+<tr class="odd">
+<td>"Germany"</td>
+<td>8051.0</td>
+</tr>
+<tr class="even">
+<td>"United Kingdom"</td>
+<td>7041.0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Bermuda’s average profit per employee is roughly <strong>$1.6 million</strong> — around 150-200 times higher than the US, UK, or Germany, where profit per employee sits in the $7,000-$9,500 range. No plausible business model explains a handful of employees in Bermuda generating that much profit relative to hundreds of employees running substantial operations elsewhere; this ratio, on its own, is one of the strongest quantitative signals in this chapter.</p>
+<div id="bc513a0a" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>snapshot_2025 <span class="op">=</span> tax_pd[tax_pd[<span class="st">"year"</span>] <span class="op">==</span> <span class="dv">2025</span>].sort_values(<span class="st">"profit_per_employee"</span>, ascending<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-6-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-1" role="tab" aria-controls="tabset-6-1" aria-selected="true" href="">seaborn</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-6-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-2" role="tab" aria-controls="tabset-6-2" aria-selected="false" href="">plotnine</a></li></ul>
+<div class="tab-content">
+<div id="tabset-6-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-6-1-tab">
+<div id="7000cc90" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="fl">4.5</span>))</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>sns.barplot(data<span class="op">=</span>snapshot_2025, x<span class="op">=</span><span class="st">"jurisdiction"</span>, y<span class="op">=</span><span class="st">"profit_per_employee"</span>, color<span class="op">=</span><span class="st">"#8a4fbe"</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>plt.yscale(<span class="st">"log"</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Profit per Employee by Jurisdiction, 2025 (log scale)"</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Profit per Employee ($, log scale)"</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">30</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="12-tax-analytics_files/figure-html/cell-14-output-1.png" width="658" height="424" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-6-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-6-2-tab">
+<div id="305781bb" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    ggplot(snapshot_2025, aes(x<span class="op">=</span><span class="st">"reorder(jurisdiction, -profit_per_employee)"</span>, y<span class="op">=</span><span class="st">"profit_per_employee"</span>))</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_col(fill<span class="op">=</span><span class="st">"#8a4fbe"</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> scale_y_log10()</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> labs(title<span class="op">=</span><span class="st">"Profit per Employee by Jurisdiction, 2025 (log scale)"</span>,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>           x<span class="op">=</span><span class="st">"Jurisdiction"</span>, y<span class="op">=</span><span class="st">"Profit per Employee ($, log scale)"</span>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> theme_minimal()</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> theme(axis_text_x<span class="op">=</span>element_text(rotation<span class="op">=</span><span class="dv">30</span>, hjust<span class="op">=</span><span class="dv">1</span>))</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<div>
+<figure class="figure">
+<p><img src="12-tax-analytics_files/figure-html/cell-15-output-1.png" width="672" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Note the <strong>log scale</strong> on this chart — without it, Bermuda’s bar would be so tall that every other jurisdiction’s bar would be visually indistinguishable from zero, which itself illustrates just how extreme the gap is.</p>
+</section>
+</section>
+<section id="rate-reconciliation" class="level2" data-number="12.5">
+<h2 data-number="12.5" class="anchored" data-anchor-id="rate-reconciliation"><span class="header-section-number">12.5</span> Rate Reconciliation</h2>
+<p>Rate reconciliation is a formal financial statement disclosure that explains the mathematical difference between a company’s domestic statutory income tax rate and its effective tax rate (ETR). For multinational corporations, it highlights how global operations, foreign tax differentials, and international provisions shift tax burdens.</p>
+<p>Public companies disclose a <strong>rate reconciliation</strong> — a bridge explaining the difference between tax expense at the home-country statutory rate and the actual tax expense reported. Let’s build a simplified version, using the U.S. statutory rate (21%) as the baseline.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-7-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-7-1-tab">
+<div id="cf7684d2" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>us_statutory_rate <span class="op">=</span> <span class="fl">0.21</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>tax_pd[<span class="st">"tax_at_us_rate"</span>] <span class="op">=</span> tax_pd[<span class="st">"pretax_income"</span>] <span class="op">*</span> us_statutory_rate</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>tax_pd[<span class="st">"foreign_rate_benefit"</span>] <span class="op">=</span> tax_pd[<span class="st">"tax_at_us_rate"</span>] <span class="op">-</span> tax_pd[<span class="st">"tax_expense"</span>]</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>contribution <span class="op">=</span> (</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    tax_pd.groupby(<span class="st">"jurisdiction"</span>)[<span class="st">"foreign_rate_benefit"</span>]</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">sum</span>()</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    .sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>contribution.<span class="bu">round</span>(<span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<pre><code>jurisdiction
+Bermuda           4136757.0
+Ireland           2058837.0
+United States       78561.0
+Singapore           64105.0
+United Kingdom    -160384.0
+Germany           -233554.0
+Name: foreign_rate_benefit, dtype: float64</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-7-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-7-2-tab">
+<div id="9007fb9b" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>us_statutory_rate <span class="op">=</span> <span class="fl">0.21</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Add calculated columns</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>tax_pl <span class="op">=</span> (</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    tax_pl</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    .with_columns(</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>        [</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>            (</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>                pl.col(<span class="st">"pretax_income"</span>) <span class="op">*</span> us_statutory_rate</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>            ).alias(<span class="st">"tax_at_us_rate"</span>),</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>            (</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>                pl.col(<span class="st">"pretax_income"</span>) <span class="op">*</span> us_statutory_rate</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>                <span class="op">-</span> pl.col(<span class="st">"tax_expense"</span>)</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>            ).alias(<span class="st">"foreign_rate_benefit"</span>),</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>        ]</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Summarize by jurisdiction</span></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>contribution_pl <span class="op">=</span> (</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>    tax_pl</span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>    .group_by(<span class="st">"jurisdiction"</span>)</span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>    .agg(</span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>        pl.col(<span class="st">"foreign_rate_benefit"</span>)</span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>        .<span class="bu">sum</span>()</span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>        .<span class="bu">round</span>(<span class="dv">0</span>)</span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>        .alias(<span class="st">"foreign_rate_benefit"</span>)</span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>    .sort(<span class="st">"foreign_rate_benefit"</span>, descending<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a>contribution_pl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="16">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (6, 2)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">jurisdiction</th>
+<th data-quarto-table-cell-role="th">foreign_rate_benefit</th>
+</tr>
+<tr class="even">
+<td>str</td>
+<td>f64</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"Bermuda"</td>
+<td>4.136757e6</td>
+</tr>
+<tr class="even">
+<td>"Ireland"</td>
+<td>2.058837e6</td>
+</tr>
+<tr class="odd">
+<td>"United States"</td>
+<td>78561.0</td>
+</tr>
+<tr class="even">
+<td>"Singapore"</td>
+<td>64105.0</td>
+</tr>
+<tr class="odd">
+<td>"United Kingdom"</td>
+<td>-160384.0</td>
+</tr>
+<tr class="even">
+<td>"Germany"</td>
+<td>-233554.0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Over the three years in this dataset, booking profit in Bermuda and Ireland rather than at the US statutory rate reduced consolidated tax expense by roughly <strong>$4.1 million</strong> and <strong>$2.1 million</strong>, respectively — figures that would typically appear as a “foreign rate differential” line item in a real rate reconciliation footnote.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-8-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-1" role="tab" aria-controls="tabset-8-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-2" role="tab" aria-controls="tabset-8-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-8-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-8-1-tab">
+<div id="f901aa18" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>consolidated_pd[<span class="st">"tax_at_us_statutory"</span>] <span class="op">=</span> consolidated_pd[<span class="st">"pretax_income"</span>] <span class="op">*</span> us_statutory_rate</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>consolidated_pd[<span class="st">"total_rate_differential_benefit"</span>] <span class="op">=</span> (</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    consolidated_pd[<span class="st">"tax_at_us_statutory"</span>] <span class="op">-</span> consolidated_pd[<span class="st">"tax_expense"</span>]</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>consolidated_pd[[<span class="st">"year"</span>, <span class="st">"consolidated_etr"</span>, <span class="st">"total_rate_differential_benefit"</span>]].<span class="bu">round</span>(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="17">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">consolidated_etr</th>
+<th data-quarto-table-cell-role="th">total_rate_differential_benefit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>2023</td>
+<td>0.117</td>
+<td>1830683.88</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>2024</td>
+<td>0.114</td>
+<td>1877900.06</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>2025</td>
+<td>0.113</td>
+<td>2235737.34</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-8-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-8-2-tab">
+<div id="d49dc08e" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>us_statutory_rate <span class="op">=</span> <span class="fl">0.21</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>consolidated_pl <span class="op">=</span> (</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    consolidated_pl</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    .with_columns(</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>        [</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>            (</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>                pl.col(<span class="st">"pretax_income"</span>) <span class="op">*</span> us_statutory_rate</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>            ).alias(<span class="st">"tax_at_us_statutory"</span>),</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>            (</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>                pl.col(<span class="st">"pretax_income"</span>) <span class="op">*</span> us_statutory_rate</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>                <span class="op">-</span> pl.col(<span class="st">"tax_expense"</span>)</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>            ).alias(<span class="st">"total_rate_differential_benefit"</span>),</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>        ]</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>    consolidated_pl</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>    .select(</span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>        <span class="st">"year"</span>,</span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>        <span class="st">"consolidated_etr"</span>,</span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>        <span class="st">"total_rate_differential_benefit"</span>,</span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>    .with_columns(</span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>        [</span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>            pl.col(<span class="st">"consolidated_etr"</span>).<span class="bu">round</span>(<span class="dv">3</span>),</span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>            pl.col(<span class="st">"total_rate_differential_benefit"</span>).<span class="bu">round</span>(<span class="dv">3</span>),</span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>        ]</span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (3, 3)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">consolidated_etr</th>
+<th data-quarto-table-cell-role="th">total_rate_differential_benefit</th>
+</tr>
+<tr class="even">
+<td>i64</td>
+<td>f64</td>
+<td>f64</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2023</td>
+<td>0.117</td>
+<td>1.8307e6</td>
+</tr>
+<tr class="even">
+<td>2024</td>
+<td>0.114</td>
+<td>1.8779e6</td>
+</tr>
+<tr class="odd">
+<td>2025</td>
+<td>0.113</td>
+<td>2.2357e6</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sales-tax-compliance-testing" class="level2" data-number="12.6">
+<h2 data-number="12.6" class="anchored" data-anchor-id="sales-tax-compliance-testing"><span class="header-section-number">12.6</span> Sales Tax Compliance Testing</h2>
+<p>Switching to indirect tax: <code>sales_tax_test_transactions.csv</code> contains 300 transactions across 8 U.S. states, each with a taxable amount, the applicable statutory rate, and the tax actually collected. We can recompute the <em>expected</em> tax and compare it to what was actually charged.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-9-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-1" role="tab" aria-controls="tabset-9-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-9-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-2" role="tab" aria-controls="tabset-9-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-9-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-9-1-tab">
+<div id="02b31bc6" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>sales_pd <span class="op">=</span> pd.read_csv(<span class="st">"data/sales_tax_test_transactions.csv"</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>sales_pd.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="19">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">transaction_id</th>
+<th data-quarto-table-cell-role="th">state</th>
+<th data-quarto-table-cell-role="th">sale_amount</th>
+<th data-quarto-table-cell-role="th">taxable_amount</th>
+<th data-quarto-table-cell-role="th">statutory_rate</th>
+<th data-quarto-table-cell-role="th">tax_collected</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>TXN4000</td>
+<td>WA</td>
+<td>47.46</td>
+<td>47.46</td>
+<td>0.0650</td>
+<td>3.08</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>TXN4001</td>
+<td>IL</td>
+<td>396.50</td>
+<td>0.00</td>
+<td>0.0625</td>
+<td>0.00</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>TXN4002</td>
+<td>PA</td>
+<td>210.94</td>
+<td>210.94</td>
+<td>0.0600</td>
+<td>12.66</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>TXN4003</td>
+<td>WA</td>
+<td>697.70</td>
+<td>697.70</td>
+<td>0.0650</td>
+<td>45.35</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>TXN4004</td>
+<td>TX</td>
+<td>236.63</td>
+<td>236.63</td>
+<td>0.0625</td>
+<td>14.79</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-9-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-9-2-tab">
+<div id="f9ef598b" class="cell" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>sales_pl <span class="op">=</span> pl.read_csv(<span class="st">"data/sales_tax_test_transactions.csv"</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>sales_pl.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="20">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (5, 6)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">transaction_id</th>
+<th data-quarto-table-cell-role="th">state</th>
+<th data-quarto-table-cell-role="th">sale_amount</th>
+<th data-quarto-table-cell-role="th">taxable_amount</th>
+<th data-quarto-table-cell-role="th">statutory_rate</th>
+<th data-quarto-table-cell-role="th">tax_collected</th>
+</tr>
+<tr class="even">
+<td>str</td>
+<td>str</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"TXN4000"</td>
+<td>"WA"</td>
+<td>47.46</td>
+<td>47.46</td>
+<td>0.065</td>
+<td>3.08</td>
+</tr>
+<tr class="even">
+<td>"TXN4001"</td>
+<td>"IL"</td>
+<td>396.5</td>
+<td>0.0</td>
+<td>0.0625</td>
+<td>0.0</td>
+</tr>
+<tr class="odd">
+<td>"TXN4002"</td>
+<td>"PA"</td>
+<td>210.94</td>
+<td>210.94</td>
+<td>0.06</td>
+<td>12.66</td>
+</tr>
+<tr class="even">
+<td>"TXN4003"</td>
+<td>"WA"</td>
+<td>697.7</td>
+<td>697.7</td>
+<td>0.065</td>
+<td>45.35</td>
+</tr>
+<tr class="odd">
+<td>"TXN4004"</td>
+<td>"TX"</td>
+<td>236.63</td>
+<td>236.63</td>
+<td>0.0625</td>
+<td>14.79</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-10-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-1" role="tab" aria-controls="tabset-10-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-10-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-2" role="tab" aria-controls="tabset-10-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-10-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-10-1-tab">
+<div id="4f7c7d30" class="cell" data-execution_count="21">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>sales_pd[<span class="st">"expected_tax"</span>] <span class="op">=</span> (sales_pd[<span class="st">"taxable_amount"</span>] <span class="op">*</span> sales_pd[<span class="st">"statutory_rate"</span>]).<span class="bu">round</span>(<span class="dv">2</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>sales_pd[<span class="st">"tax_variance"</span>] <span class="op">=</span> sales_pd[<span class="st">"tax_collected"</span>] <span class="op">-</span> sales_pd[<span class="st">"expected_tax"</span>]</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>sales_pd[<span class="st">"is_discrepancy"</span>] <span class="op">=</span> sales_pd[<span class="st">"tax_variance"</span>].<span class="bu">abs</span>() <span class="op">&gt;</span> <span class="fl">0.5</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Discrepancies found:"</span>, sales_pd[<span class="st">"is_discrepancy"</span>].<span class="bu">sum</span>())</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>sales_pd[sales_pd[<span class="st">"is_discrepancy"</span>]][</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"transaction_id"</span>, <span class="st">"state"</span>, <span class="st">"taxable_amount"</span>, <span class="st">"statutory_rate"</span>, <span class="st">"expected_tax"</span>, <span class="st">"tax_collected"</span>, <span class="st">"tax_variance"</span>]</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>].head(<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Discrepancies found: 14</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="21">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">transaction_id</th>
+<th data-quarto-table-cell-role="th">state</th>
+<th data-quarto-table-cell-role="th">taxable_amount</th>
+<th data-quarto-table-cell-role="th">statutory_rate</th>
+<th data-quarto-table-cell-role="th">expected_tax</th>
+<th data-quarto-table-cell-role="th">tax_collected</th>
+<th data-quarto-table-cell-role="th">tax_variance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">5</th>
+<td>TXN4005</td>
+<td>NY</td>
+<td>527.48</td>
+<td>0.0400</td>
+<td>21.10</td>
+<td>33.54</td>
+<td>12.44</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">31</th>
+<td>TXN4031</td>
+<td>CA</td>
+<td>71.70</td>
+<td>0.0725</td>
+<td>5.20</td>
+<td>2.55</td>
+<td>-2.65</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">34</th>
+<td>TXN4034</td>
+<td>WA</td>
+<td>201.03</td>
+<td>0.0650</td>
+<td>13.07</td>
+<td>6.03</td>
+<td>-7.04</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">62</th>
+<td>TXN4062</td>
+<td>OH</td>
+<td>99.79</td>
+<td>0.0575</td>
+<td>5.74</td>
+<td>2.51</td>
+<td>-3.23</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">77</th>
+<td>TXN4077</td>
+<td>WA</td>
+<td>131.91</td>
+<td>0.0650</td>
+<td>8.57</td>
+<td>13.28</td>
+<td>4.71</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">127</th>
+<td>TXN4127</td>
+<td>CA</td>
+<td>261.13</td>
+<td>0.0725</td>
+<td>18.93</td>
+<td>0.00</td>
+<td>-18.93</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">191</th>
+<td>TXN4191</td>
+<td>CA</td>
+<td>40.92</td>
+<td>0.0725</td>
+<td>2.97</td>
+<td>3.64</td>
+<td>0.67</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">201</th>
+<td>TXN4201</td>
+<td>NY</td>
+<td>128.41</td>
+<td>0.0400</td>
+<td>5.14</td>
+<td>3.67</td>
+<td>-1.47</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">202</th>
+<td>TXN4202</td>
+<td>TX</td>
+<td>139.36</td>
+<td>0.0625</td>
+<td>8.71</td>
+<td>13.30</td>
+<td>4.59</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">212</th>
+<td>TXN4212</td>
+<td>FL</td>
+<td>415.04</td>
+<td>0.0600</td>
+<td>24.90</td>
+<td>11.77</td>
+<td>-13.13</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-10-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-10-2-tab">
+<div id="49dfeabd" class="cell" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>sales_pl <span class="op">=</span> sales_pl.with_columns(</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    (pl.col(<span class="st">"taxable_amount"</span>) <span class="op">*</span> pl.col(<span class="st">"statutory_rate"</span>)).<span class="bu">round</span>(<span class="dv">2</span>).alias(<span class="st">"expected_tax"</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>).with_columns(</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    (pl.col(<span class="st">"tax_collected"</span>) <span class="op">-</span> pl.col(<span class="st">"expected_tax"</span>)).alias(<span class="st">"tax_variance"</span>)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>).with_columns(</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    (pl.col(<span class="st">"tax_variance"</span>).<span class="bu">abs</span>() <span class="op">&gt;</span> <span class="fl">0.5</span>).alias(<span class="st">"is_discrepancy"</span>)</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Discrepancies found:"</span>, sales_pl.<span class="bu">filter</span>(pl.col(<span class="st">"is_discrepancy"</span>)).height)</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>sales_pl.<span class="bu">filter</span>(pl.col(<span class="st">"is_discrepancy"</span>)).select(</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"transaction_id"</span>, <span class="st">"state"</span>, <span class="st">"taxable_amount"</span>, <span class="st">"statutory_rate"</span>, <span class="st">"expected_tax"</span>, <span class="st">"tax_collected"</span>, <span class="st">"tax_variance"</span>]</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>).head(<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Discrepancies found: 14</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="22">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (10, 7)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">transaction_id</th>
+<th data-quarto-table-cell-role="th">state</th>
+<th data-quarto-table-cell-role="th">taxable_amount</th>
+<th data-quarto-table-cell-role="th">statutory_rate</th>
+<th data-quarto-table-cell-role="th">expected_tax</th>
+<th data-quarto-table-cell-role="th">tax_collected</th>
+<th data-quarto-table-cell-role="th">tax_variance</th>
+</tr>
+<tr class="even">
+<td>str</td>
+<td>str</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"TXN4005"</td>
+<td>"NY"</td>
+<td>527.48</td>
+<td>0.04</td>
+<td>21.1</td>
+<td>33.54</td>
+<td>12.44</td>
+</tr>
+<tr class="even">
+<td>"TXN4031"</td>
+<td>"CA"</td>
+<td>71.7</td>
+<td>0.0725</td>
+<td>5.2</td>
+<td>2.55</td>
+<td>-2.65</td>
+</tr>
+<tr class="odd">
+<td>"TXN4034"</td>
+<td>"WA"</td>
+<td>201.03</td>
+<td>0.065</td>
+<td>13.07</td>
+<td>6.03</td>
+<td>-7.04</td>
+</tr>
+<tr class="even">
+<td>"TXN4062"</td>
+<td>"OH"</td>
+<td>99.79</td>
+<td>0.0575</td>
+<td>5.74</td>
+<td>2.51</td>
+<td>-3.23</td>
+</tr>
+<tr class="odd">
+<td>"TXN4077"</td>
+<td>"WA"</td>
+<td>131.91</td>
+<td>0.065</td>
+<td>8.57</td>
+<td>13.28</td>
+<td>4.71</td>
+</tr>
+<tr class="even">
+<td>"TXN4127"</td>
+<td>"CA"</td>
+<td>261.13</td>
+<td>0.0725</td>
+<td>18.93</td>
+<td>0.0</td>
+<td>-18.93</td>
+</tr>
+<tr class="odd">
+<td>"TXN4191"</td>
+<td>"CA"</td>
+<td>40.92</td>
+<td>0.0725</td>
+<td>2.97</td>
+<td>3.64</td>
+<td>0.67</td>
+</tr>
+<tr class="even">
+<td>"TXN4201"</td>
+<td>"NY"</td>
+<td>128.41</td>
+<td>0.04</td>
+<td>5.14</td>
+<td>3.67</td>
+<td>-1.47</td>
+</tr>
+<tr class="odd">
+<td>"TXN4202"</td>
+<td>"TX"</td>
+<td>139.36</td>
+<td>0.0625</td>
+<td>8.71</td>
+<td>13.3</td>
+<td>4.59</td>
+</tr>
+<tr class="even">
+<td>"TXN4212"</td>
+<td>"FL"</td>
+<td>415.04</td>
+<td>0.06</td>
+<td>24.9</td>
+<td>11.77</td>
+<td>-13.13</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Both libraries agree: 14 transactions show a tax variance exceeding our $0.50 threshold, covering undercharged tax, overcharged tax, and at least one transaction where no tax was collected at all despite a taxable sale.</p>
+<section id="quantifying-the-exposure" class="level3" data-number="12.6.1">
+<h3 data-number="12.6.1" class="anchored" data-anchor-id="quantifying-the-exposure"><span class="header-section-number">12.6.1</span> Quantifying the Exposure</h3>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-11-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-11-1" role="tab" aria-controls="tabset-11-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-11-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-11-2" role="tab" aria-controls="tabset-11-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-11-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-11-1-tab">
+<div id="94087acc" class="cell" data-execution_count="23">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>total_undercharged <span class="op">=</span> sales_pd[sales_pd[<span class="st">"tax_variance"</span>] <span class="op">&lt;</span> <span class="dv">0</span>][<span class="st">"tax_variance"</span>].<span class="bu">sum</span>()</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>total_overcharged <span class="op">=</span> sales_pd[sales_pd[<span class="st">"tax_variance"</span>] <span class="op">&gt;</span> <span class="dv">0</span>][<span class="st">"tax_variance"</span>].<span class="bu">sum</span>()</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Total understated tax (potential liability exposure): $</span><span class="sc">{</span>total_undercharged<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Total overcharged tax (potential customer refund exposure): $</span><span class="sc">{</span>total_overcharged<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Total understated tax (potential liability exposure): $-70.71
+Total overcharged tax (potential customer refund exposure): $28.59</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-11-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-11-2-tab">
+<div id="fdc172d8" class="cell" data-execution_count="24">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Total understated tax (negative variances)</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>total_undercharged <span class="op">=</span> (</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    sales_pl</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">filter</span>(pl.col(<span class="st">"tax_variance"</span>) <span class="op">&lt;</span> <span class="dv">0</span>)</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    .select(pl.col(<span class="st">"tax_variance"</span>).<span class="bu">sum</span>())</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>    .item()</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Total overcharged tax (positive variances)</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>total_overcharged <span class="op">=</span> (</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>    sales_pl</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">filter</span>(pl.col(<span class="st">"tax_variance"</span>) <span class="op">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>    .select(pl.col(<span class="st">"tax_variance"</span>).<span class="bu">sum</span>())</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>    .item()</span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"Total understated tax (potential liability exposure): "</span></span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"$</span><span class="sc">{</span>total_undercharged<span class="sc">:.2f}</span><span class="ss">"</span></span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"Total overcharged tax (potential customer refund exposure): "</span></span>
+<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"$</span><span class="sc">{</span>total_overcharged<span class="sc">:.2f}</span><span class="ss">"</span></span>
+<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Total understated tax (potential liability exposure): $-70.71
+Total overcharged tax (potential customer refund exposure): $28.59</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-materiality-threshold-matters" class="level3" data-number="12.6.2">
+<h3 data-number="12.6.2" class="anchored" data-anchor-id="the-materiality-threshold-matters"><span class="header-section-number">12.6.2</span> The Materiality Threshold Matters</h3>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-12-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-12-1" role="tab" aria-controls="tabset-12-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-12-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-12-2" role="tab" aria-controls="tabset-12-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-12-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-12-1-tab">
+<div id="f08ede95" class="cell" data-execution_count="25">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>sales_pd[<span class="st">"abs_variance"</span>] <span class="op">=</span> sales_pd[<span class="st">"tax_variance"</span>].<span class="bu">abs</span>()</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>near_threshold <span class="op">=</span> sales_pd[(sales_pd[<span class="st">"abs_variance"</span>] <span class="op">&gt;</span> <span class="fl">0.01</span>) <span class="op">&amp;</span> (sales_pd[<span class="st">"abs_variance"</span>] <span class="op">&lt;=</span> <span class="fl">0.5</span>)]</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>near_threshold[[<span class="st">"transaction_id"</span>, <span class="st">"state"</span>, <span class="st">"taxable_amount"</span>, <span class="st">"tax_variance"</span>]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="25">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">transaction_id</th>
+<th data-quarto-table-cell-role="th">state</th>
+<th data-quarto-table-cell-role="th">taxable_amount</th>
+<th data-quarto-table-cell-role="th">tax_variance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">252</th>
+<td>TXN4252</td>
+<td>OH</td>
+<td>110.62</td>
+<td>0.28</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">292</th>
+<td>TXN4292</td>
+<td>OH</td>
+<td>84.69</td>
+<td>0.21</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-12-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-12-2-tab">
+<div id="f6364141" class="cell" data-execution_count="26">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the absolute variance column</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>sales_pl <span class="op">=</span> sales_pl.with_columns(</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    pl.col(<span class="st">"tax_variance"</span>)</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">abs</span>()</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    .alias(<span class="st">"abs_variance"</span>)</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter transactions with variances near the threshold</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>near_threshold <span class="op">=</span> (</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>    sales_pl</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">filter</span>(</span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>        (pl.col(<span class="st">"abs_variance"</span>) <span class="op">&gt;</span> <span class="fl">0.01</span>)</span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>        <span class="op">&amp;</span> (pl.col(<span class="st">"abs_variance"</span>) <span class="op">&lt;=</span> <span class="fl">0.5</span>)</span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>    .select(</span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">"transaction_id"</span>,</span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">"state"</span>,</span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">"taxable_amount"</span>,</span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">"tax_variance"</span>,</span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a>near_threshold</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="26">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (2, 4)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">transaction_id</th>
+<th data-quarto-table-cell-role="th">state</th>
+<th data-quarto-table-cell-role="th">taxable_amount</th>
+<th data-quarto-table-cell-role="th">tax_variance</th>
+</tr>
+<tr class="even">
+<td>str</td>
+<td>str</td>
+<td>f64</td>
+<td>f64</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"TXN4252"</td>
+<td>"OH"</td>
+<td>110.62</td>
+<td>0.28</td>
+</tr>
+<tr class="even">
+<td>"TXN4292"</td>
+<td>"OH"</td>
+<td>84.69</td>
+<td>0.21</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Choosing a Threshold Is a Judgment Call, Not Just a Number
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>These two transactions have a small but genuine tax variance (20-30 cents) that falls just under our $0.50 flagging threshold. A stricter threshold (say, $0.05) would catch them — but would likely also flag a large number of transactions where the “discrepancy” is nothing more than ordinary rounding in how tax is calculated at the point of sale. There’s no universally correct threshold; it depends on transaction volume, the cost of investigating false positives, and the client’s own risk tolerance. This is the same tension we saw with Isolation Forest’s <code>contamination</code> parameter in Chapter 9 — every anomaly detection method, statistical or rule-based, requires a threshold decision that trades off precision against recall.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="chapter-summary" class="level2" data-number="12.7">
+<h2 data-number="12.7" class="anchored" data-anchor-id="chapter-summary"><span class="header-section-number">12.7</span> Chapter Summary</h2>
+<ul>
+<li>Effective tax rate (ETR) is tax expense divided by pretax income, and can differ substantially from statutory rates due to credits, deductions, and jurisdictional mix.</li>
+<li>A consolidated ETR well below every major jurisdiction’s statutory rate is a signal to investigate <em>where</em> profit is being reported, not just <em>how much</em> tax is being paid overall.</li>
+<li>Comparing a jurisdiction’s share of profit to its share of revenue or headcount is a standard test for detecting disproportionate profit allocation — in this chapter, two jurisdictions with under 5% of headcount generated roughly 70% of consolidated profit.</li>
+<li>Profit-per-employee, viewed on a log scale given how extreme the gaps can be, is a particularly sharp way to visualize this kind of mismatch.</li>
+<li>A rate reconciliation quantifies exactly how much each jurisdiction’s rate difference from a home-country baseline contributed to total tax savings — the same disclosure format used in real 10-K filings.</li>
+<li>Sales tax compliance testing follows the same recompute-and-compare logic used throughout this book: calculate the expected value independently, compare it to the recorded value, and flag material differences.</li>
+<li>Every flagging threshold, whether for sales tax variances or statistical anomalies, is a genuine tradeoff between catching more real issues and generating more false positives — there’s no threshold that eliminates this tradeoff entirely.</li>
+</ul>
+</section>
+<section id="discussion-questions" class="level2" data-number="12.8">
+<h2 data-number="12.8" class="anchored" data-anchor-id="discussion-questions"><span class="header-section-number">12.8</span> Discussion Questions</h2>
+<ol type="1">
+<li>Why is comparing a jurisdiction’s share of <em>profit</em> to its share of <em>revenue or employees</em> a more informative test than simply looking at its effective tax rate in isolation?</li>
+<li>If you were a financial statement analyst (not an auditor or tax authority), why might you still care about the profit-per-employee pattern shown in this chapter, even though tax minimization within the law is not illegal?</li>
+<li>The sales tax materiality threshold in this chapter ($0.50 per transaction) is a judgment call. How might your answer change if you were testing 300 transactions versus 3 million?</li>
+</ol>
+</section>
+<section id="exercises" class="level2" data-number="12.9">
+<h2 data-number="12.9" class="anchored" data-anchor-id="exercises"><span class="header-section-number">12.9</span> Exercises</h2>
+<ol type="1">
+<li>Recompute the rate reconciliation using the <strong>UK</strong> statutory rate (25%) as the baseline instead of the US rate. Does Bermuda and Ireland’s combined contribution to the rate differential change in a way you’d expect?</li>
+<li>Using <code>tax_provision_by_jurisdiction.csv</code>, compute each jurisdiction’s 3-year <em>average</em> effective tax rate and compare it to its statutory rate. Which jurisdiction shows the largest gap, and is that gap consistent with what you’d expect from its business substance?</li>
+<li>Lower the sales tax discrepancy threshold from $0.50 to $0.10 and rerun the compliance test. How many additional transactions get flagged, and does a quick look at them suggest genuine errors or just rounding noise?</li>
+<li>Using <code>sales_tax_test_transactions.csv</code>, group discrepancies by <code>state</code> rather than looking at them transaction-by-transaction. Is any single state’s tax calculation logic disproportionately likely to be wrong, which might suggest a system configuration issue rather than isolated data entry errors?</li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./11-revenue-recognition-analysis.html" class="pagination-link" aria-label="Revenue Recognition and Transaction-Level Analysis">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Revenue Recognition and Transaction-Level Analysis</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./13-predictive-modeling-intro.html" class="pagination-link" aria-label="Introduction to Predictive Modeling">
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Introduction to Predictive Modeling</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Accounting Analytics with Python</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/msharifbd/accounting-analytics-book/edit/main/12-tax-analytics.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/blob/main/12-tax-analytics.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>This book was built with <a href="https://quarto.org/">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

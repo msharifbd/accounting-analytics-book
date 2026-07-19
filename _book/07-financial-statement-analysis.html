@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>7&nbsp; Financial Statement Analysis with Python – Accounting Analytics with Python</title>
+<title>7&nbsp; Financial Statement Analytics – Accounting Analytics with Python</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -23,17 +23,52 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./08-audit-analytics.html" rel="next">
+<link href="./08-management-accounting-analytics.html" rel="next">
 <link href="./06-data-visualization.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -41,10 +76,14 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-9e3e5b9121e68b3f077afb32f2c64d95.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-9e3e5b9121e68b3f077afb32f2c64d95.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-fe9f69af69d9b0acfce0412d1605ee06.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-9e3e5b9121e68b3f077afb32f2c64d95.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -72,6 +111,12 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
 <style>
 .scrollable-table {
   overflow-x: auto !important;
@@ -88,10 +133,201 @@ a.citation, a.citation:visited {
 }
 </style>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -100,7 +336,7 @@ a.citation, a.citation:visited {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./07-financial-statement-analysis.html">Part III: Applied Accounting Analytics</a></li><li class="breadcrumb-item"><a href="./07-financial-statement-analysis.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Financial Statement Analysis with Python</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./07-financial-statement-analysis.html">Part III: Applied Accounting Analytics</a></li><li class="breadcrumb-item"><a href="./07-financial-statement-analysis.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Financial Statement Analytics</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -116,7 +352,7 @@ a.citation, a.citation:visited {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Accounting Analytics with Python</a> 
-        <div class="sidebar-tools-main">
+        <div class="sidebar-tools-main tools-wide">
     <a href="https://github.com/msharifbd/accounting-analytics-book" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
       <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Download"><i class="bi bi-download"></i></a>
@@ -135,6 +371,7 @@ a.citation, a.citation:visited {
           </li>
       </ul>
     </div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
       </div>
@@ -221,31 +458,37 @@ a.citation, a.citation:visited {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-financial-statement-analysis.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Financial Statement Analysis with Python</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Financial Statement Analytics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./08-audit-analytics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Audit Analytics</span></span></a>
+  <a href="./08-management-accounting-analytics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Management Accounting Analytics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./09-fraud-anomaly-detection.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Fraud Detection and Anomaly Detection</span></span></a>
+  <a href="./09-audit-analytics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Audit Analytics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./10-revenue-recognition-analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Revenue Recognition and Transaction-Level Analysis</span></span></a>
+  <a href="./10-fraud-anomaly-detection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Fraud and Anomaly Detection</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./11-tax-analytics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Tax Analytics</span></span></a>
+  <a href="./11-revenue-recognition-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Revenue Recognition and Transaction-Level Analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-tax-analytics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Tax Analytics</span></span></a>
   </div>
 </li>
       </ul>
@@ -261,14 +504,14 @@ a.citation, a.citation:visited {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./12-predictive-modeling-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Introduction to Predictive Modeling</span></span></a>
+  <a href="./13-predictive-modeling-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Introduction to Predictive Modeling</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./13-genai-in-accounting.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Generative AI in Accounting</span></span></a>
+  <a href="./14-genai-in-accounting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Generative AI in Accounting</span></span></a>
   </div>
 </li>
       </ul>
@@ -284,20 +527,20 @@ a.citation, a.citation:visited {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./14-automated-reporting-quarto.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Automated Reporting and Dashboards with Quarto</span></span></a>
+  <a href="./15-automated-reporting-quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Automated Reporting and Dashboards with Quarto</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./15-data-ethics-reproducibility.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Data Ethics, Governance, and Reproducibility</span></span></a>
+  <a href="./16-data-ethics-reproducibility.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Data Ethics, Governance, and Reproducibility</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./16-capstone-project.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Capstone Project</span></span></a>
+  <a href="./17-capstone-project.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Capstone Project</span></span></a>
   </div>
 </li>
       </ul>
@@ -342,15 +585,41 @@ a.citation, a.citation:visited {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#from-general-ledger-to-financial-statements" id="toc-from-general-ledger-to-financial-statements" class="nav-link active" data-scroll-target="#from-general-ledger-to-financial-statements"><span class="header-section-number">7.1</span> From General Ledger to Financial Statements</a></li>
+  <li><a href="#horizontal-trend-analysis" id="toc-horizontal-trend-analysis" class="nav-link" data-scroll-target="#horizontal-trend-analysis"><span class="header-section-number">7.2</span> Horizontal (Trend) Analysis</a>
+  <ul class="collapse">
+  <li><a href="#indexed-trend-analysis" id="toc-indexed-trend-analysis" class="nav-link" data-scroll-target="#indexed-trend-analysis"><span class="header-section-number">7.2.1</span> Indexed Trend Analysis</a></li>
+  </ul></li>
+  <li><a href="#vertical-common-size-analysis" id="toc-vertical-common-size-analysis" class="nav-link" data-scroll-target="#vertical-common-size-analysis"><span class="header-section-number">7.3</span> Vertical (Common-Size) Analysis</a></li>
+  <li><a href="#ratio-analysis" id="toc-ratio-analysis" class="nav-link" data-scroll-target="#ratio-analysis"><span class="header-section-number">7.4</span> Ratio Analysis</a>
+  <ul class="collapse">
+  <li><a href="#liquidity-ratios" id="toc-liquidity-ratios" class="nav-link" data-scroll-target="#liquidity-ratios"><span class="header-section-number">7.4.1</span> Liquidity Ratios</a></li>
+  <li><a href="#profitability-ratios" id="toc-profitability-ratios" class="nav-link" data-scroll-target="#profitability-ratios"><span class="header-section-number">7.4.2</span> Profitability Ratios</a></li>
+  <li><a href="#leverage-ratios" id="toc-leverage-ratios" class="nav-link" data-scroll-target="#leverage-ratios"><span class="header-section-number">7.4.3</span> Leverage Ratios</a></li>
+  <li><a href="#efficiency-ratios" id="toc-efficiency-ratios" class="nav-link" data-scroll-target="#efficiency-ratios"><span class="header-section-number">7.4.4</span> Efficiency Ratios</a></li>
+  </ul></li>
+  <li><a href="#automating-ratio-calculations" id="toc-automating-ratio-calculations" class="nav-link" data-scroll-target="#automating-ratio-calculations"><span class="header-section-number">7.5</span> Automating Ratio Calculations</a></li>
+  <li><a href="#dupont-decomposition-explaining-why-roe-changed" id="toc-dupont-decomposition-explaining-why-roe-changed" class="nav-link" data-scroll-target="#dupont-decomposition-explaining-why-roe-changed"><span class="header-section-number">7.6</span> DuPont Decomposition: Explaining <em>Why</em> ROE Changed</a></li>
+  <li><a href="#visualizing-the-trends" id="toc-visualizing-the-trends" class="nav-link" data-scroll-target="#visualizing-the-trends"><span class="header-section-number">7.7</span> Visualizing the Trends</a></li>
+  <li><a href="#putting-it-together-a-financial-health-memo" id="toc-putting-it-together-a-financial-health-memo" class="nav-link" data-scroll-target="#putting-it-together-a-financial-health-memo"><span class="header-section-number">7.8</span> Putting It Together: A Financial Health Memo</a></li>
+  <li><a href="#chapter-summary" id="toc-chapter-summary" class="nav-link" data-scroll-target="#chapter-summary"><span class="header-section-number">7.9</span> Chapter Summary</a></li>
+  <li><a href="#discussion-questions" id="toc-discussion-questions" class="nav-link" data-scroll-target="#discussion-questions"><span class="header-section-number">7.10</span> Discussion Questions</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">7.11</span> Exercises</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/msharifbd/accounting-analytics-book/edit/main/07-financial-statement-analysis.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/blob/main/07-financial-statement-analysis.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./07-financial-statement-analysis.html">Part III: Applied Accounting Analytics</a></li><li class="breadcrumb-item"><a href="./07-financial-statement-analysis.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Financial Statement Analysis with Python</span></a></li></ol></nav>
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./07-financial-statement-analysis.html">Part III: Applied Accounting Analytics</a></li><li class="breadcrumb-item"><a href="./07-financial-statement-analysis.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Financial Statement Analytics</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Financial Statement Analysis with Python</span></h1>
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Financial Statement Analytics</span></h1>
 </div>
 
 
@@ -367,12 +636,2655 @@ a.citation, a.citation:visited {
 </header>
 
 
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Learning Objectives
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>By the end of this chapter, you should be able to:</p>
+<ul>
+<li>Load and structure multi-year financial statement data for analysis</li>
+<li>Perform horizontal (trend) analysis and vertical (common-size) analysis</li>
+<li>Compute liquidity, profitability, leverage, and efficiency ratios</li>
+<li>Build a reusable function that automates ratio calculations across any set of financial statements</li>
+<li>Apply DuPont decomposition to explain <em>why</em> return on equity changed, not just that it changed</li>
+<li>Interpret ratio trends critically, rather than treating any single ratio as a verdict on its own</li>
+</ul>
+</div>
+</div>
+<section id="from-general-ledger-to-financial-statements" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="from-general-ledger-to-financial-statements"><span class="header-section-number">7.1</span> From General Ledger to Financial Statements</h2>
+<p>Chapters 3 and 4 traced how transactions flow from the general ledger into a trial balance. Financial statements are the next and final step in that chain: the income statement summarizes revenue and expense activity for a period, and the balance sheet summarizes assets, liabilities, and equity at a point in time.</p>
+<p>This chapter works with <strong>five years of financial statements (2021–2025)</strong> for a fictional company, “Ledger &amp; Co.,” stored in <code>income_statement.csv</code> and <code>balance_sheet.csv</code>. Unlike the transaction-level data from earlier chapters, this data is already fully summarized — each row is one fiscal year, and each column is a financial statement line item.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="" aria-current="page">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div id="b5849623" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>inc <span class="op">=</span> pd.read_csv(<span class="st">"data/income_statement.csv"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>bs <span class="op">=</span> pd.read_csv(<span class="st">"data/balance_sheet.csv"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>inc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="233">
+<div>
 
 
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">Revenue</th>
+<th data-quarto-table-cell-role="th">Cost of Goods Sold</th>
+<th data-quarto-table-cell-role="th">Gross Profit</th>
+<th data-quarto-table-cell-role="th">Operating Expenses (SG&amp;A)</th>
+<th data-quarto-table-cell-role="th">Depreciation and Amortization</th>
+<th data-quarto-table-cell-role="th">Operating Income</th>
+<th data-quarto-table-cell-role="th">Interest Expense</th>
+<th data-quarto-table-cell-role="th">Pretax Income</th>
+<th data-quarto-table-cell-role="th">Income Tax Expense</th>
+<th data-quarto-table-cell-role="th">Net Income</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>2021</td>
+<td>4200000</td>
+<td>2604000</td>
+<td>1596000</td>
+<td>882000</td>
+<td>95000</td>
+<td>619000</td>
+<td>62000</td>
+<td>557000</td>
+<td>116970</td>
+<td>440030</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>2022</td>
+<td>4850000</td>
+<td>2982750</td>
+<td>1867250</td>
+<td>994250</td>
+<td>105000</td>
+<td>768000</td>
+<td>58000</td>
+<td>710000</td>
+<td>149100</td>
+<td>560900</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>2023</td>
+<td>5450000</td>
+<td>3270000</td>
+<td>2180000</td>
+<td>1090000</td>
+<td>118000</td>
+<td>972000</td>
+<td>52000</td>
+<td>920000</td>
+<td>193200</td>
+<td>726800</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>2024</td>
+<td>6100000</td>
+<td>3629500</td>
+<td>2470500</td>
+<td>1189500</td>
+<td>128000</td>
+<td>1153000</td>
+<td>44000</td>
+<td>1109000</td>
+<td>232890</td>
+<td>876110</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>2025</td>
+<td>6900000</td>
+<td>4036500</td>
+<td>2863500</td>
+<td>1311000</td>
+<td>140000</td>
+<td>1412500</td>
+<td>36000</td>
+<td>1376500</td>
+<td>289065</td>
+<td>1087435</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div id="1753b9c5" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>inc_pl <span class="op">=</span> pl.read_csv(<span class="st">"data/income_statement.csv"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>bs_pl <span class="op">=</span> pl.read_csv(<span class="st">"data/balance_sheet.csv"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>bs_pl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="234">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (5, 16)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">Cash</th>
+<th data-quarto-table-cell-role="th">Accounts Receivable</th>
+<th data-quarto-table-cell-role="th">Inventory</th>
+<th data-quarto-table-cell-role="th">Property, Plant &amp; Equipment (net)</th>
+<th data-quarto-table-cell-role="th">Accounts Payable</th>
+<th data-quarto-table-cell-role="th">Short-term Debt</th>
+<th data-quarto-table-cell-role="th">Long-term Debt</th>
+<th data-quarto-table-cell-role="th">Common Stock</th>
+<th data-quarto-table-cell-role="th">Retained Earnings</th>
+<th data-quarto-table-cell-role="th">Total Current Assets</th>
+<th data-quarto-table-cell-role="th">Total Assets</th>
+<th data-quarto-table-cell-role="th">Total Current Liabilities</th>
+<th data-quarto-table-cell-role="th">Total Liabilities</th>
+<th data-quarto-table-cell-role="th">Total Equity</th>
+<th data-quarto-table-cell-role="th">Total Liabilities and Equity</th>
+</tr>
+<tr class="even">
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2021</td>
+<td>461051</td>
+<td>483288</td>
+<td>392384</td>
+<td>675000</td>
+<td>249699</td>
+<td>80000</td>
+<td>450000</td>
+<td>500000</td>
+<td>732024</td>
+<td>1336723</td>
+<td>2011723</td>
+<td>329699</td>
+<td>779699</td>
+<td>1232024</td>
+<td>2011723</td>
+</tr>
+<tr class="even">
+<td>2022</td>
+<td>763486</td>
+<td>531507</td>
+<td>424940</td>
+<td>730000</td>
+<td>294189</td>
+<td>75000</td>
+<td>400000</td>
+<td>500000</td>
+<td>1180744</td>
+<td>1719933</td>
+<td>2449933</td>
+<td>369189</td>
+<td>769189</td>
+<td>1680744</td>
+<td>2449933</td>
+</tr>
+<tr class="odd">
+<td>2023</td>
+<td>1186389</td>
+<td>582329</td>
+<td>447945</td>
+<td>787000</td>
+<td>331479</td>
+<td>70000</td>
+<td>340000</td>
+<td>500000</td>
+<td>1762184</td>
+<td>2216663</td>
+<td>3003663</td>
+<td>401479</td>
+<td>741479</td>
+<td>2262184</td>
+<td>3003663</td>
+</tr>
+<tr class="even">
+<td>2024</td>
+<td>1719566</td>
+<td>635068</td>
+<td>477304</td>
+<td>844000</td>
+<td>377866</td>
+<td>65000</td>
+<td>270000</td>
+<td>500000</td>
+<td>2463072</td>
+<td>2831938</td>
+<td>3675938</td>
+<td>442866</td>
+<td>712866</td>
+<td>2963072</td>
+<td>3675938</td>
+</tr>
+<tr class="odd">
+<td>2025</td>
+<td>2412155</td>
+<td>699452</td>
+<td>508710</td>
+<td>904000</td>
+<td>431297</td>
+<td>60000</td>
+<td>200000</td>
+<td>500000</td>
+<td>3333020</td>
+<td>3620317</td>
+<td>4524317</td>
+<td>491297</td>
+<td>691297</td>
+<td>3833020</td>
+<td>4524317</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<div id="17d08ca8" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>bs[[<span class="st">"year"</span>, <span class="st">"Cash"</span>, <span class="st">"Total Current Assets"</span>, <span class="st">"Total Assets"</span>, <span class="st">"Total Liabilities"</span>, <span class="st">"Total Equity"</span>]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="235">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">Cash</th>
+<th data-quarto-table-cell-role="th">Total Current Assets</th>
+<th data-quarto-table-cell-role="th">Total Assets</th>
+<th data-quarto-table-cell-role="th">Total Liabilities</th>
+<th data-quarto-table-cell-role="th">Total Equity</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>2021</td>
+<td>461051</td>
+<td>1336723</td>
+<td>2011723</td>
+<td>779699</td>
+<td>1232024</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>2022</td>
+<td>763486</td>
+<td>1719933</td>
+<td>2449933</td>
+<td>769189</td>
+<td>1680744</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>2023</td>
+<td>1186389</td>
+<td>2216663</td>
+<td>3003663</td>
+<td>741479</td>
+<td>2262184</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>2024</td>
+<td>1719566</td>
+<td>2831938</td>
+<td>3675938</td>
+<td>712866</td>
+<td>2963072</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>2025</td>
+<td>2412155</td>
+<td>3620317</td>
+<td>4524317</td>
+<td>691297</td>
+<td>3833020</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div id="f053c204" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>bs_pl.select(<span class="st">"year"</span>, <span class="st">"Cash"</span>, <span class="st">"Total Current Assets"</span>, <span class="st">"Total Assets"</span>, <span class="st">"Total Liabilities"</span>, <span class="st">"Total Equity"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="236">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (5, 6)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">Cash</th>
+<th data-quarto-table-cell-role="th">Total Current Assets</th>
+<th data-quarto-table-cell-role="th">Total Assets</th>
+<th data-quarto-table-cell-role="th">Total Liabilities</th>
+<th data-quarto-table-cell-role="th">Total Equity</th>
+</tr>
+<tr class="even">
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2021</td>
+<td>461051</td>
+<td>1336723</td>
+<td>2011723</td>
+<td>779699</td>
+<td>1232024</td>
+</tr>
+<tr class="even">
+<td>2022</td>
+<td>763486</td>
+<td>1719933</td>
+<td>2449933</td>
+<td>769189</td>
+<td>1680744</td>
+</tr>
+<tr class="odd">
+<td>2023</td>
+<td>1186389</td>
+<td>2216663</td>
+<td>3003663</td>
+<td>741479</td>
+<td>2262184</td>
+</tr>
+<tr class="even">
+<td>2024</td>
+<td>1719566</td>
+<td>2831938</td>
+<td>3675938</td>
+<td>712866</td>
+<td>2963072</td>
+</tr>
+<tr class="odd">
+<td>2025</td>
+<td>2412155</td>
+<td>3620317</td>
+<td>4524317</td>
+<td>691297</td>
+<td>3833020</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>A Note on Tools for This Chapter
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This chapter uses pandas only. Financial statement data is small by nature — five rows, a few dozen columns — so polars’ performance advantages (Chapter 4) don’t come into play here the way they did with transaction-level general ledger data. Feel free to redo any of this chapter’s calculations in polars as practice, but there’s no analytical reason to prefer it for a dataset this size.</p>
+</div>
+</div>
+<p>Before calculating anything, it’s worth confirming the balance sheet actually balances — a basic sanity check you should run on any real financial statement data before trusting it:</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<div id="f90e67a6" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>imbalance <span class="op">=</span> bs[<span class="st">"Total Assets"</span>] <span class="op">-</span> bs[<span class="st">"Total Liabilities and Equity"</span>]</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>imbalance</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="237">
+<pre><code>0    0
+1    0
+2    0
+3    0
+4    0
+dtype: int64</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<div id="a2e47db6" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>imbalance_pl <span class="op">=</span> bs_pl.select(<span class="st">"Total Assets"</span>) <span class="op">-</span> bs_pl.select(<span class="st">"Total Liabilities and Equity"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>imbalance_pl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="238">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (5, 1)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">Total Assets</th>
+</tr>
+<tr class="even">
+<td>i64</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+</tr>
+<tr class="even">
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>0</td>
+</tr>
+<tr class="even">
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Every year balances exactly, as it should.</p>
+</section>
+<section id="horizontal-trend-analysis" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="horizontal-trend-analysis"><span class="header-section-number">7.2</span> Horizontal (Trend) Analysis</h2>
+<p><strong>Horizontal analysis</strong> compares a line item across time, showing dollar and percentage change from one period to the next.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
+<div id="2cbf9d99" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>income_by_year <span class="op">=</span> inc.set_index(<span class="st">"year"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>dollar_change <span class="op">=</span> income_by_year.diff()</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>dollar_change[[<span class="st">"Revenue"</span>, <span class="st">"Net Income"</span>]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="239">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Revenue</th>
+<th data-quarto-table-cell-role="th">Net Income</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2021</th>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2022</th>
+<td>650000.0</td>
+<td>120870.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2023</th>
+<td>600000.0</td>
+<td>165900.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2024</th>
+<td>650000.0</td>
+<td>149310.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2025</th>
+<td>800000.0</td>
+<td>211325.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="034ff602" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>pct_change <span class="op">=</span> income_by_year.pct_change() <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>pct_change[[<span class="st">"Revenue"</span>, <span class="st">"Net Income"</span>]].<span class="bu">round</span>(<span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="240">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Revenue</th>
+<th data-quarto-table-cell-role="th">Net Income</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2021</th>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2022</th>
+<td>15.5</td>
+<td>27.5</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2023</th>
+<td>12.4</td>
+<td>29.6</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2024</th>
+<td>11.9</td>
+<td>20.5</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2025</th>
+<td>13.1</td>
+<td>24.1</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
+<div id="0c4d3861" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>dollar_change_pl <span class="op">=</span> (</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    inc_pl</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    .sort(<span class="st">"year"</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    .with_columns(</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>        pl.col([<span class="st">"Revenue"</span>, <span class="st">"Net Income"</span>]).diff()</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    .select([<span class="st">"year"</span>, <span class="st">"Revenue"</span>, <span class="st">"Net Income"</span>])</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>dollar_change_pl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="241">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (5, 3)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">Revenue</th>
+<th data-quarto-table-cell-role="th">Net Income</th>
+</tr>
+<tr class="even">
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2021</td>
+<td>null</td>
+<td>null</td>
+</tr>
+<tr class="even">
+<td>2022</td>
+<td>650000</td>
+<td>120870</td>
+</tr>
+<tr class="odd">
+<td>2023</td>
+<td>600000</td>
+<td>165900</td>
+</tr>
+<tr class="even">
+<td>2024</td>
+<td>650000</td>
+<td>149310</td>
+</tr>
+<tr class="odd">
+<td>2025</td>
+<td>800000</td>
+<td>211325</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="8096bfd5" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>pct_change_pl <span class="op">=</span> (</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    inc_pl</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    .sort(<span class="st">"year"</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    .with_columns(</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>        (pl.col([<span class="st">"Revenue"</span>, <span class="st">"Net Income"</span>]).pct_change() <span class="op">*</span> <span class="dv">100</span>).<span class="bu">round</span>(<span class="dv">1</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    .select([<span class="st">"year"</span>, <span class="st">"Revenue"</span>, <span class="st">"Net Income"</span>])</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>pct_change_pl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="242">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (5, 3)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">Revenue</th>
+<th data-quarto-table-cell-role="th">Net Income</th>
+</tr>
+<tr class="even">
+<td>i64</td>
+<td>f64</td>
+<td>f64</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2021</td>
+<td>null</td>
+<td>null</td>
+</tr>
+<tr class="even">
+<td>2022</td>
+<td>15.5</td>
+<td>27.5</td>
+</tr>
+<tr class="odd">
+<td>2023</td>
+<td>12.4</td>
+<td>29.6</td>
+</tr>
+<tr class="even">
+<td>2024</td>
+<td>11.9</td>
+<td>20.5</td>
+</tr>
+<tr class="odd">
+<td>2025</td>
+<td>13.1</td>
+<td>24.1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Revenue grew between 12% and 15% annually, but notice that <strong>net income grew faster than revenue every year</strong> (e.g., 27.5% net income growth vs.&nbsp;15.5% revenue growth in 2022) — a sign that profitability is improving, not just sales volume. We’ll confirm this more precisely with margin ratios shortly.</p>
+<section id="indexed-trend-analysis" class="level3" data-number="7.2.1">
+<h3 data-number="7.2.1" class="anchored" data-anchor-id="indexed-trend-analysis"><span class="header-section-number">7.2.1</span> Indexed Trend Analysis</h3>
+<p>A related technique sets the earliest year to 100 and expresses every later year relative to that baseline — useful for comparing the <em>relative</em> growth rate of several line items on one consistent scale, regardless of their different starting dollar amounts.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
+<div id="179d26ff" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>indexed <span class="op">=</span> income_by_year <span class="op">/</span> income_by_year.iloc[<span class="dv">0</span>] <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>indexed[[<span class="st">"Revenue"</span>, <span class="st">"Cost of Goods Sold"</span>, <span class="st">"Net Income"</span>]].<span class="bu">round</span>(<span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="243">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Revenue</th>
+<th data-quarto-table-cell-role="th">Cost of Goods Sold</th>
+<th data-quarto-table-cell-role="th">Net Income</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2021</th>
+<td>100.0</td>
+<td>100.0</td>
+<td>100.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2022</th>
+<td>115.5</td>
+<td>114.5</td>
+<td>127.5</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2023</th>
+<td>129.8</td>
+<td>125.6</td>
+<td>165.2</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2024</th>
+<td>145.2</td>
+<td>139.4</td>
+<td>199.1</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2025</th>
+<td>164.3</td>
+<td>155.0</td>
+<td>247.1</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
+<div id="ffc3bf1f" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>indexed_pl <span class="op">=</span> (</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    inc_pl</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    .sort(<span class="st">"year"</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    .with_columns(</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>        (</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>            pl.col([<span class="st">"Revenue"</span>, <span class="st">"Cost of Goods Sold"</span>, <span class="st">"Net Income"</span>])</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>            <span class="op">/</span> pl.col([<span class="st">"Revenue"</span>, <span class="st">"Cost of Goods Sold"</span>, <span class="st">"Net Income"</span>]).first()</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>            <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>        ).<span class="bu">round</span>(<span class="dv">1</span>)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    .select([<span class="st">"Revenue"</span>, <span class="st">"Cost of Goods Sold"</span>, <span class="st">"Net Income"</span>])</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>indexed_pl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="244">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (5, 3)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">Revenue</th>
+<th data-quarto-table-cell-role="th">Cost of Goods Sold</th>
+<th data-quarto-table-cell-role="th">Net Income</th>
+</tr>
+<tr class="even">
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>100.0</td>
+<td>100.0</td>
+<td>100.0</td>
+</tr>
+<tr class="even">
+<td>115.5</td>
+<td>114.5</td>
+<td>127.5</td>
+</tr>
+<tr class="odd">
+<td>129.8</td>
+<td>125.6</td>
+<td>165.2</td>
+</tr>
+<tr class="even">
+<td>145.2</td>
+<td>139.4</td>
+<td>199.1</td>
+</tr>
+<tr class="odd">
+<td>164.3</td>
+<td>155.0</td>
+<td>247.1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>By 2025, revenue has grown to 164% of its 2021 level, while net income has grown to 247% of its 2021 level — again showing that profitability is compounding faster than the top line.</p>
+</section>
+</section>
+<section id="vertical-common-size-analysis" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="vertical-common-size-analysis"><span class="header-section-number">7.3</span> Vertical (Common-Size) Analysis</h2>
+<p><strong>Vertical analysis</strong> expresses every line item as a percentage of a single base figure within the same year — typically revenue for the income statement, and total assets for the balance sheet. This is especially useful for comparing structure across years (or across companies of different sizes) without dollar amounts getting in the way.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-6-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-1" role="tab" aria-controls="tabset-6-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-6-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-2" role="tab" aria-controls="tabset-6-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-6-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-6-1-tab">
+<div id="0dd287aa" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>common_size_is <span class="op">=</span> income_by_year.div(income_by_year[<span class="st">"Revenue"</span>], axis<span class="op">=</span><span class="dv">0</span>) <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>common_size_is[[<span class="st">"Cost of Goods Sold"</span>, <span class="st">"Gross Profit"</span>, <span class="st">"Operating Income"</span>, <span class="st">"Net Income"</span>]].<span class="bu">round</span>(<span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="245">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Cost of Goods Sold</th>
+<th data-quarto-table-cell-role="th">Gross Profit</th>
+<th data-quarto-table-cell-role="th">Operating Income</th>
+<th data-quarto-table-cell-role="th">Net Income</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2021</th>
+<td>62.0</td>
+<td>38.0</td>
+<td>14.7</td>
+<td>10.5</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2022</th>
+<td>61.5</td>
+<td>38.5</td>
+<td>15.8</td>
+<td>11.6</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2023</th>
+<td>60.0</td>
+<td>40.0</td>
+<td>17.8</td>
+<td>13.3</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2024</th>
+<td>59.5</td>
+<td>40.5</td>
+<td>18.9</td>
+<td>14.4</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2025</th>
+<td>58.5</td>
+<td>41.5</td>
+<td>20.5</td>
+<td>15.8</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-6-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-6-2-tab">
+<div id="5a62e2dd" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>common_size_is_pl <span class="op">=</span> (</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    inc_pl</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    .sort(<span class="st">"year"</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    .with_columns(</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>        (</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>            pl.exclude(<span class="st">"year"</span>) <span class="op">/</span> pl.col(<span class="st">"Revenue"</span>) <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>        ).<span class="bu">round</span>(<span class="dv">1</span>)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    .select([</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"year"</span>,</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Cost of Goods Sold"</span>,</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Gross Profit"</span>,</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Operating Income"</span>,</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Net Income"</span>,</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    ])</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>common_size_is_pl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="246">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (5, 5)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">Cost of Goods Sold</th>
+<th data-quarto-table-cell-role="th">Gross Profit</th>
+<th data-quarto-table-cell-role="th">Operating Income</th>
+<th data-quarto-table-cell-role="th">Net Income</th>
+</tr>
+<tr class="even">
+<td>i64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2021</td>
+<td>62.0</td>
+<td>38.0</td>
+<td>14.7</td>
+<td>10.5</td>
+</tr>
+<tr class="even">
+<td>2022</td>
+<td>61.5</td>
+<td>38.5</td>
+<td>15.8</td>
+<td>11.6</td>
+</tr>
+<tr class="odd">
+<td>2023</td>
+<td>60.0</td>
+<td>40.0</td>
+<td>17.8</td>
+<td>13.3</td>
+</tr>
+<tr class="even">
+<td>2024</td>
+<td>59.5</td>
+<td>40.5</td>
+<td>18.9</td>
+<td>14.4</td>
+</tr>
+<tr class="odd">
+<td>2025</td>
+<td>58.5</td>
+<td>41.5</td>
+<td>20.5</td>
+<td>15.8</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Cost of Goods Sold has fallen from 62.0% of revenue in 2021 to 58.5% in 2025 — a steady margin improvement, likely reflecting economies of scale or improved purchasing terms.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-7-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-7-1-tab">
+<div id="375b8b21" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>balance_by_year <span class="op">=</span> bs.set_index(<span class="st">"year"</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>common_size_bs <span class="op">=</span> balance_by_year.div(balance_by_year[<span class="st">"Total Assets"</span>], axis<span class="op">=</span><span class="dv">0</span>) <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>common_size_bs[[<span class="st">"Cash"</span>, <span class="st">"Accounts Receivable"</span>, <span class="st">"Inventory"</span>, <span class="st">"Property, Plant &amp; Equipment (net)"</span>]].<span class="bu">round</span>(<span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="247">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Cash</th>
+<th data-quarto-table-cell-role="th">Accounts Receivable</th>
+<th data-quarto-table-cell-role="th">Inventory</th>
+<th data-quarto-table-cell-role="th">Property, Plant &amp; Equipment (net)</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2021</th>
+<td>22.9</td>
+<td>24.0</td>
+<td>19.5</td>
+<td>33.6</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2022</th>
+<td>31.2</td>
+<td>21.7</td>
+<td>17.3</td>
+<td>29.8</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2023</th>
+<td>39.5</td>
+<td>19.4</td>
+<td>14.9</td>
+<td>26.2</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2024</th>
+<td>46.8</td>
+<td>17.3</td>
+<td>13.0</td>
+<td>23.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2025</th>
+<td>53.3</td>
+<td>15.5</td>
+<td>11.2</td>
+<td>20.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-7-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-7-2-tab">
+<div id="dabb194f" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>common_size_bs_pl <span class="op">=</span> (</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    bs_pl</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    .sort(<span class="st">"year"</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    .with_columns(</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>        (</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>            pl.exclude(<span class="st">"year"</span>) <span class="op">/</span> pl.col(<span class="st">"Total Assets"</span>) <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>        ).<span class="bu">round</span>(<span class="dv">1</span>)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    .select([</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"year"</span>,</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Cash"</span>,</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Accounts Receivable"</span>,</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Inventory"</span>,</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Property, Plant &amp; Equipment (net)"</span>,</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>    ])</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>common_size_bs_pl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="248">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (5, 5)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">Cash</th>
+<th data-quarto-table-cell-role="th">Accounts Receivable</th>
+<th data-quarto-table-cell-role="th">Inventory</th>
+<th data-quarto-table-cell-role="th">Property, Plant &amp; Equipment (net)</th>
+</tr>
+<tr class="even">
+<td>i64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2021</td>
+<td>22.9</td>
+<td>24.0</td>
+<td>19.5</td>
+<td>33.6</td>
+</tr>
+<tr class="even">
+<td>2022</td>
+<td>31.2</td>
+<td>21.7</td>
+<td>17.3</td>
+<td>29.8</td>
+</tr>
+<tr class="odd">
+<td>2023</td>
+<td>39.5</td>
+<td>19.4</td>
+<td>14.9</td>
+<td>26.2</td>
+</tr>
+<tr class="even">
+<td>2024</td>
+<td>46.8</td>
+<td>17.3</td>
+<td>13.0</td>
+<td>23.0</td>
+</tr>
+<tr class="odd">
+<td>2025</td>
+<td>53.3</td>
+<td>15.5</td>
+<td>11.2</td>
+<td>20.0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Reading the Balance Sheet Structure
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Cash has grown from 22.9% to 53.3% of total assets over five years, while receivables, inventory, and PP&amp;E have all <em>shrunk</em> as a share of the balance sheet. On its own, this looks like a strong cash position — but as we’ll discuss later in this chapter, a rapidly growing cash pile can also raise a legitimate question: is management deploying capital efficiently, or simply letting cash accumulate?</p>
+</div>
+</div>
+</section>
+<section id="ratio-analysis" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="ratio-analysis"><span class="header-section-number">7.4</span> Ratio Analysis</h2>
+<p>Ratios distill financial statement data into standardized measures that are comparable across time periods and even across companies. We’ll compute four common categories.</p>
+<section id="liquidity-ratios" class="level3" data-number="7.4.1">
+<h3 data-number="7.4.1" class="anchored" data-anchor-id="liquidity-ratios"><span class="header-section-number">7.4.1</span> Liquidity Ratios</h3>
+<p>Liquidity ratios measure a company’s ability to meet short-term obligations. Liquidity ratios compare what a business owns against what it owes in the near term. Liquidity ratios include current ratio, quick ratio<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> (acid-test ratio), and cash ratio. Investors use these ratios to assess if a company is at risk of bankruptcy or financial distress.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-8-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-1" role="tab" aria-controls="tabset-8-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-2" role="tab" aria-controls="tabset-8-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-8-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-8-1-tab">
+<div id="1fce3836" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>merged <span class="op">=</span> inc.merge(bs, on<span class="op">=</span><span class="st">"year"</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>current_ratio <span class="op">=</span> merged[<span class="st">"Total Current Assets"</span>] <span class="op">/</span> merged[<span class="st">"Total Current Liabilities"</span>]</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>quick_ratio <span class="op">=</span> (merged[<span class="st">"Cash"</span>] <span class="op">+</span> merged[<span class="st">"Accounts Receivable"</span>]) <span class="op">/</span> merged[<span class="st">"Total Current Liabilities"</span>]</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>pd.DataFrame({<span class="st">"year"</span>: merged[<span class="st">"year"</span>], <span class="st">"Current Ratio"</span>: current_ratio, <span class="st">"Quick Ratio"</span>: quick_ratio}).<span class="bu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="249">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">Current Ratio</th>
+<th data-quarto-table-cell-role="th">Quick Ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>2021</td>
+<td>4.05</td>
+<td>2.86</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>2022</td>
+<td>4.66</td>
+<td>3.51</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>2023</td>
+<td>5.52</td>
+<td>4.41</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>2024</td>
+<td>6.39</td>
+<td>5.32</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>2025</td>
+<td>7.37</td>
+<td>6.33</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-8-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-8-2-tab">
+<div id="e8ae1eec" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>ratios_pl <span class="op">=</span> (</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    inc_pl</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    .join(bs_pl, on<span class="op">=</span><span class="st">"year"</span>, how<span class="op">=</span><span class="st">"inner"</span>)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    .select(</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"year"</span>,</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>        (</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>            pl.col(<span class="st">"Total Current Assets"</span>)</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>            <span class="op">/</span> pl.col(<span class="st">"Total Current Liabilities"</span>)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>        ).<span class="bu">round</span>(<span class="dv">2</span>).alias(<span class="st">"Current Ratio"</span>),</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>        (</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>            (pl.col(<span class="st">"Cash"</span>) <span class="op">+</span> pl.col(<span class="st">"Accounts Receivable"</span>))</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>            <span class="op">/</span> pl.col(<span class="st">"Total Current Liabilities"</span>)</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>        ).<span class="bu">round</span>(<span class="dv">2</span>).alias(<span class="st">"Quick Ratio"</span>),</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>ratios_pl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="250">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (5, 3)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">Current Ratio</th>
+<th data-quarto-table-cell-role="th">Quick Ratio</th>
+</tr>
+<tr class="even">
+<td>i64</td>
+<td>f64</td>
+<td>f64</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2021</td>
+<td>4.05</td>
+<td>2.86</td>
+</tr>
+<tr class="even">
+<td>2022</td>
+<td>4.66</td>
+<td>3.51</td>
+</tr>
+<tr class="odd">
+<td>2023</td>
+<td>5.52</td>
+<td>4.41</td>
+</tr>
+<tr class="even">
+<td>2024</td>
+<td>6.39</td>
+<td>5.32</td>
+</tr>
+<tr class="odd">
+<td>2025</td>
+<td>7.37</td>
+<td>6.33</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>A current ratio above 1.0 generally indicates a company can cover its short-term liabilities with short-term assets. Here, both ratios are comfortably above 1.0 and rising every year — worth a closer look later, since <em>very</em> high liquidity isn’t automatically a good sign either.</p>
+</section>
+<section id="profitability-ratios" class="level3" data-number="7.4.2">
+<h3 data-number="7.4.2" class="anchored" data-anchor-id="profitability-ratios"><span class="header-section-number">7.4.2</span> Profitability Ratios</h3>
+<p>Profitability ratios evaluate a company’s ability to generate earnings relative to its revenue, operating costs, assets, and shareholder equity. Generally, higher ratios indicate stronger efficiency, cost control, and financial health.</p>
+<p>Profitability ratios are primarily divided into two categories: <strong>Margin Ratios</strong> (which show how much profit is kept from sales) and <strong>Return Ratios</strong> (which show how well resources are used to generate returns for investors). Margin ratios include gross profit margin, operating profit margin, and net profit margin. Return ratios include return on assets (ROA), return on Equity (ROE), and return on invested capital (ROIC).</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-9-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-1" role="tab" aria-controls="tabset-9-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-9-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-2" role="tab" aria-controls="tabset-9-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-9-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-9-1-tab">
+<div id="e554916a" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>gross_margin <span class="op">=</span> merged[<span class="st">"Gross Profit"</span>] <span class="op">/</span> merged[<span class="st">"Revenue"</span>]</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>operating_margin <span class="op">=</span> merged[<span class="st">"Operating Income"</span>] <span class="op">/</span> merged[<span class="st">"Revenue"</span>]</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>net_margin <span class="op">=</span> merged[<span class="st">"Net Income"</span>] <span class="op">/</span> merged[<span class="st">"Revenue"</span>]</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>roa <span class="op">=</span> merged[<span class="st">"Net Income"</span>] <span class="op">/</span> merged[<span class="st">"Total Assets"</span>]</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>roe <span class="op">=</span> merged[<span class="st">"Net Income"</span>] <span class="op">/</span> merged[<span class="st">"Total Equity"</span>]</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>pd.DataFrame({</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"year"</span>: merged[<span class="st">"year"</span>],</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Gross Margin"</span>: gross_margin,</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Operating Margin"</span>: operating_margin,</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Net Margin"</span>: net_margin,</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ROA"</span>: roa,</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ROE"</span>: roe,</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>}).<span class="bu">round</span>(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="251">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">Gross Margin</th>
+<th data-quarto-table-cell-role="th">Operating Margin</th>
+<th data-quarto-table-cell-role="th">Net Margin</th>
+<th data-quarto-table-cell-role="th">ROA</th>
+<th data-quarto-table-cell-role="th">ROE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>2021</td>
+<td>0.380</td>
+<td>0.147</td>
+<td>0.105</td>
+<td>0.219</td>
+<td>0.357</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>2022</td>
+<td>0.385</td>
+<td>0.158</td>
+<td>0.116</td>
+<td>0.229</td>
+<td>0.334</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>2023</td>
+<td>0.400</td>
+<td>0.178</td>
+<td>0.133</td>
+<td>0.242</td>
+<td>0.321</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>2024</td>
+<td>0.405</td>
+<td>0.189</td>
+<td>0.144</td>
+<td>0.238</td>
+<td>0.296</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>2025</td>
+<td>0.415</td>
+<td>0.205</td>
+<td>0.158</td>
+<td>0.240</td>
+<td>0.284</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-9-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-9-2-tab">
+<div id="0f66db79" class="cell" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>merged_pl <span class="op">=</span> (</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    inc_pl</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    .join(bs_pl, on<span class="op">=</span><span class="st">"year"</span>, how<span class="op">=</span><span class="st">"inner"</span>)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cd71594b" class="cell" data-execution_count="21">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>profitability_ratios <span class="op">=</span> (</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    merged_pl</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    .select(</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"year"</span>,</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>        (</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>            pl.col(<span class="st">"Gross Profit"</span>) <span class="op">/</span> pl.col(<span class="st">"Revenue"</span>)</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>        ).<span class="bu">round</span>(<span class="dv">3</span>).alias(<span class="st">"Gross Margin"</span>),</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>        (</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>            pl.col(<span class="st">"Operating Income"</span>) <span class="op">/</span> pl.col(<span class="st">"Revenue"</span>)</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>        ).<span class="bu">round</span>(<span class="dv">3</span>).alias(<span class="st">"Operating Margin"</span>),</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>        (</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>            pl.col(<span class="st">"Net Income"</span>) <span class="op">/</span> pl.col(<span class="st">"Revenue"</span>)</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>        ).<span class="bu">round</span>(<span class="dv">3</span>).alias(<span class="st">"Net Margin"</span>),</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>        (</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>            pl.col(<span class="st">"Net Income"</span>) <span class="op">/</span> pl.col(<span class="st">"Total Assets"</span>)</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>        ).<span class="bu">round</span>(<span class="dv">3</span>).alias(<span class="st">"ROA"</span>),</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>        (</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>            pl.col(<span class="st">"Net Income"</span>) <span class="op">/</span> pl.col(<span class="st">"Total Equity"</span>)</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>        ).<span class="bu">round</span>(<span class="dv">3</span>).alias(<span class="st">"ROE"</span>),</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>profitability_ratios</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="253">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (5, 6)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">Gross Margin</th>
+<th data-quarto-table-cell-role="th">Operating Margin</th>
+<th data-quarto-table-cell-role="th">Net Margin</th>
+<th data-quarto-table-cell-role="th">ROA</th>
+<th data-quarto-table-cell-role="th">ROE</th>
+</tr>
+<tr class="even">
+<td>i64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2021</td>
+<td>0.38</td>
+<td>0.147</td>
+<td>0.105</td>
+<td>0.219</td>
+<td>0.357</td>
+</tr>
+<tr class="even">
+<td>2022</td>
+<td>0.385</td>
+<td>0.158</td>
+<td>0.116</td>
+<td>0.229</td>
+<td>0.334</td>
+</tr>
+<tr class="odd">
+<td>2023</td>
+<td>0.4</td>
+<td>0.178</td>
+<td>0.133</td>
+<td>0.242</td>
+<td>0.321</td>
+</tr>
+<tr class="even">
+<td>2024</td>
+<td>0.405</td>
+<td>0.189</td>
+<td>0.144</td>
+<td>0.238</td>
+<td>0.296</td>
+</tr>
+<tr class="odd">
+<td>2025</td>
+<td>0.415</td>
+<td>0.205</td>
+<td>0.158</td>
+<td>0.24</td>
+<td>0.284</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Every profitability margin improved steadily from 2021 to 2025. But look closely at <strong>ROE</strong> — despite improving margins, ROE actually <em>declines</em> over the same period (35.7% down to 28.4%). This looks contradictory at first glance. We’ll resolve exactly why using <strong>DuPont analysis</strong> later in this chapter.</p>
+</section>
+<section id="leverage-ratios" class="level3" data-number="7.4.3">
+<h3 data-number="7.4.3" class="anchored" data-anchor-id="leverage-ratios"><span class="header-section-number">7.4.3</span> Leverage Ratios</h3>
+<p>Leverage ratios measure how much a company relies on debt financing, and its ability to service that debt. By comparing debt to equity, assets, or earnings, these metrics help investors and analysts assess a business’s solvency, long-term stability, and overall financial risk. Leverage ratios include debt-to-equity ratio, debt-to-asset ratio, debt-to-EBITDA ratio, and interest coverage ratio.</p>
+<p>A <strong>high leverage ratio</strong> indicates a heavy reliance on debt. While this can amplify profits when a company performs well, it also significantly increases the risk of default during economic downturns or periods of low cash flow. A <strong>low leverage ratio</strong> points to a conservative capital structure with less debt reliance. This often suggests greater financial stability and lower risk of bankruptcy, though it can also signal an inability or reluctance to borrow for growth.</p>
+<p>Because acceptable thresholds vary widely by industry—for example, capital-intensive manufacturing or utility companies naturally require more debt than service-oriented firms—these metrics should always be benchmarked against competitors in the same sector.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-10-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-1" role="tab" aria-controls="tabset-10-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-10-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-2" role="tab" aria-controls="tabset-10-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-10-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-10-1-tab">
+<div id="4a54f672" class="cell" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>debt_to_equity <span class="op">=</span> (merged[<span class="st">"Short-term Debt"</span>] <span class="op">+</span> merged[<span class="st">"Long-term Debt"</span>]) <span class="op">/</span> merged[<span class="st">"Total Equity"</span>]</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>interest_coverage <span class="op">=</span> merged[<span class="st">"Operating Income"</span>] <span class="op">/</span> merged[<span class="st">"Interest Expense"</span>]</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>pd.DataFrame({</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"year"</span>: merged[<span class="st">"year"</span>],</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Debt-to-Equity"</span>: debt_to_equity,</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Interest Coverage"</span>: interest_coverage,</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>}).<span class="bu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="254">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">Debt-to-Equity</th>
+<th data-quarto-table-cell-role="th">Interest Coverage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>2021</td>
+<td>0.43</td>
+<td>9.98</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>2022</td>
+<td>0.28</td>
+<td>13.24</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>2023</td>
+<td>0.18</td>
+<td>18.69</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>2024</td>
+<td>0.11</td>
+<td>26.20</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>2025</td>
+<td>0.07</td>
+<td>39.24</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-10-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-10-2-tab">
+<div id="315be9fb" class="cell" data-execution_count="23">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>leverage_ratios_pl <span class="op">=</span> (</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    merged_pl</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    .select(</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"year"</span>,</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>        (</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>            (pl.col(<span class="st">"Short-term Debt"</span>) <span class="op">+</span> pl.col(<span class="st">"Long-term Debt"</span>))</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>            <span class="op">/</span> pl.col(<span class="st">"Total Equity"</span>)</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>        ).<span class="bu">round</span>(<span class="dv">2</span>).alias(<span class="st">"Debt-to-Equity"</span>),</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>        (</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>            pl.col(<span class="st">"Operating Income"</span>)</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>            <span class="op">/</span> pl.col(<span class="st">"Interest Expense"</span>)</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>        ).<span class="bu">round</span>(<span class="dv">2</span>).alias(<span class="st">"Interest Coverage"</span>),</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>leverage_ratios_pl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="255">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (5, 3)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">Debt-to-Equity</th>
+<th data-quarto-table-cell-role="th">Interest Coverage</th>
+</tr>
+<tr class="even">
+<td>i64</td>
+<td>f64</td>
+<td>f64</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2021</td>
+<td>0.43</td>
+<td>9.98</td>
+</tr>
+<tr class="even">
+<td>2022</td>
+<td>0.28</td>
+<td>13.24</td>
+</tr>
+<tr class="odd">
+<td>2023</td>
+<td>0.18</td>
+<td>18.69</td>
+</tr>
+<tr class="even">
+<td>2024</td>
+<td>0.11</td>
+<td>26.2</td>
+</tr>
+<tr class="odd">
+<td>2025</td>
+<td>0.07</td>
+<td>39.24</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Debt-to-equity has fallen sharply (from 0.43 to 0.18), and interest coverage has risen from about 10x to nearly 40x — the company has been paying down debt aggressively while growing operating income, substantially reducing its financial risk.</p>
+</section>
+<section id="efficiency-ratios" class="level3" data-number="7.4.4">
+<h3 data-number="7.4.4" class="anchored" data-anchor-id="efficiency-ratios"><span class="header-section-number">7.4.4</span> Efficiency Ratios</h3>
+<p>Efficiency ratios measure how well a company uses its assets to generate revenue. They compare a company’s expenses to its sales or track how quickly it turns assets into cash. Higher turnover ratios and lower expense ratios usually signal strong operational health. Efficiency ratios include asset turnover ratio, inventory turnover ratio, and accounts receivable turnover ratio.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-11-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-11-1" role="tab" aria-controls="tabset-11-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-11-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-11-2" role="tab" aria-controls="tabset-11-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-11-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-11-1-tab">
+<div id="cb4ba969" class="cell" data-execution_count="24">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>asset_turnover <span class="op">=</span> merged[<span class="st">"Revenue"</span>] <span class="op">/</span> merged[<span class="st">"Total Assets"</span>]</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>dso <span class="op">=</span> merged[<span class="st">"Accounts Receivable"</span>] <span class="op">/</span> merged[<span class="st">"Revenue"</span>] <span class="op">*</span> <span class="dv">365</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>dio <span class="op">=</span> merged[<span class="st">"Inventory"</span>] <span class="op">/</span> merged[<span class="st">"Cost of Goods Sold"</span>] <span class="op">*</span> <span class="dv">365</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>pd.DataFrame({</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"year"</span>: merged[<span class="st">"year"</span>],</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Asset Turnover"</span>: asset_turnover,</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Days Sales Outstanding"</span>: dso,</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Days Inventory Outstanding"</span>: dio,</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>}).<span class="bu">round</span>(<span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="256">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">Asset Turnover</th>
+<th data-quarto-table-cell-role="th">Days Sales Outstanding</th>
+<th data-quarto-table-cell-role="th">Days Inventory Outstanding</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>2021</td>
+<td>2.1</td>
+<td>42.0</td>
+<td>55.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>2022</td>
+<td>2.0</td>
+<td>40.0</td>
+<td>52.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>2023</td>
+<td>1.8</td>
+<td>39.0</td>
+<td>50.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>2024</td>
+<td>1.7</td>
+<td>38.0</td>
+<td>48.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>2025</td>
+<td>1.5</td>
+<td>37.0</td>
+<td>46.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-11-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-11-2-tab">
+<div id="ab43f136" class="cell" data-execution_count="25">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>asset_efficiency_pl <span class="op">=</span> (</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    merged_pl</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    .select(</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"year"</span>,</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>        (</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>            pl.col(<span class="st">"Revenue"</span>)</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>            <span class="op">/</span> pl.col(<span class="st">"Total Assets"</span>)</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>        ).<span class="bu">round</span>(<span class="dv">1</span>).alias(<span class="st">"Asset Turnover"</span>),</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>        (</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>            pl.col(<span class="st">"Accounts Receivable"</span>)</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>            <span class="op">/</span> pl.col(<span class="st">"Revenue"</span>)</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>            <span class="op">*</span> <span class="dv">365</span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>        ).<span class="bu">round</span>(<span class="dv">1</span>).alias(<span class="st">"Days Sales Outstanding"</span>),</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>        (</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>            pl.col(<span class="st">"Inventory"</span>)</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>            <span class="op">/</span> pl.col(<span class="st">"Cost of Goods Sold"</span>)</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>            <span class="op">*</span> <span class="dv">365</span></span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>        ).<span class="bu">round</span>(<span class="dv">1</span>).alias(<span class="st">"Days Inventory Outstanding"</span>),</span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>asset_efficiency_pl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="257">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (5, 4)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">Asset Turnover</th>
+<th data-quarto-table-cell-role="th">Days Sales Outstanding</th>
+<th data-quarto-table-cell-role="th">Days Inventory Outstanding</th>
+</tr>
+<tr class="even">
+<td>i64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2021</td>
+<td>2.1</td>
+<td>42.0</td>
+<td>55.0</td>
+</tr>
+<tr class="even">
+<td>2022</td>
+<td>2.0</td>
+<td>40.0</td>
+<td>52.0</td>
+</tr>
+<tr class="odd">
+<td>2023</td>
+<td>1.8</td>
+<td>39.0</td>
+<td>50.0</td>
+</tr>
+<tr class="even">
+<td>2024</td>
+<td>1.7</td>
+<td>38.0</td>
+<td>48.0</td>
+</tr>
+<tr class="odd">
+<td>2025</td>
+<td>1.5</td>
+<td>37.0</td>
+<td>46.0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Days Sales Outstanding and Days Inventory Outstanding have both <strong>improved</strong> (fallen) — the company collects receivables faster and turns over inventory faster in 2025 than in 2021. Yet asset turnover has <em>declined</em> (from 2.09 down to 1.53) — total assets are growing even faster than revenue, largely because of that growing cash balance. This is another thread we’ll pick up in the DuPont section.</p>
+</section>
+</section>
+<section id="automating-ratio-calculations" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="automating-ratio-calculations"><span class="header-section-number">7.5</span> Automating Ratio Calculations</h2>
+<p>Rather than recomputing each ratio by hand every time you get a new year of data, it’s worth writing a single reusable function.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-12-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-12-1" role="tab" aria-controls="tabset-12-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-12-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-12-2" role="tab" aria-controls="tabset-12-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-12-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-12-1-tab">
+<div id="65dc6176" class="cell" data-execution_count="26">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_ratios(income_df: pd.DataFrame, balance_df: pd.DataFrame) <span class="op">-&gt;</span> pd.DataFrame:</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Compute standard liquidity, profitability, leverage, and efficiency ratios</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co">    from an income statement and balance sheet sharing a common 'year' column."""</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> income_df.merge(balance_df, on<span class="op">=</span><span class="st">"year"</span>)</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> pd.DataFrame({<span class="st">"year"</span>: df[<span class="st">"year"</span>]})</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Liquidity</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>    r[<span class="st">"Current Ratio"</span>] <span class="op">=</span> df[<span class="st">"Total Current Assets"</span>] <span class="op">/</span> df[<span class="st">"Total Current Liabilities"</span>]</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>    r[<span class="st">"Quick Ratio"</span>] <span class="op">=</span> (df[<span class="st">"Cash"</span>] <span class="op">+</span> df[<span class="st">"Accounts Receivable"</span>]) <span class="op">/</span> df[<span class="st">"Total Current Liabilities"</span>]</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Profitability</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>    r[<span class="st">"Gross Margin"</span>] <span class="op">=</span> df[<span class="st">"Gross Profit"</span>] <span class="op">/</span> df[<span class="st">"Revenue"</span>]</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>    r[<span class="st">"Operating Margin"</span>] <span class="op">=</span> df[<span class="st">"Operating Income"</span>] <span class="op">/</span> df[<span class="st">"Revenue"</span>]</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>    r[<span class="st">"Net Margin"</span>] <span class="op">=</span> df[<span class="st">"Net Income"</span>] <span class="op">/</span> df[<span class="st">"Revenue"</span>]</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>    r[<span class="st">"Return on Assets"</span>] <span class="op">=</span> df[<span class="st">"Net Income"</span>] <span class="op">/</span> df[<span class="st">"Total Assets"</span>]</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>    r[<span class="st">"Return on Equity"</span>] <span class="op">=</span> df[<span class="st">"Net Income"</span>] <span class="op">/</span> df[<span class="st">"Total Equity"</span>]</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Leverage</span></span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>    r[<span class="st">"Debt-to-Equity"</span>] <span class="op">=</span> (df[<span class="st">"Short-term Debt"</span>] <span class="op">+</span> df[<span class="st">"Long-term Debt"</span>]) <span class="op">/</span> df[<span class="st">"Total Equity"</span>]</span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>    r[<span class="st">"Interest Coverage"</span>] <span class="op">=</span> df[<span class="st">"Operating Income"</span>] <span class="op">/</span> df[<span class="st">"Interest Expense"</span>]</span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Efficiency</span></span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>    r[<span class="st">"Asset Turnover"</span>] <span class="op">=</span> df[<span class="st">"Revenue"</span>] <span class="op">/</span> df[<span class="st">"Total Assets"</span>]</span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>    r[<span class="st">"Days Sales Outstanding"</span>] <span class="op">=</span> df[<span class="st">"Accounts Receivable"</span>] <span class="op">/</span> df[<span class="st">"Revenue"</span>] <span class="op">*</span> <span class="dv">365</span></span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a>    r[<span class="st">"Days Inventory Outstanding"</span>] <span class="op">=</span> df[<span class="st">"Inventory"</span>] <span class="op">/</span> df[<span class="st">"Cost of Goods Sold"</span>] <span class="op">*</span> <span class="dv">365</span></span>
+<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> r.set_index(<span class="st">"year"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="01464d05" class="cell" data-execution_count="27">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>ratios <span class="op">=</span> compute_ratios(inc, bs)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>ratios.<span class="bu">round</span>(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="259">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Current Ratio</th>
+<th data-quarto-table-cell-role="th">Quick Ratio</th>
+<th data-quarto-table-cell-role="th">Gross Margin</th>
+<th data-quarto-table-cell-role="th">Operating Margin</th>
+<th data-quarto-table-cell-role="th">Net Margin</th>
+<th data-quarto-table-cell-role="th">Return on Assets</th>
+<th data-quarto-table-cell-role="th">Return on Equity</th>
+<th data-quarto-table-cell-role="th">Debt-to-Equity</th>
+<th data-quarto-table-cell-role="th">Interest Coverage</th>
+<th data-quarto-table-cell-role="th">Asset Turnover</th>
+<th data-quarto-table-cell-role="th">Days Sales Outstanding</th>
+<th data-quarto-table-cell-role="th">Days Inventory Outstanding</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2021</th>
+<td>4.054</td>
+<td>2.864</td>
+<td>0.380</td>
+<td>0.147</td>
+<td>0.105</td>
+<td>0.219</td>
+<td>0.357</td>
+<td>0.430</td>
+<td>9.984</td>
+<td>2.088</td>
+<td>42.0</td>
+<td>55.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2022</th>
+<td>4.659</td>
+<td>3.508</td>
+<td>0.385</td>
+<td>0.158</td>
+<td>0.116</td>
+<td>0.229</td>
+<td>0.334</td>
+<td>0.283</td>
+<td>13.241</td>
+<td>1.980</td>
+<td>40.0</td>
+<td>52.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2023</th>
+<td>5.521</td>
+<td>4.406</td>
+<td>0.400</td>
+<td>0.178</td>
+<td>0.133</td>
+<td>0.242</td>
+<td>0.321</td>
+<td>0.181</td>
+<td>18.692</td>
+<td>1.814</td>
+<td>39.0</td>
+<td>50.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2024</th>
+<td>6.395</td>
+<td>5.317</td>
+<td>0.405</td>
+<td>0.189</td>
+<td>0.144</td>
+<td>0.238</td>
+<td>0.296</td>
+<td>0.113</td>
+<td>26.205</td>
+<td>1.659</td>
+<td>38.0</td>
+<td>48.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2025</th>
+<td>7.369</td>
+<td>6.333</td>
+<td>0.415</td>
+<td>0.205</td>
+<td>0.158</td>
+<td>0.240</td>
+<td>0.284</td>
+<td>0.068</td>
+<td>39.236</td>
+<td>1.525</td>
+<td>37.0</td>
+<td>46.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-12-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-12-2-tab">
+<div id="e90e3ccc" class="cell" data-execution_count="28">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_ratios_pl(income_df: pl.DataFrame, balance_df: pl.DataFrame) <span class="op">-&gt;</span> pl.DataFrame:</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Compute standard liquidity, profitability, leverage, and efficiency ratios</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co">    from an income statement and balance sheet sharing a common 'year' column."""</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> income_df.join(balance_df, on<span class="op">=</span><span class="st">"year"</span>, how<span class="op">=</span><span class="st">"inner"</span>)</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> df.select(</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"year"</span>,</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Liquidity</span></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>        (</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>            pl.col(<span class="st">"Total Current Assets"</span>)</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>            <span class="op">/</span> pl.col(<span class="st">"Total Current Liabilities"</span>)</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>        ).alias(<span class="st">"Current Ratio"</span>),</span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>        (</span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>            (pl.col(<span class="st">"Cash"</span>) <span class="op">+</span> pl.col(<span class="st">"Accounts Receivable"</span>))</span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>            <span class="op">/</span> pl.col(<span class="st">"Total Current Liabilities"</span>)</span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>        ).alias(<span class="st">"Quick Ratio"</span>),</span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Profitability</span></span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>        (</span>
+<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a>            pl.col(<span class="st">"Gross Profit"</span>)</span>
+<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a>            <span class="op">/</span> pl.col(<span class="st">"Revenue"</span>)</span>
+<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a>        ).alias(<span class="st">"Gross Margin"</span>),</span>
+<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a>        (</span>
+<span id="cb29-29"><a href="#cb29-29" aria-hidden="true" tabindex="-1"></a>            pl.col(<span class="st">"Operating Income"</span>)</span>
+<span id="cb29-30"><a href="#cb29-30" aria-hidden="true" tabindex="-1"></a>            <span class="op">/</span> pl.col(<span class="st">"Revenue"</span>)</span>
+<span id="cb29-31"><a href="#cb29-31" aria-hidden="true" tabindex="-1"></a>        ).alias(<span class="st">"Operating Margin"</span>),</span>
+<span id="cb29-32"><a href="#cb29-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-33"><a href="#cb29-33" aria-hidden="true" tabindex="-1"></a>        (</span>
+<span id="cb29-34"><a href="#cb29-34" aria-hidden="true" tabindex="-1"></a>            pl.col(<span class="st">"Net Income"</span>)</span>
+<span id="cb29-35"><a href="#cb29-35" aria-hidden="true" tabindex="-1"></a>            <span class="op">/</span> pl.col(<span class="st">"Revenue"</span>)</span>
+<span id="cb29-36"><a href="#cb29-36" aria-hidden="true" tabindex="-1"></a>        ).alias(<span class="st">"Net Margin"</span>),</span>
+<span id="cb29-37"><a href="#cb29-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-38"><a href="#cb29-38" aria-hidden="true" tabindex="-1"></a>        (</span>
+<span id="cb29-39"><a href="#cb29-39" aria-hidden="true" tabindex="-1"></a>            pl.col(<span class="st">"Net Income"</span>)</span>
+<span id="cb29-40"><a href="#cb29-40" aria-hidden="true" tabindex="-1"></a>            <span class="op">/</span> pl.col(<span class="st">"Total Assets"</span>)</span>
+<span id="cb29-41"><a href="#cb29-41" aria-hidden="true" tabindex="-1"></a>        ).alias(<span class="st">"Return on Assets"</span>),</span>
+<span id="cb29-42"><a href="#cb29-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-43"><a href="#cb29-43" aria-hidden="true" tabindex="-1"></a>        (</span>
+<span id="cb29-44"><a href="#cb29-44" aria-hidden="true" tabindex="-1"></a>            pl.col(<span class="st">"Net Income"</span>)</span>
+<span id="cb29-45"><a href="#cb29-45" aria-hidden="true" tabindex="-1"></a>            <span class="op">/</span> pl.col(<span class="st">"Total Equity"</span>)</span>
+<span id="cb29-46"><a href="#cb29-46" aria-hidden="true" tabindex="-1"></a>        ).alias(<span class="st">"Return on Equity"</span>),</span>
+<span id="cb29-47"><a href="#cb29-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-48"><a href="#cb29-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-49"><a href="#cb29-49" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Leverage</span></span>
+<span id="cb29-50"><a href="#cb29-50" aria-hidden="true" tabindex="-1"></a>        (</span>
+<span id="cb29-51"><a href="#cb29-51" aria-hidden="true" tabindex="-1"></a>            (pl.col(<span class="st">"Short-term Debt"</span>) <span class="op">+</span> pl.col(<span class="st">"Long-term Debt"</span>))</span>
+<span id="cb29-52"><a href="#cb29-52" aria-hidden="true" tabindex="-1"></a>            <span class="op">/</span> pl.col(<span class="st">"Total Equity"</span>)</span>
+<span id="cb29-53"><a href="#cb29-53" aria-hidden="true" tabindex="-1"></a>        ).alias(<span class="st">"Debt-to-Equity"</span>),</span>
+<span id="cb29-54"><a href="#cb29-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-55"><a href="#cb29-55" aria-hidden="true" tabindex="-1"></a>        (</span>
+<span id="cb29-56"><a href="#cb29-56" aria-hidden="true" tabindex="-1"></a>            pl.col(<span class="st">"Operating Income"</span>)</span>
+<span id="cb29-57"><a href="#cb29-57" aria-hidden="true" tabindex="-1"></a>            <span class="op">/</span> pl.col(<span class="st">"Interest Expense"</span>)</span>
+<span id="cb29-58"><a href="#cb29-58" aria-hidden="true" tabindex="-1"></a>        ).alias(<span class="st">"Interest Coverage"</span>),</span>
+<span id="cb29-59"><a href="#cb29-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-60"><a href="#cb29-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-61"><a href="#cb29-61" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Efficiency</span></span>
+<span id="cb29-62"><a href="#cb29-62" aria-hidden="true" tabindex="-1"></a>        (</span>
+<span id="cb29-63"><a href="#cb29-63" aria-hidden="true" tabindex="-1"></a>            pl.col(<span class="st">"Revenue"</span>)</span>
+<span id="cb29-64"><a href="#cb29-64" aria-hidden="true" tabindex="-1"></a>            <span class="op">/</span> pl.col(<span class="st">"Total Assets"</span>)</span>
+<span id="cb29-65"><a href="#cb29-65" aria-hidden="true" tabindex="-1"></a>        ).alias(<span class="st">"Asset Turnover"</span>),</span>
+<span id="cb29-66"><a href="#cb29-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-67"><a href="#cb29-67" aria-hidden="true" tabindex="-1"></a>        (</span>
+<span id="cb29-68"><a href="#cb29-68" aria-hidden="true" tabindex="-1"></a>            pl.col(<span class="st">"Accounts Receivable"</span>)</span>
+<span id="cb29-69"><a href="#cb29-69" aria-hidden="true" tabindex="-1"></a>            <span class="op">/</span> pl.col(<span class="st">"Revenue"</span>)</span>
+<span id="cb29-70"><a href="#cb29-70" aria-hidden="true" tabindex="-1"></a>            <span class="op">*</span> <span class="dv">365</span></span>
+<span id="cb29-71"><a href="#cb29-71" aria-hidden="true" tabindex="-1"></a>        ).alias(<span class="st">"Days Sales Outstanding"</span>),</span>
+<span id="cb29-72"><a href="#cb29-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-73"><a href="#cb29-73" aria-hidden="true" tabindex="-1"></a>        (</span>
+<span id="cb29-74"><a href="#cb29-74" aria-hidden="true" tabindex="-1"></a>            pl.col(<span class="st">"Inventory"</span>)</span>
+<span id="cb29-75"><a href="#cb29-75" aria-hidden="true" tabindex="-1"></a>            <span class="op">/</span> pl.col(<span class="st">"Cost of Goods Sold"</span>)</span>
+<span id="cb29-76"><a href="#cb29-76" aria-hidden="true" tabindex="-1"></a>            <span class="op">*</span> <span class="dv">365</span></span>
+<span id="cb29-77"><a href="#cb29-77" aria-hidden="true" tabindex="-1"></a>        ).alias(<span class="st">"Days Inventory Outstanding"</span>),</span>
+<span id="cb29-78"><a href="#cb29-78" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb29-79"><a href="#cb29-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-80"><a href="#cb29-80" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> r</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="c2d098bf" class="cell" data-execution_count="29">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>ratios_pl <span class="op">=</span> compute_ratios_pl(inc_pl, bs_pl)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>ratios_pl <span class="op">=</span> ratios_pl.with_columns(</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    pl.exclude(<span class="st">"year"</span>).<span class="bu">round</span>(<span class="dv">3</span>)</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>ratios_pl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="261">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (5, 13)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">Current Ratio</th>
+<th data-quarto-table-cell-role="th">Quick Ratio</th>
+<th data-quarto-table-cell-role="th">Gross Margin</th>
+<th data-quarto-table-cell-role="th">Operating Margin</th>
+<th data-quarto-table-cell-role="th">Net Margin</th>
+<th data-quarto-table-cell-role="th">Return on Assets</th>
+<th data-quarto-table-cell-role="th">Return on Equity</th>
+<th data-quarto-table-cell-role="th">Debt-to-Equity</th>
+<th data-quarto-table-cell-role="th">Interest Coverage</th>
+<th data-quarto-table-cell-role="th">Asset Turnover</th>
+<th data-quarto-table-cell-role="th">Days Sales Outstanding</th>
+<th data-quarto-table-cell-role="th">Days Inventory Outstanding</th>
+</tr>
+<tr class="even">
+<td>i64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2021</td>
+<td>4.054</td>
+<td>2.864</td>
+<td>0.38</td>
+<td>0.147</td>
+<td>0.105</td>
+<td>0.219</td>
+<td>0.357</td>
+<td>0.43</td>
+<td>9.984</td>
+<td>2.088</td>
+<td>42.0</td>
+<td>55.0</td>
+</tr>
+<tr class="even">
+<td>2022</td>
+<td>4.659</td>
+<td>3.508</td>
+<td>0.385</td>
+<td>0.158</td>
+<td>0.116</td>
+<td>0.229</td>
+<td>0.334</td>
+<td>0.283</td>
+<td>13.241</td>
+<td>1.98</td>
+<td>40.0</td>
+<td>52.0</td>
+</tr>
+<tr class="odd">
+<td>2023</td>
+<td>5.521</td>
+<td>4.406</td>
+<td>0.4</td>
+<td>0.178</td>
+<td>0.133</td>
+<td>0.242</td>
+<td>0.321</td>
+<td>0.181</td>
+<td>18.692</td>
+<td>1.814</td>
+<td>39.0</td>
+<td>50.0</td>
+</tr>
+<tr class="even">
+<td>2024</td>
+<td>6.395</td>
+<td>5.317</td>
+<td>0.405</td>
+<td>0.189</td>
+<td>0.144</td>
+<td>0.238</td>
+<td>0.296</td>
+<td>0.113</td>
+<td>26.205</td>
+<td>1.659</td>
+<td>38.0</td>
+<td>48.0</td>
+</tr>
+<tr class="odd">
+<td>2025</td>
+<td>7.369</td>
+<td>6.333</td>
+<td>0.415</td>
+<td>0.205</td>
+<td>0.158</td>
+<td>0.24</td>
+<td>0.284</td>
+<td>0.068</td>
+<td>39.236</td>
+<td>1.525</td>
+<td>37.0</td>
+<td>46.0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Connect to Practice
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Writing analysis as a reusable function like this — rather than one-off code you rerun and edit each period — is exactly how analytics work scales in practice. Next quarter’s financial statements can be run through the same <code>compute_ratios()</code> function with zero changes, as long as the column names match. This is also foreshadows the automated reporting techniques in Chapter 14.</p>
+</div>
+</div>
+</section>
+<section id="dupont-decomposition-explaining-why-roe-changed" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="dupont-decomposition-explaining-why-roe-changed"><span class="header-section-number">7.6</span> DuPont Decomposition: Explaining <em>Why</em> ROE Changed</h2>
+<p>The DuPont framework breaks <strong>return on equity (ROE)</strong> into three multiplied components, each capturing a different lever of performance:</p>
+<p><span class="math display">\[
+\text{ROE} = \underbrace{\frac{\text{Net Income}}{\text{Revenue}}}_{\text{Net Margin}} \times \underbrace{\frac{\text{Revenue}}{\text{Total Assets}}}_{\text{Asset Turnover}} \times \underbrace{\frac{\text{Total Assets}}{\text{Total Equity}}}_{\text{Equity Multiplier}}
+\]</span></p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-13-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-13-1" role="tab" aria-controls="tabset-13-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-13-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-13-2" role="tab" aria-controls="tabset-13-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-13-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-13-1-tab">
+<div id="c53c4f25" class="cell" data-execution_count="30">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>dupont <span class="op">=</span> pd.DataFrame({<span class="st">"year"</span>: merged[<span class="st">"year"</span>]})</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>dupont[<span class="st">"Net Margin"</span>] <span class="op">=</span> merged[<span class="st">"Net Income"</span>] <span class="op">/</span> merged[<span class="st">"Revenue"</span>]</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>dupont[<span class="st">"Asset Turnover"</span>] <span class="op">=</span> merged[<span class="st">"Revenue"</span>] <span class="op">/</span> merged[<span class="st">"Total Assets"</span>]</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>dupont[<span class="st">"Equity Multiplier"</span>] <span class="op">=</span> merged[<span class="st">"Total Assets"</span>] <span class="op">/</span> merged[<span class="st">"Total Equity"</span>]</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>dupont[<span class="st">"ROE (DuPont)"</span>] <span class="op">=</span> dupont[<span class="st">"Net Margin"</span>] <span class="op">*</span> dupont[<span class="st">"Asset Turnover"</span>] <span class="op">*</span> dupont[<span class="st">"Equity Multiplier"</span>]</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>dupont.set_index(<span class="st">"year"</span>).<span class="bu">round</span>(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="262">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Net Margin</th>
+<th data-quarto-table-cell-role="th">Asset Turnover</th>
+<th data-quarto-table-cell-role="th">Equity Multiplier</th>
+<th data-quarto-table-cell-role="th">ROE (DuPont)</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2021</th>
+<td>0.105</td>
+<td>2.088</td>
+<td>1.633</td>
+<td>0.357</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2022</th>
+<td>0.116</td>
+<td>1.980</td>
+<td>1.458</td>
+<td>0.334</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2023</th>
+<td>0.133</td>
+<td>1.814</td>
+<td>1.328</td>
+<td>0.321</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2024</th>
+<td>0.144</td>
+<td>1.659</td>
+<td>1.241</td>
+<td>0.296</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2025</th>
+<td>0.158</td>
+<td>1.525</td>
+<td>1.180</td>
+<td>0.284</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-13-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-13-2-tab">
+<div id="3c6811e1" class="cell" data-execution_count="31">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>dupont_pl <span class="op">=</span> (</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    merged_pl</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    .select(</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"year"</span>,</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>        (</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>            pl.col(<span class="st">"Net Income"</span>) <span class="op">/</span> pl.col(<span class="st">"Revenue"</span>)</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>        ).alias(<span class="st">"Net Margin"</span>),</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>        (</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>            pl.col(<span class="st">"Revenue"</span>) <span class="op">/</span> pl.col(<span class="st">"Total Assets"</span>)</span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>        ).alias(<span class="st">"Asset Turnover"</span>),</span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>        (</span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>            pl.col(<span class="st">"Total Assets"</span>) <span class="op">/</span> pl.col(<span class="st">"Total Equity"</span>)</span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>        ).alias(<span class="st">"Equity Multiplier"</span>),</span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>        (</span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>            (pl.col(<span class="st">"Net Income"</span>) <span class="op">/</span> pl.col(<span class="st">"Revenue"</span>))</span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>            <span class="op">*</span></span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a>            (pl.col(<span class="st">"Revenue"</span>) <span class="op">/</span> pl.col(<span class="st">"Total Assets"</span>))</span>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a>            <span class="op">*</span></span>
+<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a>            (pl.col(<span class="st">"Total Assets"</span>) <span class="op">/</span> pl.col(<span class="st">"Total Equity"</span>))</span>
+<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a>        ).alias(<span class="st">"ROE (DuPont)"</span>),</span>
+<span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb32-26"><a href="#cb32-26" aria-hidden="true" tabindex="-1"></a>    .with_columns(</span>
+<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a>        pl.exclude(<span class="st">"year"</span>).<span class="bu">round</span>(<span class="dv">3</span>)</span>
+<span id="cb32-28"><a href="#cb32-28" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb32-29"><a href="#cb32-29" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb32-30"><a href="#cb32-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-31"><a href="#cb32-31" aria-hidden="true" tabindex="-1"></a>dupont_pl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="263">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (5, 5)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">Net Margin</th>
+<th data-quarto-table-cell-role="th">Asset Turnover</th>
+<th data-quarto-table-cell-role="th">Equity Multiplier</th>
+<th data-quarto-table-cell-role="th">ROE (DuPont)</th>
+</tr>
+<tr class="even">
+<td>i64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2021</td>
+<td>0.105</td>
+<td>2.088</td>
+<td>1.633</td>
+<td>0.357</td>
+</tr>
+<tr class="even">
+<td>2022</td>
+<td>0.116</td>
+<td>1.98</td>
+<td>1.458</td>
+<td>0.334</td>
+</tr>
+<tr class="odd">
+<td>2023</td>
+<td>0.133</td>
+<td>1.814</td>
+<td>1.328</td>
+<td>0.321</td>
+</tr>
+<tr class="even">
+<td>2024</td>
+<td>0.144</td>
+<td>1.659</td>
+<td>1.241</td>
+<td>0.296</td>
+</tr>
+<tr class="odd">
+<td>2025</td>
+<td>0.158</td>
+<td>1.525</td>
+<td>1.18</td>
+<td>0.284</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>This confirms exactly the same ROE figures as the direct calculation earlier — but now we can see <em>why</em> ROE fell even as profitability rose:</p>
+<ul>
+<li><strong>Net Margin improved</strong> (10.5% → 15.8%) — profitability genuinely got better.</li>
+<li><strong>Asset Turnover fell</strong> (2.09 → 1.53) — assets (mostly that growing cash pile) grew faster than revenue.</li>
+<li><strong>Equity Multiplier fell</strong> (1.63 → 1.18) — the company relies on much less debt financing than before.</li>
+</ul>
+<p>The margin improvement was real, but it was <strong>more than offset</strong> by the combined effect of falling asset turnover and falling leverage. In other words: the company is becoming more profitable per dollar of sales, but less efficient at <em>using</em> its (growing) asset base, and increasingly equity-financed rather than debt-financed — both of which mechanically pull ROE down, even while the business is arguably getting healthier in other respects.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Why This Matters
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Reporting “ROE declined from 35.7% to 28.4%” without DuPont context could easily be read as bad news. DuPont decomposition shows that the <em>decline</em> is actually a byproduct of paying down debt and building cash reserves — both generally prudent financial decisions — rather than declining profitability. This is a good example of why a single ratio, in isolation, can mislead; understanding its components tells the real story.</p>
+</div>
+</div>
+</section>
+<section id="visualizing-the-trends" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="visualizing-the-trends"><span class="header-section-number">7.7</span> Visualizing the Trends</h2>
+<p>A trend that takes several tables to describe in words is often obvious in one chart.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-14-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-14-1" role="tab" aria-controls="tabset-14-1" aria-selected="true" href="">seaborn</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-14-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-14-2" role="tab" aria-controls="tabset-14-2" aria-selected="false" href="">plotnine</a></li></ul>
+<div class="tab-content">
+<div id="tabset-14-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-14-1-tab">
+<div id="58ad473a" class="cell" data-execution_count="32">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.ticker <span class="im">as</span> mticker</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>margin_long <span class="op">=</span> ratios.reset_index()[[<span class="st">"year"</span>, <span class="st">"Gross Margin"</span>, <span class="st">"Operating Margin"</span>, <span class="st">"Net Margin"</span>]].melt(</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>    id_vars<span class="op">=</span><span class="st">"year"</span>, var_name<span class="op">=</span><span class="st">"Margin Type"</span>, value_name<span class="op">=</span><span class="st">"Value"</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="fl">4.5</span>))</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>sns.lineplot(data<span class="op">=</span>margin_long, x<span class="op">=</span><span class="st">"year"</span>, y<span class="op">=</span><span class="st">"Value"</span>, hue<span class="op">=</span><span class="st">"Margin Type"</span>, marker<span class="op">=</span><span class="st">"o"</span>)</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Margin Trends, 2021-2025"</span>)</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Margin (</span><span class="sc">% o</span><span class="st">f Revenue)"</span>)</span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>plt.gca().yaxis.set_major_formatter(mticker.PercentFormatter(<span class="fl">1.0</span>))</span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="07-financial-statement-analysis_files/figure-html/cell-33-output-1.png" width="665" height="422" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-14-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-14-2-tab">
+<div id="ff310913" class="cell" data-execution_count="33">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    ggplot(margin_long, aes(x<span class="op">=</span><span class="st">"year"</span>, y<span class="op">=</span><span class="st">"Value"</span>, color<span class="op">=</span><span class="st">"Margin Type"</span>))</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_line(size<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_point()</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> scale_y_continuous(labels<span class="op">=</span><span class="kw">lambda</span> l: [<span class="ss">f"</span><span class="sc">{</span>v<span class="sc">:.0%}</span><span class="ss">"</span> <span class="cf">for</span> v <span class="kw">in</span> l])</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> labs(title<span class="op">=</span><span class="st">"Margin Trends, 2021-2025"</span>, x<span class="op">=</span><span class="st">"Year"</span>, y<span class="op">=</span><span class="st">"Margin (</span><span class="sc">% o</span><span class="st">f Revenue)"</span>)</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> theme_minimal()</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="265">
+<div>
+<figure class="figure">
+<p><img src="07-financial-statement-analysis_files/figure-html/cell-34-output-1.png" width="672" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>All three margins trend upward and roughly in parallel — visual confirmation that the profitability improvement is broad-based (starting at the gross profit level) rather than coming from just one line item, like a one-time tax benefit.</p>
+<div id="1c4b03c5" class="cell" data-execution_count="34">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="fl">4.5</span>))</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>sns.lineplot(data<span class="op">=</span>dupont, x<span class="op">=</span><span class="st">"year"</span>, y<span class="op">=</span><span class="st">"ROE (DuPont)"</span>, marker<span class="op">=</span><span class="st">"o"</span>, color<span class="op">=</span><span class="st">"#8a4fbe"</span>)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Return on Equity, 2021-2025"</span>)</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"ROE"</span>)</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>plt.gca().yaxis.set_major_formatter(mticker.PercentFormatter(<span class="fl">1.0</span>))</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="07-financial-statement-analysis_files/figure-html/cell-35-output-1.png" width="665" height="422" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Seeing the steady ROE decline plotted directly against the improving margins from the chart above makes the apparent contradiction visually obvious — exactly the kind of pattern that should prompt a DuPont-style investigation rather than a surface-level “ROE is getting worse” conclusion.</p>
+</section>
+<section id="putting-it-together-a-financial-health-memo" class="level2" data-number="7.8">
+<h2 data-number="7.8" class="anchored" data-anchor-id="putting-it-together-a-financial-health-memo"><span class="header-section-number">7.8</span> Putting It Together: A Financial Health Memo</h2>
+<p>A typical output of this kind of analysis isn’t just a table of ratios — it’s a short written interpretation for a decision-maker. Here’s a brief example, written the way you might summarize this exact analysis for a manager:</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Sample Memo Excerpt
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>Ledger &amp; Co.’s profitability has improved steadily over the past five years, with net margin rising from 10.5% to 15.8%, driven by both improving gross margins and declining interest expense. The company has also meaningfully reduced financial risk, cutting debt-to-equity from 0.43 to 0.18 while more than tripling interest coverage. Return on equity has declined over the same period (35.7% to 28.4%), but DuPont analysis attributes this to the combined effect of debt paydown and a growing cash balance — both generally prudent — rather than any underlying weakness in operations. One area worth management’s attention: the current ratio has risen to 7.4x, well above what’s typically needed for liquidity purposes, suggesting cash may be accumulating faster than it’s being deployed into growth, debt reduction, or shareholder returns.</em></p>
+</div>
+</div>
+<p>Notice that this memo doesn’t just repeat the numbers — it interprets what they mean <em>together</em>, flags a genuine open question (the growing cash pile) rather than treating every metric as unambiguously good news, and avoids the trap of reporting the ROE decline without its DuPont explanation.</p>
+</section>
+<section id="chapter-summary" class="level2" data-number="7.9">
+<h2 data-number="7.9" class="anchored" data-anchor-id="chapter-summary"><span class="header-section-number">7.9</span> Chapter Summary</h2>
+<ul>
+<li>Horizontal analysis compares a line item across time (dollar and percent change, or indexed to a base year); vertical (common-size) analysis expresses every line item as a percentage of a base figure within the same year.</li>
+<li>Liquidity, profitability, leverage, and efficiency ratios each capture a different dimension of financial performance, and no single ratio tells the whole story on its own.</li>
+<li>Wrapping ratio calculations in a reusable function (like <code>compute_ratios()</code>) means the same analysis can be rerun on any future period’s data without rewriting code.</li>
+<li>DuPont decomposition breaks ROE into net margin, asset turnover, and equity multiplier — essential for explaining <em>why</em> ROE changed, not just that it did, and for avoiding misleading single-ratio conclusions.</li>
+<li>A rising ratio isn’t automatically good news (e.g., an extremely high current ratio can signal underused cash) any more than a falling ratio is automatically bad news (e.g., falling ROE driven by prudent deleveraging) — ratio analysis requires interpretation, not just calculation.</li>
+</ul>
+</section>
+<section id="discussion-questions" class="level2" data-number="7.10">
+<h2 data-number="7.10" class="anchored" data-anchor-id="discussion-questions"><span class="header-section-number">7.10</span> Discussion Questions</h2>
+<ol type="1">
+<li>Ledger &amp; Co.’s current ratio rose from 4.05 to 7.37 over five years. At what point, if any, does “more liquidity” stop being a good thing? What would you want to know before deciding?</li>
+<li>Explain in your own words why ROE declined even though every margin (gross, operating, net) improved over the same period.</li>
+<li>If you were advising this company’s CFO, what would you recommend they consider doing with the growing cash balance, and what additional information would you want before making that recommendation?</li>
+</ol>
+</section>
+<section id="exercises" class="level2" data-number="7.11">
+<h2 data-number="7.11" class="anchored" data-anchor-id="exercises"><span class="header-section-number">7.11</span> Exercises</h2>
+<ol type="1">
+<li>Using <code>compute_ratios()</code>, add one additional ratio of your choice (e.g., <strong>Return on Invested Capital</strong>, <strong>Cash Ratio</strong>, or <strong>Fixed Asset Turnover</strong>) and compute it for all five years.</li>
+<li>Perform vertical analysis on the <em>liabilities and equity</em> side of the balance sheet (not just assets, which this chapter covered). How has the company’s financing mix shifted between 2021 and 2025?</li>
+<li>Recreate the margin trend chart from this chapter, but plot Return on Assets and Return on Equity together instead of the three margins. What does the widening or narrowing gap between ROA and ROE tell you about leverage over time?</li>
+<li>Write your own 150-word financial health memo based on the leverage and efficiency ratios computed in this chapter (rather than the profitability-focused example memo shown above).</li>
+</ol>
+
+
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>The difference between current ratio and quick ratio is that quick ratio is stricter, excluding inventory because it is the least liquid current asset<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
     const anchorJS = new window.AnchorJS();
     anchorJS.options = {
@@ -778,8 +3690,8 @@ a.citation, a.citation:visited {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./08-audit-analytics.html" class="pagination-link" aria-label="Audit Analytics">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Audit Analytics</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./08-management-accounting-analytics.html" class="pagination-link" aria-label="Management Accounting Analytics">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Management Accounting Analytics</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -791,7 +3703,7 @@ a.citation, a.citation:visited {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><ul><li><a href="https://github.com/msharifbd/accounting-analytics-book/edit/main/07-financial-statement-analysis.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/blob/main/07-financial-statement-analysis.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/msharifbd/accounting-analytics-book/edit/main/07-financial-statement-analysis.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/blob/main/07-financial-statement-analysis.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This book was built with <a href="https://quarto.org/">Quarto</a></p>
 </div>

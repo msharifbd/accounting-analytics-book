@@ -1,1 +1,350 @@
 # Exploratory Data Analysis for Financial Data
+
+::: {.callout-note}
+## Learning Objectives
+By the end of this chapter, you should be able to:
+
+- Explain the goals of exploratory data analysis (EDA) and where it fits in the analytics workflow
+- Choose appropriate summary statistics based on a variable's level of measurement
+- Compute and interpret measures of central tendency and dispersion for financial data
+- Visually inspect the distribution of a financial variable and recognize skewness
+- Distinguish between an outlier and an error, and apply the z-score and IQR methods to flag unusual transactions
+- Perform a first-pass EDA on transaction-level general ledger data, including comparisons across categories
+:::
+
+## What Is EDA, and Why Do It First?
+
+**Exploratory data analysis (EDA)** is the process of getting to know a dataset — its shape, its typical values, its oddities — before you calculate ratios (Chapter 7), run audit tests (Chapter 8), or build a predictive model (Chapter 12). Skipping this step is one of the most common ways analytics work goes wrong: it's easy to compute a technically correct number from data you don't actually understand yet, and end up with a confidently wrong conclusion.
+
+The EDA mindset is simple: **look before you calculate.** Let the data surprise you before you start asking it questions.
+
+This chapter introduces EDA using a new dataset: `general_ledger_large.csv`, a simulated general ledger with **1,504 transaction lines** (752 journal entries) spanning a full fiscal year. It's large enough to show real distribution shapes and genuine outliers — something our earlier 10–20 row samples were too small to demonstrate convincingly.
+
+::: {.panel-tabset}
+## pandas
+
+```{python}
+import pandas as pd
+gl_pd = pd.read_csv("data/general_ledger_large.csv")
+print(gl_pd.shape)
+gl_pd.head()
+```
+
+## polars
+```{python}
+import polars as pl
+gl_pl = pl.read_csv("data/general_ledger_large.csv")
+gl_pl.head()
+```
+
+:::
+
+## Choosing the Right Summary Statistic
+
+Recall from Chapter 3 that a variable's **level of measurement** determines which calculations are actually meaningful:
+
+| Level | Example in this dataset | Meaningful summary |
+|---|---|---|
+| Nominal | `account`, `department`, `posted_by` | Count, mode |
+| Ratio | `debit`, `credit` | Mean, median, std, all arithmetic |
+
+It's worth pausing on this before diving into code. `department` is nominal — Sales, Operations, HR, Finance are categories with no inherent order. Computing an "average department" is meaningless. `debit`, on the other hand, is ratio-level — dollar amounts have a true zero and every arithmetic operation applies. The rest of this chapter focuses on summarizing `debit` and `credit`, and *counting* (not averaging) categorical fields like `department`.
+
+::: {.panel-tabset}
+## pandas
+```{python}
+gl_pd["department"].value_counts()
+```
+
+## polars
+
+```{python}
+gl_pl['department'].value_counts()
+# or
+gl_pl.select(pl.col("department").value_counts())
+```
+
+:::
+
+
+## Measures of Central Tendency
+
+Let's compute the mean, median, and mode of transaction debit amounts (restricting to rows where a debit actually occurred, since half the rows in a double-entry dataset have a debit of `0`).
+
+::: {.panel-tabset}
+## pandas
+```{python}
+debit_pd = gl_pd[gl_pd["debit"] > 0]["debit"]
+
+print("Mean:  ", debit_pd.mean())
+print("Median:", debit_pd.median())
+print("Mode:  ", debit_pd.mode().iloc[0])
+```
+
+## polars
+```{python}
+debit_pl = gl_pl.filter(pl.col("debit") > 0).select("debit").to_series()
+
+print("Mean:  ", debit_pl.mean())
+print("Median:", debit_pl.median())
+print("Mode:  ", debit_pl.mode()[0])
+```
+:::
+
+Notice the **mean ($4,044) is noticeably higher than the median ($2,457)**. This is a classic sign of a right-skewed distribution: most transactions are modest in size, but a handful of very large ones pull the mean upward. The median is a more representative "typical transaction size" here — a pattern you'll see constantly in financial data, and a good reason to always check both rather than reporting the mean alone.
+
+::: {.callout-tip}
+## Connect to Practice
+When a client or manager asks for "the average transaction size," it's worth asking whether they want the mean or the median — for skewed financial data, these can tell noticeably different stories, and reporting only the mean can be misleading.
+:::
+
+## Measures of Dispersion
+
+Central tendency tells you where the data is centered; dispersion tells you how spread out it is.
+
+::: {.panel-tabset}
+## pandas
+```{python}
+print("Standard deviation:", debit_pd.std())
+print("Variance:          ", debit_pd.var())
+
+q1, q3 = debit_pd.quantile([0.25, 0.75])
+iqr = q3 - q1
+print("IQR:               ", iqr)
+
+cv = debit_pd.std() / debit_pd.mean()
+print("Coefficient of variation:", cv)
+```
+
+## polars
+```{python}
+print("Standard deviation:", debit_pl.std())
+print("Variance:          ", debit_pl.var())
+
+q1_pl = debit_pl.quantile(0.25, interpolation="linear")
+q3_pl = debit_pl.quantile(0.75, interpolation="linear")
+iqr_pl = q3_pl - q1_pl
+print("IQR:               ", iqr_pl)
+
+cv_pl = debit_pl.std() / debit_pl.mean()
+print("Coefficient of variation:", cv_pl)
+```
+:::
+
+::: {.callout-important}
+## Why the Coefficient of Variation?
+Standard deviation alone can't tell you whether an account is "volatile" in any meaningful sense, because it's on the same scale as the data itself — a standard deviation of $10,000 is huge for a Rent Expense account but unremarkable for total Sales Revenue. The **coefficient of variation** (standard deviation ÷ mean) is a unitless ratio, which makes it possible to fairly compare variability *across* accounts of very different sizes — something we'll do in the grouped EDA section below.
+:::
+
+## Understanding Distributions
+
+Numbers alone don't always reveal a distribution's shape — visualizing it does. Full charting techniques are the focus of Chapter 6, but a histogram and boxplot are useful enough that we'll use them here too.
+
+```{python}
+import matplotlib.pyplot as plt
+
+fig, axes = plt.subplots(1, 2, figsize=(11, 4))
+
+axes[0].hist(debit_pd, bins=40, color="#1c7c73")
+axes[0].set_title("Debit Amounts — Full Range")
+axes[0].set_xlabel("Debit Amount ($)")
+
+axes[1].boxplot(debit_pd, vert=True)
+axes[1].set_title("Debit Amounts — Boxplot")
+axes[1].set_ylabel("Debit Amount ($)")
+
+plt.tight_layout()
+plt.show()
+```
+
+::: {.callout-warning}
+## When Outliers Hide the Distribution
+Look closely at the histogram: nearly every bar is crammed into the leftmost sliver of the chart, because a handful of very large transactions stretch the x-axis all the way out to $176,500. This is a common problem with skewed financial data — the outliers you'll learn to detect in the next section can also distort your ability to *see* the underlying distribution. A quick fix: zoom in by temporarily excluding the extreme values.
+:::
+
+```{python}
+zoomed = debit_pd[debit_pd < 10000]
+
+plt.figure(figsize=(6, 4))
+plt.hist(zoomed, bins=40, color="#c9482f")
+plt.title("Debit Amounts Under $10,000 (zoomed in)")
+plt.xlabel("Debit Amount ($)")
+plt.show()
+
+print(f"{len(zoomed)} of {len(debit_pd)} transactions shown ({len(zoomed)/len(debit_pd):.1%})")
+```
+
+Zooming in reveals what was hidden before: a right-skewed but otherwise unimodal (single-peaked) distribution, with most transactions clustered in the low thousands of dollars. This confirms numerically what we already suspected from the mean-vs-median gap: **skewness**, not a data error, largely explains the shape.
+
+::: {.callout-tip}
+## Connect to Practice
+A **bimodal** distribution (two distinct peaks) in an account balance often signals that two different populations have been lumped into one account — for example, a "Travel Expense" account mixing routine local travel with occasional expensive international trips. Spotting this kind of pattern is often the first clue that a variable needs to be split or segmented before further analysis.
+:::
+
+## Detecting Outliers
+
+An **outlier** is a value that differs substantially from the rest of the data. Whether it's a *mistake* or a *legitimate rare event* is a judgment call — statistics can only flag candidates for you to investigate, not make that determination on its own.
+
+### The Z-Score Method
+
+A z-score measures how many standard deviations a value is from the mean. A common rule of thumb flags anything with `|z| > 3` as an outlier.
+
+::: {.panel-tabset}
+## pandas
+```{python}
+z_scores = (debit_pd - debit_pd.mean()) / debit_pd.std()
+outliers_z_pd = gl_pd.loc[debit_pd.index][z_scores.abs() > 3]
+outliers_z_pd[["entry_id", "entry_date", "account", "debit", "department"]]
+```
+
+## polars
+```{python}
+mean_val = debit_pl.mean()
+std_val = debit_pl.std()
+
+gl_with_z = (
+    gl_pl.filter(pl.col("debit") > 0)
+    .with_columns(
+        ((pl.col("debit") - mean_val) / std_val).alias("z_score")
+    )
+)
+
+outliers_z_pl = gl_with_z.filter(pl.col("z_score").abs() > 3)
+outliers_z_pl.select(["entry_id", "entry_date", "account", "debit", "department"])
+```
+:::
+
+The z-score method flags exactly **7 transactions** — all well over $60,000, an order of magnitude above the typical transaction size.
+
+### The IQR Method
+
+An alternative, less sensitive to extreme values than the mean/std-based z-score, uses the interquartile range: flag anything above `Q3 + 1.5 × IQR`.
+
+::: {.panel-tabset}
+## pandas
+```{python}
+upper_bound = q3 + 1.5 * iqr
+outliers_iqr_pd = gl_pd.loc[debit_pd.index][debit_pd > upper_bound]
+
+print("IQR upper bound:", upper_bound)
+print("Transactions flagged:", len(outliers_iqr_pd))
+```
+
+## polars
+```{python}
+upper_bound_pl = q3_pl + 1.5 * iqr_pl
+outliers_iqr_pl = gl_with_z.filter(pl.col("debit") > upper_bound_pl)
+
+print("IQR upper bound:", upper_bound_pl)
+print("Transactions flagged:", outliers_iqr_pl.height)
+```
+:::
+
+Notice the IQR method flags **38 transactions** — far more than the 7 flagged by the z-score method. This isn't a bug; it's a real methodological difference:
+
+::: {.callout-important}
+## Z-Score vs. IQR: Why Do They Disagree?
+The z-score method uses the **mean and standard deviation**, both of which are themselves heavily influenced by extreme values — a few huge transactions inflate the standard deviation, which makes the z-score threshold more forgiving. The IQR method uses the **median and quartiles**, which are far more resistant to extreme values, so it stays "strict" even when a few huge outliers are present. In practice, this means:
+
+- The **z-score method** here caught only the most extreme injected anomalies (all above $60,000)
+- The **IQR method** also caught moderately large, but still plausible, legitimate transactions
+
+Neither method is "correct" on its own — the IQR method casts a wider net and will produce more false positives requiring manual review, while the z-score method may miss moderately unusual transactions when the data itself is highly skewed. In practice, many audit and fraud analytics workflows use IQR-style thresholds as a first-pass filter specifically *because* it's more sensitive, and treat the resulting list as candidates for follow-up, not confirmed problems.
+:::
+
+### Outlier or Error? A Judgment Call
+
+Statistical flagging is only the first step. Consider the seven z-score outliers above — some questions a real investigation would ask:
+
+- Is a $176,500 sale plausible for this business, or does it look like a data entry error (an extra digit)?
+- Two of the flagged transactions were posted on a weekend — is that normal for this company, or unusual enough to warrant follow-up?
+- Do the posting employees for these entries normally handle transactions of this size?
+
+```{python}
+gl_pd["entry_date"] = pd.to_datetime(gl_pd["entry_date"])
+outliers_z_pd_with_day = outliers_z_pd.copy()
+outliers_z_pd_with_day["entry_date"] = pd.to_datetime(outliers_z_pd_with_day["entry_date"])
+outliers_z_pd_with_day["day_of_week"] = outliers_z_pd_with_day["entry_date"].dt.day_name()
+outliers_z_pd_with_day[["entry_id", "entry_date", "day_of_week", "account", "debit", "posted_by"]]
+```
+
+Two of the seven outliers were posted on a **Saturday or Sunday** — worth flagging for follow-up, since unusual timing combined with an unusually large amount is a stronger signal than either one alone. We'll build on exactly this kind of reasoning in Chapter 9 (Fraud Detection and Anomaly Detection).
+
+## Grouped EDA: Comparing Across Categories
+
+Summary statistics computed on the whole dataset can hide differences between groups. Let's compare debit amounts by department.
+
+::: {.panel-tabset}
+## pandas
+```{python}
+grouped_pd = (
+    gl_pd[gl_pd["debit"] > 0]
+    .groupby("department")["debit"]
+    .agg(["count", "mean", "median", "std"])
+)
+grouped_pd["cv"] = grouped_pd["std"] / grouped_pd["mean"]
+grouped_pd
+```
+
+## polars
+```{python}
+grouped_pl = (
+    gl_pl.filter(pl.col("debit") > 0)
+    .group_by("department")
+    .agg([
+        pl.len().alias("count"),
+        pl.col("debit").mean().alias("mean"),
+        pl.col("debit").median().alias("median"),
+        pl.col("debit").std().alias("std"),
+    ])
+    .with_columns((pl.col("std") / pl.col("mean")).alias("cv"))
+    .sort("department")
+)
+grouped_pl
+```
+:::
+
+A few things worth noticing:
+
+- **Finance** has by far the *lowest* variability (small coefficient of variation) — consistent with routine, predictable transactions like depreciation and insurance amortization.
+- **Sales** and **HR** show much higher variability, partly because several of our injected large outliers landed in those departments.
+- **Operations** has the highest transaction *count* by far, reflecting frequent inventory and vendor-payment activity.
+
+This kind of grouped comparison is often how an unusual pattern first gets noticed — not from a single transaction, but from *one department's numbers looking different from the others* in a way that invites a closer look.
+
+## Putting It Together: A First-Pass EDA Checklist
+
+The steps in this chapter form a reusable sequence you can apply to *any* new dataset before moving on to deeper analysis:
+
+1. **Check shape and structure** — row/column count, data types (Chapter 3–4 territory)
+2. **Choose appropriate summary statistics** based on each variable's level of measurement
+3. **Compute central tendency and dispersion** — and compare mean vs. median for signs of skew
+4. **Visualize the distribution** — histogram and boxplot, zooming in if outliers dominate the scale
+5. **Flag outliers** — using both z-score and IQR methods, since they disagree in informative ways
+6. **Compare across categories** — group by a relevant categorical variable (department, account, employee) to see if any group stands out
+
+We applied all six steps to `general_ledger_large.csv` in this chapter. In Chapter 6, we'll build on this foundation with more advanced and polished visualizations; in Chapters 8–9, we'll apply this same EDA mindset directly to audit and fraud analytics tasks.
+
+## Chapter Summary
+
+- EDA means getting to know your data — its center, its spread, its shape, its oddities — before running any formal analysis, audit test, or model.
+- A variable's level of measurement determines which summary statistics are meaningful; this dataset's ratio-level `debit`/`credit` columns support full arithmetic, while nominal columns like `department` only support counting.
+- Mean and median can diverge substantially in skewed financial data — always check both, since the mean alone can be misleading.
+- The coefficient of variation allows fair comparison of variability across accounts or groups on very different scales.
+- Histograms can be distorted by extreme outliers; zooming in (temporarily excluding extreme values) often reveals the true underlying shape.
+- The z-score and IQR methods for outlier detection can disagree substantially — IQR is more sensitive (and produces more false positives) since it's based on the more outlier-resistant median and quartiles, while z-score is based on the more outlier-sensitive mean and standard deviation.
+- A flagged outlier is not automatically an error — determining that requires investigation and accounting judgment, not just a statistical threshold.
+- Grouped EDA (comparing summary statistics across categories) is often how an unusual pattern first becomes visible.
+
+## Discussion Questions
+
+1. Why does the mean of the debit amounts in this chapter's dataset exceed the median? What would it mean if the opposite were true — median greater than mean?
+2. The IQR method flagged 38 transactions, the z-score method only 7. If you were leading an audit team with limited time, which method would you use for an initial screen, and why?
+3. Two of the seven z-score outliers were posted on a weekend. On its own, is a weekend posting evidence of a problem? What additional information would make you more or less concerned?
+
+## Exercises
+
+1. Using `general_ledger_large.csv`, compute the mean, median, and standard deviation of `debit` for just the **Sales** department, and compare it to the whole-dataset statistics computed in this chapter.
+2. Re-run the z-score and IQR outlier detection methods using the `credit` column instead of `debit`. Are the same journal entries flagged? Explain why or why not, given how the dataset is structured.
+3. Produce a histogram of debit amounts grouped by department (four separate histograms, or one overlaid chart) and describe, in a few sentences, how the distributions differ across departments.
+4. Pick one of the seven z-score-flagged outliers. Write a short (100-word) memo describing what additional information you would request before concluding whether it's a legitimate transaction or an error.

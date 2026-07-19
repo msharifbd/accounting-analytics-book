@@ -23,10 +23,45 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -40,10 +75,14 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-9e3e5b9121e68b3f077afb32f2c64d95.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-9e3e5b9121e68b3f077afb32f2c64d95.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-fe9f69af69d9b0acfce0412d1605ee06.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-9e3e5b9121e68b3f077afb32f2c64d95.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -71,6 +110,12 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
 <style>
 .scrollable-table {
   overflow-x: auto !important;
@@ -90,7 +135,169 @@ a.citation, a.citation:visited {
 
 </head>
 
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -115,7 +322,7 @@ a.citation, a.citation:visited {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Accounting Analytics with Python</a> 
-        <div class="sidebar-tools-main">
+        <div class="sidebar-tools-main tools-wide">
     <a href="https://github.com/msharifbd/accounting-analytics-book" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
       <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Download"><i class="bi bi-download"></i></a>
@@ -134,6 +341,7 @@ a.citation, a.citation:visited {
           </li>
       </ul>
     </div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
       </div>
@@ -220,31 +428,37 @@ a.citation, a.citation:visited {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-financial-statement-analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Financial Statement Analysis with Python</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Financial Statement Analytics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./08-audit-analytics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Audit Analytics</span></span></a>
+  <a href="./08-management-accounting-analytics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Management Accounting Analytics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./09-fraud-anomaly-detection.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Fraud Detection and Anomaly Detection</span></span></a>
+  <a href="./09-audit-analytics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Audit Analytics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./10-revenue-recognition-analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Revenue Recognition and Transaction-Level Analysis</span></span></a>
+  <a href="./10-fraud-anomaly-detection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Fraud and Anomaly Detection</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./11-tax-analytics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Tax Analytics</span></span></a>
+  <a href="./11-revenue-recognition-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Revenue Recognition and Transaction-Level Analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-tax-analytics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Tax Analytics</span></span></a>
   </div>
 </li>
       </ul>
@@ -260,14 +474,14 @@ a.citation, a.citation:visited {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./12-predictive-modeling-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Introduction to Predictive Modeling</span></span></a>
+  <a href="./13-predictive-modeling-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Introduction to Predictive Modeling</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./13-genai-in-accounting.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Generative AI in Accounting</span></span></a>
+  <a href="./14-genai-in-accounting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Generative AI in Accounting</span></span></a>
   </div>
 </li>
       </ul>
@@ -283,20 +497,20 @@ a.citation, a.citation:visited {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./14-automated-reporting-quarto.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Automated Reporting and Dashboards with Quarto</span></span></a>
+  <a href="./15-automated-reporting-quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Automated Reporting and Dashboards with Quarto</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./15-data-ethics-reproducibility.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Data Ethics, Governance, and Reproducibility</span></span></a>
+  <a href="./16-data-ethics-reproducibility.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Data Ethics, Governance, and Reproducibility</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./16-capstone-project.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Capstone Project</span></span></a>
+  <a href="./17-capstone-project.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Capstone Project</span></span></a>
   </div>
 </li>
       </ul>
@@ -341,11 +555,21 @@ a.citation, a.citation:visited {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#edgar-database-and-its-implications" id="toc-edgar-database-and-its-implications" class="nav-link active" data-scroll-target="#edgar-database-and-its-implications"><span class="header-section-number">C.1</span> EDGAR Database and Its Implications</a></li>
+  <li><a href="#xbrl" id="toc-xbrl" class="nav-link" data-scroll-target="#xbrl"><span class="header-section-number">C.2</span> XBRL</a></li>
+  <li><a href="#edgartools---python-package-for-parsing-edgar-database" id="toc-edgartools---python-package-for-parsing-edgar-database" class="nav-link" data-scroll-target="#edgartools---python-package-for-parsing-edgar-database"><span class="header-section-number">C.3</span> edgartools - Python Package for Parsing EDGAR Database</a></li>
+  <li><a href="#edgar-analytics---python-package-built-on-edgartools-for-analytics" id="toc-edgar-analytics---python-package-built-on-edgartools-for-analytics" class="nav-link" data-scroll-target="#edgar-analytics---python-package-built-on-edgartools-for-analytics"><span class="header-section-number">C.4</span> edgar-analytics - Python Package Built on edgartools for Analytics</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/msharifbd/accounting-analytics-book/edit/main/appendix-c-edgar-database.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/blob/main/appendix-c-edgar-database.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
+
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./appendix-a-python-primer.html">Appendices</a></li><li class="breadcrumb-item"><a href="./appendix-c-edgar-database.html"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">An Introduction to EDGAR Database</span></a></li></ol></nav>
 <div class="quarto-title">
@@ -366,12 +590,275 @@ a.citation, a.citation:visited {
 </header>
 
 
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Learning Objectives
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>By the end of this Appendix, you should be able to:</p>
+<ul>
+<li>Gain an Understanding about <code>EDGAR</code> Database and its importance</li>
+<li>Learn how to extract financial statements from <code>EDGAR</code> database</li>
+<li>Learn how to extract non-structured data from <code>EDGAR</code> database</li>
+<li>Learn about <code>XBRL</code></li>
+</ul>
+</div>
+</div>
+<section id="edgar-database-and-its-implications" class="level2" data-number="C.1">
+<h2 data-number="C.1" class="anchored" data-anchor-id="edgar-database-and-its-implications"><span class="header-section-number">C.1</span> EDGAR Database and Its Implications</h2>
+<p>The Electronic Data Gathering, Analysis, and Retrieval (EDGAR) database is an online filing system maintained by the U.S. Securities and Exchange Commission (SEC). Established in 1992, EDGAR serves as a centralized repository for corporate disclosures required under U.S. federal securities laws. The system provides investors, researchers, analysts, and the general public with free access to millions of regulatory filings submitted by publicly traded companies and other reporting entities. The url of EDGAR database is - <a href="https://www.sec.gov/edgar." class="uri">https://www.sec.gov/edgar.</a></p>
+<p>Public companies are required to submit various financial and non-financial reports through EDGAR, including annual reports (Form 10-K), quarterly reports (Form 10-Q), current reports (Form 8-K), proxy statements (Form DEF 14A), and registration statements. These filings contain important information about a company’s financial performance, operating activities, risk factors, management discussion and analysis (MD&amp;A), executive compensation, and corporate governance practices.</p>
+<p>For financial analysis and academic research, EDGAR is an important source of primary corporate information because the data comes directly from company filings submitted to regulators. Researchers can use EDGAR filings to analyze financial statements, calculate financial ratios, evaluate business performance, study corporate decisions, and conduct empirical research in accounting, finance, and economics. The database also supports automated data collection through SEC-provided APIs and structured filing formats, making it useful for large-scale financial data analysis.</p>
+<p>Overall, EDGAR plays a critical role in promoting transparency and efficiency in U.S. capital markets by ensuring that investors have timely and reliable access to corporate disclosure information.</p>
+</section>
+<section id="xbrl" class="level2" data-number="C.2">
+<h2 data-number="C.2" class="anchored" data-anchor-id="xbrl"><span class="header-section-number">C.2</span> XBRL</h2>
+<p><code>XBRL</code>, or eXtensible Business Reporting Language, is an XML-based language for the electronic transmission of business and financial data. It is designed to improve the way financial data is communicated and shared, making it easier to prepare, analyze, and exchange financial information. XBRL uses tags to identify each piece of financial data, which then allows it to be used programmatically by an XBRL-compatible program.</p>
+<p>According to <a href="www.xbrl.org">XBRL</a>, XBRL plays a huge role in increasing <em>corporate transparency</em>, <em>reducing information asymmetries</em>, and <em>improving the efficiency of capital markets</em>. When digital reporting – supplying clear, consistent digital meanings – is combined with rigorous management oversight and assurance processes, users can have a high degree of confidence in business data and in the insights they draw from it.</p>
+<ul>
+<li><p>For <strong>investors</strong>, finding information, comparing corporate performance and uncovering new opportunities all becomes easier, cheaper, faster and more accurate. XBRL data can open up wider possibilities for investment, less limited by language and location.</p></li>
+<li><p><strong>Regulators</strong> too benefit from streamlined data collection, improved understanding of market, sustainability or other risks, and ultimately more efficient and effective oversight.</p></li>
+<li><p><strong>Corporates</strong>, meanwhile, are able to tell their own stories. Digital reporting can open up increased access to capital, potentially at a reduced cost. For companies with an eye on the future, getting to grips with XBRL offers the opportunity to go beyond compliance, for example in monitoring and benchmarking performance.</p></li>
+</ul>
+<p>XBRL brings reporting into the digital age, and offers powerful capabilities across the reporting chain. Market demand for reliable digital data is high: for users from investors to regulators, XBRL is the gold standard for decision-useful analysis.</p>
+</section>
+<section id="edgartools---python-package-for-parsing-edgar-database" class="level2" data-number="C.3">
+<h2 data-number="C.3" class="anchored" data-anchor-id="edgartools---python-package-for-parsing-edgar-database"><span class="header-section-number">C.3</span> edgartools - Python Package for Parsing EDGAR Database</h2>
+<p><code>edgartools</code> is a Python library for accessing SEC EDGAR filings as structured data. SEC EDGAR has every filing back to 1994, free — and almost none of it is ready to use. <code>edgartools</code> turns any filing into a tidy data object. To learn more about the <code>edgartools</code>, you can go through <a href="https://edgartools.readthedocs.io/en/latest/">documentation</a>.</p>
+<p>After installing the <code>edgartools</code>, you need to identify yourself to the SEC because EDGAR requires an email with every request.</p>
+<div id="0ebef822" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> edgar <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>set_identity(<span class="st">"Sharif Islam mdshariful.islam@siu.edu"</span>)  <span class="co"># required by SEC</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="0210f71b" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> edgar <span class="im">import</span> Company, set_identity</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> edgar.xbrl <span class="im">import</span> XBRLS</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="f2b8df77" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>company <span class="op">=</span> Company(<span class="st">"AAPL"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Get all 10-K filings, then filter to the date range you want</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>filings <span class="op">=</span> company.get_filings(form<span class="op">=</span><span class="st">"10-K"</span>, date<span class="op">=</span><span class="st">"2010-01-01:2015-12-31"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Stitch multiple filings' financials into one multi-period view</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>xbrls <span class="op">=</span> XBRLS.from_filings(filings)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="f62884e1" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Income Statement</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>income_statement <span class="op">=</span> xbrls.statements.income_statement()</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to a DataFrame for easier analysis/plotting</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>income_df <span class="op">=</span> income_statement.to_dataframe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="9c48244d" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Balance Sheet</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>balance_sheet <span class="op">=</span> xbrls.statements.balance_sheet()</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>balance_df <span class="op">=</span> balance_sheet.to_dataframe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="39a70903" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cash Flow Statement </span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>cash_flow_statement <span class="op">=</span> xbrls.statements.cash_flow_statement()</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>cash_flow_statement_df <span class="op">=</span> cash_flow_statement.to_dataframe()</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>cash_flow_statement2 <span class="op">=</span> xbrls.statements.cashflow_statement()</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>cash_flow_statement_df2 <span class="op">=</span> cash_flow_statement2.to_dataframe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="ee653212" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Statement of Equity </span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>statement_of_equity <span class="op">=</span> xbrls.statements.statement_of_equity()</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>statement_of_equity_df <span class="op">=</span> statement_of_equity.to_dataframe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="751c3eff" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Comprehensive Income Statement</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>comp_income_statement <span class="op">=</span> xbrls.statements.comprehensive_income()</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>comp_income_statement_df <span class="op">=</span> comp_income_statement.to_dataframe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="25b111ec" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>income_statement_detailed <span class="op">=</span> xbrls.statements.income_statement(view<span class="op">=</span><span class="st">"detailed"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>income_df_detailed <span class="op">=</span> income_statement_detailed.to_dataframe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Alternatively, you can get some specific values from the financial statements instead of the whole financial statements to calculate different ratios using <code>edgartools</code>.</p>
+<div id="dd456cc5" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>financials <span class="op">=</span> company.get_financials()</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>revenue <span class="op">=</span> financials.get_revenue()</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>net_income <span class="op">=</span> financials.get_net_income()</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>total_assets <span class="op">=</span> financials.get_total_assets()</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>total_liabilities <span class="op">=</span> financials.get_total_liabilities()</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>stockholders_equity <span class="op">=</span> financials.get_stockholders_equity()</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>current_assets <span class="op">=</span> financials.get_current_assets()</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>current_liabilities <span class="op">=</span> financials.get_current_liabilities()</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>operating_cf <span class="op">=</span> financials.get_operating_cash_flow()</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>capex <span class="op">=</span> financials.get_capital_expenditures()</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>free_cash_flow <span class="op">=</span> financials.get_free_cash_flow()  <span class="co"># calculated automatically</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Roll your own ratio</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>debt_to_equity <span class="op">=</span> total_liabilities <span class="op">/</span> stockholders_equity</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>net_margin <span class="op">=</span> net_income <span class="op">/</span> revenue</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="edgar-analytics---python-package-built-on-edgartools-for-analytics" class="level2" data-number="C.4">
+<h2 data-number="C.4" class="anchored" data-anchor-id="edgar-analytics---python-package-built-on-edgartools-for-analytics"><span class="header-section-number">C.4</span> edgar-analytics - Python Package Built on edgartools for Analytics</h2>
+<div id="d63d09af" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> edgar_analytics <span class="im">as</span> ea</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>os.environ[<span class="st">"EDGAR_IDENTITY"</span>] <span class="op">=</span> os.getenv(<span class="st">"EDGAR_IDENTITY"</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> ea.analyze(<span class="st">"AAPL"</span>, peers<span class="op">=</span>[<span class="st">"MSFT"</span>, <span class="st">"GOOGL"</span>], identity<span class="op">=</span> <span class="st">"Sharif Islam mdshariful.islam@siu.edu"</span>)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Multi-period trends (FCF, ROE, D/E over time)</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>annual <span class="op">=</span> result.main.multiyear.annual_data</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>annual</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"ROE % by year: </span><span class="sc">{</span>annual<span class="sc">.</span>get(<span class="st">'ROE %'</span>, {})<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(annual)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co">#annual.keys()</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co">#annual.items()</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>ROE % by year: {'2023-09-30': 156.07601454639075, '2024-09-28': 164.59350307287096, '2025-09-27': 151.91298333175104}</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="43">
+<div>
 
 
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Revenue</th>
+<th data-quarto-table-cell-role="th">Net Income</th>
+<th data-quarto-table-cell-role="th">Gross Profit</th>
+<th data-quarto-table-cell-role="th">Operating Income</th>
+<th data-quarto-table-cell-role="th">Cost of Revenue</th>
+<th data-quarto-table-cell-role="th">Interest Expense</th>
+<th data-quarto-table-cell-role="th">Income Tax Expense</th>
+<th data-quarto-table-cell-role="th">Total Assets</th>
+<th data-quarto-table-cell-role="th">Total Equity</th>
+<th data-quarto-table-cell-role="th">Total Liabilities</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">Long-term Debt</th>
+<th data-quarto-table-cell-role="th">Cash from Operations</th>
+<th data-quarto-table-cell-role="th">CapEx</th>
+<th data-quarto-table-cell-role="th">Free Cash Flow</th>
+<th data-quarto-table-cell-role="th">Gross Margin %</th>
+<th data-quarto-table-cell-role="th">Operating Margin %</th>
+<th data-quarto-table-cell-role="th">Net Margin %</th>
+<th data-quarto-table-cell-role="th">ROE %</th>
+<th data-quarto-table-cell-role="th">ROA %</th>
+<th data-quarto-table-cell-role="th">Debt-to-Equity</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2023-09-30</th>
+<td>3.832850e+11</td>
+<td>9.699500e+10</td>
+<td>1.691480e+11</td>
+<td>1.143010e+11</td>
+<td>2.141370e+11</td>
+<td>NaN</td>
+<td>1.674100e+10</td>
+<td>3.525830e+11</td>
+<td>6.214600e+10</td>
+<td>2.904370e+11</td>
+<td>...</td>
+<td>9.528100e+10</td>
+<td>1.105430e+11</td>
+<td>1.095900e+10</td>
+<td>9.958400e+10</td>
+<td>44.131130</td>
+<td>29.821412</td>
+<td>25.306234</td>
+<td>156.076015</td>
+<td>27.509835</td>
+<td>4.673462</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2024-09-28</th>
+<td>3.910350e+11</td>
+<td>9.373600e+10</td>
+<td>1.806830e+11</td>
+<td>1.232160e+11</td>
+<td>2.103520e+11</td>
+<td>NaN</td>
+<td>2.974900e+10</td>
+<td>3.649800e+11</td>
+<td>5.695000e+10</td>
+<td>3.080300e+11</td>
+<td>...</td>
+<td>8.575000e+10</td>
+<td>1.182540e+11</td>
+<td>9.447000e+09</td>
+<td>1.088070e+11</td>
+<td>46.206350</td>
+<td>31.510223</td>
+<td>23.971256</td>
+<td>164.593503</td>
+<td>25.682503</td>
+<td>5.408780</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2025-09-27</th>
+<td>4.161610e+11</td>
+<td>1.120100e+11</td>
+<td>1.952010e+11</td>
+<td>1.330500e+11</td>
+<td>2.209600e+11</td>
+<td>NaN</td>
+<td>2.071900e+10</td>
+<td>3.592410e+11</td>
+<td>7.373300e+10</td>
+<td>2.855080e+11</td>
+<td>...</td>
+<td>7.832800e+10</td>
+<td>1.114820e+11</td>
+<td>1.271500e+10</td>
+<td>9.876700e+10</td>
+<td>46.905164</td>
+<td>31.970800</td>
+<td>26.915064</td>
+<td>151.912983</td>
+<td>31.179626</td>
+<td>3.872187</td>
+</tr>
+</tbody>
+</table>
+
+<p>3 rows × 23 columns</p>
+</div>
+</div>
+</div>
+<div id="f970a795" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> edgar_analytics.multi_period_analysis <span class="im">import</span> retrieve_multi_year_data</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>aapl <span class="op">=</span> retrieve_multi_year_data(<span class="st">"AAPL"</span>, n_years<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>msft <span class="op">=</span> retrieve_multi_year_data(<span class="st">"MSFT"</span>, n_years<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>googl <span class="op">=</span> retrieve_multi_year_data(<span class="st">"GOOGL"</span>, n_years<span class="op">=</span><span class="dv">15</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="03eba2be" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>aapl_df <span class="op">=</span> pd.DataFrame(aapl[<span class="st">"annual_data"</span>])</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>msft_df <span class="op">=</span> pd.DataFrame(msft[<span class="st">"annual_data"</span>])</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>googl_df <span class="op">=</span> pd.DataFrame(googl[<span class="st">'annual_data'</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+
+
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
     const anchorJS = new window.AnchorJS();
     anchorJS.options = {
@@ -787,7 +1274,7 @@ a.citation, a.citation:visited {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><ul><li><a href="https://github.com/msharifbd/accounting-analytics-book/edit/main/appendix-c-edgar-database.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/blob/main/appendix-c-edgar-database.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/msharifbd/accounting-analytics-book/edit/main/appendix-c-edgar-database.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/blob/main/appendix-c-edgar-database.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This book was built with <a href="https://quarto.org/">Quarto</a></p>
 </div>

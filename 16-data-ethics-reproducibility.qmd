@@ -1,0 +1,239 @@
+# Data Ethics, Governance, and Reproducibility
+
+::: {.callout-note}
+## Learning Objectives
+By the end of this chapter, you should be able to:
+
+- Explain why data privacy, governance, and reproducibility are core professional responsibilities in accounting analytics, not optional extras
+- Apply pseudonymization and generalization techniques to reduce the sensitivity of a dataset
+- Build a simple transformation log that documents what was done to a dataset, when, and why
+- Explain how version control (Git) functions as a form of audit trail for analytics work
+- Capture the software environment behind an analysis so it can be reproduced later
+- Apply a practical checklist covering ethics, governance, and reproducibility to your own analytics projects
+:::
+
+## Why This Chapter Matters
+
+Every technique in this book — audit analytics, fraud detection, predictive modeling — assumes you're working with real, sensitive data: customer records, employee salaries, vendor relationships, financial results not yet public. Getting the *analysis* right isn't enough. You also need to handle that data responsibly, be able to explain what you did to it, and be able to reproduce your results later — whether for a regulator, an auditor reviewing your work, or just yourself six months from now trying to remember how you got a number.
+
+This chapter covers three related responsibilities: **data privacy** (protecting sensitive information), **governance** (documenting and controlling how data is used), and **reproducibility** (ensuring your work can be verified and repeated).
+
+## Data Privacy and Confidentiality
+
+Accounting datasets routinely contain information that must be protected: customer names and account numbers, employee salaries, vendor banking details, and unpublished financial results. Two general principles matter regardless of which specific regulation applies (GDPR, CCPA, or an internal firm policy):
+
+- **Data minimization** — only collect, retain, and share the data actually needed for the task at hand. If an analysis doesn't require a customer's name, don't include it.
+- **Least exposure** — even when sensitive data is needed for analysis, reduce how many people and systems see the *identifiable* version of it. This is where pseudonymization and generalization come in.
+
+### Pseudonymization
+
+**Pseudonymization** replaces an identifying value with a consistent substitute, so the same real-world entity always maps to the same pseudonym — which preserves the ability to group and analyze by that entity — without exposing the original value to anyone who only sees the pseudonymized data.
+
+```{python}
+import pandas as pd
+import hashlib
+
+sales = pd.read_csv("data/sales_transactions.csv")
+print(sales["customer_id"].nunique(), "unique customers")
+```
+
+```{python}
+SALT = "course-project-2026"  # kept separate from any shared or published data
+
+def pseudonymize(value, salt=SALT):
+    combined = f"{salt}{value}".encode("utf-8")
+    return "CUST_" + hashlib.sha256(combined).hexdigest()[:8]
+
+sales["customer_id_pseudonym"] = sales["customer_id"].apply(pseudonymize)
+sales[["customer_id", "customer_id_pseudonym"]].drop_duplicates().head(6)
+```
+
+```{python}
+# same input always produces the same pseudonym, so grouping/joining still works
+check1 = pseudonymize("CUST100")
+check2 = pseudonymize("CUST100")
+print("Consistent mapping:", check1 == check2)
+```
+
+::: {.callout-important}
+## Pseudonymization Is Not Anonymization
+Anyone who knows the `SALT` value can recompute the same hash and re-identify a customer — which is exactly the point: the salt is a secret, kept separate from the pseudonymized dataset, so someone with only the pseudonymized data *cannot* reverse it, but someone with legitimate access to both the salt and the mapping can. This is why the salt itself needs its own protection (e.g., a secrets manager or restricted config file, never committed to a public Git repository) — pseudonymization only protects the data as well as the salt is protected.
+:::
+
+### Generalization
+
+**Generalization** reduces precision rather than replacing identity — turning an exact value into a broader category, which makes any single record less identifiable while preserving overall patterns for analysis.
+
+```{python}
+def generalize_amount(amount):
+    lower = int(amount // 1000) * 1000
+    return f"${lower:,}-${lower + 1000:,}"
+
+sales["invoice_date"] = pd.to_datetime(sales["invoice_date"])
+sales["amount_range"] = sales["amount"].apply(generalize_amount)
+sales["invoice_month"] = sales["invoice_date"].dt.to_period("M").astype(str)
+
+sales[["amount", "amount_range", "invoice_date", "invoice_month"]].head(5)
+```
+
+```{python}
+print("Unique exact amounts:", sales["amount"].nunique())
+print("Unique amount ranges:", sales["amount_range"].nunique())
+```
+
+Generalizing amounts into $1,000 bands reduces 427 distinct exact values down to just 23 categories — most quarterly trend or department-level analysis in this book would look nearly identical using either version, but the generalized version is meaningfully harder to use to single out one specific transaction.
+
+::: {.callout-tip}
+## Connect to Practice
+Notice the tradeoff: generalization makes data safer to share but also less useful for some analyses. Chapter 9's Isolation Forest model, for example, needed exact dollar amounts to detect the seven outlier transactions — a generalized `amount_range` column would have hidden exactly the signal that model relied on. Privacy protection and analytical usefulness are frequently in tension, and the right balance depends on who the data is being shared with and why.
+:::
+
+## Data Governance and Audit Trails
+
+**Governance** is about being able to answer, at any point, three questions: who has access to this data, what has been done to it, and why. The second question — what's been done to it — is where analytics work generates its own audit trail.
+
+### Version Control as an Audit Trail
+
+You've been using Git since Chapter 2 to track changes to this book's chapters. The same mechanism is a legitimate governance tool for analytics work: every commit records *what* changed, *when*, and (via the commit message) *why* — exactly the kind of trail a regulator or reviewer might ask for when questioning how an analysis was produced.
+
+```bash
+git log --oneline data/sales_transactions.csv
+```
+
+Running this shows every commit that touched this specific file — a complete history of when the dataset was added or modified, without needing any separate logging system.
+
+### Logging Data Transformations
+
+Git tracks *file-level* history well, but for a single analytical session, it's often useful to log each transformation step directly, especially for privacy-sensitive operations like the pseudonymization above.
+
+```{python}
+from datetime import datetime, timezone
+
+class TransformLog:
+    def __init__(self):
+        self.entries = []
+
+    def record(self, step_name, description, rows_before, rows_after):
+        self.entries.append({
+            "timestamp": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+            "step": step_name,
+            "description": description,
+            "rows_before": rows_before,
+            "rows_after": rows_after,
+        })
+
+    def as_dataframe(self):
+        return pd.DataFrame(self.entries)
+
+log = TransformLog()
+```
+
+```{python}
+raw_sales = pd.read_csv("data/sales_transactions.csv")
+log.record("load", "Loaded raw sales_transactions.csv", None, len(raw_sales))
+
+before = len(raw_sales)
+raw_sales["customer_id"] = raw_sales["customer_id"].apply(pseudonymize)
+log.record("pseudonymize", "Replaced customer_id with salted-hash pseudonym", before, len(raw_sales))
+
+before = len(raw_sales)
+clean_sales = raw_sales.dropna(subset=["amount"])
+log.record("drop_missing", "Dropped rows with missing amount", before, len(clean_sales))
+
+log.as_dataframe()
+```
+
+This log is itself a small dataset you could save alongside your analysis output — a concrete, reviewable record of exactly what happened to the data, in what order, and why each step was taken.
+
+### Access Control
+
+Governance also means limiting *who* can see identifiable data in the first place, following the principle of **least privilege**: a person should have access to only the data their role genuinely requires. In practice this means the pseudonymized version of a dataset (like `customer_id_pseudonym` above) might be shared broadly with a team performing pattern analysis, while the mapping needed to reverse it stays restricted to a much smaller group with a specific, documented business need.
+
+## Reproducibility
+
+**Reproducibility** means someone else — or you, months later — can rerun your analysis and get the same result. This has come up implicitly throughout this book (every synthetic dataset used a fixed random seed), and it's worth making the practice explicit.
+
+### Fixed Random Seeds
+
+Every dataset in this book was generated with an explicit seed, for example `rng = np.random.default_rng(seed=42)` back in Chapter 5. This is why the specific numbers in every chapter — the 7 z-score outliers, the exact ETR figures, the exact model coefficients — are exactly reproducible if you rerun the generation code, rather than different every time.
+
+```{python}
+import numpy as np
+
+rng1 = np.random.default_rng(seed=42)
+rng2 = np.random.default_rng(seed=42)
+
+print(rng1.normal(0, 1, 3))
+print(rng2.normal(0, 1, 3))
+```
+
+Both sequences are identical — the seed fully determines the "random" output, which is exactly what makes a simulation reproducible rather than a one-time, unrepeatable event.
+
+### Capturing the Software Environment
+
+The same code can produce different results on different machines if package versions differ — a chart's default colors change, a statistical function's default parameter changes, a bug gets fixed (or introduced) between versions. Recording exactly which versions were used is essential for anyone trying to reproduce your work later.
+
+```{python}
+import importlib.metadata as metadata
+
+packages_of_interest = ["pandas", "polars", "numpy", "scikit-learn", "seaborn", "plotnine", "matplotlib"]
+
+for pkg in packages_of_interest:
+    try:
+        print(f"{pkg}: {metadata.version(pkg)}")
+    except metadata.PackageNotFoundError:
+        print(f"{pkg}: not installed")
+```
+
+In practice, this is usually captured once for an entire project rather than checked manually each time, using:
+
+```bash
+pip freeze > requirements.txt
+```
+
+Committing `requirements.txt` to your project's Git repository (alongside the `.qmd` files themselves) means anyone who clones the repository can recreate the exact same package environment with `pip install -r requirements.txt`, rather than guessing which versions you originally used.
+
+### Quarto's Own Reproducibility Features
+
+Recall from Chapter 2 that this book's `_quarto.yml` includes:
+
+```yaml
+execute:
+  freeze: auto
+```
+
+This caches each chapter's executed output and only re-runs code when that chapter's content actually changes — which serves reproducibility in a subtle but important way: it guarantees that a chapter's rendered output reflects a specific, known execution of its code, rather than silently drifting if, say, a shared dataset file changes without the chapter itself being edited.
+
+## A Practical Ethics, Governance, and Reproducibility Checklist
+
+Before sharing or submitting any analytics project, it's worth checking:
+
+- [ ] Does this dataset contain any identifying information that isn't strictly necessary for the analysis? If so, has it been removed, pseudonymized, or generalized?
+- [ ] If pseudonymization was used, is the salt or key stored separately from the shared data, and never committed to a public repository?
+- [ ] Is there a record (a transformation log, commit history, or both) of what was done to the data and why?
+- [ ] Are random seeds fixed anywhere randomness is used, so results are reproducible?
+- [ ] Is the software environment (package versions) documented, e.g., via `requirements.txt`?
+- [ ] Would someone with appropriate access, given your code and your documented environment, be able to reproduce your exact results?
+
+## Chapter Summary
+
+- Data privacy in accounting analytics rests on two general principles: collect and share only what's needed (data minimization), and reduce exposure of identifiable data even when it's needed (least exposure).
+- Pseudonymization (consistent, salted replacement of identifiers) preserves the ability to analyze by entity while protecting identity — but only as well as the salt itself is protected, and it is not the same as true anonymization.
+- Generalization reduces precision (exact amounts to ranges, exact dates to months) to make individual records harder to single out, at some cost to analytical precision — a real tradeoff, not a free improvement.
+- Git commit history and an explicit transformation log both serve as governance audit trails, recording what was done to data, when, and why.
+- Least privilege access control means limiting identifiable data access to those with a specific, documented need, separate from broader access to de-identified data for analysis.
+- Reproducibility depends on fixed random seeds and a documented software environment (e.g., `requirements.txt`) — both practices already used implicitly throughout this book's own dataset generation.
+- A short pre-sharing checklist covering privacy, governance, and reproducibility should become a standard last step before submitting or distributing any analytics project.
+
+## Discussion Questions
+
+1. Why is pseudonymization described in this chapter as "not the same as anonymization"? What would need to be true for a dataset to be genuinely anonymized rather than merely pseudonymized?
+2. Chapter 9's Isolation Forest model needed exact dollar amounts to detect outliers, which generalization would have obscured. Can you think of an accounting analysis from an earlier chapter where generalized (rather than exact) data would have worked just as well?
+3. If you inherited a dataset and analysis from a colleague who left the firm, with no transformation log and no record of package versions used, what specific problems might you run into trying to extend their work?
+
+## Exercises
+
+1. Apply the pseudonymization function from this chapter to the `posted_by` column in `audit_test_transactions.csv`, and confirm that Chapter 8's rare-poster test still identifies the same flagged individual after pseudonymization (by pseudonym rather than by name).
+2. Extend the `TransformLog` class in this chapter to also record the specific columns affected by each transformation step, not just row counts.
+3. Write a `requirements.txt`-style list (by hand or using the `importlib.metadata` approach shown in this chapter) documenting every package used across this book's chapters, and commit it to your project's Git repository.
+4. Design a generalization scheme (amount ranges, date granularity, or both) for `sales_transactions.csv` that would still allow Chapter 10's quarter-end concentration analysis to reach the same conclusion. How coarse can the generalization be before that analysis's conclusion becomes unclear?

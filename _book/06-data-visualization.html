@@ -23,10 +23,45 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -41,10 +76,14 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-9e3e5b9121e68b3f077afb32f2c64d95.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-9e3e5b9121e68b3f077afb32f2c64d95.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-fe9f69af69d9b0acfce0412d1605ee06.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-9e3e5b9121e68b3f077afb32f2c64d95.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -72,6 +111,12 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
 <style>
 .scrollable-table {
   overflow-x: auto !important;
@@ -91,7 +136,169 @@ a.citation, a.citation:visited {
 
 </head>
 
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -116,7 +323,7 @@ a.citation, a.citation:visited {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Accounting Analytics with Python</a> 
-        <div class="sidebar-tools-main">
+        <div class="sidebar-tools-main tools-wide">
     <a href="https://github.com/msharifbd/accounting-analytics-book" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
       <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Download"><i class="bi bi-download"></i></a>
@@ -135,6 +342,7 @@ a.citation, a.citation:visited {
           </li>
       </ul>
     </div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
       </div>
@@ -221,31 +429,37 @@ a.citation, a.citation:visited {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-financial-statement-analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Financial Statement Analysis with Python</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Financial Statement Analytics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./08-audit-analytics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Audit Analytics</span></span></a>
+  <a href="./08-management-accounting-analytics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Management Accounting Analytics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./09-fraud-anomaly-detection.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Fraud Detection and Anomaly Detection</span></span></a>
+  <a href="./09-audit-analytics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Audit Analytics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./10-revenue-recognition-analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Revenue Recognition and Transaction-Level Analysis</span></span></a>
+  <a href="./10-fraud-anomaly-detection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Fraud and Anomaly Detection</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./11-tax-analytics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Tax Analytics</span></span></a>
+  <a href="./11-revenue-recognition-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Revenue Recognition and Transaction-Level Analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-tax-analytics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Tax Analytics</span></span></a>
   </div>
 </li>
       </ul>
@@ -261,14 +475,14 @@ a.citation, a.citation:visited {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./12-predictive-modeling-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Introduction to Predictive Modeling</span></span></a>
+  <a href="./13-predictive-modeling-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Introduction to Predictive Modeling</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./13-genai-in-accounting.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Generative AI in Accounting</span></span></a>
+  <a href="./14-genai-in-accounting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Generative AI in Accounting</span></span></a>
   </div>
 </li>
       </ul>
@@ -284,20 +498,20 @@ a.citation, a.citation:visited {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./14-automated-reporting-quarto.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Automated Reporting and Dashboards with Quarto</span></span></a>
+  <a href="./15-automated-reporting-quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Automated Reporting and Dashboards with Quarto</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./15-data-ethics-reproducibility.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Data Ethics, Governance, and Reproducibility</span></span></a>
+  <a href="./16-data-ethics-reproducibility.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Data Ethics, Governance, and Reproducibility</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./16-capstone-project.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Capstone Project</span></span></a>
+  <a href="./17-capstone-project.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Capstone Project</span></span></a>
   </div>
 </li>
       </ul>
@@ -342,11 +556,34 @@ a.citation, a.citation:visited {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#why-visualize-from-numbers-to-insight" id="toc-why-visualize-from-numbers-to-insight" class="nav-link active" data-scroll-target="#why-visualize-from-numbers-to-insight"><span class="header-section-number">6.1</span> Why Visualize? From Numbers to Insight</a></li>
+  <li><a href="#two-visualization-philosophies-seaborn-vs.-plotnine" id="toc-two-visualization-philosophies-seaborn-vs.-plotnine" class="nav-link" data-scroll-target="#two-visualization-philosophies-seaborn-vs.-plotnine"><span class="header-section-number">6.2</span> Two Visualization Philosophies: Seaborn vs.&nbsp;Plotnine</a></li>
+  <li><a href="#bar-charts-comparing-categories" id="toc-bar-charts-comparing-categories" class="nav-link" data-scroll-target="#bar-charts-comparing-categories"><span class="header-section-number">6.3</span> Bar Charts: Comparing Categories</a></li>
+  <li><a href="#line-charts-trends-over-time" id="toc-line-charts-trends-over-time" class="nav-link" data-scroll-target="#line-charts-trends-over-time"><span class="header-section-number">6.4</span> Line Charts: Trends Over Time</a></li>
+  <li><a href="#distribution-plots-revisiting-chapter-5-properly-styled" id="toc-distribution-plots-revisiting-chapter-5-properly-styled" class="nav-link" data-scroll-target="#distribution-plots-revisiting-chapter-5-properly-styled"><span class="header-section-number">6.5</span> Distribution Plots: Revisiting Chapter 5, Properly Styled</a></li>
+  <li><a href="#scatter-plots-spotting-outliers-visually" id="toc-scatter-plots-spotting-outliers-visually" class="nav-link" data-scroll-target="#scatter-plots-spotting-outliers-visually"><span class="header-section-number">6.6</span> Scatter Plots: Spotting Outliers Visually</a></li>
+  <li><a href="#heatmaps-cross-tabulated-data" id="toc-heatmaps-cross-tabulated-data" class="nav-link" data-scroll-target="#heatmaps-cross-tabulated-data"><span class="header-section-number">6.7</span> Heatmaps: Cross-Tabulated Data</a></li>
+  <li><a href="#faceting-small-multiples" id="toc-faceting-small-multiples" class="nav-link" data-scroll-target="#faceting-small-multiples"><span class="header-section-number">6.8</span> Faceting: Small Multiples</a></li>
+  <li><a href="#when-to-reach-for-matplotlib" id="toc-when-to-reach-for-matplotlib" class="nav-link" data-scroll-target="#when-to-reach-for-matplotlib"><span class="header-section-number">6.9</span> When to Reach for Matplotlib</a></li>
+  <li><a href="#design-principles-for-accounting-visualizations" id="toc-design-principles-for-accounting-visualizations" class="nav-link" data-scroll-target="#design-principles-for-accounting-visualizations"><span class="header-section-number">6.10</span> Design Principles for Accounting Visualizations</a>
+  <ul class="collapse">
+  <li><a href="#truncated-axes-exaggerate-change" id="toc-truncated-axes-exaggerate-change" class="nav-link" data-scroll-target="#truncated-axes-exaggerate-change"><span class="header-section-number">6.10.1</span> Truncated Axes Exaggerate Change</a></li>
+  <li><a href="#other-design-principles" id="toc-other-design-principles" class="nav-link" data-scroll-target="#other-design-principles"><span class="header-section-number">6.10.2</span> Other Design Principles</a></li>
+  </ul></li>
+  <li><a href="#chapter-summary" id="toc-chapter-summary" class="nav-link" data-scroll-target="#chapter-summary"><span class="header-section-number">6.11</span> Chapter Summary</a></li>
+  <li><a href="#discussion-questions" id="toc-discussion-questions" class="nav-link" data-scroll-target="#discussion-questions"><span class="header-section-number">6.12</span> Discussion Questions</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">6.13</span> Exercises</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/msharifbd/accounting-analytics-book/edit/main/06-data-visualization.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/blob/main/06-data-visualization.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
+
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-data-wrangling-pandas.html">Part II: Core Data Skills</a></li><li class="breadcrumb-item"><a href="./06-data-visualization.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Visualization for Accounting</span></a></li></ol></nav>
 <div class="quarto-title">
@@ -367,12 +604,846 @@ a.citation, a.citation:visited {
 </header>
 
 
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Learning Objectives
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>By the end of this chapter, you should be able to:</p>
+<ul>
+<li>Explain why visualization complements (rather than replaces) the numeric EDA from Chapter 5</li>
+<li>Describe the difference between seaborn’s statistical-plotting approach and plotnine’s grammar-of-graphics approach</li>
+<li>Create bar charts, line charts, distribution plots, scatter plots, heatmaps, and faceted charts for accounting data using both libraries</li>
+<li>Recognize misleading chart design choices, especially truncated axes, and apply basic design principles for financial visualizations</li>
+<li>Choose an appropriate chart type for a given accounting analytics question</li>
+</ul>
+</div>
+</div>
+<section id="why-visualize-from-numbers-to-insight" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="why-visualize-from-numbers-to-insight"><span class="header-section-number">6.1</span> Why Visualize? From Numbers to Insight</h2>
+<p>Chapter 5 gave us <em>numbers</em>: a mean of $4,044, a median of $2,457, seven z-score outliers. Those numbers are precise, but they take effort to absorb, and they don’t always reveal a pattern’s shape at a glance. A well-designed chart can communicate the same finding to a controller or audit committee in seconds, and can reveal patterns — a skew, a cluster, a trend — that are much harder to spot from a table of statistics alone.</p>
+<p>This chapter builds on the same dataset from Chapter 5, <code>general_ledger_large.csv</code>, and turns several of that chapter’s numeric findings into visuals.</p>
+</section>
+<section id="two-visualization-philosophies-seaborn-vs.-plotnine" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="two-visualization-philosophies-seaborn-vs.-plotnine"><span class="header-section-number">6.2</span> Two Visualization Philosophies: Seaborn vs.&nbsp;Plotnine</h2>
+<p>This chapter teaches two Python visualization libraries - <code>seaborn</code> and <code>plotnine</code> - so you can compare the same chart built two different ways:</p>
+<ul>
+<li><strong>Seaborn</strong>, built on top of matplotlib, provides ready-made statistical plotting functions (<code>barplot</code>, <code>histplot</code>, <code>scatterplot</code>) — you call a function that matches your chart type, and pass in your data and variables.</li>
+<li><strong>Plotnine</strong>, a Python implementation of R’s <code>ggplot2</code>, uses a <strong>grammar of graphics</strong>: you build a plot by layering independent components — data, aesthetic mappings, geometric shapes — with <code>+</code>.</li>
+</ul>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Seaborn</th>
+<th>Plotnine</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Approach</strong></td>
+<td>Pick a function matching your chart type</td>
+<td>Layer components: data + aesthetics + geometry</td>
+</tr>
+<tr class="even">
+<td><strong>Built on</strong></td>
+<td>matplotlib</td>
+<td>Its own rendering, inspired by R’s <code>ggplot2</code></td>
+</tr>
+<tr class="odd">
+<td><strong>Learning curve</strong></td>
+<td>Fast to get a standard chart working</td>
+<td>Slightly steeper at first, very consistent once learned</td>
+</tr>
+<tr class="even">
+<td><strong>Customization</strong></td>
+<td>Matplotlib escape hatch available for fine control</td>
+<td>Everything is a layer you can add/replace</td>
+</tr>
+<tr class="odd">
+<td><strong>Common in accounting/finance practice</strong></td>
+<td>Very common, well-documented</td>
+<td>Growing, especially among analysts with R backgrounds</td>
+</tr>
+</tbody>
+</table>
+<p>We’ll also use plain <strong>matplotlib</strong> in one section later in this chapter, for a case where low-level control over a custom layout is genuinely useful — but for the vast majority of charts, <code>seaborn</code> or <code>plotnine</code> will get you there faster.</p>
+<div id="bae7b8b2" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>gl <span class="op">=</span> pd.read_csv(<span class="st">"data/general_ledger_large.csv"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>gl[<span class="st">"entry_date"</span>] <span class="op">=</span> pd.to_datetime(gl[<span class="st">"entry_date"</span>])</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Add account_type, matching each account to its category</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># (In Chapter 4, we got this via a join to chart_of_accounts.csv — a simple</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># mapping works just as well here since this chapter's focus is visualization)</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>account_type_map <span class="op">=</span> {</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Cash"</span>: <span class="st">"Asset"</span>, <span class="st">"Accounts Receivable"</span>: <span class="st">"Asset"</span>, <span class="st">"Inventory"</span>: <span class="st">"Asset"</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Prepaid Insurance"</span>: <span class="st">"Asset"</span>, <span class="st">"Accumulated Depreciation - Equipment"</span>: <span class="st">"Contra-Asset"</span>,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Accounts Payable"</span>: <span class="st">"Liability"</span>, <span class="st">"Notes Payable"</span>: <span class="st">"Liability"</span>,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Sales Revenue"</span>: <span class="st">"Revenue"</span>,</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Cost of Goods Sold"</span>: <span class="st">"Expense"</span>, <span class="st">"Salaries Expense"</span>: <span class="st">"Expense"</span>,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Rent Expense"</span>: <span class="st">"Expense"</span>, <span class="st">"Utilities Expense"</span>: <span class="st">"Expense"</span>,</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Depreciation Expense"</span>: <span class="st">"Expense"</span>, <span class="st">"Insurance Expense"</span>: <span class="st">"Expense"</span>,</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Interest Expense"</span>: <span class="st">"Expense"</span>,</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>gl[<span class="st">"account_type"</span>] <span class="op">=</span> gl[<span class="st">"account"</span>].<span class="bu">map</span>(account_type_map)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>debit <span class="op">=</span> gl[gl[<span class="st">"debit"</span>] <span class="op">&gt;</span> <span class="dv">0</span>].copy()</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>debit.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div>
 
 
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">entry_id</th>
+<th data-quarto-table-cell-role="th">entry_date</th>
+<th data-quarto-table-cell-role="th">account</th>
+<th data-quarto-table-cell-role="th">debit</th>
+<th data-quarto-table-cell-role="th">credit</th>
+<th data-quarto-table-cell-role="th">department</th>
+<th data-quarto-table-cell-role="th">posted_by</th>
+<th data-quarto-table-cell-role="th">account_type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>JE3253</td>
+<td>2025-01-01</td>
+<td>Cost of Goods Sold</td>
+<td>1231.76</td>
+<td>0.0</td>
+<td>Operations</td>
+<td>mchen</td>
+<td>Expense</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2</th>
+<td>JE3413</td>
+<td>2025-01-01</td>
+<td>Accounts Receivable</td>
+<td>3024.76</td>
+<td>0.0</td>
+<td>Sales</td>
+<td>agarcia</td>
+<td>Asset</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>JE3476</td>
+<td>2025-01-01</td>
+<td>Cash</td>
+<td>4476.03</td>
+<td>0.0</td>
+<td>Sales</td>
+<td>rpatel</td>
+<td>Asset</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">6</th>
+<td>JE3030</td>
+<td>2025-01-02</td>
+<td>Accounts Payable</td>
+<td>1488.48</td>
+<td>0.0</td>
+<td>Operations</td>
+<td>agarcia</td>
+<td>Liability</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8</th>
+<td>JE3066</td>
+<td>2025-01-02</td>
+<td>Cost of Goods Sold</td>
+<td>2705.81</td>
+<td>0.0</td>
+<td>Operations</td>
+<td>rpatel</td>
+<td>Expense</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="bar-charts-comparing-categories" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="bar-charts-comparing-categories"><span class="header-section-number">6.3</span> Bar Charts: Comparing Categories</h2>
+<p>A bar chart is the natural choice for comparing a total across categories — here, total debit amount by department.</p>
+<div id="6f201596" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dept_totals <span class="op">=</span> debit.groupby(<span class="st">"department"</span>, as_index<span class="op">=</span><span class="va">False</span>)[<span class="st">"debit"</span>].<span class="bu">sum</span>()</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>dept_totals</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">department</th>
+<th data-quarto-table-cell-role="th">debit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Finance</td>
+<td>33411.56</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>HR</td>
+<td>458950.41</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Operations</td>
+<td>913003.72</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Sales</td>
+<td>1635771.29</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="" aria-current="page">seaborn</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">plotnine</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div id="1786d0d4" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">4</span>))</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>sns.barplot(data<span class="op">=</span>dept_totals, x<span class="op">=</span><span class="st">"department"</span>, y<span class="op">=</span><span class="st">"debit"</span>, color<span class="op">=</span><span class="st">"#1c7c73"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Total Debit Amount by Department"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Total Debit ($)"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Department"</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="06-data-visualization_files/figure-html/cell-4-output-1.png" width="567" height="374" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div id="96894d57" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    ggplot(dept_totals, aes(x<span class="op">=</span><span class="st">"department"</span>, y<span class="op">=</span><span class="st">"debit"</span>))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_col(fill<span class="op">=</span><span class="st">"#1c7c73"</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> labs(title<span class="op">=</span><span class="st">"Total Debit Amount by Department"</span>, x<span class="op">=</span><span class="st">"Department"</span>, y<span class="op">=</span><span class="st">"Total Debit ($)"</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> theme_minimal()</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<div>
+<figure class="figure">
+<p><img src="06-data-visualization_files/figure-html/cell-5-output-1.png" width="672" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Sales accounts for by far the largest share of debit volume, followed by Operations, HR, and Finance — consistent with the grouped statistics we computed in Chapter 5.</p>
+</section>
+<section id="line-charts-trends-over-time" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="line-charts-trends-over-time"><span class="header-section-number">6.4</span> Line Charts: Trends Over Time</h2>
+<p>Line charts are the natural choice for showing change over time — here, total debit volume by month across the fiscal year.</p>
+<div id="156a0279" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>debit[<span class="st">"month"</span>] <span class="op">=</span> debit[<span class="st">"entry_date"</span>].dt.to_period(<span class="st">"M"</span>).astype(<span class="bu">str</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>monthly <span class="op">=</span> debit.groupby(<span class="st">"month"</span>, as_index<span class="op">=</span><span class="va">False</span>)[<span class="st">"debit"</span>].<span class="bu">sum</span>()</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>monthly</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">month</th>
+<th data-quarto-table-cell-role="th">debit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>2025-01</td>
+<td>172341.25</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>2025-02</td>
+<td>185630.06</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>2025-03</td>
+<td>334149.58</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>2025-04</td>
+<td>249734.34</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>2025-05</td>
+<td>192663.53</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>2025-06</td>
+<td>270924.54</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>2025-07</td>
+<td>192653.19</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>2025-08</td>
+<td>353903.51</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8</th>
+<td>2025-09</td>
+<td>217687.87</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">9</th>
+<td>2025-10</td>
+<td>190253.40</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">10</th>
+<td>2025-11</td>
+<td>286748.33</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">11</th>
+<td>2025-12</td>
+<td>394447.38</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">seaborn</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">plotnine</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<div id="c5cadd11" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>sns.lineplot(data<span class="op">=</span>monthly, x<span class="op">=</span><span class="st">"month"</span>, y<span class="op">=</span><span class="st">"debit"</span>, marker<span class="op">=</span><span class="st">"o"</span>, color<span class="op">=</span><span class="st">"#1c7c73"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Total Monthly Debit Volume"</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Total Debit ($)"</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="06-data-visualization_files/figure-html/cell-7-output-1.png" width="761" height="376" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div id="2cf1dbd8" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    ggplot(monthly, aes(x<span class="op">=</span><span class="st">"month"</span>, y<span class="op">=</span><span class="st">"debit"</span>, group<span class="op">=</span><span class="dv">1</span>))</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_line(color<span class="op">=</span><span class="st">"#1c7c73"</span>, size<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_point(color<span class="op">=</span><span class="st">"#1c7c73"</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> labs(title<span class="op">=</span><span class="st">"Total Monthly Debit Volume"</span>, x<span class="op">=</span><span class="st">"Month"</span>, y<span class="op">=</span><span class="st">"Total Debit ($)"</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> theme_minimal()</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> theme(axis_text_x<span class="op">=</span>element_text(rotation<span class="op">=</span><span class="dv">45</span>, hjust<span class="op">=</span><span class="dv">1</span>))</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<div>
+<figure class="figure">
+<p><img src="06-data-visualization_files/figure-html/cell-8-output-1.png" width="672" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Three months — March, August, and December — stand out with noticeably higher totals. If you recall from Chapter 5, this is exactly where several of our seven z-score-flagged outlier transactions landed. A line chart makes that timing pattern immediately visible in a way that a table of monthly totals would not.</p>
+</section>
+<section id="distribution-plots-revisiting-chapter-5-properly-styled" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="distribution-plots-revisiting-chapter-5-properly-styled"><span class="header-section-number">6.5</span> Distribution Plots: Revisiting Chapter 5, Properly Styled</h2>
+<p>Chapter 5 showed that transaction amounts are heavily right-skewed, and that zooming in on amounts under $10,000 revealed the underlying shape more clearly. Let’s rebuild that finding with proper statistical plotting tools.</p>
+<div id="35e12f8b" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>zoomed <span class="op">=</span> debit[debit[<span class="st">"debit"</span>] <span class="op">&lt;</span> <span class="dv">10000</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">seaborn</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">plotnine</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<div id="d2670836" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">4</span>))</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>sns.histplot(data<span class="op">=</span>zoomed, x<span class="op">=</span><span class="st">"debit"</span>, bins<span class="op">=</span><span class="dv">40</span>, kde<span class="op">=</span><span class="va">True</span>, color<span class="op">=</span><span class="st">"#1c7c73"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Distribution of Debit Amounts (under $10,000)"</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Debit Amount ($)"</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="06-data-visualization_files/figure-html/cell-10-output-1.png" width="567" height="374" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<div id="3e55f69a" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    ggplot(zoomed, aes(x<span class="op">=</span><span class="st">"debit"</span>))</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_histogram(bins<span class="op">=</span><span class="dv">40</span>, fill<span class="op">=</span><span class="st">"#1c7c73"</span>, color<span class="op">=</span><span class="st">"white"</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> labs(title<span class="op">=</span><span class="st">"Distribution of Debit Amounts (under $10,000)"</span>, x<span class="op">=</span><span class="st">"Debit Amount ($)"</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> theme_minimal()</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<div>
+<figure class="figure">
+<p><img src="06-data-visualization_files/figure-html/cell-11-output-1.png" width="672" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Seaborn’s <code>kde=True</code> option overlays a smoothed density curve directly on the histogram — a nice way to see the distribution’s overall shape without being distracted by individual bin heights.</p>
+<p>Let’s also compare distributions across departments with a boxplot and a violin plot, which shows both the summary statistics (boxplot) and the full shape of the distribution (violin).</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href="">seaborn</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false" href="">plotnine</a></li></ul>
+<div class="tab-content">
+<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
+<div id="0fb3f1d0" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">4</span>))</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>sns.boxplot(data<span class="op">=</span>zoomed, x<span class="op">=</span><span class="st">"department"</span>, y<span class="op">=</span><span class="st">"debit"</span>, color<span class="op">=</span><span class="st">"#c9482f"</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Debit Amount by Department (under $10,000)"</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Debit Amount ($)"</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="06-data-visualization_files/figure-html/cell-12-output-1.png" width="664" height="374" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
+<div id="92af89f6" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    ggplot(zoomed, aes(x<span class="op">=</span><span class="st">"department"</span>, y<span class="op">=</span><span class="st">"debit"</span>))</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_violin(fill<span class="op">=</span><span class="st">"#c9482f"</span>, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> labs(title<span class="op">=</span><span class="st">"Debit Amount by Department (under $10,000)"</span>, x<span class="op">=</span><span class="st">"Department"</span>, y<span class="op">=</span><span class="st">"Debit Amount ($)"</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> theme_minimal()</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<div>
+<figure class="figure">
+<p><img src="06-data-visualization_files/figure-html/cell-13-output-1.png" width="672" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Connect to Practice
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Finance’s violin/box shape is noticeably narrower and lower than the others — consistent with the low coefficient of variation we calculated for Finance in Chapter 5. Seeing this visually, rather than just as a single CV number, makes the point land faster for a non-technical audience.</p>
+</div>
+</div>
+</section>
+<section id="scatter-plots-spotting-outliers-visually" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="scatter-plots-spotting-outliers-visually"><span class="header-section-number">6.6</span> Scatter Plots: Spotting Outliers Visually</h2>
+<p>Chapter 5 flagged seven transactions using a z-score threshold. Let’s plot every transaction over time and highlight those outliers directly.</p>
+<div id="b0bb7891" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>mean_debit, std_debit <span class="op">=</span> debit[<span class="st">"debit"</span>].mean(), debit[<span class="st">"debit"</span>].std()</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>debit[<span class="st">"z_score"</span>] <span class="op">=</span> (debit[<span class="st">"debit"</span>] <span class="op">-</span> mean_debit) <span class="op">/</span> std_debit</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>debit[<span class="st">"is_outlier"</span>] <span class="op">=</span> debit[<span class="st">"z_score"</span>].<span class="bu">abs</span>() <span class="op">&gt;</span> <span class="dv">3</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true" href="">seaborn</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false" href="">plotnine</a></li></ul>
+<div class="tab-content">
+<div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
+<div id="515f44e0" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="fl">4.5</span>))</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>debit, x<span class="op">=</span><span class="st">"entry_date"</span>, y<span class="op">=</span><span class="st">"debit"</span>, hue<span class="op">=</span><span class="st">"is_outlier"</span>,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    palette<span class="op">=</span>{<span class="va">True</span>: <span class="st">"#c9482f"</span>, <span class="va">False</span>: <span class="st">"#1c7c73"</span>}, alpha<span class="op">=</span><span class="fl">0.6</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Transaction Amounts Over Time (outliers highlighted)"</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Debit Amount ($)"</span>)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Date"</span>)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="06-data-visualization_files/figure-html/cell-15-output-1.png" width="761" height="425" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
+<div id="98e220d5" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    ggplot(debit, aes(x<span class="op">=</span><span class="st">"entry_date"</span>, y<span class="op">=</span><span class="st">"debit"</span>, color<span class="op">=</span><span class="st">"is_outlier"</span>))</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_point(alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> scale_color_manual(values<span class="op">=</span>{<span class="va">True</span>: <span class="st">"#c9482f"</span>, <span class="va">False</span>: <span class="st">"#1c7c73"</span>})</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> labs(title<span class="op">=</span><span class="st">"Transaction Amounts Over Time (outliers highlighted)"</span>,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>           x<span class="op">=</span><span class="st">"Date"</span>, y<span class="op">=</span><span class="st">"Debit Amount ($)"</span>, color<span class="op">=</span><span class="st">"Outlier"</span>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> theme_minimal()</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> theme(axis_text_x<span class="op">=</span>element_text(rotation<span class="op">=</span><span class="dv">45</span>, hjust<span class="op">=</span><span class="dv">1</span>))</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<div>
+<figure class="figure">
+<p><img src="06-data-visualization_files/figure-html/cell-16-output-1.png" width="672" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>The seven outliers are immediately obvious, sitting far above the dense cluster of routine transactions near the bottom of the chart — this is a far faster way to communicate “here’s what stands out” to a reviewer than a filtered table alone.</p>
+</section>
+<section id="heatmaps-cross-tabulated-data" class="level2" data-number="6.7">
+<h2 data-number="6.7" class="anchored" data-anchor-id="heatmaps-cross-tabulated-data"><span class="header-section-number">6.7</span> Heatmaps: Cross-Tabulated Data</h2>
+<p>A heatmap is well-suited to showing a two-way summary — here, total debit volume by department <strong>and</strong> account type at once.</p>
+<div id="ea5780d0" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>pivot <span class="op">=</span> debit.pivot_table(</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span><span class="st">"department"</span>, columns<span class="op">=</span><span class="st">"account_type"</span>, values<span class="op">=</span><span class="st">"debit"</span>,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    aggfunc<span class="op">=</span><span class="st">"sum"</span>, fill_value<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>pivot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="16">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">account_type</th>
+<th data-quarto-table-cell-role="th">Asset</th>
+<th data-quarto-table-cell-role="th">Expense</th>
+<th data-quarto-table-cell-role="th">Liability</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">department</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Finance</th>
+<td>0.00</td>
+<td>33411.56</td>
+<td>0.00</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">HR</th>
+<td>0.00</td>
+<td>458950.41</td>
+<td>0.00</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Operations</th>
+<td>222231.90</td>
+<td>470702.06</td>
+<td>220069.76</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Sales</th>
+<td>1635771.29</td>
+<td>0.00</td>
+<td>0.00</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-6-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-1" role="tab" aria-controls="tabset-6-1" aria-selected="true" href="">seaborn</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-6-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-2" role="tab" aria-controls="tabset-6-2" aria-selected="false" href="">plotnine</a></li></ul>
+<div class="tab-content">
+<div id="tabset-6-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-6-1-tab">
+<div id="62849cb6" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">4</span>))</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>sns.heatmap(pivot, annot<span class="op">=</span><span class="va">True</span>, fmt<span class="op">=</span><span class="st">".0f"</span>, cmap<span class="op">=</span><span class="st">"YlGnBu"</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Total Debit Volume: Department x Account Type"</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="06-data-visualization_files/figure-html/cell-18-output-1.png" width="617" height="374" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-6-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-6-2-tab">
+<div id="bae6b34d" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>long_form <span class="op">=</span> pivot.reset_index().melt(</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    id_vars<span class="op">=</span><span class="st">"department"</span>, var_name<span class="op">=</span><span class="st">"account_type"</span>, value_name<span class="op">=</span><span class="st">"total_debit"</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    ggplot(long_form, aes(x<span class="op">=</span><span class="st">"account_type"</span>, y<span class="op">=</span><span class="st">"department"</span>, fill<span class="op">=</span><span class="st">"total_debit"</span>))</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_tile()</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_text(aes(label<span class="op">=</span><span class="st">"total_debit.round(0).astype(int)"</span>), size<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> scale_fill_gradient(low<span class="op">=</span><span class="st">"#f0f9f4"</span>, high<span class="op">=</span><span class="st">"#1c7c73"</span>)</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> labs(title<span class="op">=</span><span class="st">"Total Debit Volume: Department x Account Type"</span>,</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>           x<span class="op">=</span><span class="st">"Account Type"</span>, y<span class="op">=</span><span class="st">"Department"</span>, fill<span class="op">=</span><span class="st">"Total Debit"</span>)</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> theme_minimal()</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<div>
+<figure class="figure">
+<p><img src="06-data-visualization_files/figure-html/cell-19-output-1.png" width="672" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>This view immediately shows which department-account combinations don’t occur at all (the empty/zero cells) versus where activity concentrates — Sales transactions are almost entirely Asset-type accounts (Cash, Accounts Receivable), while Operations activity is spread across Asset, Expense, and Liability accounts.</p>
+</section>
+<section id="faceting-small-multiples" class="level2" data-number="6.8">
+<h2 data-number="6.8" class="anchored" data-anchor-id="faceting-small-multiples"><span class="header-section-number">6.8</span> Faceting: Small Multiples</h2>
+<p><strong>Faceting</strong> splits one chart into a grid of smaller panels, one per category — a powerful way to compare distribution shapes across groups at a glance, rather than overlaying them all on one crowded chart.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true" href="">seaborn</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false" href="">plotnine</a></li></ul>
+<div class="tab-content">
+<div id="tabset-7-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-7-1-tab">
+<div id="0c6983fd" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> sns.FacetGrid(zoomed, col<span class="op">=</span><span class="st">"department"</span>, col_wrap<span class="op">=</span><span class="dv">2</span>, height<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>g.map_dataframe(sns.histplot, x<span class="op">=</span><span class="st">"debit"</span>, bins<span class="op">=</span><span class="dv">25</span>, color<span class="op">=</span><span class="st">"#1c7c73"</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>g.set_titles(<span class="st">"</span><span class="sc">{col_name}</span><span class="st">"</span>)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>g.figure.suptitle(<span class="st">"Debit Amount Distribution by Department (under $10,000)"</span>, y<span class="op">=</span><span class="fl">1.03</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="06-data-visualization_files/figure-html/cell-20-output-1.png" width="569" height="598" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-7-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-7-2-tab">
+<div id="2be2c8e5" class="cell" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    ggplot(zoomed, aes(x<span class="op">=</span><span class="st">"debit"</span>))</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_histogram(bins<span class="op">=</span><span class="dv">25</span>, fill<span class="op">=</span><span class="st">"#1c7c73"</span>, color<span class="op">=</span><span class="st">"white"</span>)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> facet_wrap(<span class="st">"~department"</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> labs(title<span class="op">=</span><span class="st">"Debit Amount Distribution by Department (under $10,000)"</span>,</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>           x<span class="op">=</span><span class="st">"Debit Amount ($)"</span>)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> theme_minimal()</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="20">
+<div>
+<figure class="figure">
+<p><img src="06-data-visualization_files/figure-html/cell-21-output-1.png" width="672" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Faceting makes it easy to see, for example, that Finance’s transaction volume is both much smaller in count and much more tightly clustered near zero than the other three departments — a pattern that would be much harder to notice in a single combined histogram.</p>
+</section>
+<section id="when-to-reach-for-matplotlib" class="level2" data-number="6.9">
+<h2 data-number="6.9" class="anchored" data-anchor-id="when-to-reach-for-matplotlib"><span class="header-section-number">6.9</span> When to Reach for Matplotlib</h2>
+<p>Seaborn and plotnine handle the overwhelming majority of accounting charts you’ll need. Occasionally, though, you want a <strong>custom multi-panel layout</strong> — combining several unrelated chart types into a single “dashboard” figure — where matplotlib’s low-level control is genuinely the easier path.</p>
+<div id="ca385738" class="cell" data-execution_count="21">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.gridspec <span class="im">as</span> gridspec</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>gs <span class="op">=</span> gridspec.GridSpec(<span class="dv">2</span>, <span class="dv">2</span>, figure<span class="op">=</span>fig, height_ratios<span class="op">=</span>[<span class="dv">1</span>, <span class="fl">1.2</span>])</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(gs[<span class="dv">0</span>, :])</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>ax1.plot(monthly[<span class="st">"month"</span>], monthly[<span class="st">"debit"</span>], marker<span class="op">=</span><span class="st">"o"</span>, color<span class="op">=</span><span class="st">"#1c7c73"</span>)</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>ax1.set_title(<span class="st">"Monthly Debit Volume"</span>)</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>ax1.tick_params(axis<span class="op">=</span><span class="st">"x"</span>, rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>ax2 <span class="op">=</span> fig.add_subplot(gs[<span class="dv">1</span>, <span class="dv">0</span>])</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>ax2.bar(dept_totals[<span class="st">"department"</span>], dept_totals[<span class="st">"debit"</span>], color<span class="op">=</span><span class="st">"#c9482f"</span>)</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>ax2.set_title(<span class="st">"Total Debit by Department"</span>)</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>ax2.tick_params(axis<span class="op">=</span><span class="st">"x"</span>, rotation<span class="op">=</span><span class="dv">30</span>)</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>ax3 <span class="op">=</span> fig.add_subplot(gs[<span class="dv">1</span>, <span class="dv">1</span>])</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>ax3.hist(zoomed[<span class="st">"debit"</span>], bins<span class="op">=</span><span class="dv">30</span>, color<span class="op">=</span><span class="st">"#8a4fbe"</span>)</span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>ax3.set_title(<span class="st">"Debit Amount Distribution (&lt;$10,000)"</span>)</span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>fig.suptitle(<span class="st">"General Ledger Dashboard — FY2025"</span>, fontsize<span class="op">=</span><span class="dv">14</span>, fontweight<span class="op">=</span><span class="st">"bold"</span>)</span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="06-data-visualization_files/figure-html/cell-22-output-1.png" width="952" height="572" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Connect to Practice
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This kind of combined dashboard figure — several related charts arranged in one image — is a common deliverable format for a management reporting package. Matplotlib’s <code>GridSpec</code> gives you precise control over panel sizes and positions that would be awkward to achieve directly in seaborn or plotnine, which is why it’s worth knowing even if you use it rarely.</p>
+</div>
+</div>
+</section>
+<section id="design-principles-for-accounting-visualizations" class="level2" data-number="6.10">
+<h2 data-number="6.10" class="anchored" data-anchor-id="design-principles-for-accounting-visualizations"><span class="header-section-number">6.10</span> Design Principles for Accounting Visualizations</h2>
+<p>A technically correct chart can still mislead a reader if it’s designed carelessly. A few principles worth internalizing:</p>
+<section id="truncated-axes-exaggerate-change" class="level3" data-number="6.10.1">
+<h3 data-number="6.10.1" class="anchored" data-anchor-id="truncated-axes-exaggerate-change"><span class="header-section-number">6.10.1</span> Truncated Axes Exaggerate Change</h3>
+<div id="1dd07257" class="cell" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">11</span>, <span class="dv">4</span>))</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].plot(monthly[<span class="st">"month"</span>], monthly[<span class="st">"debit"</span>], marker<span class="op">=</span><span class="st">"o"</span>, color<span class="op">=</span><span class="st">"#c9482f"</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_ylim(<span class="dv">150000</span>, <span class="dv">400000</span>)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_title(<span class="st">"Misleading: Truncated Y-Axis</span><span class="ch">\n</span><span class="st">(exaggerates month-to-month change)"</span>)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].tick_params(axis<span class="op">=</span><span class="st">"x"</span>, rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].plot(monthly[<span class="st">"month"</span>], monthly[<span class="st">"debit"</span>], marker<span class="op">=</span><span class="st">"o"</span>, color<span class="op">=</span><span class="st">"#1c7c73"</span>)</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_ylim(<span class="dv">0</span>, monthly[<span class="st">"debit"</span>].<span class="bu">max</span>() <span class="op">*</span> <span class="fl">1.1</span>)</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_title(<span class="st">"Honest: Y-Axis Starts at Zero</span><span class="ch">\n</span><span class="st">(shows true relative change)"</span>)</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].tick_params(axis<span class="op">=</span><span class="st">"x"</span>, rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="06-data-visualization_files/figure-html/cell-23-output-1.png" width="1047" height="377" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Both charts show <em>identical</em> data. The left version, with its y-axis starting at $150,000 instead of zero, makes the dip between March and May look like a dramatic collapse. The right version, with a y-axis starting at zero, shows the same fluctuation as the far more modest change it actually is. This is one of the most common ways financial charts mislead — intentionally or not — and one of the easiest to check for: <strong>look at where the y-axis starts.</strong></p>
+</section>
+<section id="other-design-principles" class="level3" data-number="6.10.2">
+<h3 data-number="6.10.2" class="anchored" data-anchor-id="other-design-principles"><span class="header-section-number">6.10.2</span> Other Design Principles</h3>
+<ul>
+<li><strong>Color choice matters.</strong> Avoid relying on red/green alone to signal “bad/good” — a meaningful share of viewers have red-green color vision deficiency and won’t be able to distinguish them. Pair color with position, labels, or a different visual encoding (e.g., an icon or explicit text) where the distinction matters.</li>
+<li><strong>Label clearly for your actual audience.</strong> A chart for an audit committee or controller should have a clear title, labeled axes with units (e.g., “$”, not just numbers), and should not assume the reader already knows what “debit” and “credit” refer to in this specific context.</li>
+<li><strong>Match the chart type to the question.</strong> A line chart implies a trend over a continuous variable (usually time) — using one to connect unrelated categories (like departments) implies a false sense of order or continuity. A bar chart is almost always the better choice for comparing discrete categories.</li>
+</ul>
+</section>
+</section>
+<section id="chapter-summary" class="level2" data-number="6.11">
+<h2 data-number="6.11" class="anchored" data-anchor-id="chapter-summary"><span class="header-section-number">6.11</span> Chapter Summary</h2>
+<ul>
+<li>Visualization complements numeric EDA (Chapter 5) by making patterns — trends, skew, clusters, outliers — visible at a glance, especially for non-technical audiences.</li>
+<li>Seaborn offers ready-made statistical plotting functions; plotnine builds charts by layering grammar-of-graphics components — both accomplish the same tasks with different syntax philosophies.</li>
+<li>Bar charts suit category comparisons, line charts suit trends over time, histograms/boxplots/violins suit distributions, scatter plots suit relationships (including visually spotting outliers), heatmaps suit two-way cross-tabulated summaries, and faceting enables side-by-side comparison across groups.</li>
+<li>Matplotlib remains useful for custom multi-panel layouts that don’t fit neatly into seaborn’s or plotnine’s higher-level interfaces.</li>
+<li>Truncated y-axes are one of the most common ways financial charts mislead, by exaggerating the apparent magnitude of change — always check where a y-axis starts, both in your own work and when reviewing others’.</li>
+<li>Good design (color choice, clear labeling, appropriate chart type) is not a cosmetic afterthought — it directly affects whether your audience draws an accurate conclusion.</li>
+</ul>
+</section>
+<section id="discussion-questions" class="level2" data-number="6.12">
+<h2 data-number="6.12" class="anchored" data-anchor-id="discussion-questions"><span class="header-section-number">6.12</span> Discussion Questions</h2>
+<ol type="1">
+<li>Choose one chart from this chapter and recreate it in the <em>other</em> library (if you focused on the seaborn tab, try plotnine, and vice versa). Which did you find more intuitive, and why?</li>
+<li>Look back at the misleading vs.&nbsp;honest y-axis example. Can you think of a real-world scenario in accounting or finance reporting where someone might be tempted to truncate an axis, intentionally or not?</li>
+<li>Why might a violin plot reveal something a boxplot alone would miss, even though both summarize the same underlying data?</li>
+</ol>
+</section>
+<section id="exercises" class="level2" data-number="6.13">
+<h2 data-number="6.13" class="anchored" data-anchor-id="exercises"><span class="header-section-number">6.13</span> Exercises</h2>
+<ol type="1">
+<li>Build a faceted distribution plot (like the one in this chapter) using <code>posted_by</code> instead of <code>department</code>. Are any employees’ transaction patterns visually distinct from the others?</li>
+<li>Recreate the department bar chart from this chapter, but sort the bars from largest to smallest total debit rather than alphabetically. (Hint: sort the underlying DataFrame before plotting.)</li>
+<li>Find or construct a “bad” chart — either one you build yourself with a deliberately truncated axis or misleading color choice, or one you find in the wild — and write a short critique (150 words) explaining what’s misleading and how you would redesign it.</li>
+<li>Using the heatmap section as a starting point, build a similar department x account-type heatmap, but for <code>credit</code> instead of <code>debit</code>. How does the pattern compare to the debit-side heatmap?</li>
+</ol>
+
+
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
     const anchorJS = new window.AnchorJS();
     anchorJS.options = {
@@ -778,8 +1849,8 @@ a.citation, a.citation:visited {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./07-financial-statement-analysis.html" class="pagination-link" aria-label="Financial Statement Analysis with Python">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Financial Statement Analysis with Python</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./07-financial-statement-analysis.html" class="pagination-link" aria-label="Financial Statement Analytics">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Financial Statement Analytics</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -791,7 +1862,7 @@ a.citation, a.citation:visited {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><ul><li><a href="https://github.com/msharifbd/accounting-analytics-book/edit/main/06-data-visualization.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/blob/main/06-data-visualization.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/msharifbd/accounting-analytics-book/edit/main/06-data-visualization.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/blob/main/06-data-visualization.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This book was built with <a href="https://quarto.org/">Quarto</a></p>
 </div>

@@ -1,0 +1,517 @@
+# Tax Analytics
+
+::: {.callout-note}
+## Learning Objectives
+By the end of this chapter, you should be able to:
+
+- Compute effective tax rates (ETR) at the jurisdiction and consolidated level
+- Build a rate reconciliation bridging statutory to effective tax rates
+- Identify disproportionate profit allocation across jurisdictions using profit-per-employee and profit-to-revenue metrics
+- Recompute expected sales tax from transaction-level data and flag compliance discrepancies
+- Apply both pandas and polars to multi-jurisdiction and transaction-level tax data
+- Recognize the limits of a chosen materiality threshold when flagging compliance exceptions
+:::
+
+## Two Kinds of Tax Analytics
+
+This chapter covers two related but distinct areas of tax analytics:
+
+1. **Income tax analytics** — analyzing effective tax rates across jurisdictions and over time, and understanding what drives the gap between a company's statutory and effective tax rate
+2. **Indirect tax compliance testing** — recomputing sales tax at the transaction level to verify it was calculated and collected correctly
+
+We'll use two datasets: `tax_provision_by_jurisdiction.csv` (a multinational company's income tax provision by country and year) and `sales_tax_test_transactions.csv` (300 transaction-level sales with sales tax detail).
+
+:::{.panel-tabset}
+## pandas 
+```{python}
+import pandas as pd
+tax_pd = pd.read_csv("data/tax_provision_by_jurisdiction.csv")
+tax_pd
+```
+
+## polars 
+
+```{python}
+import polars as pl
+tax_pl = pl.read_csv("data/tax_provision_by_jurisdiction.csv")
+```
+
+:::
+Our fictional company operates in six jurisdictions with very different statutory tax rates, from Bermuda (0%) to Germany (30%).
+
+## Effective Tax Rate by Jurisdiction
+
+The **effective tax rate (ETR)** is tax expense divided by pretax income — the tax rate a company actually experiences, which can differ substantially from any jurisdiction's statutory rate due to credits, deductions, and other adjustments.
+
+```{python}
+tax_pd[["jurisdiction", "year", "statutory_rate", "effective_tax_rate"]].round(3)
+```
+
+Most jurisdictions show an effective rate reasonably close to their statutory rate. Ireland and Bermuda, however, show *very* low effective rates — but that alone isn't unusual, since their statutory rates are also low (12.5% and 0%, respectively). The more interesting question is how much *profit* is being taxed at those low rates, relative to the actual business activity happening there.
+
+
+::: {.panel-tabset}
+## seaborn
+```{python}
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(8, 4.5))
+sns.lineplot(data=tax_pd, x="year", y="effective_tax_rate", hue="jurisdiction", marker="o")
+plt.title("Effective Tax Rate by Jurisdiction, 2023-2025")
+plt.ylabel("Effective Tax Rate")
+plt.gca().yaxis.set_major_formatter(plt.matplotlib.ticker.PercentFormatter(1.0))
+plt.tight_layout()
+plt.show()
+```
+
+## plotnine
+```{python}
+from plotnine import *
+
+(
+    ggplot(tax_pd, aes(x="year", y="effective_tax_rate", color="jurisdiction"))
+    + geom_line(size=1)
+    + geom_point()
+    + scale_y_continuous(labels=lambda l: [f"{v:.0%}" for v in l])
+    + labs(title="Effective Tax Rate by Jurisdiction, 2023-2025", x="Year", y="Effective Tax Rate")
+    + theme_minimal()
+)
+```
+:::
+
+Every major operating jurisdiction (US, UK, Germany, Singapore) tracks fairly close to a stable band each year. Ireland and Bermuda sit visibly apart, near the bottom of the chart — consistent with their low statutory rates, but worth keeping in mind as we look at profit allocation next.
+
+## Consolidated Effective Tax Rate
+
+::: {.panel-tabset}
+## pandas
+```{python}
+consolidated_pd = tax_pd.groupby("year", as_index=False)[["pretax_income", "tax_expense"]].sum()
+consolidated_pd["consolidated_etr"] = consolidated_pd["tax_expense"] / consolidated_pd["pretax_income"]
+consolidated_pd.round(3)
+```
+
+## polars
+```{python}
+consolidated_pl = (
+    tax_pl.group_by("year")
+    .agg([pl.col("pretax_income").sum(), pl.col("tax_expense").sum()])
+    .with_columns((pl.col("tax_expense") / pl.col("pretax_income")).alias("consolidated_etr"))
+    .sort("year")
+)
+consolidated_pl
+```
+:::
+
+The consolidated ETR is roughly **11-12%** — noticeably lower than *any* individual major jurisdiction's statutory rate (21% to 30%). This gap is the first clue that something in the jurisdictional mix is pulling the blended rate down substantially.
+
+## Spotting Disproportionate Profit Allocation
+
+A standard analytical test for profit-shifting risk compares each jurisdiction's **share of profit** to its **share of real economic activity** — typically proxied by revenue or headcount. A jurisdiction booking far more profit than its business substance would suggest is a classic red flag.
+
+::: {.panel-tabset}
+## pandas
+```{python}
+totals_pd = tax_pd.groupby("year").agg(
+    total_revenue=("revenue", "sum"),
+    total_profit=("pretax_income", "sum"),
+    total_employees=("employees", "sum"),
+)
+
+low_substance_pd = (
+    tax_pd[tax_pd["jurisdiction"].isin(["Ireland", "Bermuda"])]
+    .groupby("year")
+    .agg(ls_revenue=("revenue", "sum"), ls_profit=("pretax_income", "sum"), ls_employees=("employees", "sum"))
+)
+
+combined_pd = totals_pd.join(low_substance_pd)
+combined_pd["pct_of_revenue"] = combined_pd["ls_revenue"] / combined_pd["total_revenue"] * 100
+combined_pd["pct_of_employees"] = combined_pd["ls_employees"] / combined_pd["total_employees"] * 100
+combined_pd["pct_of_profit"] = combined_pd["ls_profit"] / combined_pd["total_profit"] * 100
+
+combined_pd[["pct_of_revenue", "pct_of_employees", "pct_of_profit"]].round(1)
+```
+
+## polars
+```{python}
+totals_pl = tax_pl.group_by("year").agg([
+    pl.col("revenue").sum().alias("total_revenue"),
+    pl.col("pretax_income").sum().alias("total_profit"),
+    pl.col("employees").sum().alias("total_employees"),
+])
+
+low_substance_pl = (
+    tax_pl.filter(pl.col("jurisdiction").is_in(["Ireland", "Bermuda"]))
+    .group_by("year")
+    .agg([
+        pl.col("revenue").sum().alias("ls_revenue"),
+        pl.col("pretax_income").sum().alias("ls_profit"),
+        pl.col("employees").sum().alias("ls_employees"),
+    ])
+)
+
+combined_pl = totals_pl.join(low_substance_pl, on="year").with_columns([
+    (pl.col("ls_revenue") / pl.col("total_revenue") * 100).alias("pct_of_revenue"),
+    (pl.col("ls_employees") / pl.col("total_employees") * 100).alias("pct_of_employees"),
+    (pl.col("ls_profit") / pl.col("total_profit") * 100).alias("pct_of_profit"),
+]).sort("year")
+
+combined_pl.select(["year", "pct_of_revenue", "pct_of_employees", "pct_of_profit"])
+```
+:::
+
+::: {.callout-important}
+## A Textbook Profit-Shifting Pattern
+Ireland and Bermuda together account for only about **6% of consolidated revenue** and **under 5% of employees** — yet they generate roughly **68-72% of consolidated pretax profit**. This is exactly the kind of mismatch that international tax authorities (and analysts studying a company's tax footprint) look for: profit concentrated in low-tax jurisdictions far out of proportion to the actual business substance (people, sales activity) located there. It directly explains why the consolidated ETR is so much lower than any major operating jurisdiction's statutory rate — a small, low-taxed slice of the business is generating most of the reported profit.
+:::
+
+### Profit per Employee: A Sharper View of the Same Pattern
+
+:::{.panel-tabset}
+## pandas 
+```{python}
+tax_pd["profit_per_employee"].groupby(tax_pd["jurisdiction"]).mean().sort_values(ascending=False).round(0)
+```
+
+## polars 
+
+```{python}
+(
+    tax_pl
+    .group_by("jurisdiction")
+    .agg(
+        pl.col("profit_per_employee")
+        .mean()
+        .round(0)
+        .alias("profit_per_employee")
+    )
+    .sort("profit_per_employee", descending=True)
+)
+```
+
+:::
+Bermuda's average profit per employee is roughly **$1.6 million** — around 150-200 times higher than the US, UK, or Germany, where profit per employee sits in the $7,000-$9,500 range. No plausible business model explains a handful of employees in Bermuda generating that much profit relative to hundreds of employees running substantial operations elsewhere; this ratio, on its own, is one of the strongest quantitative signals in this chapter.
+
+```{python}
+snapshot_2025 = tax_pd[tax_pd["year"] == 2025].sort_values("profit_per_employee", ascending=False)
+```
+
+::: {.panel-tabset}
+## seaborn
+```{python}
+plt.figure(figsize=(7, 4.5))
+sns.barplot(data=snapshot_2025, x="jurisdiction", y="profit_per_employee", color="#8a4fbe")
+plt.yscale("log")
+plt.title("Profit per Employee by Jurisdiction, 2025 (log scale)")
+plt.ylabel("Profit per Employee ($, log scale)")
+plt.xticks(rotation=30)
+plt.tight_layout()
+plt.show()
+```
+
+## plotnine
+```{python}
+(
+    ggplot(snapshot_2025, aes(x="reorder(jurisdiction, -profit_per_employee)", y="profit_per_employee"))
+    + geom_col(fill="#8a4fbe")
+    + scale_y_log10()
+    + labs(title="Profit per Employee by Jurisdiction, 2025 (log scale)",
+           x="Jurisdiction", y="Profit per Employee ($, log scale)")
+    + theme_minimal()
+    + theme(axis_text_x=element_text(rotation=30, hjust=1))
+)
+```
+:::
+
+Note the **log scale** on this chart — without it, Bermuda's bar would be so tall that every other jurisdiction's bar would be visually indistinguishable from zero, which itself illustrates just how extreme the gap is.
+
+## Rate Reconciliation
+
+Rate reconciliation is a formal financial statement disclosure that explains the mathematical difference between a company's domestic statutory income tax rate and its effective tax rate (ETR). For multinational corporations, it highlights how global operations, foreign tax differentials, and international provisions shift tax burdens.
+
+Public companies disclose a **rate reconciliation** — a bridge explaining the difference between tax expense at the home-country statutory rate and the actual tax expense reported. Let's build a simplified version, using the U.S. statutory rate (21%) as the baseline.
+
+:::{.panel-tabset}
+
+## pandas 
+```{python}
+us_statutory_rate = 0.21
+
+tax_pd["tax_at_us_rate"] = tax_pd["pretax_income"] * us_statutory_rate
+tax_pd["foreign_rate_benefit"] = tax_pd["tax_at_us_rate"] - tax_pd["tax_expense"]
+
+contribution = (
+    tax_pd.groupby("jurisdiction")["foreign_rate_benefit"]
+    .sum()
+    .sort_values(ascending=False)
+)
+contribution.round(0)
+```
+
+## polars 
+
+```{python}
+import polars as pl
+us_statutory_rate = 0.21
+# Add calculated columns
+tax_pl = (
+    tax_pl
+    .with_columns(
+        [
+            (
+                pl.col("pretax_income") * us_statutory_rate
+            ).alias("tax_at_us_rate"),
+
+            (
+                pl.col("pretax_income") * us_statutory_rate
+                - pl.col("tax_expense")
+            ).alias("foreign_rate_benefit"),
+        ]
+    )
+)
+
+# Summarize by jurisdiction
+contribution_pl = (
+    tax_pl
+    .group_by("jurisdiction")
+    .agg(
+        pl.col("foreign_rate_benefit")
+        .sum()
+        .round(0)
+        .alias("foreign_rate_benefit")
+    )
+    .sort("foreign_rate_benefit", descending=True)
+)
+
+contribution_pl
+```
+
+:::
+
+Over the three years in this dataset, booking profit in Bermuda and Ireland rather than at the US statutory rate reduced consolidated tax expense by roughly **$4.1 million** and **$2.1 million**, respectively — figures that would typically appear as a "foreign rate differential" line item in a real rate reconciliation footnote.
+
+
+:::{.panel-tabset}
+
+## pandas 
+```{python}
+consolidated_pd["tax_at_us_statutory"] = consolidated_pd["pretax_income"] * us_statutory_rate
+consolidated_pd["total_rate_differential_benefit"] = (
+    consolidated_pd["tax_at_us_statutory"] - consolidated_pd["tax_expense"]
+)
+consolidated_pd[["year", "consolidated_etr", "total_rate_differential_benefit"]].round(3)
+```
+
+## polars 
+
+```{python}
+import polars as pl
+
+us_statutory_rate = 0.21
+
+consolidated_pl = (
+    consolidated_pl
+    .with_columns(
+        [
+            (
+                pl.col("pretax_income") * us_statutory_rate
+            ).alias("tax_at_us_statutory"),
+
+            (
+                pl.col("pretax_income") * us_statutory_rate
+                - pl.col("tax_expense")
+            ).alias("total_rate_differential_benefit"),
+        ]
+    )
+)
+
+(
+    consolidated_pl
+    .select(
+        "year",
+        "consolidated_etr",
+        "total_rate_differential_benefit",
+    )
+    .with_columns(
+        [
+            pl.col("consolidated_etr").round(3),
+            pl.col("total_rate_differential_benefit").round(3),
+        ]
+    )
+)
+```
+
+:::
+
+
+## Sales Tax Compliance Testing
+
+Switching to indirect tax: `sales_tax_test_transactions.csv` contains 300 transactions across 8 U.S. states, each with a taxable amount, the applicable statutory rate, and the tax actually collected. We can recompute the *expected* tax and compare it to what was actually charged.
+
+:::{.panel-tabset}
+
+## pandas 
+```{python}
+sales_pd = pd.read_csv("data/sales_tax_test_transactions.csv")
+sales_pd.head()
+```
+
+## polars 
+
+```{python}
+sales_pl = pl.read_csv("data/sales_tax_test_transactions.csv")
+sales_pl.head()
+```
+
+:::
+
+
+::: {.panel-tabset}
+## pandas
+```{python}
+sales_pd["expected_tax"] = (sales_pd["taxable_amount"] * sales_pd["statutory_rate"]).round(2)
+sales_pd["tax_variance"] = sales_pd["tax_collected"] - sales_pd["expected_tax"]
+sales_pd["is_discrepancy"] = sales_pd["tax_variance"].abs() > 0.5
+
+print("Discrepancies found:", sales_pd["is_discrepancy"].sum())
+sales_pd[sales_pd["is_discrepancy"]][
+    ["transaction_id", "state", "taxable_amount", "statutory_rate", "expected_tax", "tax_collected", "tax_variance"]
+].head(10)
+```
+
+## polars
+```{python}
+sales_pl = sales_pl.with_columns(
+    (pl.col("taxable_amount") * pl.col("statutory_rate")).round(2).alias("expected_tax")
+).with_columns(
+    (pl.col("tax_collected") - pl.col("expected_tax")).alias("tax_variance")
+).with_columns(
+    (pl.col("tax_variance").abs() > 0.5).alias("is_discrepancy")
+)
+
+print("Discrepancies found:", sales_pl.filter(pl.col("is_discrepancy")).height)
+sales_pl.filter(pl.col("is_discrepancy")).select(
+    ["transaction_id", "state", "taxable_amount", "statutory_rate", "expected_tax", "tax_collected", "tax_variance"]
+).head(10)
+```
+:::
+
+Both libraries agree: 14 transactions show a tax variance exceeding our $0.50 threshold, covering undercharged tax, overcharged tax, and at least one transaction where no tax was collected at all despite a taxable sale.
+
+### Quantifying the Exposure
+
+:::{.panel-tabset}
+
+## pandas 
+```{python}
+total_undercharged = sales_pd[sales_pd["tax_variance"] < 0]["tax_variance"].sum()
+total_overcharged = sales_pd[sales_pd["tax_variance"] > 0]["tax_variance"].sum()
+
+print(f"Total understated tax (potential liability exposure): ${total_undercharged:.2f}")
+print(f"Total overcharged tax (potential customer refund exposure): ${total_overcharged:.2f}")
+```
+
+## polars 
+
+```{python}
+# Total understated tax (negative variances)
+total_undercharged = (
+    sales_pl
+    .filter(pl.col("tax_variance") < 0)
+    .select(pl.col("tax_variance").sum())
+    .item()
+)
+
+# Total overcharged tax (positive variances)
+total_overcharged = (
+    sales_pl
+    .filter(pl.col("tax_variance") > 0)
+    .select(pl.col("tax_variance").sum())
+    .item()
+)
+
+print(
+    f"Total understated tax (potential liability exposure): "
+    f"${total_undercharged:.2f}"
+)
+
+print(
+    f"Total overcharged tax (potential customer refund exposure): "
+    f"${total_overcharged:.2f}"
+)
+```
+
+:::
+
+
+### The Materiality Threshold Matters
+
+:::{.panel-tabset}
+
+## pandas 
+
+```{python}
+sales_pd["abs_variance"] = sales_pd["tax_variance"].abs()
+near_threshold = sales_pd[(sales_pd["abs_variance"] > 0.01) & (sales_pd["abs_variance"] <= 0.5)]
+near_threshold[["transaction_id", "state", "taxable_amount", "tax_variance"]]
+```
+
+## polars 
+
+```{python}
+# Create the absolute variance column
+sales_pl = sales_pl.with_columns(
+    pl.col("tax_variance")
+    .abs()
+    .alias("abs_variance")
+)
+
+# Filter transactions with variances near the threshold
+near_threshold = (
+    sales_pl
+    .filter(
+        (pl.col("abs_variance") > 0.01)
+        & (pl.col("abs_variance") <= 0.5)
+    )
+    .select(
+        "transaction_id",
+        "state",
+        "taxable_amount",
+        "tax_variance",
+    )
+)
+
+near_threshold
+```
+
+:::
+
+
+::: {.callout-important}
+## Choosing a Threshold Is a Judgment Call, Not Just a Number
+These two transactions have a small but genuine tax variance (20-30 cents) that falls just under our $0.50 flagging threshold. A stricter threshold (say, $0.05) would catch them — but would likely also flag a large number of transactions where the "discrepancy" is nothing more than ordinary rounding in how tax is calculated at the point of sale. There's no universally correct threshold; it depends on transaction volume, the cost of investigating false positives, and the client's own risk tolerance. This is the same tension we saw with Isolation Forest's `contamination` parameter in Chapter 9 — every anomaly detection method, statistical or rule-based, requires a threshold decision that trades off precision against recall.
+:::
+
+## Chapter Summary
+
+- Effective tax rate (ETR) is tax expense divided by pretax income, and can differ substantially from statutory rates due to credits, deductions, and jurisdictional mix.
+- A consolidated ETR well below every major jurisdiction's statutory rate is a signal to investigate *where* profit is being reported, not just *how much* tax is being paid overall.
+- Comparing a jurisdiction's share of profit to its share of revenue or headcount is a standard test for detecting disproportionate profit allocation — in this chapter, two jurisdictions with under 5% of headcount generated roughly 70% of consolidated profit.
+- Profit-per-employee, viewed on a log scale given how extreme the gaps can be, is a particularly sharp way to visualize this kind of mismatch.
+- A rate reconciliation quantifies exactly how much each jurisdiction's rate difference from a home-country baseline contributed to total tax savings — the same disclosure format used in real 10-K filings.
+- Sales tax compliance testing follows the same recompute-and-compare logic used throughout this book: calculate the expected value independently, compare it to the recorded value, and flag material differences.
+- Every flagging threshold, whether for sales tax variances or statistical anomalies, is a genuine tradeoff between catching more real issues and generating more false positives — there's no threshold that eliminates this tradeoff entirely.
+
+## Discussion Questions
+
+1. Why is comparing a jurisdiction's share of *profit* to its share of *revenue or employees* a more informative test than simply looking at its effective tax rate in isolation?
+2. If you were a financial statement analyst (not an auditor or tax authority), why might you still care about the profit-per-employee pattern shown in this chapter, even though tax minimization within the law is not illegal?
+3. The sales tax materiality threshold in this chapter ($0.50 per transaction) is a judgment call. How might your answer change if you were testing 300 transactions versus 3 million?
+
+## Exercises
+
+1. Recompute the rate reconciliation using the **UK** statutory rate (25%) as the baseline instead of the US rate. Does Bermuda and Ireland's combined contribution to the rate differential change in a way you'd expect?
+2. Using `tax_provision_by_jurisdiction.csv`, compute each jurisdiction's 3-year *average* effective tax rate and compare it to its statutory rate. Which jurisdiction shows the largest gap, and is that gap consistent with what you'd expect from its business substance?
+3. Lower the sales tax discrepancy threshold from $0.50 to $0.10 and rerun the compliance test. How many additional transactions get flagged, and does a quick look at them suggest genuine errors or just rounding noise?
+4. Using `sales_tax_test_transactions.csv`, group discrepancies by `state` rather than looking at them transaction-by-transaction. Is any single state's tax calculation logic disproportionately likely to be wrong, which might suggest a system configuration issue rather than isolated data entry errors?

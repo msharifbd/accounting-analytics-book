@@ -28,19 +28,20 @@ book:
     - part: "Part III: Applied Accounting Analytics"
       chapters:
         - 07-financial-statement-analysis.qmd
-        - 08-audit-analytics.qmd
-        - 09-fraud-anomaly-detection.qmd
-        - 10-revenue-recognition-analysis.qmd
-        - 11-tax-analytics.qmd
+        - 08-management-accounting-analytics.qmd
+        - 09-audit-analytics.qmd
+        - 10-fraud-anomaly-detection.qmd
+        - 11-revenue-recognition-analysis.qmd
+        - 12-tax-analytics.qmd
     - part: "Part IV: Predictive Methods and GenAI"
       chapters:
-        - 12-predictive-modeling-intro.qmd
-        - 13-genai-in-accounting.qmd
+        - 13-predictive-modeling-intro.qmd
+        - 14-genai-in-accounting.qmd
     - part: "Part V: Communication and Capstone"
       chapters:
-        - 14-automated-reporting-quarto.qmd
-        - 15-data-ethics-reproducibility.qmd
-        - 16-capstone-project.qmd
+        - 15-automated-reporting-quarto.qmd
+        - 16-data-ethics-reproducibility.qmd
+        - 17-capstone-project.qmd
     - references.qmd
   appendices:
     - appendix-a-python-primer.qmd
@@ -52,7 +53,9 @@ bibliography: references.bib
 
 format:
   html:
-    theme: cosmo
+    theme: 
+      light: cosmo
+      dark: slate 
     include-in-header:
       text: |
         <style>

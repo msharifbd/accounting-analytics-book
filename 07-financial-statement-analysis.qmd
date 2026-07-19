@@ -1,1 +1,735 @@
-# Financial Statement Analysis with Python
+# Financial Statement Analytics
+
+
+::: {.callout-note}
+## Learning Objectives
+By the end of this chapter, you should be able to:
+
+- Load and structure multi-year financial statement data for analysis
+- Perform horizontal (trend) analysis and vertical (common-size) analysis
+- Compute liquidity, profitability, leverage, and efficiency ratios
+- Build a reusable function that automates ratio calculations across any set of financial statements
+- Apply DuPont decomposition to explain *why* return on equity changed, not just that it changed
+- Interpret ratio trends critically, rather than treating any single ratio as a verdict on its own
+:::
+
+## From General Ledger to Financial Statements
+
+Chapters 3 and 4 traced how transactions flow from the general ledger into a trial balance. Financial statements are the next and final step in that chain: the income statement summarizes revenue and expense activity for a period, and the balance sheet summarizes assets, liabilities, and equity at a point in time.
+
+This chapter works with **five years of financial statements (2021–2025)** for a fictional company, "Ledger & Co.," stored in `income_statement.csv` and `balance_sheet.csv`. Unlike the transaction-level data from earlier chapters, this data is already fully summarized — each row is one fiscal year, and each column is a financial statement line item.
+
+::: {.panel-tabset}
+## pandas 
+```{python}
+import pandas as pd
+
+inc = pd.read_csv("data/income_statement.csv")
+bs = pd.read_csv("data/balance_sheet.csv")
+
+inc
+```
+
+## polars 
+
+```{python}
+import polars as pl
+inc_pl = pl.read_csv("data/income_statement.csv")
+bs_pl = pl.read_csv("data/balance_sheet.csv")
+bs_pl
+```
+
+:::
+
+::: {.panel-tabset}
+## pandas 
+```{python}
+bs[["year", "Cash", "Total Current Assets", "Total Assets", "Total Liabilities", "Total Equity"]]
+```
+
+## polars 
+
+```{python}
+bs_pl.select("year", "Cash", "Total Current Assets", "Total Assets", "Total Liabilities", "Total Equity")
+```
+
+:::
+
+
+::: {.callout-tip}
+## A Note on Tools for This Chapter
+This chapter uses pandas only. Financial statement data is small by nature — five rows, a few dozen columns — so polars' performance advantages (Chapter 4) don't come into play here the way they did with transaction-level general ledger data. Feel free to redo any of this chapter's calculations in polars as practice, but there's no analytical reason to prefer it for a dataset this size.
+:::
+
+Before calculating anything, it's worth confirming the balance sheet actually balances — a basic sanity check you should run on any real financial statement data before trusting it:
+
+::: {.panel-tabset}
+## pandas 
+```{python}
+imbalance = bs["Total Assets"] - bs["Total Liabilities and Equity"]
+imbalance
+```
+
+## polars
+
+```{python}
+imbalance_pl = bs_pl.select("Total Assets") - bs_pl.select("Total Liabilities and Equity")
+imbalance_pl
+```
+
+:::
+Every year balances exactly, as it should.
+
+## Horizontal (Trend) Analysis
+
+**Horizontal analysis** compares a line item across time, showing dollar and percentage change from one period to the next.
+
+::: {.panel-tabset}
+## pandas 
+```{python}
+income_by_year = inc.set_index("year")
+
+dollar_change = income_by_year.diff()
+dollar_change[["Revenue", "Net Income"]]
+```
+
+```{python}
+pct_change = income_by_year.pct_change() * 100
+pct_change[["Revenue", "Net Income"]].round(1)
+```
+
+## polars 
+```{python}
+dollar_change_pl = (
+    inc_pl
+    .sort("year")
+    .with_columns(
+        pl.col(["Revenue", "Net Income"]).diff()
+    )
+    .select(["year", "Revenue", "Net Income"])
+)
+
+dollar_change_pl
+```
+
+```{python}
+pct_change_pl = (
+    inc_pl
+    .sort("year")
+    .with_columns(
+        (pl.col(["Revenue", "Net Income"]).pct_change() * 100).round(1)
+    )
+    .select(["year", "Revenue", "Net Income"])
+)
+
+pct_change_pl
+```
+
+:::
+
+Revenue grew between 12% and 15% annually, but notice that **net income grew faster than revenue every year** (e.g., 27.5% net income growth vs. 15.5% revenue growth in 2022) — a sign that profitability is improving, not just sales volume. We'll confirm this more precisely with margin ratios shortly.
+
+### Indexed Trend Analysis
+
+A related technique sets the earliest year to 100 and expresses every later year relative to that baseline — useful for comparing the *relative* growth rate of several line items on one consistent scale, regardless of their different starting dollar amounts.
+
+::: {.panel-tabset}
+## pandas 
+```{python}
+indexed = income_by_year / income_by_year.iloc[0] * 100
+indexed[["Revenue", "Cost of Goods Sold", "Net Income"]].round(1)
+```
+
+## polars 
+```{python}
+indexed_pl = (
+    inc_pl
+    .sort("year")
+    .with_columns(
+        (
+            pl.col(["Revenue", "Cost of Goods Sold", "Net Income"])
+            / pl.col(["Revenue", "Cost of Goods Sold", "Net Income"]).first()
+            * 100
+        ).round(1)
+    )
+    .select(["Revenue", "Cost of Goods Sold", "Net Income"])
+)
+
+indexed_pl
+```
+
+:::
+By 2025, revenue has grown to 164% of its 2021 level, while net income has grown to 247% of its 2021 level — again showing that profitability is compounding faster than the top line.
+
+## Vertical (Common-Size) Analysis
+
+**Vertical analysis** expresses every line item as a percentage of a single base figure within the same year — typically revenue for the income statement, and total assets for the balance sheet. This is especially useful for comparing structure across years (or across companies of different sizes) without dollar amounts getting in the way.
+
+::: {.panel-tabset}
+## pandas 
+```{python}
+common_size_is = income_by_year.div(income_by_year["Revenue"], axis=0) * 100
+common_size_is[["Cost of Goods Sold", "Gross Profit", "Operating Income", "Net Income"]].round(1)
+```
+
+## polars 
+```{python}
+common_size_is_pl = (
+    inc_pl
+    .sort("year")
+    .with_columns(
+        (
+            pl.exclude("year") / pl.col("Revenue") * 100
+        ).round(1)
+    )
+    .select([
+        "year",
+        "Cost of Goods Sold",
+        "Gross Profit",
+        "Operating Income",
+        "Net Income",
+    ])
+)
+
+common_size_is_pl
+```
+
+:::
+Cost of Goods Sold has fallen from 62.0% of revenue in 2021 to 58.5% in 2025 — a steady margin improvement, likely reflecting economies of scale or improved purchasing terms.
+
+::: {.panel-tabset}
+## pandas 
+```{python}
+balance_by_year = bs.set_index("year")
+common_size_bs = balance_by_year.div(balance_by_year["Total Assets"], axis=0) * 100
+common_size_bs[["Cash", "Accounts Receivable", "Inventory", "Property, Plant & Equipment (net)"]].round(1)
+```
+
+## polars
+
+```{python}
+common_size_bs_pl = (
+    bs_pl
+    .sort("year")
+    .with_columns(
+        (
+            pl.exclude("year") / pl.col("Total Assets") * 100
+        ).round(1)
+    )
+    .select([
+        "year",
+        "Cash",
+        "Accounts Receivable",
+        "Inventory",
+        "Property, Plant & Equipment (net)",
+    ])
+)
+
+common_size_bs_pl
+```
+
+:::
+
+::: {.callout-important}
+## Reading the Balance Sheet Structure
+Cash has grown from 22.9% to 53.3% of total assets over five years, while receivables, inventory, and PP&E have all *shrunk* as a share of the balance sheet. On its own, this looks like a strong cash position — but as we'll discuss later in this chapter, a rapidly growing cash pile can also raise a legitimate question: is management deploying capital efficiently, or simply letting cash accumulate?
+:::
+
+## Ratio Analysis
+
+Ratios distill financial statement data into standardized measures that are comparable across time periods and even across companies. We'll compute four common categories.
+
+### Liquidity Ratios
+
+Liquidity ratios measure a company's ability to meet short-term obligations. Liquidity ratios compare what a business owns against what it owes in the near term. Liquidity ratios include current ratio, quick ratio^[The difference between current ratio and quick ratio is that quick ratio is stricter, excluding inventory because it is the least liquid current asset] (acid-test ratio), and cash ratio. Investors use these ratios to assess if a company is at risk of bankruptcy or financial distress.
+
+:::{.panel-tabset}
+## pandas
+```{python}
+merged = inc.merge(bs, on="year")
+
+current_ratio = merged["Total Current Assets"] / merged["Total Current Liabilities"]
+quick_ratio = (merged["Cash"] + merged["Accounts Receivable"]) / merged["Total Current Liabilities"]
+
+pd.DataFrame({"year": merged["year"], "Current Ratio": current_ratio, "Quick Ratio": quick_ratio}).round(2)
+```
+
+## polars
+
+```{python}
+ratios_pl = (
+    inc_pl
+    .join(bs_pl, on="year", how="inner")
+    .select(
+        "year",
+        (
+            pl.col("Total Current Assets")
+            / pl.col("Total Current Liabilities")
+        ).round(2).alias("Current Ratio"),
+        (
+            (pl.col("Cash") + pl.col("Accounts Receivable"))
+            / pl.col("Total Current Liabilities")
+        ).round(2).alias("Quick Ratio"),
+    )
+)
+
+ratios_pl
+```
+
+:::
+A current ratio above 1.0 generally indicates a company can cover its short-term liabilities with short-term assets. Here, both ratios are comfortably above 1.0 and rising every year — worth a closer look later, since *very* high liquidity isn't automatically a good sign either.
+
+### Profitability Ratios
+
+Profitability ratios evaluate a company's ability to generate earnings relative to its revenue, operating costs, assets, and shareholder equity. Generally, higher ratios indicate stronger efficiency, cost control, and financial health.
+
+Profitability ratios are primarily divided into two categories: **Margin Ratios** (which show how much profit is kept from sales) and **Return Ratios** (which show how well resources are used to generate returns for investors). Margin ratios include gross profit margin, operating profit margin, and net profit margin. Return ratios include return on assets (ROA), return on Equity (ROE), and return on invested capital (ROIC). 
+
+:::{.panel-tabset}
+## pandas
+```{python}
+gross_margin = merged["Gross Profit"] / merged["Revenue"]
+operating_margin = merged["Operating Income"] / merged["Revenue"]
+net_margin = merged["Net Income"] / merged["Revenue"]
+roa = merged["Net Income"] / merged["Total Assets"]
+roe = merged["Net Income"] / merged["Total Equity"]
+
+pd.DataFrame({
+    "year": merged["year"],
+    "Gross Margin": gross_margin,
+    "Operating Margin": operating_margin,
+    "Net Margin": net_margin,
+    "ROA": roa,
+    "ROE": roe,
+}).round(3)
+```
+
+
+## polars 
+
+```{python}
+merged_pl = (
+    inc_pl
+    .join(bs_pl, on="year", how="inner")
+)
+```
+
+```{python}
+profitability_ratios = (
+    merged_pl
+    .select(
+        "year",
+        (
+            pl.col("Gross Profit") / pl.col("Revenue")
+        ).round(3).alias("Gross Margin"),
+        (
+            pl.col("Operating Income") / pl.col("Revenue")
+        ).round(3).alias("Operating Margin"),
+        (
+            pl.col("Net Income") / pl.col("Revenue")
+        ).round(3).alias("Net Margin"),
+        (
+            pl.col("Net Income") / pl.col("Total Assets")
+        ).round(3).alias("ROA"),
+        (
+            pl.col("Net Income") / pl.col("Total Equity")
+        ).round(3).alias("ROE"),
+    )
+)
+
+profitability_ratios
+```
+
+:::
+Every profitability margin improved steadily from 2021 to 2025. But look closely at **ROE** — despite improving margins, ROE actually *declines* over the same period (35.7% down to 28.4%). This looks contradictory at first glance. We'll resolve exactly why using **DuPont analysis** later in this chapter.
+
+### Leverage Ratios
+
+Leverage ratios measure how much a company relies on debt financing, and its ability to service that debt. By comparing debt to equity, assets, or earnings, these metrics help investors and analysts assess a business's solvency, long-term stability, and overall financial risk. Leverage ratios include debt-to-equity ratio, debt-to-asset ratio, debt-to-EBITDA ratio, and interest coverage ratio.
+
+A **high leverage ratio** indicates a heavy reliance on debt. While this can amplify profits when a company performs well, it also significantly increases the risk of default during economic downturns or periods of low cash flow.  A **low leverage ratio** points to a conservative capital structure with less debt reliance. This often suggests greater financial stability and lower risk of bankruptcy, though it can also signal an inability or reluctance to borrow for growth.
+
+Because acceptable thresholds vary widely by industry—for example, capital-intensive manufacturing or utility companies naturally require more debt than service-oriented firms—these metrics should always be benchmarked against competitors in the same sector.
+
+::: {.panel-tabset}
+## pandas 
+```{python}
+debt_to_equity = (merged["Short-term Debt"] + merged["Long-term Debt"]) / merged["Total Equity"]
+interest_coverage = merged["Operating Income"] / merged["Interest Expense"]
+
+pd.DataFrame({
+    "year": merged["year"],
+    "Debt-to-Equity": debt_to_equity,
+    "Interest Coverage": interest_coverage,
+}).round(2)
+```
+
+## polars 
+
+```{python}
+leverage_ratios_pl = (
+    merged_pl
+    .select(
+        "year",
+        (
+            (pl.col("Short-term Debt") + pl.col("Long-term Debt"))
+            / pl.col("Total Equity")
+        ).round(2).alias("Debt-to-Equity"),
+        (
+            pl.col("Operating Income")
+            / pl.col("Interest Expense")
+        ).round(2).alias("Interest Coverage"),
+    )
+)
+
+leverage_ratios_pl
+```
+
+:::
+Debt-to-equity has fallen sharply (from 0.43 to 0.18), and interest coverage has risen from about 10x to nearly 40x — the company has been paying down debt aggressively while growing operating income, substantially reducing its financial risk.
+
+### Efficiency Ratios
+
+Efficiency ratios measure how well a company uses its assets to generate revenue. They compare a company’s expenses to its sales or track how quickly it turns assets into cash. Higher turnover ratios and lower expense ratios usually signal strong operational health. Efficiency ratios include asset turnover ratio, inventory turnover ratio, and accounts receivable turnover ratio.
+
+:::{.panel-tabset}
+## pandas 
+```{python}
+asset_turnover = merged["Revenue"] / merged["Total Assets"]
+dso = merged["Accounts Receivable"] / merged["Revenue"] * 365
+dio = merged["Inventory"] / merged["Cost of Goods Sold"] * 365
+
+pd.DataFrame({
+    "year": merged["year"],
+    "Asset Turnover": asset_turnover,
+    "Days Sales Outstanding": dso,
+    "Days Inventory Outstanding": dio,
+}).round(1)
+```
+
+## polars 
+
+```{python}
+asset_efficiency_pl = (
+    merged_pl
+    .select(
+        "year",
+        (
+            pl.col("Revenue")
+            / pl.col("Total Assets")
+        ).round(1).alias("Asset Turnover"),
+        (
+            pl.col("Accounts Receivable")
+            / pl.col("Revenue")
+            * 365
+        ).round(1).alias("Days Sales Outstanding"),
+        (
+            pl.col("Inventory")
+            / pl.col("Cost of Goods Sold")
+            * 365
+        ).round(1).alias("Days Inventory Outstanding"),
+    )
+)
+
+asset_efficiency_pl
+```
+:::
+Days Sales Outstanding and Days Inventory Outstanding have both **improved** (fallen) — the company collects receivables faster and turns over inventory faster in 2025 than in 2021. Yet asset turnover has *declined* (from 2.09 down to 1.53) — total assets are growing even faster than revenue, largely because of that growing cash balance. This is another thread we'll pick up in the DuPont section.
+
+## Automating Ratio Calculations
+
+Rather than recomputing each ratio by hand every time you get a new year of data, it's worth writing a single reusable function.
+
+:::{.panel-tabset}
+## pandas 
+```{python}
+def compute_ratios(income_df: pd.DataFrame, balance_df: pd.DataFrame) -> pd.DataFrame:
+    """Compute standard liquidity, profitability, leverage, and efficiency ratios
+    from an income statement and balance sheet sharing a common 'year' column."""
+    df = income_df.merge(balance_df, on="year")
+    r = pd.DataFrame({"year": df["year"]})
+
+    # Liquidity
+    r["Current Ratio"] = df["Total Current Assets"] / df["Total Current Liabilities"]
+    r["Quick Ratio"] = (df["Cash"] + df["Accounts Receivable"]) / df["Total Current Liabilities"]
+
+    # Profitability
+    r["Gross Margin"] = df["Gross Profit"] / df["Revenue"]
+    r["Operating Margin"] = df["Operating Income"] / df["Revenue"]
+    r["Net Margin"] = df["Net Income"] / df["Revenue"]
+    r["Return on Assets"] = df["Net Income"] / df["Total Assets"]
+    r["Return on Equity"] = df["Net Income"] / df["Total Equity"]
+
+    # Leverage
+    r["Debt-to-Equity"] = (df["Short-term Debt"] + df["Long-term Debt"]) / df["Total Equity"]
+    r["Interest Coverage"] = df["Operating Income"] / df["Interest Expense"]
+
+    # Efficiency
+    r["Asset Turnover"] = df["Revenue"] / df["Total Assets"]
+    r["Days Sales Outstanding"] = df["Accounts Receivable"] / df["Revenue"] * 365
+    r["Days Inventory Outstanding"] = df["Inventory"] / df["Cost of Goods Sold"] * 365
+
+    return r.set_index("year")
+```
+
+```{python}
+ratios = compute_ratios(inc, bs)
+ratios.round(3)
+```
+
+## polars 
+
+```{python}
+def compute_ratios_pl(income_df: pl.DataFrame, balance_df: pl.DataFrame) -> pl.DataFrame:
+    """Compute standard liquidity, profitability, leverage, and efficiency ratios
+    from an income statement and balance sheet sharing a common 'year' column."""
+
+    df = income_df.join(balance_df, on="year", how="inner")
+
+    r = df.select(
+        "year",
+
+        # Liquidity
+        (
+            pl.col("Total Current Assets")
+            / pl.col("Total Current Liabilities")
+        ).alias("Current Ratio"),
+
+        (
+            (pl.col("Cash") + pl.col("Accounts Receivable"))
+            / pl.col("Total Current Liabilities")
+        ).alias("Quick Ratio"),
+
+
+        # Profitability
+        (
+            pl.col("Gross Profit")
+            / pl.col("Revenue")
+        ).alias("Gross Margin"),
+
+        (
+            pl.col("Operating Income")
+            / pl.col("Revenue")
+        ).alias("Operating Margin"),
+
+        (
+            pl.col("Net Income")
+            / pl.col("Revenue")
+        ).alias("Net Margin"),
+
+        (
+            pl.col("Net Income")
+            / pl.col("Total Assets")
+        ).alias("Return on Assets"),
+
+        (
+            pl.col("Net Income")
+            / pl.col("Total Equity")
+        ).alias("Return on Equity"),
+
+
+        # Leverage
+        (
+            (pl.col("Short-term Debt") + pl.col("Long-term Debt"))
+            / pl.col("Total Equity")
+        ).alias("Debt-to-Equity"),
+
+        (
+            pl.col("Operating Income")
+            / pl.col("Interest Expense")
+        ).alias("Interest Coverage"),
+
+
+        # Efficiency
+        (
+            pl.col("Revenue")
+            / pl.col("Total Assets")
+        ).alias("Asset Turnover"),
+
+        (
+            pl.col("Accounts Receivable")
+            / pl.col("Revenue")
+            * 365
+        ).alias("Days Sales Outstanding"),
+
+        (
+            pl.col("Inventory")
+            / pl.col("Cost of Goods Sold")
+            * 365
+        ).alias("Days Inventory Outstanding"),
+    )
+
+    return r
+```
+
+```{python}
+ratios_pl = compute_ratios_pl(inc_pl, bs_pl)
+
+ratios_pl = ratios_pl.with_columns(
+    pl.exclude("year").round(3)
+)
+
+ratios_pl
+```
+:::
+
+
+::: {.callout-tip}
+## Connect to Practice
+Writing analysis as a reusable function like this — rather than one-off code you rerun and edit each period — is exactly how analytics work scales in practice. Next quarter's financial statements can be run through the same `compute_ratios()` function with zero changes, as long as the column names match. This is also foreshadows the automated reporting techniques in Chapter 14.
+:::
+
+## DuPont Decomposition: Explaining *Why* ROE Changed
+
+The DuPont framework breaks **return on equity (ROE)** into three multiplied components, each capturing a different lever of performance:
+
+
+$$
+\text{ROE} = \underbrace{\frac{\text{Net Income}}{\text{Revenue}}}_{\text{Net Margin}} \times \underbrace{\frac{\text{Revenue}}{\text{Total Assets}}}_{\text{Asset Turnover}} \times \underbrace{\frac{\text{Total Assets}}{\text{Total Equity}}}_{\text{Equity Multiplier}}
+$$
+
+:::{.panel-tabset}
+## pandas 
+```{python}
+dupont = pd.DataFrame({"year": merged["year"]})
+dupont["Net Margin"] = merged["Net Income"] / merged["Revenue"]
+dupont["Asset Turnover"] = merged["Revenue"] / merged["Total Assets"]
+dupont["Equity Multiplier"] = merged["Total Assets"] / merged["Total Equity"]
+dupont["ROE (DuPont)"] = dupont["Net Margin"] * dupont["Asset Turnover"] * dupont["Equity Multiplier"]
+
+dupont.set_index("year").round(3)
+```
+
+## polars 
+```{python}
+dupont_pl = (
+    merged_pl
+    .select(
+        "year",
+
+        (
+            pl.col("Net Income") / pl.col("Revenue")
+        ).alias("Net Margin"),
+
+        (
+            pl.col("Revenue") / pl.col("Total Assets")
+        ).alias("Asset Turnover"),
+
+        (
+            pl.col("Total Assets") / pl.col("Total Equity")
+        ).alias("Equity Multiplier"),
+
+        (
+            (pl.col("Net Income") / pl.col("Revenue"))
+            *
+            (pl.col("Revenue") / pl.col("Total Assets"))
+            *
+            (pl.col("Total Assets") / pl.col("Total Equity"))
+        ).alias("ROE (DuPont)"),
+    )
+    .with_columns(
+        pl.exclude("year").round(3)
+    )
+)
+
+dupont_pl
+```
+
+:::
+This confirms exactly the same ROE figures as the direct calculation earlier — but now we can see *why* ROE fell even as profitability rose:
+
+- **Net Margin improved** (10.5% → 15.8%) — profitability genuinely got better.
+- **Asset Turnover fell** (2.09 → 1.53) — assets (mostly that growing cash pile) grew faster than revenue.
+- **Equity Multiplier fell** (1.63 → 1.18) — the company relies on much less debt financing than before.
+
+The margin improvement was real, but it was **more than offset** by the combined effect of falling asset turnover and falling leverage. In other words: the company is becoming more profitable per dollar of sales, but less efficient at *using* its (growing) asset base, and increasingly equity-financed rather than debt-financed — both of which mechanically pull ROE down, even while the business is arguably getting healthier in other respects.
+
+::: {.callout-important}
+## Why This Matters
+Reporting "ROE declined from 35.7% to 28.4%" without DuPont context could easily be read as bad news. DuPont decomposition shows that the *decline* is actually a byproduct of paying down debt and building cash reserves — both generally prudent financial decisions — rather than declining profitability. This is a good example of why a single ratio, in isolation, can mislead; understanding its components tells the real story.
+:::
+
+## Visualizing the Trends
+
+A trend that takes several tables to describe in words is often obvious in one chart.
+
+::: {.panel-tabset}
+## seaborn
+```{python}
+import seaborn as sns
+import matplotlib.pyplot as plt
+import matplotlib.ticker as mticker
+
+margin_long = ratios.reset_index()[["year", "Gross Margin", "Operating Margin", "Net Margin"]].melt(
+    id_vars="year", var_name="Margin Type", value_name="Value"
+)
+
+plt.figure(figsize=(7, 4.5))
+sns.lineplot(data=margin_long, x="year", y="Value", hue="Margin Type", marker="o")
+plt.title("Margin Trends, 2021-2025")
+plt.ylabel("Margin (% of Revenue)")
+plt.gca().yaxis.set_major_formatter(mticker.PercentFormatter(1.0))
+plt.tight_layout()
+plt.show()
+```
+
+## plotnine
+```{python}
+from plotnine import *
+
+(
+    ggplot(margin_long, aes(x="year", y="Value", color="Margin Type"))
+    + geom_line(size=1)
+    + geom_point()
+    + scale_y_continuous(labels=lambda l: [f"{v:.0%}" for v in l])
+    + labs(title="Margin Trends, 2021-2025", x="Year", y="Margin (% of Revenue)")
+    + theme_minimal()
+)
+```
+:::
+
+All three margins trend upward and roughly in parallel — visual confirmation that the profitability improvement is broad-based (starting at the gross profit level) rather than coming from just one line item, like a one-time tax benefit.
+
+```{python}
+plt.figure(figsize=(7, 4.5))
+sns.lineplot(data=dupont, x="year", y="ROE (DuPont)", marker="o", color="#8a4fbe")
+plt.title("Return on Equity, 2021-2025")
+plt.ylabel("ROE")
+plt.gca().yaxis.set_major_formatter(mticker.PercentFormatter(1.0))
+plt.tight_layout()
+plt.show()
+```
+
+Seeing the steady ROE decline plotted directly against the improving margins from the chart above makes the apparent contradiction visually obvious — exactly the kind of pattern that should prompt a DuPont-style investigation rather than a surface-level "ROE is getting worse" conclusion.
+
+## Putting It Together: A Financial Health Memo
+
+A typical output of this kind of analysis isn't just a table of ratios — it's a short written interpretation for a decision-maker. Here's a brief example, written the way you might summarize this exact analysis for a manager:
+
+::: {.callout-tip}
+## Sample Memo Excerpt
+*Ledger & Co.'s profitability has improved steadily over the past five years, with net margin rising from 10.5% to 15.8%, driven by both improving gross margins and declining interest expense. The company has also meaningfully reduced financial risk, cutting debt-to-equity from 0.43 to 0.18 while more than tripling interest coverage. Return on equity has declined over the same period (35.7% to 28.4%), but DuPont analysis attributes this to the combined effect of debt paydown and a growing cash balance — both generally prudent — rather than any underlying weakness in operations. One area worth management's attention: the current ratio has risen to 7.4x, well above what's typically needed for liquidity purposes, suggesting cash may be accumulating faster than it's being deployed into growth, debt reduction, or shareholder returns.*
+:::
+
+Notice that this memo doesn't just repeat the numbers — it interprets what they mean *together*, flags a genuine open question (the growing cash pile) rather than treating every metric as unambiguously good news, and avoids the trap of reporting the ROE decline without its DuPont explanation.
+
+## Chapter Summary
+
+- Horizontal analysis compares a line item across time (dollar and percent change, or indexed to a base year); vertical (common-size) analysis expresses every line item as a percentage of a base figure within the same year.
+- Liquidity, profitability, leverage, and efficiency ratios each capture a different dimension of financial performance, and no single ratio tells the whole story on its own.
+- Wrapping ratio calculations in a reusable function (like `compute_ratios()`) means the same analysis can be rerun on any future period's data without rewriting code.
+- DuPont decomposition breaks ROE into net margin, asset turnover, and equity multiplier — essential for explaining *why* ROE changed, not just that it did, and for avoiding misleading single-ratio conclusions.
+- A rising ratio isn't automatically good news (e.g., an extremely high current ratio can signal underused cash) any more than a falling ratio is automatically bad news (e.g., falling ROE driven by prudent deleveraging) — ratio analysis requires interpretation, not just calculation.
+
+## Discussion Questions
+
+1. Ledger & Co.'s current ratio rose from 4.05 to 7.37 over five years. At what point, if any, does "more liquidity" stop being a good thing? What would you want to know before deciding?
+2. Explain in your own words why ROE declined even though every margin (gross, operating, net) improved over the same period.
+3. If you were advising this company's CFO, what would you recommend they consider doing with the growing cash balance, and what additional information would you want before making that recommendation?
+
+## Exercises
+
+1. Using `compute_ratios()`, add one additional ratio of your choice (e.g., **Return on Invested Capital**, **Cash Ratio**, or **Fixed Asset Turnover**) and compute it for all five years.
+2. Perform vertical analysis on the *liabilities and equity* side of the balance sheet (not just assets, which this chapter covered). How has the company's financing mix shifted between 2021 and 2025?
+3. Recreate the margin trend chart from this chapter, but plot Return on Assets and Return on Equity together instead of the three margins. What does the widening or narrowing gap between ROA and ROE tell you about leverage over time?
+4. Write your own 150-word financial health memo based on the leverage and efficiency ratios computed in this chapter (rather than the profitability-focused example memo shown above).

@@ -1,0 +1,235 @@
+entry_id,entry_date,account,debit,credit,department,posted_by
+JE5137,2025-01-01,Cash,1754.15,0.0,Sales,dwilson
+JE5137,2025-01-01,Accounts Receivable,0.0,1754.15,Sales,dwilson
+JE5106,2025-01-02,Inventory,2648.94,0.0,Operations,agarcia
+JE5106,2025-01-02,Accounts Payable,0.0,2648.94,Operations,agarcia
+JE5132,2025-01-06,Cash,2680.6,0.0,Sales,jsmith
+JE5132,2025-01-06,Accounts Receivable,0.0,2680.6,Sales,jsmith
+JE5196,2025-01-09,Salaries Expense,6771.93,0.0,HR,ktaylor
+JE5196,2025-01-09,Cash,0.0,6771.93,HR,ktaylor
+JE5198,2025-01-10,Cash,2268.58,0.0,Sales,jsmith
+JE5198,2025-01-10,Accounts Receivable,0.0,2268.58,Sales,jsmith
+JE5124,2025-01-14,Inventory,1840.43,0.0,Operations,mchen
+JE5124,2025-01-14,Accounts Payable,0.0,1840.43,Operations,mchen
+JE5190,2025-01-14,Utilities Expense,520.02,0.0,Operations,mchen
+JE5190,2025-01-14,Accounts Payable,0.0,520.02,Operations,mchen
+JE5123,2025-01-16,Salaries Expense,5909.26,0.0,HR,rpatel
+JE5123,2025-01-16,Cash,0.0,5909.26,HR,rpatel
+JE5152,2025-01-22,Cash,2142.87,0.0,Sales,rpatel
+JE5152,2025-01-22,Accounts Receivable,0.0,2142.87,Sales,rpatel
+JE5146,2025-02-03,Cash,1823.5,0.0,Sales,ktaylor
+JE5146,2025-02-03,Accounts Receivable,0.0,1823.5,Sales,ktaylor
+JE5167,2025-02-05,Utilities Expense,565.74,0.0,Operations,jsmith
+JE5167,2025-02-05,Accounts Payable,0.0,565.74,Operations,jsmith
+JE5199,2025-02-14,Accounts Receivable,2882.95,0.0,Sales,agarcia
+JE5199,2025-02-14,Sales Revenue,0.0,2882.95,Sales,agarcia
+JE5174,2025-02-18,Cash,6380.4,0.0,Sales,rpatel
+JE5174,2025-02-18,Accounts Receivable,0.0,6380.4,Sales,rpatel
+JE5179,2025-02-22,Utilities Expense,503.11,0.0,Operations,rpatel
+JE5179,2025-02-22,Accounts Payable,0.0,503.11,Operations,rpatel
+JE5155,2025-02-25,Accounts Payable,2750.55,0.0,Operations,rpatel
+JE5155,2025-02-25,Cash,0.0,2750.55,Operations,rpatel
+JE5163,2025-02-25,Accounts Payable,2721.06,0.0,Operations,mchen
+JE5163,2025-02-25,Cash,0.0,2721.06,Operations,mchen
+JE5139,2025-02-26,Cost of Goods Sold,1167.63,0.0,Operations,rpatel
+JE5139,2025-02-26,Inventory,0.0,1167.63,Operations,rpatel
+JE5121,2025-02-27,Accounts Receivable,3908.63,0.0,Sales,jsmith
+JE5121,2025-02-27,Sales Revenue,0.0,3908.63,Sales,jsmith
+JE5183,2025-03-07,Rent Expense,2696.53,0.0,Operations,dwilson
+JE5183,2025-03-07,Cash,0.0,2696.53,Operations,dwilson
+JE5133,2025-03-12,Cash,1185.72,0.0,Sales,agarcia
+JE5133,2025-03-12,Accounts Receivable,0.0,1185.72,Sales,agarcia
+JE5180,2025-03-12,Salaries Expense,3962.48,0.0,HR,mchen
+JE5180,2025-03-12,Cash,0.0,3962.48,HR,mchen
+JE5135,2025-03-14,Cost of Goods Sold,1844.52,0.0,Operations,agarcia
+JE5135,2025-03-14,Inventory,0.0,1844.52,Operations,agarcia
+JE5120,2025-03-20,Utilities Expense,627.42,0.0,Operations,jsmith
+JE5120,2025-03-20,Accounts Payable,0.0,627.42,Operations,jsmith
+JE5169,2025-03-20,Inventory,2709.29,0.0,Operations,mchen
+JE5169,2025-03-20,Accounts Payable,0.0,2709.29,Operations,mchen
+JE5103,2025-03-24,Utilities Expense,592.13,0.0,Operations,dwilson
+JE5103,2025-03-24,Accounts Payable,0.0,592.13,Operations,dwilson
+JE5165,2025-03-28,Inventory,2161.62,0.0,Operations,jsmith
+JE5165,2025-03-28,Accounts Payable,0.0,2161.62,Operations,jsmith
+JE5189,2025-03-28,Salaries Expense,5024.24,0.0,HR,agarcia
+JE5189,2025-03-28,Cash,0.0,5024.24,HR,agarcia
+JE5131,2025-04-01,Cash,1623.75,0.0,Sales,mchen
+JE5131,2025-04-01,Accounts Receivable,0.0,1623.75,Sales,mchen
+JE5112,2025-04-03,Salaries Expense,4499.72,0.0,HR,agarcia
+JE5112,2025-04-03,Cash,0.0,4499.72,HR,agarcia
+JE5140,2025-04-08,Cost of Goods Sold,863.02,0.0,Operations,ktaylor
+JE5140,2025-04-08,Inventory,0.0,863.02,Operations,ktaylor
+JE5901,2025-04-08,Accounts Payable,10000.0,0.0,Operations,mchen
+JE5901,2025-04-08,Cash,0.0,10000.0,Operations,mchen
+JE5111,2025-04-11,Rent Expense,2692.73,0.0,Operations,agarcia
+JE5111,2025-04-11,Cash,0.0,2692.73,Operations,agarcia
+JE5104,2025-04-21,Utilities Expense,489.87,0.0,Operations,ktaylor
+JE5104,2025-04-21,Accounts Payable,0.0,489.87,Operations,ktaylor
+JE5171,2025-04-21,Utilities Expense,358.61,0.0,Operations,mchen
+JE5171,2025-04-21,Accounts Payable,0.0,358.61,Operations,mchen
+JE5110,2025-04-22,Accounts Payable,1302.19,0.0,Operations,agarcia
+JE5110,2025-04-22,Cash,0.0,1302.19,Operations,agarcia
+JE5154,2025-04-29,Cash,2808.84,0.0,Sales,mchen
+JE5154,2025-04-29,Accounts Receivable,0.0,2808.84,Sales,mchen
+JE5194,2025-04-29,Accounts Payable,1593.51,0.0,Operations,ktaylor
+JE5194,2025-04-29,Cash,0.0,1593.51,Operations,ktaylor
+JE5205,2025-05-06,Rent Expense,2819.26,0.0,Operations,agarcia
+JE5205,2025-05-06,Cash,0.0,2819.26,Operations,agarcia
+JE5208,2025-05-09,Salaries Expense,6666.75,0.0,HR,jsmith
+JE5208,2025-05-09,Cash,0.0,6666.75,HR,jsmith
+JE5150,2025-05-13,Cash,2579.26,0.0,Sales,jsmith
+JE5150,2025-05-13,Accounts Receivable,0.0,2579.26,Sales,jsmith
+JE5136,2025-05-15,Accounts Receivable,2636.21,0.0,Sales,agarcia
+JE5136,2025-05-15,Sales Revenue,0.0,2636.21,Sales,agarcia
+JE5197,2025-05-16,Cash,2789.94,0.0,Sales,rpatel
+JE5197,2025-05-16,Accounts Receivable,0.0,2789.94,Sales,rpatel
+JE5187,2025-05-19,Salaries Expense,5960.24,0.0,HR,dwilson
+JE5187,2025-05-19,Cash,0.0,5960.24,HR,dwilson
+JE5157,2025-05-20,Accounts Payable,1198.19,0.0,Operations,ktaylor
+JE5157,2025-05-20,Cash,0.0,1198.19,Operations,ktaylor
+JE5153,2025-05-22,Utilities Expense,482.69,0.0,Operations,jsmith
+JE5153,2025-05-22,Accounts Payable,0.0,482.69,Operations,jsmith
+JE5166,2025-05-28,Utilities Expense,497.5,0.0,Operations,rpatel
+JE5166,2025-05-28,Accounts Payable,0.0,497.5,Operations,rpatel
+JE5188,2025-05-30,Cash,4265.97,0.0,Sales,jsmith
+JE5188,2025-05-30,Accounts Receivable,0.0,4265.97,Sales,jsmith
+JE5202,2025-06-05,Cost of Goods Sold,1636.86,0.0,Operations,jsmith
+JE5202,2025-06-05,Inventory,0.0,1636.86,Operations,jsmith
+JE5164,2025-06-10,Rent Expense,2718.62,0.0,Operations,dwilson
+JE5164,2025-06-10,Cash,0.0,2718.62,Operations,dwilson
+JE5113,2025-06-12,Rent Expense,2783.61,0.0,Operations,dwilson
+JE5113,2025-06-12,Cash,0.0,2783.61,Operations,dwilson
+JE5900,2025-06-14,Accounts Receivable,50000.0,0.0,Sales,jsmith
+JE5900,2025-06-14,Sales Revenue,0.0,50000.0,Sales,jsmith
+JE5126,2025-06-19,Utilities Expense,611.2,0.0,Operations,ktaylor
+JE5126,2025-06-19,Accounts Payable,0.0,611.2,Operations,ktaylor
+JE5109,2025-06-20,Accounts Receivable,5812.5,0.0,Sales,agarcia
+JE5109,2025-06-20,Sales Revenue,0.0,5812.5,Sales,agarcia
+JE5192,2025-06-20,Cost of Goods Sold,1852.77,0.0,Operations,mchen
+JE5192,2025-06-20,Inventory,0.0,1852.77,Operations,mchen
+JE5130,2025-07-01,Cash,1159.41,0.0,Sales,dwilson
+JE5130,2025-07-01,Accounts Receivable,0.0,1159.41,Sales,dwilson
+JE5114,2025-07-03,Salaries Expense,4626.83,0.0,HR,ktaylor
+JE5114,2025-07-03,Cash,0.0,4626.83,HR,ktaylor
+JE5148,2025-07-04,Accounts Receivable,8205.67,0.0,Sales,jsmith
+JE5148,2025-07-04,Sales Revenue,0.0,8205.67,Sales,jsmith
+JE5142,2025-07-07,Rent Expense,2752.67,0.0,Operations,agarcia
+JE5142,2025-07-07,Cash,0.0,2752.67,Operations,agarcia
+JE5125,2025-07-08,Rent Expense,2534.29,0.0,Operations,rpatel
+JE5125,2025-07-08,Cash,0.0,2534.29,Operations,rpatel
+JE5129,2025-07-08,Salaries Expense,3908.72,0.0,HR,dwilson
+JE5129,2025-07-08,Cash,0.0,3908.72,HR,dwilson
+JE5209,2025-07-09,Accounts Payable,2145.85,0.0,Operations,jsmith
+JE5209,2025-07-09,Cash,0.0,2145.85,Operations,jsmith
+JE5203,2025-07-10,Utilities Expense,330.88,0.0,Operations,agarcia
+JE5203,2025-07-10,Accounts Payable,0.0,330.88,Operations,agarcia
+JE5147,2025-07-17,Cost of Goods Sold,2106.73,0.0,Operations,jsmith
+JE5147,2025-07-17,Inventory,0.0,2106.73,Operations,jsmith
+JE5193,2025-07-18,Cost of Goods Sold,2321.71,0.0,Operations,agarcia
+JE5193,2025-07-18,Inventory,0.0,2321.71,Operations,agarcia
+JE5115,2025-07-22,Cash,2727.42,0.0,Sales,jsmith
+JE5115,2025-07-22,Accounts Receivable,0.0,2727.42,Sales,jsmith
+JE5182,2025-07-22,Rent Expense,2862.37,0.0,Operations,rpatel
+JE5182,2025-07-22,Cash,0.0,2862.37,Operations,rpatel
+JE5178,2025-07-28,Accounts Payable,1831.11,0.0,Operations,mchen
+JE5178,2025-07-28,Cash,0.0,1831.11,Operations,mchen
+JE5186,2025-07-28,Cost of Goods Sold,798.28,0.0,Operations,ktaylor
+JE5186,2025-07-28,Inventory,0.0,798.28,Operations,ktaylor
+JE5159,2025-08-04,Utilities Expense,415.11,0.0,Operations,mchen
+JE5159,2025-08-04,Accounts Payable,0.0,415.11,Operations,mchen
+JE5206,2025-08-05,Accounts Payable,1156.59,0.0,Operations,mchen
+JE5206,2025-08-05,Cash,0.0,1156.59,Operations,mchen
+JE5151,2025-08-07,Inventory,1236.52,0.0,Operations,mchen
+JE5151,2025-08-07,Accounts Payable,0.0,1236.52,Operations,mchen
+JE5160,2025-08-08,Rent Expense,2626.73,0.0,Operations,rpatel
+JE5160,2025-08-08,Cash,0.0,2626.73,Operations,rpatel
+JE5122,2025-08-12,Rent Expense,2804.76,0.0,Operations,dwilson
+JE5122,2025-08-12,Cash,0.0,2804.76,Operations,dwilson
+JE5118,2025-08-15,Rent Expense,2622.34,0.0,Operations,mchen
+JE5118,2025-08-15,Cash,0.0,2622.34,Operations,mchen
+JE5100,2025-08-18,Accounts Payable,3081.81,0.0,Operations,mchen
+JE5100,2025-08-18,Cash,0.0,3081.81,Operations,mchen
+JE5128,2025-08-19,Accounts Receivable,7627.41,0.0,Sales,dwilson
+JE5128,2025-08-19,Sales Revenue,0.0,7627.41,Sales,dwilson
+JE5903,2025-08-19,Rent Expense,3000.0,0.0,Operations,mchen
+JE5903,2025-08-19,Cash,0.0,3000.0,Operations,mchen
+JE5904,2025-08-19,Rent Expense,3000.0,0.0,Operations,mchen
+JE5904,2025-08-19,Cash,0.0,3000.0,Operations,mchen
+JE5144,2025-08-21,Utilities Expense,383.85,0.0,Operations,mchen
+JE5144,2025-08-21,Accounts Payable,0.0,383.85,Operations,mchen
+JE5161,2025-08-21,Salaries Expense,4961.3,0.0,HR,jsmith
+JE5161,2025-08-21,Cash,0.0,4961.3,HR,jsmith
+JE5185,2025-08-22,Salaries Expense,4546.5,0.0,HR,agarcia
+JE5185,2025-08-22,Cash,0.0,4546.5,HR,agarcia
+JE5201,2025-08-28,Cash,2407.58,0.0,Sales,dwilson
+JE5201,2025-08-28,Accounts Receivable,0.0,2407.58,Sales,dwilson
+JE5173,2025-08-29,Accounts Receivable,1537.14,0.0,Sales,ktaylor
+JE5173,2025-08-29,Sales Revenue,0.0,1537.14,Sales,ktaylor
+JE5170,2025-09-03,Salaries Expense,4286.18,0.0,HR,dwilson
+JE5170,2025-09-03,Cash,0.0,4286.18,HR,dwilson
+JE5162,2025-09-04,Accounts Payable,965.22,0.0,Operations,dwilson
+JE5162,2025-09-04,Cash,0.0,965.22,Operations,dwilson
+JE5207,2025-09-08,Accounts Receivable,1500.02,0.0,Sales,jsmith
+JE5207,2025-09-08,Sales Revenue,0.0,1500.02,Sales,jsmith
+JE5134,2025-09-10,Utilities Expense,290.76,0.0,Operations,ktaylor
+JE5134,2025-09-10,Accounts Payable,0.0,290.76,Operations,ktaylor
+JE5905,2025-09-21,Salaries Expense,41000.0,0.0,HR,ceverett
+JE5905,2025-09-21,Cash,0.0,41000.0,HR,ceverett
+JE5145,2025-09-29,Cost of Goods Sold,1974.23,0.0,Operations,dwilson
+JE5145,2025-09-29,Inventory,0.0,1974.23,Operations,dwilson
+JE5195,2025-10-02,Inventory,1713.0,0.0,Operations,ktaylor
+JE5195,2025-10-02,Accounts Payable,0.0,1713.0,Operations,ktaylor
+JE5102,2025-10-10,Rent Expense,2613.37,0.0,Operations,jsmith
+JE5102,2025-10-10,Cash,0.0,2613.37,Operations,jsmith
+JE5117,2025-10-16,Inventory,2573.55,0.0,Operations,mchen
+JE5117,2025-10-16,Accounts Payable,0.0,2573.55,Operations,mchen
+JE5108,2025-10-19,Cost of Goods Sold,1098.04,0.0,Operations,dwilson
+JE5108,2025-10-19,Inventory,0.0,1098.04,Operations,dwilson
+JE5156,2025-10-27,Utilities Expense,490.11,0.0,Operations,mchen
+JE5156,2025-10-27,Accounts Payable,0.0,490.11,Operations,mchen
+JE5107,2025-10-28,Utilities Expense,475.46,0.0,Operations,ktaylor
+JE5107,2025-10-28,Accounts Payable,0.0,475.46,Operations,ktaylor
+JE5138,2025-10-30,Inventory,1205.44,0.0,Operations,ktaylor
+JE5138,2025-10-30,Accounts Payable,0.0,1205.44,Operations,ktaylor
+JE5175,2025-11-05,Inventory,1834.57,0.0,Operations,agarcia
+JE5175,2025-11-05,Accounts Payable,0.0,1834.57,Operations,agarcia
+JE5143,2025-11-06,Accounts Payable,1216.67,0.0,Operations,agarcia
+JE5143,2025-11-06,Cash,0.0,1216.67,Operations,agarcia
+JE5149,2025-11-14,Utilities Expense,615.22,0.0,Operations,rpatel
+JE5149,2025-11-14,Accounts Payable,0.0,615.22,Operations,rpatel
+JE5204,2025-11-14,Rent Expense,2665.72,0.0,Operations,ktaylor
+JE5204,2025-11-14,Cash,0.0,2665.72,Operations,ktaylor
+JE5105,2025-11-15,Cash,1851.67,0.0,Sales,rpatel
+JE5105,2025-11-15,Accounts Receivable,0.0,1851.67,Sales,rpatel
+JE5172,2025-11-17,Accounts Receivable,2782.73,0.0,Sales,dwilson
+JE5172,2025-11-17,Sales Revenue,0.0,2782.73,Sales,dwilson
+JE5191,2025-11-17,Utilities Expense,468.3,0.0,Operations,mchen
+JE5191,2025-11-17,Accounts Payable,0.0,468.3,Operations,mchen
+JE5141,2025-11-18,Utilities Expense,485.24,0.0,Operations,rpatel
+JE5141,2025-11-18,Accounts Payable,0.0,485.24,Operations,rpatel
+JE5184,2025-11-19,Salaries Expense,6672.79,0.0,HR,jsmith
+JE5184,2025-11-19,Cash,0.0,6672.79,HR,jsmith
+JE5101,2025-11-25,Rent Expense,2669.31,0.0,Operations,rpatel
+JE5101,2025-11-25,Cash,0.0,2669.31,Operations,rpatel
+JE5177,2025-11-26,Accounts Payable,504.67,0.0,Operations,agarcia
+JE5177,2025-11-26,Cash,0.0,504.67,Operations,agarcia
+JE5127,2025-12-02,Accounts Payable,2423.89,0.0,Operations,jsmith
+JE5127,2025-12-02,Cash,0.0,2423.89,Operations,jsmith
+JE5181,2025-12-05,Cost of Goods Sold,1668.67,0.0,Operations,mchen
+JE5181,2025-12-05,Inventory,0.0,1668.67,Operations,mchen
+JE5176,2025-12-11,Cash,3967.38,0.0,Sales,dwilson
+JE5176,2025-12-11,Accounts Receivable,0.0,3967.38,Sales,dwilson
+JE5168,2025-12-19,Cost of Goods Sold,1992.34,0.0,Operations,dwilson
+JE5168,2025-12-19,Inventory,0.0,1992.34,Operations,dwilson
+JE5200,2025-12-19,Inventory,3132.11,0.0,Operations,mchen
+JE5200,2025-12-19,Accounts Payable,0.0,3132.11,Operations,mchen
+JE5158,2025-12-24,Utilities Expense,301.21,0.0,Operations,agarcia
+JE5158,2025-12-24,Accounts Payable,0.0,301.21,Operations,agarcia
+JE5906,2025-12-28,Accounts Receivable,75000.0,0.0,Sales,ceverett
+JE5906,2025-12-28,Sales Revenue,0.0,75000.0,Sales,ceverett
+JE5119,2025-12-29,Rent Expense,2828.43,0.0,Operations,rpatel
+JE5119,2025-12-29,Cash,0.0,2828.43,Operations,rpatel
+JE5116,2025-12-30,Rent Expense,2860.71,0.0,Operations,dwilson
+JE5116,2025-12-30,Cash,0.0,2860.71,Operations,dwilson
+JE5902,2025-12-30,Accounts Receivable,92500.0,0.0,Sales,rpatel
+JE5902,2025-12-30,Sales Revenue,0.0,92500.0,Sales,rpatel

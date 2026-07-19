@@ -1,0 +1,358 @@
+# Revenue Recognition and Transaction-Level Analysis
+
+::: {.callout-note}
+## Learning Objectives
+By the end of this chapter, you should be able to:
+
+- Explain why revenue recognition timing is a common area of financial reporting risk
+- Detect quarter-end revenue concentration patterns often associated with channel stuffing
+- Identify "bill-and-hold" style anomalies by comparing invoice dates to shipment dates
+- Build an accounts receivable aging schedule and compute Days Sales Outstanding (DSO) by period
+- Recognize survivorship bias in time-to-payment analysis, and explain why it can distort period-over-period comparisons
+- Perform all of the above using both pandas and polars
+:::
+
+## Why Revenue Recognition Is a Common Risk Area
+
+Revenue is usually the single largest number on the income statement, and the timing of when it's recognized has a direct, often material, effect on reported profitability. Accounting standards (ASC 606 in the U.S.) require revenue to be recognized when control of a good or service actually transfers to the customer — not simply when a contract is signed or an invoice is generated [FASB -@financial_accounting_standards_board_fasb_revenue_2014]. In addition, auditing standards consider revenue recognition a high fraud risk area [PCAOB -@public_company_accounting_oversight_board_pcaob_as_2024]. 
+
+Because revenue timing has such a large impact on reported results, it's also one of the most common areas where financial reporting goes wrong — sometimes through honest error, sometimes through deliberate manipulation. Two patterns show up often enough that they're standard audit analytics tests in their own right:
+
+- **Channel stuffing / cutoff risk**: recognizing an unusually large share of a period's revenue right at period-end, potentially borrowing sales from the next period to inflate the current one
+- **Bill-and-hold arrangements**: invoicing a customer before goods actually ship, recognizing revenue before control has genuinely transferred
+
+This chapter builds detection techniques for both, using a new dataset: `sales_transactions.csv`, containing 427 invoices across 35 customers for fiscal year 2025.
+
+::: {.panel-tabset}
+## pandas
+```{python}
+import pandas as pd
+sales_pd = pd.read_csv("data/sales_transactions.csv", parse_dates=["invoice_date", "ship_date", "payment_date"])
+sales_pd.head()
+```
+
+## polars 
+
+```{python}
+import polars as pl
+sales_pl = pl.read_csv("data/sales_transactions.csv", try_parse_dates=True)
+sales_pl.head()
+```
+:::
+
+Each invoice has an `invoice_date` (when revenue was recorded), a `ship_date` (when goods actually shipped), a `payment_date` (when the customer paid, if they have as of year-end), and `payment_terms_days` (the customer's agreed payment window).
+
+## Detecting Quarter-End Revenue Concentration
+
+If revenue were recognized at a steady pace throughout each quarter, we'd expect roughly even daily volume. A disproportionate share of revenue landing in the final days of a quarter is a red flag worth investigating.
+
+::: {.panel-tabset}
+## pandas
+```{python}
+sales_pd["quarter_end_date"] = sales_pd.groupby("quarter")["invoice_date"].transform("max")
+sales_pd["days_before_qend"] = (sales_pd["quarter_end_date"] - sales_pd["invoice_date"]).dt.days
+sales_pd["is_quarter_end_spike"] = sales_pd["days_before_qend"] <= 3
+
+spike_summary_pd = sales_pd.groupby(["quarter", "is_quarter_end_spike"])["amount"].agg(["count", "sum"])
+spike_summary_pd
+```
+
+## polars
+```{python}
+sales_pl = sales_pl.with_columns(
+    pl.col("invoice_date").max().over("quarter").alias("quarter_end_date")
+).with_columns(
+    (pl.col("quarter_end_date") - pl.col("invoice_date")).dt.total_days().alias("days_before_qend")
+).with_columns(
+    (pl.col("days_before_qend") <= 3).alias("is_quarter_end_spike")
+)
+
+spike_summary_pl = (
+    sales_pl.group_by(["quarter", "is_quarter_end_spike"])
+    .agg([pl.len().alias("count"), pl.col("amount").sum().alias("sum")])
+    .sort(["quarter", "is_quarter_end_spike"])
+)
+spike_summary_pl
+```
+:::
+
+The last **4 days** of each quarter — out of roughly 90 days total — account for **20% to 32% of that quarter's total revenue.** That's a striking concentration: if revenue were recognized evenly, those 4 days should account for only about 4% of the quarter's total. This kind of pattern, on its own, doesn't prove anything improper happened — some genuine seasonality or sales-team incentive structures can produce a legitimate end-of-period push — but it's exactly the kind of pattern that warrants a closer look.
+
+:::{.panel-tabset}
+## seaborn
+```{python}
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(10, 4.5))
+sns.scatterplot(
+    data=sales_pd, x="invoice_date", y="amount", hue="is_quarter_end_spike",
+    palette={True: "#c9482f", False: "#1c7c73"}, alpha=0.6
+)
+plt.title("Daily Invoice Amounts (quarter-end spike window highlighted)")
+plt.ylabel("Invoice Amount ($)")
+plt.tight_layout()
+plt.show()
+```
+
+## plotnine
+
+```{python}
+from plotnine import (
+    ggplot,
+    aes,
+    geom_point,
+    scale_color_manual,
+    labs,
+    theme_minimal,
+    theme,
+    element_text
+)
+
+# Convert Polars DataFrame to pandas
+sales_pd = sales_pl.to_pandas()
+
+(
+    ggplot(
+        sales_pd,
+        aes(
+            x="invoice_date",
+            y="amount",
+            color="is_quarter_end_spike"
+        )
+    )
+    + geom_point(alpha=0.6)
+    + scale_color_manual(
+        values={
+            True: "#c9482f",
+            False: "#1c7c73"
+        }
+    )
+    + labs(
+        title="Daily Invoice Amounts (quarter-end spike window highlighted)",
+        x="Invoice Date",
+        y="Invoice Amount ($)",
+        color="Quarter-End Spike"
+    )
+    + theme_minimal()
+    + theme(
+        figure_size=(10, 4.5),
+        plot_title=element_text(ha="center")
+    )
+)
+```
+
+:::
+The red points cluster visibly at the right edge of each quarter — exactly where we'd expect to see them if revenue is being pushed into period-end.
+
+### Which Customers Drive the Concentration?
+
+:::{.panel-tabset}
+
+### pandas 
+```{python}
+customer_summary = sales_pd.groupby("customer_id").apply(
+    lambda x: pd.Series({
+        "total_revenue": x["amount"].sum(),
+        "spike_revenue": x.loc[x["is_quarter_end_spike"], "amount"].sum(),
+    }),
+    include_groups=False,
+)
+customer_summary["pct_from_spike"] = customer_summary["spike_revenue"] / customer_summary["total_revenue"] * 100
+
+customer_summary.sort_values("pct_from_spike", ascending=False).head(8).round(1)
+```
+
+## polars 
+
+```{python}
+customer_summary_pl = (
+    sales_pl
+    .group_by("customer_id")
+    .agg(
+        pl.col("amount").sum().alias("total_revenue"),
+
+        pl.col("amount")
+        .filter(pl.col("is_quarter_end_spike"))
+        .sum()
+        .alias("spike_revenue"),
+    )
+    .with_columns(
+        (
+            pl.col("spike_revenue")
+            / pl.col("total_revenue")
+            * 100
+        )
+        .round(1)
+        .alias("pct_from_spike")
+    )
+    .sort("pct_from_spike", descending=True)
+    .head(8)
+)
+
+customer_summary_pl
+```
+
+:::
+Four customers stand out with well over half their annual revenue concentrated in quarter-end spike windows — worth remembering, since we'll come back to these exact customers in the next section.
+
+## Detecting Bill-and-Hold Patterns
+
+A **bill-and-hold** arrangement — invoicing a customer before goods actually ship — is a classic revenue recognition red flag, since control of the goods hasn't transferred to the customer yet. We can detect this directly by comparing `invoice_date` to `ship_date`.
+
+::: {.panel-tabset}
+## pandas
+```{python}
+sales_pd["ship_lag_days"] = (sales_pd["ship_date"] - sales_pd["invoice_date"]).dt.days
+
+bill_and_hold_pd = sales_pd[sales_pd["ship_lag_days"] > 10]
+bill_and_hold_pd[["invoice_id", "customer_id", "invoice_date", "ship_date", "ship_lag_days", "amount"]]
+```
+
+## polars
+```{python}
+sales_pl = sales_pl.with_columns(
+    (pl.col("ship_date") - pl.col("invoice_date")).dt.total_days().alias("ship_lag_days")
+)
+
+bill_and_hold_pl = sales_pl.filter(pl.col("ship_lag_days") > 10)
+bill_and_hold_pl.select(["invoice_id", "customer_id", "invoice_date", "ship_date", "ship_lag_days", "amount"])
+```
+:::
+
+Five invoices ship 20 to 35 days *after* the invoice date, in sharp contrast to the rest of the population, where goods almost always ship on or slightly before the invoice date (a normal "ship, then bill" sequence).
+
+:::{.panel-tabset}
+
+## pandas 
+```{python}
+sales_pd["ship_lag_days"].describe()
+```
+
+## polars 
+
+```{python}
+sales_pl.select("ship_lag_days").describe()
+```
+
+:::
+The median ship lag across the whole population is *negative one day* (goods typically ship a day before invoicing) — making a 20+ day lag unmistakably unusual.
+
+::: {.callout-important}
+## Connecting the Two Findings
+Look back at the customer-level spike concentration table from the previous section. **CUST112, CUST118, CUST124, and CUST130** — the four customers with the highest share of revenue from quarter-end spikes — are the *same* customers behind every bill-and-hold invoice flagged here. Two independent tests, run on completely different logic (timing concentration vs. invoice/ship date mismatch), converge on the same small set of customers. This kind of convergence between unrelated tests is a much stronger signal than either finding alone, and is exactly the kind of pattern that should move a transaction from "worth a look" to "worth a real investigation."
+:::
+
+## Accounts Receivable Aging
+
+An **AR aging schedule** aging is an accounting method that categorizes a company's unpaid customer invoices based on the length of time they have been due. It groups outstanding balances into specific time buckets (e.g., 0-30, 31-60, 61-90, and 90+ days) to help businesses track collections, assess credit risk, and manage cash flow.
+
+::: {.panel-tabset}
+## pandas
+```{python}
+as_of_date = pd.Timestamp("2025-12-31")
+
+unpaid_pd = sales_pd[sales_pd["payment_date"].isna()].copy()
+unpaid_pd["days_outstanding"] = (as_of_date - unpaid_pd["invoice_date"]).dt.days
+
+bins = [-1, 30, 60, 90, float("inf")]
+labels = ["0-30", "31-60", "61-90", "90+"]
+unpaid_pd["aging_bucket"] = pd.cut(unpaid_pd["days_outstanding"], bins=bins, labels=labels)
+
+aging_summary_pd = unpaid_pd.groupby("aging_bucket", observed=True)["amount"].agg(["count", "sum"])
+aging_summary_pd
+```
+
+## polars
+```{python}
+as_of_pl = pl.date(2025, 12, 31)
+
+unpaid_pl = sales_pl.filter(pl.col("payment_date").is_null()).with_columns(
+    (as_of_pl - pl.col("invoice_date")).dt.total_days().alias("days_outstanding")
+)
+
+unpaid_pl = unpaid_pl.with_columns(
+    pl.when(pl.col("days_outstanding") <= 30).then(pl.lit("0-30"))
+    .when(pl.col("days_outstanding") <= 60).then(pl.lit("31-60"))
+    .when(pl.col("days_outstanding") <= 90).then(pl.lit("61-90"))
+    .otherwise(pl.lit("90+"))
+    .alias("aging_bucket")
+)
+
+aging_summary_pl = (
+    unpaid_pl.group_by("aging_bucket")
+    .agg([pl.len().alias("count"), pl.col("amount").sum().alias("sum")])
+    .sort("aging_bucket")
+)
+aging_summary_pl
+```
+:::
+
+::: {.callout-warning}
+## A Bin-Boundary Bug Worth Knowing About
+The pandas bins deliberately start at **-1**, not **0**. Several invoices had exactly 0 days outstanding (invoiced on the very last day of the year), and pandas' `pd.cut()` uses *left-open* intervals by default — meaning a bin of `(0, 30]` would silently **exclude** a value of exactly 0. Using `-1` as the lower bound avoids this trap. This is a classic, easy-to-miss bug: the first version of this code (using `bins=[0, 30, 60, 90, inf]`) silently dropped 9 real invoices from the aging schedule with no error or warning — always double-check your bucket totals sum back to your actual unpaid count.
+:::
+
+Roughly $27,600 sits in the 90+ day bucket — the balances most at risk of never being collected, and the ones a real audit or collections team would prioritize reviewing first.
+
+## Days Sales Outstanding (DSO) by Quarter
+
+Days Sales Outstanding (DSO) is a financial metric that measures the average number of days it takes a company to collect payment after making a sale. A lower DSO indicates healthy cash flow and efficient collections, while a higher DSO points to potential liquidity risks and delayed payments.
+
+::: {.panel-tabset}
+## pandas
+```{python}
+paid_pd = sales_pd[sales_pd["is_paid"]].copy()
+paid_pd["days_to_collect"] = (paid_pd["payment_date"] - paid_pd["invoice_date"]).dt.days
+
+dso_by_quarter_pd = paid_pd.groupby("quarter")["days_to_collect"].mean()
+dso_by_quarter_pd.round(1)
+```
+
+## polars
+```{python}
+paid_pl = sales_pl.filter(pl.col("is_paid")).with_columns(
+    (pl.col("payment_date") - pl.col("invoice_date")).dt.total_days().alias("days_to_collect")
+)
+
+dso_by_quarter_pl = (
+    paid_pl.group_by("quarter")
+    .agg(pl.col("days_to_collect").mean().alias("avg_days_to_collect"))
+    .sort("quarter")
+)
+dso_by_quarter_pl
+```
+:::
+
+At first glance, this looks like a clear success story: average collection time falls from 62 days in Q1 to just 31 days in Q4.
+
+::: {.callout-important}
+## Before You Celebrate: Survivorship Bias
+This apparent improvement is at least partly an illusion, and it's worth understanding exactly why. Our data was captured **as of December 31, 2025**. A Q1 invoice has had up to a full year to get paid before that cutoff — plenty of time for even slow payers to show up in our "paid" data. A Q4 invoice, by contrast, might have been issued on, say, December 20th — only 11 days before our cutoff. **Only the fastest-paying Q4 customers could possibly show up as "paid" in this snapshot; every slow-paying Q4 customer is still sitting in accounts receivable, invisible to this calculation.**
+
+In other words, the Q4 "paid" group isn't a random or representative sample of Q4 invoices — it's systematically biased toward whichever invoices happened to be paid fastest. This is a specific case of **survivorship bias**: drawing a conclusion from only the observations that "survived" to the point of being measurable, while ignoring the ones that didn't (yet).
+
+**The fix**, if you needed a genuinely fair quarter-over-quarter comparison, would be to only compare invoices that have all had an *equal* amount of time to be collected (for example, restricting every quarter's calculation to invoices at least 90 days old as of the measurement date) — something you're encouraged to try in this chapter's exercises.
+:::
+
+## Chapter Summary
+
+- Revenue recognition timing is one of the highest-risk areas in financial reporting, since a large share of reported profitability depends on *when* revenue is recorded, not just whether the underlying sale is genuine.
+- Quarter-end revenue concentration (a disproportionate share of a period's revenue landing in its final days) is a standard analytics test associated with channel stuffing risk.
+- Comparing invoice dates to ship dates directly detects bill-and-hold patterns, where revenue is recognized before goods have actually transferred to the customer.
+- When two independently-designed tests flag the same set of transactions or customers, that convergence is stronger evidence than either test alone.
+- AR aging schedules require careful attention to bin boundaries — an off-by-one error in bucket definitions can silently drop real invoices from your analysis with no visible error.
+- DSO and other time-to-event metrics computed near a data cutoff are vulnerable to survivorship bias: recent periods will systematically appear to collect faster, simply because slow payers haven't had time to be captured yet, not because collection genuinely improved.
+
+## Discussion Questions
+
+1. A 20-30% revenue concentration in the last 4 days of a quarter isn't proof of a problem by itself. What additional information would you want before deciding whether this pattern reflects a real business practice versus a reporting concern?
+2. Why does convergence between the quarter-end spike analysis and the bill-and-hold analysis (both flagging the same four customers) matter more than either finding alone?
+3. Explain, in your own words, why the declining DSO trend from Q1 to Q4 is at least partly misleading, and describe a concrete way you could measure DSO that would avoid this bias.
+
+## Exercises
+
+1. Recompute DSO by quarter, but restrict the analysis to only invoices at least 120 days old as of December 31, 2025 (i.e., invoiced on or before September 3, 2025). Does the "improving DSO" trend still appear once this restriction removes the survivorship bias?
+2. Using the customer-level spike concentration table, identify any customer with more than 30% of their revenue from quarter-end spikes who was *not* one of the five bill-and-hold invoices. What follow-up would you recommend for that customer specifically?
+3. Rebuild the AR aging schedule using 15-day buckets instead of 30-day buckets (0-15, 16-30, 31-45, 46-60, 61-90, 90+). Does any bucket reveal a concentration of risk that the coarser 30-day buckets obscured?
+4. Using either pandas or polars, calculate the average `ship_lag_days` by customer (not just by invoice) across the full dataset. Does this reveal any customers with a mildly unusual average shipping pattern that fell below this chapter's 10-day flagging threshold for any single invoice?
