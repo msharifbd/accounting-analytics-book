@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Accounting Analytics with Python",
     "section": "",
-    "text": "Preface\nWelcome to Accounting Analytics with Python. This book is intended for accounting undergraduate students. However, students from other disciplines such as Finance are very likely to be benefited from using the book.\n\n\nAbout the Author\nSharif Islam, DBA, CPA, CMA is an Associate professor in School of Accountancy in Southern Illinois University Carbondale (SIUC). He is a licensed CPA in Illinois and a Certified Management Accountant (CMA). He teaches Advanced Cost Accounting, Auditing, Accounting Information Systems, Machine Learning, and Analytics for Accounting Data. He earned his doctorate from Louisiana Tech University. His mansucripts are selected for “Best Research Paper Award” in several conferences of American Accounting Association (AAA). His research also got 2024 “Notable Contribution to the Literature Award” by AIS section of AAA. He published research in Accounting Horizons, Journal of Accounting and Public Policy, Journal of Information Systems, Advances in Accounting, Journal of Emerging Technologies in Accounting, Issues in Accounting Education, and Managerial Auditing Journal. His research interests lie at the intersection of Accounting and Data Science. More about his teaching and research can be found in his personal website.\n\n\nAcknowledgement\nTo prepare the book, I took help from many sources on the internet and published materials. Many of them are cited in the book. I acknowledge the contribution of all of those resources that help me to prepare the book for the students.",
+    "text": "Preface\nWelcome to Accounting Analytics with Python. This book is intended for accounting undergraduate students. However, students from other disciplines such as Finance are very likely to be benefited from using the book.\n\n\n\nAbout the Author\nSharif Islam, DBA, CPA, CMA is an Associate professor in School of Accountancy in Southern Illinois University Carbondale (SIUC). He is a licensed CPA in Illinois and a Certified Management Accountant (CMA). He teaches Advanced Cost Accounting, Auditing, Accounting Information Systems, Machine Learning, and Analytics for Accounting Data. He earned his doctorate from Louisiana Tech University. His mansucripts are selected for “Best Research Paper Award” in several conferences of American Accounting Association (AAA). His research also got 2024 “Notable Contribution to the Literature Award” by AIS section of AAA. He published research in Accounting Horizons, Journal of Accounting and Public Policy, Journal of Information Systems, Advances in Accounting, Journal of Emerging Technologies in Accounting, Issues in Accounting Education, and Managerial Auditing Journal. His research interests lie at the intersection of Accounting and Data Science. More about his teaching and research can be found in his personal website.\n\n\nAcknowledgement\nTo prepare the book, I took help from many sources on the internet and published materials. Many of them are cited in the book. I acknowledge the contribution of all of those resources that help me to prepare the book for the students.",
     "crumbs": [
       "Preface"
     ]
@@ -2015,7 +2015,7 @@
     "href": "appendix-b-financial-statement-basics.html",
     "title": "Appendix B — The Accounting Cycle: From Journal to Financial Statements",
     "section": "",
-    "text": "B.1 The Accounting Cycle, at a Glance\nThe accounting cycle is the sequence of steps a business follows, every period, to turn raw transactions into financial statements:\nWe’ll now work through all eight steps for one company.",
+    "text": "B.1 The Accounting Cycle - at a Glance\nThe accounting cycle is the sequence of steps a business follows, every period, to turn raw transactions into financial statements:\nWe’ll now work through all eight steps for one company.",
     "crumbs": [
       "Appendices",
       "<span class='chapter-number'>B</span>  <span class='chapter-title'>The Accounting Cycle: From Journal to Financial Statements</span>"
@@ -2195,6 +2195,17 @@
     "crumbs": [
       "Appendices",
       "<span class='chapter-number'>C</span>  <span class='chapter-title'>An Introduction to EDGAR Database</span>"
+    ]
+  },
+  {
+    "objectID": "appendix-b-financial-statement-basics.html#the-accounting-cycle---at-a-glance",
+    "href": "appendix-b-financial-statement-basics.html#the-accounting-cycle---at-a-glance",
+    "title": "Appendix B — The Accounting Cycle: From Journal to Financial Statements",
+    "section": "",
+    "text": "Journalize transactions — record each transaction in the general journal as it occurs\nPost to the ledger — transfer each journal entry into the relevant account\nPrepare an unadjusted trial balance — list every account and its balance, to confirm debits equal credits\nRecord adjusting entries — update accounts for items not yet captured by day-to-day transactions (accruals, deferrals, depreciation)\nPrepare an adjusted trial balance — confirm the books still balance after adjustments\nPrepare financial statements — the income statement, statement of retained earnings, and balance sheet, built directly from the adjusted trial balance\nRecord closing entries — zero out revenue, expense, and dividend accounts, transferring their net effect into retained earnings\nPrepare a post-closing trial balance — confirm only permanent (balance sheet) accounts carry a balance into the next period",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>The Accounting Cycle: From Journal to Financial Statements</span>"
     ]
   }
 ]

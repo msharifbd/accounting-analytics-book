@@ -7,7 +7,7 @@ This appendix is a self-contained primer on the mechanics of the accounting cycl
 This appendix uses one small, complete worked example throughout — a single company, a single month, from its very first transaction all the way to its financial statements and post-closing trial balance — rather than isolated examples for each step. Every number in every table below was computed and verified to tie out exactly.
 :::
 
-## The Accounting Cycle, at a Glance
+## The Accounting Cycle - at a Glance
 
 The **accounting cycle** is the sequence of steps a business follows, every period, to turn raw transactions into financial statements:
 

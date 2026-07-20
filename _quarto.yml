@@ -95,9 +95,11 @@ format:
     fig-pos: "H"
     pdf-engine: xelatex
     mainfont: "EB Garamond"
-    include-in-header:
-      text: |
-        \setkomafont{disposition}{\rmfamily\bfseries}
+    include-in-header: preamble.tex
+
+  epub: 
+    cover-image: images/Front-page-image.png
+        
 
 execute:
   freeze: auto

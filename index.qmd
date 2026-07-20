@@ -1,6 +1,11 @@
 # Preface {.unnumbered}
 
-Welcome to *Accounting Analytics with Python*. This book is intended for accounting undergraduate students. However, students from other disciplines such as Finance are very likely to be benefited from using the book.
+Welcome to *Accounting Analytics with Python*. This book is intended for accounting undergraduate students. However, students from other disciplines such as Finance are very likely to be benefited from using the book. 
+
+<img src="images/Front-page-image.png"
+     width="280"
+     style="float:right; margin-left:20px; margin-bottom:15px;">
+
 
 # About the Author {.unnumbered}
 
