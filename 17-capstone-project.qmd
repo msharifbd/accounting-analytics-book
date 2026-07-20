@@ -1,1 +1,116 @@
 # Capstone Project
+
+::: {.callout-note}
+## What This Chapter Is
+Unlike every other chapter in this book, this one doesn't teach a new technique. It's a project brief: a single integrated dataset, a choice of analytical tracks, and a structure for applying what you've learned across Chapters 1-16 to an open-ended, realistic engagement. Plan to spend the final 1-2 weeks of the course on this.
+:::
+
+## The Scenario
+
+You've been engaged to analyze one fiscal year (2025) of data for **Alderwood Supply Co.**, a mid-sized distribution company. You have access to:
+
+| File | Description |
+|---|---|
+| `capstone_chart_of_accounts.csv` | The company's chart of accounts (21 accounts) |
+| `capstone_general_ledger.csv` | A sample of FY2025 transaction-level journal entries (692 lines, 346 entries) |
+| `capstone_income_statement.csv` | Income statements for FY2024 and FY2025 |
+| `capstone_balance_sheet.csv` | Balance sheets for FY2024 and FY2025 |
+| `capstone_sales_transactions.csv` | FY2025 invoice-level sales and accounts receivable detail (151 invoices) |
+| `capstone_department_budget_actual.csv` | FY2025 budget-to-actual spending by department and category |
+
+::: {.callout-important}
+## A Naming Note
+Every file in this capstone is prefixed with `capstone_`, even though a few cover the same *type* of data as earlier chapters (an income statement, a chart of accounts, sales transactions). This is deliberate: earlier chapters already have files named `income_statement.csv`, `balance_sheet.csv`, `chart_of_accounts.csv`, and `sales_transactions.csv` sitting in your project root, and this capstone uses a **different fictional company** with completely different numbers. Keeping the `capstone_` prefix means both sets of files can coexist in the same project folder without one silently overwriting the other.
+:::
+
+
+::: {.callout-important}
+## This Data Has Not Been Pre-Cleaned or Pre-Explained
+Every dataset in Chapters 1-16 came with a narrative explaining exactly what to look for. This one doesn't. Some of it may be completely unremarkable. Some of it may not be. Part of this capstone is deciding, using the techniques from this book, what's actually worth investigating and building a defensible case — not being told in advance where to look. Treat the general ledger sample specifically the way Chapter 9 treated sampling: as a *sample* of the year's activity, not a complete population, and reason about your conclusions accordingly.
+:::
+
+## Choosing a Track
+
+Pick **one** primary track to focus your capstone on. All three draw on the same underlying company, but emphasize different chapters. Regardless of track, you're expected to draw on the foundational skills from Chapters 3-6 (data fundamentals, wrangling, EDA, visualization) throughout.
+
+### Track A: Audit & Fraud Analytics
+*Primarily draws on Chapters 8-10 (management accounting variance concepts, audit analytics, fraud detection)*
+
+Using `capstone_general_ledger.csv`, apply journal entry testing, sampling, and anomaly detection techniques to identify transactions or patterns worth flagging for further review. Build a composite risk score. Decide which flagged items you'd escalate for follow-up and which you'd consider immaterial or explainable.
+
+### Track B: Financial Reporting & Revenue Analytics
+*Primarily draws on Chapters 7 and 11-12 (financial statement analysis, revenue recognition, tax)*
+
+Using `capstone_income_statement.csv`, `capstone_balance_sheet.csv`, and `capstone_sales_transactions.csv`, perform ratio and trend analysis across the two years provided, and evaluate the sales data for revenue recognition risk (timing concentration, invoice-to-shipment patterns, AR aging). Build a short financial health assessment.
+
+### Track C: Management Accounting & Predictive Analytics
+*Primarily draws on Chapter 8 (management accounting) and Chapter 13 (predictive modeling)*
+
+Using `capstone_department_budget_actual.csv` alongside the financial statements, analyze budget variances by department and category, and build a simple predictive model (for example, predicting which department/category combinations are most likely to show a large variance, or modeling a cost driver relationship) using techniques from Chapter 13.
+
+::: {.callout-tip}
+## Not Sure Which Track to Pick?
+Track A tends to suit students who enjoyed Chapters 8-10 most and like investigative, detective-style work. Track B suits students more interested in external financial analysis and reporting. Track C suits students who want more hands-on time with the modeling techniques from Chapter 13. There's no wrong choice — pick based on genuine interest, since that will show in the quality of your final report.
+:::
+
+## Deliverables
+
+1. **A rendered Quarto report** (HTML, PDF, or both) presenting your analysis, findings, and recommendations — written for a specific, named audience (e.g., "the audit committee," "the CFO," "the controller"), not a generic reader.
+2. **Clean, reproducible code** supporting every claim in your report, following the practices from Chapter 16: a fixed random seed anywhere randomness is used, a documented package environment, and clear organization so someone else could rerun your analysis and get the same result.
+3. **A short presentation** (5-10 minutes, in-class or recorded, per your instructor's preference) summarizing your findings for a non-technical audience — practice communicating results the way Chapter 6 and Chapter 7 emphasized, not just producing them.
+
+::: {.callout-tip}
+## Individual or Group?
+This capstone works either individually or in small groups of 2-3, at your instructor's discretion. If working in a group, your report should briefly note who contributed to which sections.
+:::
+
+## Suggested Milestones
+
+A capstone with no intermediate checkpoints tends to become a last-minute scramble. A reasonable pacing:
+
+| Week | Milestone |
+|---|---|
+| 1 | Explore all provided datasets, choose a track, and submit 2-3 specific questions you plan to investigate |
+| 1-2 | Perform your core analysis; meet with your instructor or peers for a brief progress check |
+| 2 | Draft your Quarto report; conduct a peer review exchange with another student or group |
+| 2 | Finalize your report, prepare your presentation, and submit |
+
+## Example Starter Questions
+
+You don't have to use these exact questions, but they illustrate the kind of open-ended question this capstone expects, and roughly how much depth is expected per track.
+
+**Track A (Audit & Fraud):**
+- Does the general ledger sample balance? If not, what does that tell you, and how would you investigate it?
+- Which journal entries score highest on a composite red-flag basis, and what specific follow-up would you request for each?
+- Are there any postings whose *description* field is worth a second look, independent of their dollar amount?
+
+**Track B (Financial Reporting & Revenue):**
+- How did the company's profitability, liquidity, and leverage change from FY2024 to FY2025, and what's driving the biggest change?
+- Does the sales data show any quarter-end concentration or invoice-to-shipment timing patterns worth flagging?
+- Which customers, if any, warrant a closer look based on payment behavior or revenue timing?
+
+**Track C (Management Accounting & Predictive):**
+- Which department/category combinations show the largest budget variances, and are they favorable or unfavorable?
+- Can you build a model that predicts which combinations are likely to see a large variance, using the patterns in this year's data?
+- What would you recommend to management based on this year's variance patterns going into next year's budget cycle?
+
+## Grading Rubric
+
+| Criterion | What It Assesses |
+|---|---|
+| **Technical correctness** | Are your calculations, code, and statistical methods correct and appropriately applied? |
+| **Technique selection** | Did you choose analytical methods appropriate to your question, rather than applying a technique just because it was covered in the book? |
+| **Depth of investigation** | Did you follow up on interesting findings, or stop at the first surface-level observation? |
+| **Clarity of communication** | Would your named audience actually understand your findings and recommendations? |
+| **Reproducibility** | Could someone else rerun your code and get your exact results? |
+| **Presentation** | Did you communicate your findings clearly and appropriately for a non-technical audience? |
+
+::: {.callout-important}
+## A Note on "Finding Something"
+Not every dataset contains a dramatic discovery, and manufacturing a finding that isn't really there is a worse outcome than honestly reporting "I investigated X and found no significant concern." Chapter 12 made exactly this point about a weak regression result — an honest null finding, properly investigated and clearly communicated, is a legitimate and valuable outcome. Grading rewards rigorous investigation and clear communication, not a dramatic conclusion for its own sake.
+:::
+
+## Final Thoughts
+
+Every technique in this capstone — reading messy data, computing the right summary statistic, building a red-flag score, checking a model's assumptions, communicating a result honestly — is something you've now done at least once in this book, on data built specifically to teach that one skill in isolation. The capstone's real challenge isn't learning anything new; it's deciding, on your own, which of those sixteen chapters' worth of tools actually fit the questions in front of you, and using them with the same judgment a professional would bring to an unfamiliar engagement. That judgment is the actual subject this course has been teaching all along.
+

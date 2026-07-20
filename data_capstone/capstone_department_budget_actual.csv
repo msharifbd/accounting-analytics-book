@@ -1,0 +1,16 @@
+department,category,budgeted_amount,actual_amount
+Sales,Salaries,31500.0,32651.34
+Sales,Marketing,29200.0,29140.8
+Sales,Supplies,13400.0,15171.45
+Sales,Software,54600.0,52420.33
+Operations,Salaries,8700.0,9011.61
+Operations,Marketing,17600.0,17364.18
+Operations,Travel,25800.0,26678.72
+Operations,Supplies,23700.0,25867.01
+Operations,Software,47400.0,46491.8
+HR,Salaries,58900.0,63170.59
+HR,Marketing,55100.0,55773.06
+HR,Software,46900.0,44187.25
+Finance,Salaries,18000.0,17626.13
+Finance,Travel,44400.0,41594.11
+Finance,Supplies,14500.0,14949.26

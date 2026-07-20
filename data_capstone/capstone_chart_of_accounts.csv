@@ -1,0 +1,22 @@
+account,account_number,account_type
+Cash,1000,Asset
+Accounts Receivable,1100,Asset
+Inventory,1200,Asset
+Prepaid Insurance,1300,Asset
+Equipment,1500,Asset
+Accumulated Depreciation - Equipment,1510,Contra-Asset
+Accounts Payable,2000,Liability
+Unearned Revenue,2100,Liability
+Notes Payable,2200,Liability
+Common Stock,3000,Equity
+Retained Earnings,3100,Equity
+Dividends,3200,Equity
+Sales Revenue,4000,Revenue
+Cost of Goods Sold,5000,Expense
+Salaries Expense,5100,Expense
+Rent Expense,5200,Expense
+Utilities Expense,5300,Expense
+Depreciation Expense,5400,Expense
+Insurance Expense,5500,Expense
+Interest Expense,5600,Expense
+Marketing Expense,5700,Expense

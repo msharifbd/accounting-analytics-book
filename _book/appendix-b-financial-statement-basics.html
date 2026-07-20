@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Appendix B — Financial Statement Basics – Accounting Analytics with Python</title>
+<title>Appendix B — The Accounting Cycle: From Journal to Financial Statements – Accounting Analytics with Python</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -23,10 +23,45 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -76,6 +111,12 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
 <style>
 .scrollable-table {
   overflow-x: auto !important;
@@ -266,7 +307,7 @@ a.citation, a.citation:visited {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./appendix-a-python-primer.html">Appendices</a></li><li class="breadcrumb-item"><a href="./appendix-b-financial-statement-basics.html"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Financial Statement Basics</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./appendix-a-python-primer.html">Appendices</a></li><li class="breadcrumb-item"><a href="./appendix-b-financial-statement-basics.html"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">The Accounting Cycle: From Journal to Financial Statements</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -499,7 +540,7 @@ a.citation, a.citation:visited {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./appendix-b-financial-statement-basics.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Financial Statement Basics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">The Accounting Cycle: From Journal to Financial Statements</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -515,16 +556,45 @@ a.citation, a.citation:visited {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#the-accounting-cycle-at-a-glance" id="toc-the-accounting-cycle-at-a-glance" class="nav-link active" data-scroll-target="#the-accounting-cycle-at-a-glance"><span class="header-section-number">B.1</span> The Accounting Cycle, at a Glance</a></li>
+  <li><a href="#our-worked-example-bright-consulting-llc" id="toc-our-worked-example-bright-consulting-llc" class="nav-link" data-scroll-target="#our-worked-example-bright-consulting-llc"><span class="header-section-number">B.2</span> Our Worked Example: Bright Consulting LLC</a></li>
+  <li><a href="#step-1-journalize-transactions" id="toc-step-1-journalize-transactions" class="nav-link" data-scroll-target="#step-1-journalize-transactions"><span class="header-section-number">B.3</span> Step 1: Journalize Transactions</a></li>
+  <li><a href="#step-2-post-to-the-ledger" id="toc-step-2-post-to-the-ledger" class="nav-link" data-scroll-target="#step-2-post-to-the-ledger"><span class="header-section-number">B.4</span> Step 2: Post to the Ledger</a></li>
+  <li><a href="#step-3-unadjusted-trial-balance" id="toc-step-3-unadjusted-trial-balance" class="nav-link" data-scroll-target="#step-3-unadjusted-trial-balance"><span class="header-section-number">B.5</span> Step 3: Unadjusted Trial Balance</a></li>
+  <li><a href="#step-4-adjusting-entries" id="toc-step-4-adjusting-entries" class="nav-link" data-scroll-target="#step-4-adjusting-entries"><span class="header-section-number">B.6</span> Step 4: Adjusting Entries</a>
+  <ul class="collapse">
+  <li><a href="#a-deferred-expense-supplies-used" id="toc-a-deferred-expense-supplies-used" class="nav-link" data-scroll-target="#a-deferred-expense-supplies-used"><span class="header-section-number">B.6.1</span> (a) Deferred Expense: Supplies Used</a></li>
+  <li><a href="#b-deferred-expense-insurance-expired" id="toc-b-deferred-expense-insurance-expired" class="nav-link" data-scroll-target="#b-deferred-expense-insurance-expired"><span class="header-section-number">B.6.2</span> (b) Deferred Expense: Insurance Expired</a></li>
+  <li><a href="#c-depreciation" id="toc-c-depreciation" class="nav-link" data-scroll-target="#c-depreciation"><span class="header-section-number">B.6.3</span> (c) Depreciation</a></li>
+  <li><a href="#d-accrued-expense-unrecorded-salaries" id="toc-d-accrued-expense-unrecorded-salaries" class="nav-link" data-scroll-target="#d-accrued-expense-unrecorded-salaries"><span class="header-section-number">B.6.4</span> (d) Accrued Expense: Unrecorded Salaries</a></li>
+  <li><a href="#e-deferred-revenue-unearned-revenue-now-earned" id="toc-e-deferred-revenue-unearned-revenue-now-earned" class="nav-link" data-scroll-target="#e-deferred-revenue-unearned-revenue-now-earned"><span class="header-section-number">B.6.5</span> (e) Deferred Revenue: Unearned Revenue Now Earned</a></li>
+  </ul></li>
+  <li><a href="#step-5-adjusted-trial-balance" id="toc-step-5-adjusted-trial-balance" class="nav-link" data-scroll-target="#step-5-adjusted-trial-balance"><span class="header-section-number">B.7</span> Step 5: Adjusted Trial Balance</a></li>
+  <li><a href="#step-6-prepare-the-financial-statements" id="toc-step-6-prepare-the-financial-statements" class="nav-link" data-scroll-target="#step-6-prepare-the-financial-statements"><span class="header-section-number">B.8</span> Step 6: Prepare the Financial Statements</a>
+  <ul class="collapse">
+  <li><a href="#income-statement" id="toc-income-statement" class="nav-link" data-scroll-target="#income-statement"><span class="header-section-number">B.8.1</span> Income Statement</a></li>
+  <li><a href="#statement-of-retained-earnings" id="toc-statement-of-retained-earnings" class="nav-link" data-scroll-target="#statement-of-retained-earnings"><span class="header-section-number">B.8.2</span> Statement of Retained Earnings</a></li>
+  <li><a href="#balance-sheet" id="toc-balance-sheet" class="nav-link" data-scroll-target="#balance-sheet"><span class="header-section-number">B.8.3</span> Balance Sheet</a></li>
+  </ul></li>
+  <li><a href="#step-7-closing-entries" id="toc-step-7-closing-entries" class="nav-link" data-scroll-target="#step-7-closing-entries"><span class="header-section-number">B.9</span> Step 7: Closing Entries</a></li>
+  <li><a href="#step-8-post-closing-trial-balance" id="toc-step-8-post-closing-trial-balance" class="nav-link" data-scroll-target="#step-8-post-closing-trial-balance"><span class="header-section-number">B.10</span> Step 8: Post-Closing Trial Balance</a></li>
+  <li><a href="#seeing-the-whole-cycle-in-python" id="toc-seeing-the-whole-cycle-in-python" class="nav-link" data-scroll-target="#seeing-the-whole-cycle-in-python"><span class="header-section-number">B.11</span> Seeing the Whole Cycle in Python</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">B.12</span> Summary</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/msharifbd/accounting-analytics-book/edit/main/appendix-b-financial-statement-basics.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/blob/main/appendix-b-financial-statement-basics.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./appendix-a-python-primer.html">Appendices</a></li><li class="breadcrumb-item"><a href="./appendix-b-financial-statement-basics.html"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Financial Statement Basics</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./appendix-a-python-primer.html">Appendices</a></li><li class="breadcrumb-item"><a href="./appendix-b-financial-statement-basics.html"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">The Accounting Cycle: From Journal to Financial Statements</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Appendix B — Financial Statement Basics</h1>
+<h1 class="title"><span id="sec-accounting-cycle" class="quarto-section-identifier">Appendix B — The Accounting Cycle: From Journal to Financial Statements</span></h1>
 </div>
 
 
@@ -541,8 +611,1143 @@ a.citation, a.citation:visited {
 </header>
 
 
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Who This Appendix Is For
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This appendix is a self-contained primer on the mechanics of the accounting cycle — how a single transaction turns into a full set of financial statements. If you’ve already taken introductory financial accounting, most of this will be a refresher. If accounting analytics is your first real exposure to accounting mechanics, work through this appendix <em>before</em> Chapter 3 — everything in this book assumes you’re comfortable with the concepts covered here.</p>
+<p>This appendix uses one small, complete worked example throughout — a single company, a single month, from its very first transaction all the way to its financial statements and post-closing trial balance — rather than isolated examples for each step. Every number in every table below was computed and verified to tie out exactly.</p>
+</div>
+</div>
+<section id="the-accounting-cycle-at-a-glance" class="level2" data-number="B.1">
+<h2 data-number="B.1" class="anchored" data-anchor-id="the-accounting-cycle-at-a-glance"><span class="header-section-number">B.1</span> The Accounting Cycle, at a Glance</h2>
+<p>The <strong>accounting cycle</strong> is the sequence of steps a business follows, every period, to turn raw transactions into financial statements:</p>
+<ol type="1">
+<li><strong>Journalize transactions</strong> — record each transaction in the general journal as it occurs</li>
+<li><strong>Post to the ledger</strong> — transfer each journal entry into the relevant account</li>
+<li><strong>Prepare an unadjusted trial balance</strong> — list every account and its balance, to confirm debits equal credits</li>
+<li><strong>Record adjusting entries</strong> — update accounts for items not yet captured by day-to-day transactions (accruals, deferrals, depreciation)</li>
+<li><strong>Prepare an adjusted trial balance</strong> — confirm the books still balance after adjustments</li>
+<li><strong>Prepare financial statements</strong> — the income statement, statement of retained earnings, and balance sheet, built directly from the adjusted trial balance</li>
+<li><strong>Record closing entries</strong> — zero out revenue, expense, and dividend accounts, transferring their net effect into retained earnings</li>
+<li><strong>Prepare a post-closing trial balance</strong> — confirm only permanent (balance sheet) accounts carry a balance into the next period</li>
+</ol>
+<p>We’ll now work through all eight steps for one company.</p>
+</section>
+<section id="our-worked-example-bright-consulting-llc" class="level2" data-number="B.2">
+<h2 data-number="B.2" class="anchored" data-anchor-id="our-worked-example-bright-consulting-llc"><span class="header-section-number">B.2</span> Our Worked Example: Bright Consulting LLC</h2>
+<p>Bright Consulting LLC is a new consulting business. We’ll record its very first month of operations, January 2026, from its first transaction through to its financial statements.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>A Quick Refresher on Debits and Credits
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Every transaction affects at least two accounts, and total debits must always equal total credits. The normal balance of each account type:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Account Type</th>
+<th>Normal Balance</th>
+<th>Increases With</th>
+<th>Decreases With</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Assets</td>
+<td>Debit</td>
+<td>Debit</td>
+<td>Credit</td>
+</tr>
+<tr class="even">
+<td>Liabilities</td>
+<td>Credit</td>
+<td>Credit</td>
+<td>Debit</td>
+</tr>
+<tr class="odd">
+<td>Equity</td>
+<td>Credit</td>
+<td>Credit</td>
+<td>Debit</td>
+</tr>
+<tr class="even">
+<td>Revenue</td>
+<td>Credit</td>
+<td>Credit</td>
+<td>Debit</td>
+</tr>
+<tr class="odd">
+<td>Expenses</td>
+<td>Debit</td>
+<td>Debit</td>
+<td>Credit</td>
+</tr>
+</tbody>
+</table>
+<p>If this table doesn’t feel automatic yet, keep it nearby while working through the rest of this appendix.</p>
+</div>
+</div>
+</section>
+<section id="step-1-journalize-transactions" class="level2" data-number="B.3">
+<h2 data-number="B.3" class="anchored" data-anchor-id="step-1-journalize-transactions"><span class="header-section-number">B.3</span> Step 1: Journalize Transactions</h2>
+<p>Here are Bright Consulting’s transactions for January 2026, recorded in the general journal:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Date</th>
+<th>Description</th>
+<th>Account</th>
+<th>Debit</th>
+<th>Credit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Jan 1</td>
+<td>Owner invests cash for common stock</td>
+<td>Cash</td>
+<td>20,000</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>Common Stock</td>
+<td></td>
+<td>20,000</td>
+</tr>
+<tr class="odd">
+<td>Jan 3</td>
+<td>Purchase equipment for cash</td>
+<td>Equipment</td>
+<td>6,000</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>Cash</td>
+<td></td>
+<td>6,000</td>
+</tr>
+<tr class="odd">
+<td>Jan 5</td>
+<td>Pay 12-month insurance policy in advance</td>
+<td>Prepaid Insurance</td>
+<td>2,400</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>Cash</td>
+<td></td>
+<td>2,400</td>
+</tr>
+<tr class="odd">
+<td>Jan 8</td>
+<td>Purchase office supplies on account</td>
+<td>Supplies</td>
+<td>800</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>Accounts Payable</td>
+<td></td>
+<td>800</td>
+</tr>
+<tr class="odd">
+<td>Jan 10</td>
+<td>Provide consulting services for cash</td>
+<td>Cash</td>
+<td>5,000</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>Service Revenue</td>
+<td></td>
+<td>5,000</td>
+</tr>
+<tr class="odd">
+<td>Jan 15</td>
+<td>Provide consulting services on account</td>
+<td>Accounts Receivable</td>
+<td>3,500</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>Service Revenue</td>
+<td></td>
+<td>3,500</td>
+</tr>
+<tr class="odd">
+<td>Jan 18</td>
+<td>Pay employee salaries</td>
+<td>Salaries Expense</td>
+<td>2,200</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>Cash</td>
+<td></td>
+<td>2,200</td>
+</tr>
+<tr class="odd">
+<td>Jan 20</td>
+<td>Receive cash in advance for February services</td>
+<td>Cash</td>
+<td>1,500</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>Unearned Revenue</td>
+<td></td>
+<td>1,500</td>
+</tr>
+<tr class="odd">
+<td>Jan 22</td>
+<td>Pay accounts payable</td>
+<td>Accounts Payable</td>
+<td>800</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>Cash</td>
+<td></td>
+<td>800</td>
+</tr>
+<tr class="odd">
+<td>Jan 28</td>
+<td>Collect cash from customer on account</td>
+<td>Cash</td>
+<td>2,000</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>Accounts Receivable</td>
+<td></td>
+<td>2,000</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Notice Two Transactions That Are Easy to Misread
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The January 5 entry (prepaid insurance) and January 20 entry (cash received in advance) are <strong>not</strong> revenue or expense at the time they’re recorded — Bright Consulting hasn’t yet used the insurance or performed the February services. Both will need an adjusting entry later, in Step 4, once some of that time or service has actually passed. This is one of the most common sources of confusion for students new to accounting: cash changing hands does not necessarily mean revenue or expense has been earned or incurred yet.</p>
+</div>
+</div>
+<p><strong>Check:</strong> total debits across all ten entries = $44,200; total credits = $44,200. They match, which is the first sign nothing was recorded incorrectly.</p>
+</section>
+<section id="step-2-post-to-the-ledger" class="level2" data-number="B.4">
+<h2 data-number="B.4" class="anchored" data-anchor-id="step-2-post-to-the-ledger"><span class="header-section-number">B.4</span> Step 2: Post to the Ledger</h2>
+<p><strong>Posting</strong> means transferring each journal entry into its own running account (traditionally drawn as a “T-account,” named for its shape). Here’s Bright Consulting’s Cash T-account after posting every January transaction involving cash:</p>
+<pre><code>                              Cash
+--------------------------------------------------------------
+Jan 1    20,000  |  Jan 3     6,000
+Jan 10    5,000  |  Jan 5     2,400
+Jan 20    1,500  |  Jan 18    2,200
+Jan 28    2,000  |  Jan 22      800
+--------------------------------------------------------------
+Total    28,500  |  Total    11,400
+
+Ending balance: 28,500 - 11,400 = 17,100 (debit balance, as expected for an asset)</code></pre>
+<p>Every other account gets its own T-account the same way. Once every journal entry has been posted, you’re ready for Step 3.</p>
+</section>
+<section id="step-3-unadjusted-trial-balance" class="level2" data-number="B.5">
+<h2 data-number="B.5" class="anchored" data-anchor-id="step-3-unadjusted-trial-balance"><span class="header-section-number">B.5</span> Step 3: Unadjusted Trial Balance</h2>
+<p>A <strong>trial balance</strong> simply lists every account and its ending balance, to confirm total debits still equal total credits after posting.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Account</th>
+<th>Debit</th>
+<th>Credit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Cash</td>
+<td>17,100</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Accounts Receivable</td>
+<td>1,500</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Supplies</td>
+<td>800</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Prepaid Insurance</td>
+<td>2,400</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Equipment</td>
+<td>6,000</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Accounts Payable</td>
+<td></td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>Unearned Revenue</td>
+<td></td>
+<td>1,500</td>
+</tr>
+<tr class="even">
+<td>Common Stock</td>
+<td></td>
+<td>20,000</td>
+</tr>
+<tr class="odd">
+<td>Service Revenue</td>
+<td></td>
+<td>8,500</td>
+</tr>
+<tr class="even">
+<td>Salaries Expense</td>
+<td>2,200</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><strong>Total</strong></td>
+<td><strong>29,000</strong></td>
+<td><strong>29,000</strong></td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Why Accounts Payable Shows Zero
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Accounts Payable was debited $800 (the January 22 payment) and credited $800 (the January 8 purchase) — the account was opened and fully paid off within the same month, so its net balance happens to be zero. It’s still listed, since a real trial balance includes every account that had <em>any</em> activity, even if the ending balance nets to nothing.</p>
+</div>
+</div>
+<p>Debits equal credits ($29,000 = $29,000), so we’re ready to move on. But notice this trial balance is <em>incomplete</em> — it doesn’t yet reflect the insurance that’s expired, the supplies that have been used, or several other things that happened silently over the course of the month. That’s exactly what Step 4 fixes.</p>
+</section>
+<section id="step-4-adjusting-entries" class="level2" data-number="B.6">
+<h2 data-number="B.6" class="anchored" data-anchor-id="step-4-adjusting-entries"><span class="header-section-number">B.6</span> Step 4: Adjusting Entries</h2>
+<p><strong>Adjusting entries</strong> update the books at the end of a period for economic events that occurred but weren’t triggered by an obvious external transaction — no invoice arrived, no cash changed hands, but something real happened that the financial statements need to reflect. There are four common types, all illustrated below.</p>
+<section id="a-deferred-expense-supplies-used" class="level3" data-number="B.6.1">
+<h3 data-number="B.6.1" class="anchored" data-anchor-id="a-deferred-expense-supplies-used"><span class="header-section-number">B.6.1</span> (a) Deferred Expense: Supplies Used</h3>
+<p>Bright Consulting purchased $800 of supplies on January 8. A physical count on January 31 shows $300 worth remaining — meaning $500 was used during the month.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Account</th>
+<th>Debit</th>
+<th>Credit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Supplies Expense</td>
+<td>500</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Supplies</td>
+<td></td>
+<td>500</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="b-deferred-expense-insurance-expired" class="level3" data-number="B.6.2">
+<h3 data-number="B.6.2" class="anchored" data-anchor-id="b-deferred-expense-insurance-expired"><span class="header-section-number">B.6.2</span> (b) Deferred Expense: Insurance Expired</h3>
+<p>The $2,400 insurance policy purchased January 5 covers 12 months. One month (1/12) has now passed: $2,400 / 12 = $200.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Account</th>
+<th>Debit</th>
+<th>Credit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Insurance Expense</td>
+<td>200</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Prepaid Insurance</td>
+<td></td>
+<td>200</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="c-depreciation" class="level3" data-number="B.6.3">
+<h3 data-number="B.6.3" class="anchored" data-anchor-id="c-depreciation"><span class="header-section-number">B.6.3</span> (c) Depreciation</h3>
+<p>The $6,000 equipment purchased January 3 is expected to last 5 years (60 months) with no salvage value, depreciated evenly: $6,000 / 60 = $100 per month.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Account</th>
+<th>Debit</th>
+<th>Credit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Depreciation Expense</td>
+<td>100</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Accumulated Depreciation — Equipment</td>
+<td></td>
+<td>100</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Why a Separate “Accumulated Depreciation” Account?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Depreciation is never credited directly to the Equipment account. Instead, <strong>Accumulated Depreciation</strong> is a <em>contra-asset</em> account — it’s reported as a deduction from Equipment on the balance sheet, but keeps the original cost ($6,000) and the total depreciation taken visible separately, rather than silently shrinking the Equipment balance itself.</p>
+</div>
+</div>
+</section>
+<section id="d-accrued-expense-unrecorded-salaries" class="level3" data-number="B.6.4">
+<h3 data-number="B.6.4" class="anchored" data-anchor-id="d-accrued-expense-unrecorded-salaries"><span class="header-section-number">B.6.4</span> (d) Accrued Expense: Unrecorded Salaries</h3>
+<p>By January 31, employees have earned an additional $400 in wages that won’t actually be paid until February — but the expense belongs to January, since that’s when the work was performed.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Account</th>
+<th>Debit</th>
+<th>Credit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Salaries Expense</td>
+<td>400</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Salaries Payable</td>
+<td></td>
+<td>400</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="e-deferred-revenue-unearned-revenue-now-earned" class="level3" data-number="B.6.5">
+<h3 data-number="B.6.5" class="anchored" data-anchor-id="e-deferred-revenue-unearned-revenue-now-earned"><span class="header-section-number">B.6.5</span> (e) Deferred Revenue: Unearned Revenue Now Earned</h3>
+<p>Recall the $1,500 received January 20 for February services. By January 31, Bright Consulting has actually performed $500 worth of that work already.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Account</th>
+<th>Debit</th>
+<th>Credit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Unearned Revenue</td>
+<td>500</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Service Revenue</td>
+<td></td>
+<td>500</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>The Pattern Behind All Five Adjustments
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Every adjusting entry above does the same job: it moves something out of a balance sheet “holding” account (Supplies, Prepaid Insurance, Unearned Revenue) or recognizes something not yet recorded at all (Depreciation, accrued Salaries) and puts it in the right period’s income statement. None of these five entries involve cash — that’s precisely why they’d be missed without a deliberate adjusting step at period-end.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="step-5-adjusted-trial-balance" class="level2" data-number="B.7">
+<h2 data-number="B.7" class="anchored" data-anchor-id="step-5-adjusted-trial-balance"><span class="header-section-number">B.7</span> Step 5: Adjusted Trial Balance</h2>
+<p>After posting all five adjusting entries, here’s the complete adjusted trial balance:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Account</th>
+<th>Debit</th>
+<th>Credit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Cash</td>
+<td>17,100</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Accounts Receivable</td>
+<td>1,500</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Supplies</td>
+<td>300</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Prepaid Insurance</td>
+<td>2,200</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Equipment</td>
+<td>6,000</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Accumulated Depreciation — Equipment</td>
+<td></td>
+<td>100</td>
+</tr>
+<tr class="odd">
+<td>Accounts Payable</td>
+<td></td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>Salaries Payable</td>
+<td></td>
+<td>400</td>
+</tr>
+<tr class="odd">
+<td>Unearned Revenue</td>
+<td></td>
+<td>1,000</td>
+</tr>
+<tr class="even">
+<td>Common Stock</td>
+<td></td>
+<td>20,000</td>
+</tr>
+<tr class="odd">
+<td>Service Revenue</td>
+<td></td>
+<td>9,000</td>
+</tr>
+<tr class="even">
+<td>Salaries Expense</td>
+<td>2,600</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Supplies Expense</td>
+<td>500</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Insurance Expense</td>
+<td>200</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Depreciation Expense</td>
+<td>100</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>Total</strong></td>
+<td><strong>30,500</strong></td>
+<td><strong>30,500</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Debits still equal credits ($30,500 = $30,500) — the adjustments were posted correctly.</p>
+</section>
+<section id="step-6-prepare-the-financial-statements" class="level2" data-number="B.8">
+<h2 data-number="B.8" class="anchored" data-anchor-id="step-6-prepare-the-financial-statements"><span class="header-section-number">B.8</span> Step 6: Prepare the Financial Statements</h2>
+<p>The adjusted trial balance contains everything needed to build all three core financial statements — in a specific order, since each one feeds the next.</p>
+<section id="income-statement" class="level3" data-number="B.8.1">
+<h3 data-number="B.8.1" class="anchored" data-anchor-id="income-statement"><span class="header-section-number">B.8.1</span> Income Statement</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Bright Consulting LLC — Income Statement</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>For the Month Ended January 31, 2026</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Service Revenue</td>
+<td></td>
+<td>9,000</td>
+</tr>
+<tr class="odd">
+<td>Expenses:</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>&nbsp;&nbsp;Salaries Expense</td>
+<td>2,600</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>&nbsp;&nbsp;Supplies Expense</td>
+<td>500</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>&nbsp;&nbsp;Insurance Expense</td>
+<td>200</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>&nbsp;&nbsp;Depreciation Expense</td>
+<td>100</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>&nbsp;&nbsp;Total Expenses</td>
+<td></td>
+<td>3,400</td>
+</tr>
+<tr class="odd">
+<td><strong>Net Income</strong></td>
+<td></td>
+<td><strong>5,600</strong></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="statement-of-retained-earnings" class="level3" data-number="B.8.2">
+<h3 data-number="B.8.2" class="anchored" data-anchor-id="statement-of-retained-earnings"><span class="header-section-number">B.8.2</span> Statement of Retained Earnings</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Bright Consulting LLC — Statement of Retained Earnings</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>For the Month Ended January 31, 2026</strong></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Beginning Retained Earnings (new company)</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>Add: Net Income</td>
+<td>5,600</td>
+</tr>
+<tr class="even">
+<td>Less: Dividends</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td><strong>Ending Retained Earnings</strong></td>
+<td><strong>5,600</strong></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="balance-sheet" class="level3" data-number="B.8.3">
+<h3 data-number="B.8.3" class="anchored" data-anchor-id="balance-sheet"><span class="header-section-number">B.8.3</span> Balance Sheet</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Bright Consulting LLC — Balance Sheet</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>As of January 31, 2026</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>Assets</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Cash</td>
+<td></td>
+<td>17,100</td>
+</tr>
+<tr class="even">
+<td>Accounts Receivable</td>
+<td></td>
+<td>1,500</td>
+</tr>
+<tr class="odd">
+<td>Supplies</td>
+<td></td>
+<td>300</td>
+</tr>
+<tr class="even">
+<td>Prepaid Insurance</td>
+<td></td>
+<td>2,200</td>
+</tr>
+<tr class="odd">
+<td>Equipment</td>
+<td>6,000</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Less: Accumulated Depreciation</td>
+<td>(100)</td>
+<td>5,900</td>
+</tr>
+<tr class="odd">
+<td><strong>Total Assets</strong></td>
+<td></td>
+<td><strong>27,000</strong></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><strong>Liabilities</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Accounts Payable</td>
+<td></td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>Salaries Payable</td>
+<td></td>
+<td>400</td>
+</tr>
+<tr class="even">
+<td>Unearned Revenue</td>
+<td></td>
+<td>1,000</td>
+</tr>
+<tr class="odd">
+<td><strong>Total Liabilities</strong></td>
+<td></td>
+<td><strong>1,400</strong></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><strong>Equity</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Common Stock</td>
+<td></td>
+<td>20,000</td>
+</tr>
+<tr class="odd">
+<td>Retained Earnings</td>
+<td></td>
+<td>5,600</td>
+</tr>
+<tr class="even">
+<td><strong>Total Equity</strong></td>
+<td></td>
+<td><strong>25,600</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>Total Liabilities and Equity</strong></td>
+<td></td>
+<td><strong>27,000</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Total Assets ($27,000) = Total Liabilities and Equity ($27,000).</strong> The balance sheet balances, confirming everything up to this point was recorded and adjusted correctly.</p>
+</section>
+</section>
+<section id="step-7-closing-entries" class="level2" data-number="B.9">
+<h2 data-number="B.9" class="anchored" data-anchor-id="step-7-closing-entries"><span class="header-section-number">B.9</span> Step 7: Closing Entries</h2>
+<p><strong>Closing entries</strong> reset every <em>temporary</em> account (revenue, expenses, and dividends) to zero at the end of the period, transferring their combined effect into Retained Earnings — a <em>permanent</em> account that carries forward into the next period. This is what allows revenue and expense accounts to start fresh at zero every new period, rather than accumulating forever.</p>
+<p><strong>Closing entry 1 — close revenue:</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Account</th>
+<th>Debit</th>
+<th>Credit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Service Revenue</td>
+<td>9,000</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Income Summary</td>
+<td></td>
+<td>9,000</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Closing entry 2 — close expenses:</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Account</th>
+<th>Debit</th>
+<th>Credit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Income Summary</td>
+<td>3,400</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Salaries Expense</td>
+<td></td>
+<td>2,600</td>
+</tr>
+<tr class="odd">
+<td>Supplies Expense</td>
+<td></td>
+<td>500</td>
+</tr>
+<tr class="even">
+<td>Insurance Expense</td>
+<td></td>
+<td>200</td>
+</tr>
+<tr class="odd">
+<td>Depreciation Expense</td>
+<td></td>
+<td>100</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Closing entry 3 — close Income Summary to Retained Earnings:</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Account</th>
+<th>Debit</th>
+<th>Credit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Income Summary</td>
+<td>5,600</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Retained Earnings</td>
+<td></td>
+<td>5,600</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>What Is “Income Summary”?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Income Summary is a temporary clearing account used only during the closing process — it exists purely to collect the total of all revenue and expense accounts in one place, before that net figure (here, $5,600 — exactly this period’s net income) moves into Retained Earnings. It never appears on any financial statement and always ends the closing process with a zero balance.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>A Fourth Closing Entry, If Dividends Were Paid
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Bright Consulting paid no dividends this month, so there’s no fourth entry here. If it had, a closing entry would debit Retained Earnings and credit Dividends directly (Dividends does not flow through Income Summary, since dividends are a distribution of profit, not a component of it).</p>
+</div>
+</div>
+</section>
+<section id="step-8-post-closing-trial-balance" class="level2" data-number="B.10">
+<h2 data-number="B.10" class="anchored" data-anchor-id="step-8-post-closing-trial-balance"><span class="header-section-number">B.10</span> Step 8: Post-Closing Trial Balance</h2>
+<p>After posting all closing entries, only <strong>permanent</strong> (balance sheet) accounts carry a balance — every revenue, expense, and Income Summary account is now exactly zero.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Account</th>
+<th>Debit</th>
+<th>Credit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Cash</td>
+<td>17,100</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Accounts Receivable</td>
+<td>1,500</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Supplies</td>
+<td>300</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Prepaid Insurance</td>
+<td>2,200</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Equipment</td>
+<td>6,000</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Accumulated Depreciation — Equipment</td>
+<td></td>
+<td>100</td>
+</tr>
+<tr class="odd">
+<td>Accounts Payable</td>
+<td></td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>Salaries Payable</td>
+<td></td>
+<td>400</td>
+</tr>
+<tr class="odd">
+<td>Unearned Revenue</td>
+<td></td>
+<td>1,000</td>
+</tr>
+<tr class="even">
+<td>Common Stock</td>
+<td></td>
+<td>20,000</td>
+</tr>
+<tr class="odd">
+<td>Retained Earnings</td>
+<td></td>
+<td>5,600</td>
+</tr>
+<tr class="even">
+<td><strong>Total</strong></td>
+<td><strong>27,100</strong></td>
+<td><strong>27,100</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Debits equal credits one final time ($27,100 = $27,100), and this trial balance’s ending balances become the <strong>beginning</strong> balances for February — the accounting cycle then repeats.</p>
+</section>
+<section id="seeing-the-whole-cycle-in-python" class="level2" data-number="B.11">
+<h2 data-number="B.11" class="anchored" data-anchor-id="seeing-the-whole-cycle-in-python"><span class="header-section-number">B.11</span> Seeing the Whole Cycle in Python</h2>
+<p>Since this book uses Python throughout, it’s worth briefly seeing how naturally this entire cycle maps onto a pandas DataFrame — exactly the structure used for the general ledger datasets in Chapters 3-4.</p>
+<div id="610aacfd" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Every journal entry (including adjusting entries) as one tidy table --</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># this is exactly the shape of general_ledger_sample.csv from Chapter 3</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>entries <span class="op">=</span> [</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"Jan 1"</span>, <span class="st">"Cash"</span>, <span class="dv">20000</span>, <span class="dv">0</span>), (<span class="st">"Jan 1"</span>, <span class="st">"Common Stock"</span>, <span class="dv">0</span>, <span class="dv">20000</span>),</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"Jan 3"</span>, <span class="st">"Equipment"</span>, <span class="dv">6000</span>, <span class="dv">0</span>), (<span class="st">"Jan 3"</span>, <span class="st">"Cash"</span>, <span class="dv">0</span>, <span class="dv">6000</span>),</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"Jan 31 (a)"</span>, <span class="st">"Supplies Expense"</span>, <span class="dv">500</span>, <span class="dv">0</span>), (<span class="st">"Jan 31 (a)"</span>, <span class="st">"Supplies"</span>, <span class="dv">0</span>, <span class="dv">500</span>),</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"Jan 31 (e)"</span>, <span class="st">"Unearned Revenue"</span>, <span class="dv">500</span>, <span class="dv">0</span>), (<span class="st">"Jan 31 (e)"</span>, <span class="st">"Service Revenue"</span>, <span class="dv">0</span>, <span class="dv">500</span>),</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ... the remaining entries from this appendix would continue here</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>journal <span class="op">=</span> pd.DataFrame(entries, columns<span class="op">=</span>[<span class="st">"date"</span>, <span class="st">"account"</span>, <span class="st">"debit"</span>, <span class="st">"credit"</span>])</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># A trial balance is just a groupby -- the same technique from Chapter 4</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>trial_balance <span class="op">=</span> journal.groupby(<span class="st">"account"</span>)[[<span class="st">"debit"</span>, <span class="st">"credit"</span>]].<span class="bu">sum</span>()</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>trial_balance[<span class="st">"balance"</span>] <span class="op">=</span> trial_balance[<span class="st">"debit"</span>] <span class="op">-</span> trial_balance[<span class="st">"credit"</span>]</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>trial_balance</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div>
 
 
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">debit</th>
+<th data-quarto-table-cell-role="th">credit</th>
+<th data-quarto-table-cell-role="th">balance</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">account</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Cash</th>
+<td>20000</td>
+<td>6000</td>
+<td>14000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Common Stock</th>
+<td>0</td>
+<td>20000</td>
+<td>-20000</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Equipment</th>
+<td>6000</td>
+<td>0</td>
+<td>6000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Service Revenue</th>
+<td>0</td>
+<td>500</td>
+<td>-500</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Supplies</th>
+<td>0</td>
+<td>500</td>
+<td>-500</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Supplies Expense</th>
+<td>500</td>
+<td>0</td>
+<td>500</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Unearned Revenue</th>
+<td>500</td>
+<td>0</td>
+<td>500</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>The Connection to This Book
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Every general ledger dataset used in Chapters 3 through 11 <em>is</em> the journal from this appendix, just at a larger scale — hundreds or thousands of entries instead of ten. A trial balance is a <code>groupby</code>. A balance sheet is a filtered, reshaped version of that same trial balance. The audit tests in Chapter 9 look for unusual patterns in exactly the kind of journal entries you just recorded by hand in this appendix. If the mechanics in this appendix make sense, you already understand <em>what</em> the data in the rest of this book represents — the remaining chapters are about doing this same work at a scale no one could manage by hand.</p>
+</div>
+</div>
+</section>
+<section id="summary" class="level2" data-number="B.12">
+<h2 data-number="B.12" class="anchored" data-anchor-id="summary"><span class="header-section-number">B.12</span> Summary</h2>
+<ul>
+<li>The accounting cycle has eight steps: journalize, post, unadjusted trial balance, adjusting entries, adjusted trial balance, financial statements, closing entries, post-closing trial balance.</li>
+<li>Adjusting entries fall into four patterns: deferred expenses (supplies, prepaid insurance), depreciation, accrued expenses (unpaid salaries), and deferred revenue (unearned revenue now earned) — none involve cash changing hands at the moment of adjustment.</li>
+<li>Financial statements are prepared in a specific order because each one depends on the last: the income statement’s net income feeds the statement of retained earnings, whose ending balance feeds the balance sheet.</li>
+<li>Closing entries reset temporary accounts (revenue, expenses, dividends) to zero via the Income Summary account, transferring the period’s net income into Retained Earnings, a permanent account.</li>
+<li>A post-closing trial balance should contain only balance sheet accounts, and its ending balances become the next period’s beginning balances — the cycle then repeats.</li>
+<li>Every technique in this appendix — the journal, the trial balance, the adjustments — is the same structure this entire book works with in pandas and polars, just at a much larger scale.</li>
+</ul>
+
+
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -978,7 +2183,7 @@ a.citation, a.citation:visited {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><ul><li><a href="https://github.com/msharifbd/accounting-analytics-book/edit/main/appendix-b-financial-statement-basics.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/blob/main/appendix-b-financial-statement-basics.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/msharifbd/accounting-analytics-book/edit/main/appendix-b-financial-statement-basics.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/blob/main/appendix-b-financial-statement-basics.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This book was built with <a href="https://quarto.org/">Quarto</a></p>
 </div>

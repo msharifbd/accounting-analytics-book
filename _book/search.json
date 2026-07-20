@@ -1913,6 +1913,94 @@
     ]
   },
   {
+    "objectID": "17-capstone-project.html",
+    "href": "17-capstone-project.html",
+    "title": "17  Capstone Project",
+    "section": "",
+    "text": "17.1 The Scenario\nYou’ve been engaged to analyze one fiscal year (2025) of data for Alderwood Supply Co., a mid-sized distribution company. You have access to:",
+    "crumbs": [
+      "Part V: Communication and Capstone",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Capstone Project</span>"
+    ]
+  },
+  {
+    "objectID": "17-capstone-project.html#the-scenario",
+    "href": "17-capstone-project.html#the-scenario",
+    "title": "17  Capstone Project",
+    "section": "",
+    "text": "File\nDescription\n\n\n\n\ncapstone_chart_of_accounts.csv\nThe company’s chart of accounts (21 accounts)\n\n\ncapstone_general_ledger.csv\nA sample of FY2025 transaction-level journal entries (692 lines, 346 entries)\n\n\ncapstone_income_statement.csv\nIncome statements for FY2024 and FY2025\n\n\ncapstone_balance_sheet.csv\nBalance sheets for FY2024 and FY2025\n\n\ncapstone_sales_transactions.csv\nFY2025 invoice-level sales and accounts receivable detail (151 invoices)\n\n\ncapstone_department_budget_actual.csv\nFY2025 budget-to-actual spending by department and category\n\n\n\n\n\n\n\n\n\nImportantA Naming Note\n\n\n\nEvery file in this capstone is prefixed with capstone_, even though a few cover the same type of data as earlier chapters (an income statement, a chart of accounts, sales transactions). This is deliberate: earlier chapters already have files named income_statement.csv, balance_sheet.csv, chart_of_accounts.csv, and sales_transactions.csv sitting in your project root, and this capstone uses a different fictional company with completely different numbers. Keeping the capstone_ prefix means both sets of files can coexist in the same project folder without one silently overwriting the other.\n\n\n\n\n\n\n\n\nImportantThis Data Has Not Been Pre-Cleaned or Pre-Explained\n\n\n\nEvery dataset in Chapters 1-16 came with a narrative explaining exactly what to look for. This one doesn’t. Some of it may be completely unremarkable. Some of it may not be. Part of this capstone is deciding, using the techniques from this book, what’s actually worth investigating and building a defensible case — not being told in advance where to look. Treat the general ledger sample specifically the way Chapter 9 treated sampling: as a sample of the year’s activity, not a complete population, and reason about your conclusions accordingly.",
+    "crumbs": [
+      "Part V: Communication and Capstone",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Capstone Project</span>"
+    ]
+  },
+  {
+    "objectID": "17-capstone-project.html#choosing-a-track",
+    "href": "17-capstone-project.html#choosing-a-track",
+    "title": "17  Capstone Project",
+    "section": "17.2 Choosing a Track",
+    "text": "17.2 Choosing a Track\nPick one primary track to focus your capstone on. All three draw on the same underlying company, but emphasize different chapters. Regardless of track, you’re expected to draw on the foundational skills from Chapters 3-6 (data fundamentals, wrangling, EDA, visualization) throughout.\n\n17.2.1 Track A: Audit & Fraud Analytics\nPrimarily draws on Chapters 8-10 (management accounting variance concepts, audit analytics, fraud detection)\nUsing capstone_general_ledger.csv, apply journal entry testing, sampling, and anomaly detection techniques to identify transactions or patterns worth flagging for further review. Build a composite risk score. Decide which flagged items you’d escalate for follow-up and which you’d consider immaterial or explainable.\n\n\n17.2.2 Track B: Financial Reporting & Revenue Analytics\nPrimarily draws on Chapters 7 and 11-12 (financial statement analysis, revenue recognition, tax)\nUsing capstone_income_statement.csv, capstone_balance_sheet.csv, and capstone_sales_transactions.csv, perform ratio and trend analysis across the two years provided, and evaluate the sales data for revenue recognition risk (timing concentration, invoice-to-shipment patterns, AR aging). Build a short financial health assessment.\n\n\n17.2.3 Track C: Management Accounting & Predictive Analytics\nPrimarily draws on Chapter 8 (management accounting) and Chapter 13 (predictive modeling)\nUsing capstone_department_budget_actual.csv alongside the financial statements, analyze budget variances by department and category, and build a simple predictive model (for example, predicting which department/category combinations are most likely to show a large variance, or modeling a cost driver relationship) using techniques from Chapter 13.\n\n\n\n\n\n\nTipNot Sure Which Track to Pick?\n\n\n\nTrack A tends to suit students who enjoyed Chapters 8-10 most and like investigative, detective-style work. Track B suits students more interested in external financial analysis and reporting. Track C suits students who want more hands-on time with the modeling techniques from Chapter 13. There’s no wrong choice — pick based on genuine interest, since that will show in the quality of your final report.",
+    "crumbs": [
+      "Part V: Communication and Capstone",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Capstone Project</span>"
+    ]
+  },
+  {
+    "objectID": "17-capstone-project.html#deliverables",
+    "href": "17-capstone-project.html#deliverables",
+    "title": "17  Capstone Project",
+    "section": "17.3 Deliverables",
+    "text": "17.3 Deliverables\n\nA rendered Quarto report (HTML, PDF, or both) presenting your analysis, findings, and recommendations — written for a specific, named audience (e.g., “the audit committee,” “the CFO,” “the controller”), not a generic reader.\nClean, reproducible code supporting every claim in your report, following the practices from Chapter 16: a fixed random seed anywhere randomness is used, a documented package environment, and clear organization so someone else could rerun your analysis and get the same result.\nA short presentation (5-10 minutes, in-class or recorded, per your instructor’s preference) summarizing your findings for a non-technical audience — practice communicating results the way Chapter 6 and Chapter 7 emphasized, not just producing them.\n\n\n\n\n\n\n\nTipIndividual or Group?\n\n\n\nThis capstone works either individually or in small groups of 2-3, at your instructor’s discretion. If working in a group, your report should briefly note who contributed to which sections.",
+    "crumbs": [
+      "Part V: Communication and Capstone",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Capstone Project</span>"
+    ]
+  },
+  {
+    "objectID": "17-capstone-project.html#suggested-milestones",
+    "href": "17-capstone-project.html#suggested-milestones",
+    "title": "17  Capstone Project",
+    "section": "17.4 Suggested Milestones",
+    "text": "17.4 Suggested Milestones\nA capstone with no intermediate checkpoints tends to become a last-minute scramble. A reasonable pacing:\n\n\n\n\n\n\n\nWeek\nMilestone\n\n\n\n\n1\nExplore all provided datasets, choose a track, and submit 2-3 specific questions you plan to investigate\n\n\n1-2\nPerform your core analysis; meet with your instructor or peers for a brief progress check\n\n\n2\nDraft your Quarto report; conduct a peer review exchange with another student or group\n\n\n2\nFinalize your report, prepare your presentation, and submit",
+    "crumbs": [
+      "Part V: Communication and Capstone",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Capstone Project</span>"
+    ]
+  },
+  {
+    "objectID": "17-capstone-project.html#example-starter-questions",
+    "href": "17-capstone-project.html#example-starter-questions",
+    "title": "17  Capstone Project",
+    "section": "17.5 Example Starter Questions",
+    "text": "17.5 Example Starter Questions\nYou don’t have to use these exact questions, but they illustrate the kind of open-ended question this capstone expects, and roughly how much depth is expected per track.\nTrack A (Audit & Fraud): - Does the general ledger sample balance? If not, what does that tell you, and how would you investigate it? - Which journal entries score highest on a composite red-flag basis, and what specific follow-up would you request for each? - Are there any postings whose description field is worth a second look, independent of their dollar amount?\nTrack B (Financial Reporting & Revenue): - How did the company’s profitability, liquidity, and leverage change from FY2024 to FY2025, and what’s driving the biggest change? - Does the sales data show any quarter-end concentration or invoice-to-shipment timing patterns worth flagging? - Which customers, if any, warrant a closer look based on payment behavior or revenue timing?\nTrack C (Management Accounting & Predictive): - Which department/category combinations show the largest budget variances, and are they favorable or unfavorable? - Can you build a model that predicts which combinations are likely to see a large variance, using the patterns in this year’s data? - What would you recommend to management based on this year’s variance patterns going into next year’s budget cycle?",
+    "crumbs": [
+      "Part V: Communication and Capstone",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Capstone Project</span>"
+    ]
+  },
+  {
+    "objectID": "17-capstone-project.html#grading-rubric",
+    "href": "17-capstone-project.html#grading-rubric",
+    "title": "17  Capstone Project",
+    "section": "17.6 Grading Rubric",
+    "text": "17.6 Grading Rubric\n\n\n\n\n\n\n\nCriterion\nWhat It Assesses\n\n\n\n\nTechnical correctness\nAre your calculations, code, and statistical methods correct and appropriately applied?\n\n\nTechnique selection\nDid you choose analytical methods appropriate to your question, rather than applying a technique just because it was covered in the book?\n\n\nDepth of investigation\nDid you follow up on interesting findings, or stop at the first surface-level observation?\n\n\nClarity of communication\nWould your named audience actually understand your findings and recommendations?\n\n\nReproducibility\nCould someone else rerun your code and get your exact results?\n\n\nPresentation\nDid you communicate your findings clearly and appropriately for a non-technical audience?\n\n\n\n\n\n\n\n\n\nImportantA Note on “Finding Something”\n\n\n\nNot every dataset contains a dramatic discovery, and manufacturing a finding that isn’t really there is a worse outcome than honestly reporting “I investigated X and found no significant concern.” Chapter 12 made exactly this point about a weak regression result — an honest null finding, properly investigated and clearly communicated, is a legitimate and valuable outcome. Grading rewards rigorous investigation and clear communication, not a dramatic conclusion for its own sake.",
+    "crumbs": [
+      "Part V: Communication and Capstone",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Capstone Project</span>"
+    ]
+  },
+  {
+    "objectID": "17-capstone-project.html#final-thoughts",
+    "href": "17-capstone-project.html#final-thoughts",
+    "title": "17  Capstone Project",
+    "section": "17.7 Final Thoughts",
+    "text": "17.7 Final Thoughts\nEvery technique in this capstone — reading messy data, computing the right summary statistic, building a red-flag score, checking a model’s assumptions, communicating a result honestly — is something you’ve now done at least once in this book, on data built specifically to teach that one skill in isolation. The capstone’s real challenge isn’t learning anything new; it’s deciding, on your own, which of those sixteen chapters’ worth of tools actually fit the questions in front of you, and using them with the same judgment a professional would bring to an unfamiliar engagement. That judgment is the actual subject this course has been teaching all along.",
+    "crumbs": [
+      "Part V: Communication and Capstone",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Capstone Project</span>"
+    ]
+  },
+  {
     "objectID": "references.html",
     "href": "references.html",
     "title": "References",
@@ -1920,6 +2008,149 @@
     "text": "Financial Accounting Standards Board (FASB). 2014. Revenue from\nContracts with Customers. https://asc.fasb.org/1943274/2147480014.\n\n\nPublic Company Accounting Oversight Board (PCAOB). 2024a.\nAS 2401: Consideration of\nFraud in a Financial Statement\nAudit. https://pcaobus.org/oversight/standards/auditing-standards/details/AS2401.\n\n\nPublic Company Accounting Oversight Board (PCAOB). 2024b. Staff\nUpdate on Outreach Activities\nRelated to the Integration of\nGenerative Artificial\nIntelligence in Audits and\nFinancial Reporting. https://pcaobus.org/news-events/news-releases/news-release-detail/pcaob-staff-shares-observations-from-outreach-on-use-of-generative-artificial-intelligence-in-audits-and-financial-reporting.\n\n\nStobierski, Tim. 2021. “Data Wrangling:\nWhat It Is & Why\nIt’s Important.” In Harvard\nBusiness School Online. https://online.hbs.edu/blog/post/data-wrangling.\n\n\nThe International Auditing and Assurance Standards Board (IAASB). 2024.\nIAASB Unveils New\nTechnology Position to Shape the\nFuture of Audit and Assurance\nStandards. https://www.iaasb.org/news-events/2024-10/iaasb-unveils-new-technology-position-shape-future-audit-and-assurance-standards.\n\n\nUS Securities & Exchange Commission (US SEC). 2025.\nSEC Creates Task\nForce to Tap Artificial\nIntelligence for Enhanced\nInnovation and Efficiency Across\nthe Agency. https://www.sec.gov/newsroom/press-releases/2025-103-sec-creates-task-force-tap-artificial-intelligence-enhanced-innovation-efficiency-across-agency.",
     "crumbs": [
       "References"
+    ]
+  },
+  {
+    "objectID": "appendix-b-financial-statement-basics.html",
+    "href": "appendix-b-financial-statement-basics.html",
+    "title": "Appendix B — The Accounting Cycle: From Journal to Financial Statements",
+    "section": "",
+    "text": "B.1 The Accounting Cycle, at a Glance\nThe accounting cycle is the sequence of steps a business follows, every period, to turn raw transactions into financial statements:\nWe’ll now work through all eight steps for one company.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>The Accounting Cycle: From Journal to Financial Statements</span>"
+    ]
+  },
+  {
+    "objectID": "appendix-b-financial-statement-basics.html#the-accounting-cycle-at-a-glance",
+    "href": "appendix-b-financial-statement-basics.html#the-accounting-cycle-at-a-glance",
+    "title": "Appendix B — The Accounting Cycle: From Journal to Financial Statements",
+    "section": "",
+    "text": "Journalize transactions — record each transaction in the general journal as it occurs\nPost to the ledger — transfer each journal entry into the relevant account\nPrepare an unadjusted trial balance — list every account and its balance, to confirm debits equal credits\nRecord adjusting entries — update accounts for items not yet captured by day-to-day transactions (accruals, deferrals, depreciation)\nPrepare an adjusted trial balance — confirm the books still balance after adjustments\nPrepare financial statements — the income statement, statement of retained earnings, and balance sheet, built directly from the adjusted trial balance\nRecord closing entries — zero out revenue, expense, and dividend accounts, transferring their net effect into retained earnings\nPrepare a post-closing trial balance — confirm only permanent (balance sheet) accounts carry a balance into the next period",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>The Accounting Cycle: From Journal to Financial Statements</span>"
+    ]
+  },
+  {
+    "objectID": "appendix-b-financial-statement-basics.html#our-worked-example-bright-consulting-llc",
+    "href": "appendix-b-financial-statement-basics.html#our-worked-example-bright-consulting-llc",
+    "title": "Appendix B — The Accounting Cycle: From Journal to Financial Statements",
+    "section": "B.2 Our Worked Example: Bright Consulting LLC",
+    "text": "B.2 Our Worked Example: Bright Consulting LLC\nBright Consulting LLC is a new consulting business. We’ll record its very first month of operations, January 2026, from its first transaction through to its financial statements.\n\n\n\n\n\n\nTipA Quick Refresher on Debits and Credits\n\n\n\nEvery transaction affects at least two accounts, and total debits must always equal total credits. The normal balance of each account type:\n\n\n\nAccount Type\nNormal Balance\nIncreases With\nDecreases With\n\n\n\n\nAssets\nDebit\nDebit\nCredit\n\n\nLiabilities\nCredit\nCredit\nDebit\n\n\nEquity\nCredit\nCredit\nDebit\n\n\nRevenue\nCredit\nCredit\nDebit\n\n\nExpenses\nDebit\nDebit\nCredit\n\n\n\nIf this table doesn’t feel automatic yet, keep it nearby while working through the rest of this appendix.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>The Accounting Cycle: From Journal to Financial Statements</span>"
+    ]
+  },
+  {
+    "objectID": "appendix-b-financial-statement-basics.html#step-1-journalize-transactions",
+    "href": "appendix-b-financial-statement-basics.html#step-1-journalize-transactions",
+    "title": "Appendix B — The Accounting Cycle: From Journal to Financial Statements",
+    "section": "B.3 Step 1: Journalize Transactions",
+    "text": "B.3 Step 1: Journalize Transactions\nHere are Bright Consulting’s transactions for January 2026, recorded in the general journal:\n\n\n\n\n\n\n\n\n\n\nDate\nDescription\nAccount\nDebit\nCredit\n\n\n\n\nJan 1\nOwner invests cash for common stock\nCash\n20,000\n\n\n\n\n\nCommon Stock\n\n20,000\n\n\nJan 3\nPurchase equipment for cash\nEquipment\n6,000\n\n\n\n\n\nCash\n\n6,000\n\n\nJan 5\nPay 12-month insurance policy in advance\nPrepaid Insurance\n2,400\n\n\n\n\n\nCash\n\n2,400\n\n\nJan 8\nPurchase office supplies on account\nSupplies\n800\n\n\n\n\n\nAccounts Payable\n\n800\n\n\nJan 10\nProvide consulting services for cash\nCash\n5,000\n\n\n\n\n\nService Revenue\n\n5,000\n\n\nJan 15\nProvide consulting services on account\nAccounts Receivable\n3,500\n\n\n\n\n\nService Revenue\n\n3,500\n\n\nJan 18\nPay employee salaries\nSalaries Expense\n2,200\n\n\n\n\n\nCash\n\n2,200\n\n\nJan 20\nReceive cash in advance for February services\nCash\n1,500\n\n\n\n\n\nUnearned Revenue\n\n1,500\n\n\nJan 22\nPay accounts payable\nAccounts Payable\n800\n\n\n\n\n\nCash\n\n800\n\n\nJan 28\nCollect cash from customer on account\nCash\n2,000\n\n\n\n\n\nAccounts Receivable\n\n2,000\n\n\n\n\n\n\n\n\n\nImportantNotice Two Transactions That Are Easy to Misread\n\n\n\nThe January 5 entry (prepaid insurance) and January 20 entry (cash received in advance) are not revenue or expense at the time they’re recorded — Bright Consulting hasn’t yet used the insurance or performed the February services. Both will need an adjusting entry later, in Step 4, once some of that time or service has actually passed. This is one of the most common sources of confusion for students new to accounting: cash changing hands does not necessarily mean revenue or expense has been earned or incurred yet.\n\n\nCheck: total debits across all ten entries = $44,200; total credits = $44,200. They match, which is the first sign nothing was recorded incorrectly.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>The Accounting Cycle: From Journal to Financial Statements</span>"
+    ]
+  },
+  {
+    "objectID": "appendix-b-financial-statement-basics.html#step-2-post-to-the-ledger",
+    "href": "appendix-b-financial-statement-basics.html#step-2-post-to-the-ledger",
+    "title": "Appendix B — The Accounting Cycle: From Journal to Financial Statements",
+    "section": "B.4 Step 2: Post to the Ledger",
+    "text": "B.4 Step 2: Post to the Ledger\nPosting means transferring each journal entry into its own running account (traditionally drawn as a “T-account,” named for its shape). Here’s Bright Consulting’s Cash T-account after posting every January transaction involving cash:\n                              Cash\n--------------------------------------------------------------\nJan 1    20,000  |  Jan 3     6,000\nJan 10    5,000  |  Jan 5     2,400\nJan 20    1,500  |  Jan 18    2,200\nJan 28    2,000  |  Jan 22      800\n--------------------------------------------------------------\nTotal    28,500  |  Total    11,400\n\nEnding balance: 28,500 - 11,400 = 17,100 (debit balance, as expected for an asset)\nEvery other account gets its own T-account the same way. Once every journal entry has been posted, you’re ready for Step 3.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>The Accounting Cycle: From Journal to Financial Statements</span>"
+    ]
+  },
+  {
+    "objectID": "appendix-b-financial-statement-basics.html#step-3-unadjusted-trial-balance",
+    "href": "appendix-b-financial-statement-basics.html#step-3-unadjusted-trial-balance",
+    "title": "Appendix B — The Accounting Cycle: From Journal to Financial Statements",
+    "section": "B.5 Step 3: Unadjusted Trial Balance",
+    "text": "B.5 Step 3: Unadjusted Trial Balance\nA trial balance simply lists every account and its ending balance, to confirm total debits still equal total credits after posting.\n\n\n\nAccount\nDebit\nCredit\n\n\n\n\nCash\n17,100\n\n\n\nAccounts Receivable\n1,500\n\n\n\nSupplies\n800\n\n\n\nPrepaid Insurance\n2,400\n\n\n\nEquipment\n6,000\n\n\n\nAccounts Payable\n\n0\n\n\nUnearned Revenue\n\n1,500\n\n\nCommon Stock\n\n20,000\n\n\nService Revenue\n\n8,500\n\n\nSalaries Expense\n2,200\n\n\n\nTotal\n29,000\n29,000\n\n\n\n\n\n\n\n\n\nTipWhy Accounts Payable Shows Zero\n\n\n\nAccounts Payable was debited $800 (the January 22 payment) and credited $800 (the January 8 purchase) — the account was opened and fully paid off within the same month, so its net balance happens to be zero. It’s still listed, since a real trial balance includes every account that had any activity, even if the ending balance nets to nothing.\n\n\nDebits equal credits ($29,000 = $29,000), so we’re ready to move on. But notice this trial balance is incomplete — it doesn’t yet reflect the insurance that’s expired, the supplies that have been used, or several other things that happened silently over the course of the month. That’s exactly what Step 4 fixes.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>The Accounting Cycle: From Journal to Financial Statements</span>"
+    ]
+  },
+  {
+    "objectID": "appendix-b-financial-statement-basics.html#step-4-adjusting-entries",
+    "href": "appendix-b-financial-statement-basics.html#step-4-adjusting-entries",
+    "title": "Appendix B — The Accounting Cycle: From Journal to Financial Statements",
+    "section": "B.6 Step 4: Adjusting Entries",
+    "text": "B.6 Step 4: Adjusting Entries\nAdjusting entries update the books at the end of a period for economic events that occurred but weren’t triggered by an obvious external transaction — no invoice arrived, no cash changed hands, but something real happened that the financial statements need to reflect. There are four common types, all illustrated below.\n\nB.6.1 (a) Deferred Expense: Supplies Used\nBright Consulting purchased $800 of supplies on January 8. A physical count on January 31 shows $300 worth remaining — meaning $500 was used during the month.\n\n\n\nAccount\nDebit\nCredit\n\n\n\n\nSupplies Expense\n500\n\n\n\nSupplies\n\n500\n\n\n\n\n\nB.6.2 (b) Deferred Expense: Insurance Expired\nThe $2,400 insurance policy purchased January 5 covers 12 months. One month (1/12) has now passed: $2,400 / 12 = $200.\n\n\n\nAccount\nDebit\nCredit\n\n\n\n\nInsurance Expense\n200\n\n\n\nPrepaid Insurance\n\n200\n\n\n\n\n\nB.6.3 (c) Depreciation\nThe $6,000 equipment purchased January 3 is expected to last 5 years (60 months) with no salvage value, depreciated evenly: $6,000 / 60 = $100 per month.\n\n\n\nAccount\nDebit\nCredit\n\n\n\n\nDepreciation Expense\n100\n\n\n\nAccumulated Depreciation — Equipment\n\n100\n\n\n\n\n\n\n\n\n\nImportantWhy a Separate “Accumulated Depreciation” Account?\n\n\n\nDepreciation is never credited directly to the Equipment account. Instead, Accumulated Depreciation is a contra-asset account — it’s reported as a deduction from Equipment on the balance sheet, but keeps the original cost ($6,000) and the total depreciation taken visible separately, rather than silently shrinking the Equipment balance itself.\n\n\n\n\nB.6.4 (d) Accrued Expense: Unrecorded Salaries\nBy January 31, employees have earned an additional $400 in wages that won’t actually be paid until February — but the expense belongs to January, since that’s when the work was performed.\n\n\n\nAccount\nDebit\nCredit\n\n\n\n\nSalaries Expense\n400\n\n\n\nSalaries Payable\n\n400\n\n\n\n\n\nB.6.5 (e) Deferred Revenue: Unearned Revenue Now Earned\nRecall the $1,500 received January 20 for February services. By January 31, Bright Consulting has actually performed $500 worth of that work already.\n\n\n\nAccount\nDebit\nCredit\n\n\n\n\nUnearned Revenue\n500\n\n\n\nService Revenue\n\n500\n\n\n\n\n\n\n\n\n\nTipThe Pattern Behind All Five Adjustments\n\n\n\nEvery adjusting entry above does the same job: it moves something out of a balance sheet “holding” account (Supplies, Prepaid Insurance, Unearned Revenue) or recognizes something not yet recorded at all (Depreciation, accrued Salaries) and puts it in the right period’s income statement. None of these five entries involve cash — that’s precisely why they’d be missed without a deliberate adjusting step at period-end.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>The Accounting Cycle: From Journal to Financial Statements</span>"
+    ]
+  },
+  {
+    "objectID": "appendix-b-financial-statement-basics.html#step-5-adjusted-trial-balance",
+    "href": "appendix-b-financial-statement-basics.html#step-5-adjusted-trial-balance",
+    "title": "Appendix B — The Accounting Cycle: From Journal to Financial Statements",
+    "section": "B.7 Step 5: Adjusted Trial Balance",
+    "text": "B.7 Step 5: Adjusted Trial Balance\nAfter posting all five adjusting entries, here’s the complete adjusted trial balance:\n\n\n\nAccount\nDebit\nCredit\n\n\n\n\nCash\n17,100\n\n\n\nAccounts Receivable\n1,500\n\n\n\nSupplies\n300\n\n\n\nPrepaid Insurance\n2,200\n\n\n\nEquipment\n6,000\n\n\n\nAccumulated Depreciation — Equipment\n\n100\n\n\nAccounts Payable\n\n0\n\n\nSalaries Payable\n\n400\n\n\nUnearned Revenue\n\n1,000\n\n\nCommon Stock\n\n20,000\n\n\nService Revenue\n\n9,000\n\n\nSalaries Expense\n2,600\n\n\n\nSupplies Expense\n500\n\n\n\nInsurance Expense\n200\n\n\n\nDepreciation Expense\n100\n\n\n\nTotal\n30,500\n30,500\n\n\n\nDebits still equal credits ($30,500 = $30,500) — the adjustments were posted correctly.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>The Accounting Cycle: From Journal to Financial Statements</span>"
+    ]
+  },
+  {
+    "objectID": "appendix-b-financial-statement-basics.html#step-6-prepare-the-financial-statements",
+    "href": "appendix-b-financial-statement-basics.html#step-6-prepare-the-financial-statements",
+    "title": "Appendix B — The Accounting Cycle: From Journal to Financial Statements",
+    "section": "B.8 Step 6: Prepare the Financial Statements",
+    "text": "B.8 Step 6: Prepare the Financial Statements\nThe adjusted trial balance contains everything needed to build all three core financial statements — in a specific order, since each one feeds the next.\n\nB.8.1 Income Statement\n\n\n\nBright Consulting LLC — Income Statement\n\n\n\n\n\n\nFor the Month Ended January 31, 2026\n\n\n\n\nService Revenue\n\n9,000\n\n\nExpenses:\n\n\n\n\n  Salaries Expense\n2,600\n\n\n\n  Supplies Expense\n500\n\n\n\n  Insurance Expense\n200\n\n\n\n  Depreciation Expense\n100\n\n\n\n  Total Expenses\n\n3,400\n\n\nNet Income\n\n5,600\n\n\n\n\n\nB.8.2 Statement of Retained Earnings\n\n\n\nBright Consulting LLC — Statement of Retained Earnings\n\n\n\n\n\nFor the Month Ended January 31, 2026\n\n\n\nBeginning Retained Earnings (new company)\n0\n\n\nAdd: Net Income\n5,600\n\n\nLess: Dividends\n0\n\n\nEnding Retained Earnings\n5,600\n\n\n\n\n\nB.8.3 Balance Sheet\n\n\n\nBright Consulting LLC — Balance Sheet\n\n\n\n\n\n\nAs of January 31, 2026\n\n\n\n\nAssets\n\n\n\n\nCash\n\n17,100\n\n\nAccounts Receivable\n\n1,500\n\n\nSupplies\n\n300\n\n\nPrepaid Insurance\n\n2,200\n\n\nEquipment\n6,000\n\n\n\nLess: Accumulated Depreciation\n(100)\n5,900\n\n\nTotal Assets\n\n27,000\n\n\n\n\n\n\n\nLiabilities\n\n\n\n\nAccounts Payable\n\n0\n\n\nSalaries Payable\n\n400\n\n\nUnearned Revenue\n\n1,000\n\n\nTotal Liabilities\n\n1,400\n\n\n\n\n\n\n\nEquity\n\n\n\n\nCommon Stock\n\n20,000\n\n\nRetained Earnings\n\n5,600\n\n\nTotal Equity\n\n25,600\n\n\nTotal Liabilities and Equity\n\n27,000\n\n\n\nTotal Assets ($27,000) = Total Liabilities and Equity ($27,000). The balance sheet balances, confirming everything up to this point was recorded and adjusted correctly.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>The Accounting Cycle: From Journal to Financial Statements</span>"
+    ]
+  },
+  {
+    "objectID": "appendix-b-financial-statement-basics.html#step-7-closing-entries",
+    "href": "appendix-b-financial-statement-basics.html#step-7-closing-entries",
+    "title": "Appendix B — The Accounting Cycle: From Journal to Financial Statements",
+    "section": "B.9 Step 7: Closing Entries",
+    "text": "B.9 Step 7: Closing Entries\nClosing entries reset every temporary account (revenue, expenses, and dividends) to zero at the end of the period, transferring their combined effect into Retained Earnings — a permanent account that carries forward into the next period. This is what allows revenue and expense accounts to start fresh at zero every new period, rather than accumulating forever.\nClosing entry 1 — close revenue:\n\n\n\nAccount\nDebit\nCredit\n\n\n\n\nService Revenue\n9,000\n\n\n\nIncome Summary\n\n9,000\n\n\n\nClosing entry 2 — close expenses:\n\n\n\nAccount\nDebit\nCredit\n\n\n\n\nIncome Summary\n3,400\n\n\n\nSalaries Expense\n\n2,600\n\n\nSupplies Expense\n\n500\n\n\nInsurance Expense\n\n200\n\n\nDepreciation Expense\n\n100\n\n\n\nClosing entry 3 — close Income Summary to Retained Earnings:\n\n\n\nAccount\nDebit\nCredit\n\n\n\n\nIncome Summary\n5,600\n\n\n\nRetained Earnings\n\n5,600\n\n\n\n\n\n\n\n\n\nTipWhat Is “Income Summary”?\n\n\n\nIncome Summary is a temporary clearing account used only during the closing process — it exists purely to collect the total of all revenue and expense accounts in one place, before that net figure (here, $5,600 — exactly this period’s net income) moves into Retained Earnings. It never appears on any financial statement and always ends the closing process with a zero balance.\n\n\n\n\n\n\n\n\nImportantA Fourth Closing Entry, If Dividends Were Paid\n\n\n\nBright Consulting paid no dividends this month, so there’s no fourth entry here. If it had, a closing entry would debit Retained Earnings and credit Dividends directly (Dividends does not flow through Income Summary, since dividends are a distribution of profit, not a component of it).",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>The Accounting Cycle: From Journal to Financial Statements</span>"
+    ]
+  },
+  {
+    "objectID": "appendix-b-financial-statement-basics.html#step-8-post-closing-trial-balance",
+    "href": "appendix-b-financial-statement-basics.html#step-8-post-closing-trial-balance",
+    "title": "Appendix B — The Accounting Cycle: From Journal to Financial Statements",
+    "section": "B.10 Step 8: Post-Closing Trial Balance",
+    "text": "B.10 Step 8: Post-Closing Trial Balance\nAfter posting all closing entries, only permanent (balance sheet) accounts carry a balance — every revenue, expense, and Income Summary account is now exactly zero.\n\n\n\nAccount\nDebit\nCredit\n\n\n\n\nCash\n17,100\n\n\n\nAccounts Receivable\n1,500\n\n\n\nSupplies\n300\n\n\n\nPrepaid Insurance\n2,200\n\n\n\nEquipment\n6,000\n\n\n\nAccumulated Depreciation — Equipment\n\n100\n\n\nAccounts Payable\n\n0\n\n\nSalaries Payable\n\n400\n\n\nUnearned Revenue\n\n1,000\n\n\nCommon Stock\n\n20,000\n\n\nRetained Earnings\n\n5,600\n\n\nTotal\n27,100\n27,100\n\n\n\nDebits equal credits one final time ($27,100 = $27,100), and this trial balance’s ending balances become the beginning balances for February — the accounting cycle then repeats.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>The Accounting Cycle: From Journal to Financial Statements</span>"
+    ]
+  },
+  {
+    "objectID": "appendix-b-financial-statement-basics.html#seeing-the-whole-cycle-in-python",
+    "href": "appendix-b-financial-statement-basics.html#seeing-the-whole-cycle-in-python",
+    "title": "Appendix B — The Accounting Cycle: From Journal to Financial Statements",
+    "section": "B.11 Seeing the Whole Cycle in Python",
+    "text": "B.11 Seeing the Whole Cycle in Python\nSince this book uses Python throughout, it’s worth briefly seeing how naturally this entire cycle maps onto a pandas DataFrame — exactly the structure used for the general ledger datasets in Chapters 3-4.\n\nimport pandas as pd\n\n# Every journal entry (including adjusting entries) as one tidy table --\n# this is exactly the shape of general_ledger_sample.csv from Chapter 3\nentries = [\n    (\"Jan 1\", \"Cash\", 20000, 0), (\"Jan 1\", \"Common Stock\", 0, 20000),\n    (\"Jan 3\", \"Equipment\", 6000, 0), (\"Jan 3\", \"Cash\", 0, 6000),\n    (\"Jan 31 (a)\", \"Supplies Expense\", 500, 0), (\"Jan 31 (a)\", \"Supplies\", 0, 500),\n    (\"Jan 31 (e)\", \"Unearned Revenue\", 500, 0), (\"Jan 31 (e)\", \"Service Revenue\", 0, 500),\n    # ... the remaining entries from this appendix would continue here\n]\n\njournal = pd.DataFrame(entries, columns=[\"date\", \"account\", \"debit\", \"credit\"])\n\n# A trial balance is just a groupby -- the same technique from Chapter 4\ntrial_balance = journal.groupby(\"account\")[[\"debit\", \"credit\"]].sum()\ntrial_balance[\"balance\"] = trial_balance[\"debit\"] - trial_balance[\"credit\"]\ntrial_balance\n\n\n\n\n\n\n\n\ndebit\ncredit\nbalance\n\n\naccount\n\n\n\n\n\n\n\nCash\n20000\n6000\n14000\n\n\nCommon Stock\n0\n20000\n-20000\n\n\nEquipment\n6000\n0\n6000\n\n\nService Revenue\n0\n500\n-500\n\n\nSupplies\n0\n500\n-500\n\n\nSupplies Expense\n500\n0\n500\n\n\nUnearned Revenue\n500\n0\n500\n\n\n\n\n\n\n\n\n\n\n\n\n\nTipThe Connection to This Book\n\n\n\nEvery general ledger dataset used in Chapters 3 through 11 is the journal from this appendix, just at a larger scale — hundreds or thousands of entries instead of ten. A trial balance is a groupby. A balance sheet is a filtered, reshaped version of that same trial balance. The audit tests in Chapter 9 look for unusual patterns in exactly the kind of journal entries you just recorded by hand in this appendix. If the mechanics in this appendix make sense, you already understand what the data in the rest of this book represents — the remaining chapters are about doing this same work at a scale no one could manage by hand.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>The Accounting Cycle: From Journal to Financial Statements</span>"
+    ]
+  },
+  {
+    "objectID": "appendix-b-financial-statement-basics.html#summary",
+    "href": "appendix-b-financial-statement-basics.html#summary",
+    "title": "Appendix B — The Accounting Cycle: From Journal to Financial Statements",
+    "section": "B.12 Summary",
+    "text": "B.12 Summary\n\nThe accounting cycle has eight steps: journalize, post, unadjusted trial balance, adjusting entries, adjusted trial balance, financial statements, closing entries, post-closing trial balance.\nAdjusting entries fall into four patterns: deferred expenses (supplies, prepaid insurance), depreciation, accrued expenses (unpaid salaries), and deferred revenue (unearned revenue now earned) — none involve cash changing hands at the moment of adjustment.\nFinancial statements are prepared in a specific order because each one depends on the last: the income statement’s net income feeds the statement of retained earnings, whose ending balance feeds the balance sheet.\nClosing entries reset temporary accounts (revenue, expenses, dividends) to zero via the Income Summary account, transferring the period’s net income into Retained Earnings, a permanent account.\nA post-closing trial balance should contain only balance sheet accounts, and its ending balances become the next period’s beginning balances — the cycle then repeats.\nEvery technique in this appendix — the journal, the trial balance, the adjustments — is the same structure this entire book works with in pandas and polars, just at a much larger scale.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>The Accounting Cycle: From Journal to Financial Statements</span>"
     ]
   },
   {

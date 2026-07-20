@@ -499,7 +499,7 @@ a.citation, a.citation:visited {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./appendix-b-financial-statement-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Financial Statement Basics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">The Accounting Cycle: From Journal to Financial Statements</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -515,8 +515,25 @@ a.citation, a.citation:visited {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#the-scenario" id="toc-the-scenario" class="nav-link active" data-scroll-target="#the-scenario"><span class="header-section-number">17.1</span> The Scenario</a></li>
+  <li><a href="#choosing-a-track" id="toc-choosing-a-track" class="nav-link" data-scroll-target="#choosing-a-track"><span class="header-section-number">17.2</span> Choosing a Track</a>
+  <ul class="collapse">
+  <li><a href="#track-a-audit-fraud-analytics" id="toc-track-a-audit-fraud-analytics" class="nav-link" data-scroll-target="#track-a-audit-fraud-analytics"><span class="header-section-number">17.2.1</span> Track A: Audit &amp; Fraud Analytics</a></li>
+  <li><a href="#track-b-financial-reporting-revenue-analytics" id="toc-track-b-financial-reporting-revenue-analytics" class="nav-link" data-scroll-target="#track-b-financial-reporting-revenue-analytics"><span class="header-section-number">17.2.2</span> Track B: Financial Reporting &amp; Revenue Analytics</a></li>
+  <li><a href="#track-c-management-accounting-predictive-analytics" id="toc-track-c-management-accounting-predictive-analytics" class="nav-link" data-scroll-target="#track-c-management-accounting-predictive-analytics"><span class="header-section-number">17.2.3</span> Track C: Management Accounting &amp; Predictive Analytics</a></li>
+  </ul></li>
+  <li><a href="#deliverables" id="toc-deliverables" class="nav-link" data-scroll-target="#deliverables"><span class="header-section-number">17.3</span> Deliverables</a></li>
+  <li><a href="#suggested-milestones" id="toc-suggested-milestones" class="nav-link" data-scroll-target="#suggested-milestones"><span class="header-section-number">17.4</span> Suggested Milestones</a></li>
+  <li><a href="#example-starter-questions" id="toc-example-starter-questions" class="nav-link" data-scroll-target="#example-starter-questions"><span class="header-section-number">17.5</span> Example Starter Questions</a></li>
+  <li><a href="#grading-rubric" id="toc-grading-rubric" class="nav-link" data-scroll-target="#grading-rubric"><span class="header-section-number">17.6</span> Grading Rubric</a></li>
+  <li><a href="#final-thoughts" id="toc-final-thoughts" class="nav-link" data-scroll-target="#final-thoughts"><span class="header-section-number">17.7</span> Final Thoughts</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/msharifbd/accounting-analytics-book/edit/main/17-capstone-project.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/blob/main/17-capstone-project.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -541,8 +558,241 @@ a.citation, a.citation:visited {
 </header>
 
 
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>What This Chapter Is
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Unlike every other chapter in this book, this one doesn’t teach a new technique. It’s a project brief: a single integrated dataset, a choice of analytical tracks, and a structure for applying what you’ve learned across Chapters 1-16 to an open-ended, realistic engagement. Plan to spend the final 1-2 weeks of the course on this.</p>
+</div>
+</div>
+<section id="the-scenario" class="level2" data-number="17.1">
+<h2 data-number="17.1" class="anchored" data-anchor-id="the-scenario"><span class="header-section-number">17.1</span> The Scenario</h2>
+<p>You’ve been engaged to analyze one fiscal year (2025) of data for <strong>Alderwood Supply Co.</strong>, a mid-sized distribution company. You have access to:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>File</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>capstone_chart_of_accounts.csv</code></td>
+<td>The company’s chart of accounts (21 accounts)</td>
+</tr>
+<tr class="even">
+<td><code>capstone_general_ledger.csv</code></td>
+<td>A sample of FY2025 transaction-level journal entries (692 lines, 346 entries)</td>
+</tr>
+<tr class="odd">
+<td><code>capstone_income_statement.csv</code></td>
+<td>Income statements for FY2024 and FY2025</td>
+</tr>
+<tr class="even">
+<td><code>capstone_balance_sheet.csv</code></td>
+<td>Balance sheets for FY2024 and FY2025</td>
+</tr>
+<tr class="odd">
+<td><code>capstone_sales_transactions.csv</code></td>
+<td>FY2025 invoice-level sales and accounts receivable detail (151 invoices)</td>
+</tr>
+<tr class="even">
+<td><code>capstone_department_budget_actual.csv</code></td>
+<td>FY2025 budget-to-actual spending by department and category</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>A Naming Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Every file in this capstone is prefixed with <code>capstone_</code>, even though a few cover the same <em>type</em> of data as earlier chapters (an income statement, a chart of accounts, sales transactions). This is deliberate: earlier chapters already have files named <code>income_statement.csv</code>, <code>balance_sheet.csv</code>, <code>chart_of_accounts.csv</code>, and <code>sales_transactions.csv</code> sitting in your project root, and this capstone uses a <strong>different fictional company</strong> with completely different numbers. Keeping the <code>capstone_</code> prefix means both sets of files can coexist in the same project folder without one silently overwriting the other.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>This Data Has Not Been Pre-Cleaned or Pre-Explained
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Every dataset in Chapters 1-16 came with a narrative explaining exactly what to look for. This one doesn’t. Some of it may be completely unremarkable. Some of it may not be. Part of this capstone is deciding, using the techniques from this book, what’s actually worth investigating and building a defensible case — not being told in advance where to look. Treat the general ledger sample specifically the way Chapter 9 treated sampling: as a <em>sample</em> of the year’s activity, not a complete population, and reason about your conclusions accordingly.</p>
+</div>
+</div>
+</section>
+<section id="choosing-a-track" class="level2" data-number="17.2">
+<h2 data-number="17.2" class="anchored" data-anchor-id="choosing-a-track"><span class="header-section-number">17.2</span> Choosing a Track</h2>
+<p>Pick <strong>one</strong> primary track to focus your capstone on. All three draw on the same underlying company, but emphasize different chapters. Regardless of track, you’re expected to draw on the foundational skills from Chapters 3-6 (data fundamentals, wrangling, EDA, visualization) throughout.</p>
+<section id="track-a-audit-fraud-analytics" class="level3" data-number="17.2.1">
+<h3 data-number="17.2.1" class="anchored" data-anchor-id="track-a-audit-fraud-analytics"><span class="header-section-number">17.2.1</span> Track A: Audit &amp; Fraud Analytics</h3>
+<p><em>Primarily draws on Chapters 8-10 (management accounting variance concepts, audit analytics, fraud detection)</em></p>
+<p>Using <code>capstone_general_ledger.csv</code>, apply journal entry testing, sampling, and anomaly detection techniques to identify transactions or patterns worth flagging for further review. Build a composite risk score. Decide which flagged items you’d escalate for follow-up and which you’d consider immaterial or explainable.</p>
+</section>
+<section id="track-b-financial-reporting-revenue-analytics" class="level3" data-number="17.2.2">
+<h3 data-number="17.2.2" class="anchored" data-anchor-id="track-b-financial-reporting-revenue-analytics"><span class="header-section-number">17.2.2</span> Track B: Financial Reporting &amp; Revenue Analytics</h3>
+<p><em>Primarily draws on Chapters 7 and 11-12 (financial statement analysis, revenue recognition, tax)</em></p>
+<p>Using <code>capstone_income_statement.csv</code>, <code>capstone_balance_sheet.csv</code>, and <code>capstone_sales_transactions.csv</code>, perform ratio and trend analysis across the two years provided, and evaluate the sales data for revenue recognition risk (timing concentration, invoice-to-shipment patterns, AR aging). Build a short financial health assessment.</p>
+</section>
+<section id="track-c-management-accounting-predictive-analytics" class="level3" data-number="17.2.3">
+<h3 data-number="17.2.3" class="anchored" data-anchor-id="track-c-management-accounting-predictive-analytics"><span class="header-section-number">17.2.3</span> Track C: Management Accounting &amp; Predictive Analytics</h3>
+<p><em>Primarily draws on Chapter 8 (management accounting) and Chapter 13 (predictive modeling)</em></p>
+<p>Using <code>capstone_department_budget_actual.csv</code> alongside the financial statements, analyze budget variances by department and category, and build a simple predictive model (for example, predicting which department/category combinations are most likely to show a large variance, or modeling a cost driver relationship) using techniques from Chapter 13.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Not Sure Which Track to Pick?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Track A tends to suit students who enjoyed Chapters 8-10 most and like investigative, detective-style work. Track B suits students more interested in external financial analysis and reporting. Track C suits students who want more hands-on time with the modeling techniques from Chapter 13. There’s no wrong choice — pick based on genuine interest, since that will show in the quality of your final report.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="deliverables" class="level2" data-number="17.3">
+<h2 data-number="17.3" class="anchored" data-anchor-id="deliverables"><span class="header-section-number">17.3</span> Deliverables</h2>
+<ol type="1">
+<li><strong>A rendered Quarto report</strong> (HTML, PDF, or both) presenting your analysis, findings, and recommendations — written for a specific, named audience (e.g., “the audit committee,” “the CFO,” “the controller”), not a generic reader.</li>
+<li><strong>Clean, reproducible code</strong> supporting every claim in your report, following the practices from Chapter 16: a fixed random seed anywhere randomness is used, a documented package environment, and clear organization so someone else could rerun your analysis and get the same result.</li>
+<li><strong>A short presentation</strong> (5-10 minutes, in-class or recorded, per your instructor’s preference) summarizing your findings for a non-technical audience — practice communicating results the way Chapter 6 and Chapter 7 emphasized, not just producing them.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Individual or Group?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This capstone works either individually or in small groups of 2-3, at your instructor’s discretion. If working in a group, your report should briefly note who contributed to which sections.</p>
+</div>
+</div>
+</section>
+<section id="suggested-milestones" class="level2" data-number="17.4">
+<h2 data-number="17.4" class="anchored" data-anchor-id="suggested-milestones"><span class="header-section-number">17.4</span> Suggested Milestones</h2>
+<p>A capstone with no intermediate checkpoints tends to become a last-minute scramble. A reasonable pacing:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Week</th>
+<th>Milestone</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Explore all provided datasets, choose a track, and submit 2-3 specific questions you plan to investigate</td>
+</tr>
+<tr class="even">
+<td>1-2</td>
+<td>Perform your core analysis; meet with your instructor or peers for a brief progress check</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>Draft your Quarto report; conduct a peer review exchange with another student or group</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Finalize your report, prepare your presentation, and submit</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="example-starter-questions" class="level2" data-number="17.5">
+<h2 data-number="17.5" class="anchored" data-anchor-id="example-starter-questions"><span class="header-section-number">17.5</span> Example Starter Questions</h2>
+<p>You don’t have to use these exact questions, but they illustrate the kind of open-ended question this capstone expects, and roughly how much depth is expected per track.</p>
+<p><strong>Track A (Audit &amp; Fraud):</strong> - Does the general ledger sample balance? If not, what does that tell you, and how would you investigate it? - Which journal entries score highest on a composite red-flag basis, and what specific follow-up would you request for each? - Are there any postings whose <em>description</em> field is worth a second look, independent of their dollar amount?</p>
+<p><strong>Track B (Financial Reporting &amp; Revenue):</strong> - How did the company’s profitability, liquidity, and leverage change from FY2024 to FY2025, and what’s driving the biggest change? - Does the sales data show any quarter-end concentration or invoice-to-shipment timing patterns worth flagging? - Which customers, if any, warrant a closer look based on payment behavior or revenue timing?</p>
+<p><strong>Track C (Management Accounting &amp; Predictive):</strong> - Which department/category combinations show the largest budget variances, and are they favorable or unfavorable? - Can you build a model that predicts which combinations are likely to see a large variance, using the patterns in this year’s data? - What would you recommend to management based on this year’s variance patterns going into next year’s budget cycle?</p>
+</section>
+<section id="grading-rubric" class="level2" data-number="17.6">
+<h2 data-number="17.6" class="anchored" data-anchor-id="grading-rubric"><span class="header-section-number">17.6</span> Grading Rubric</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Criterion</th>
+<th>What It Assesses</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Technical correctness</strong></td>
+<td>Are your calculations, code, and statistical methods correct and appropriately applied?</td>
+</tr>
+<tr class="even">
+<td><strong>Technique selection</strong></td>
+<td>Did you choose analytical methods appropriate to your question, rather than applying a technique just because it was covered in the book?</td>
+</tr>
+<tr class="odd">
+<td><strong>Depth of investigation</strong></td>
+<td>Did you follow up on interesting findings, or stop at the first surface-level observation?</td>
+</tr>
+<tr class="even">
+<td><strong>Clarity of communication</strong></td>
+<td>Would your named audience actually understand your findings and recommendations?</td>
+</tr>
+<tr class="odd">
+<td><strong>Reproducibility</strong></td>
+<td>Could someone else rerun your code and get your exact results?</td>
+</tr>
+<tr class="even">
+<td><strong>Presentation</strong></td>
+<td>Did you communicate your findings clearly and appropriately for a non-technical audience?</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>A Note on “Finding Something”
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Not every dataset contains a dramatic discovery, and manufacturing a finding that isn’t really there is a worse outcome than honestly reporting “I investigated X and found no significant concern.” Chapter 12 made exactly this point about a weak regression result — an honest null finding, properly investigated and clearly communicated, is a legitimate and valuable outcome. Grading rewards rigorous investigation and clear communication, not a dramatic conclusion for its own sake.</p>
+</div>
+</div>
+</section>
+<section id="final-thoughts" class="level2" data-number="17.7">
+<h2 data-number="17.7" class="anchored" data-anchor-id="final-thoughts"><span class="header-section-number">17.7</span> Final Thoughts</h2>
+<p>Every technique in this capstone — reading messy data, computing the right summary statistic, building a red-flag score, checking a model’s assumptions, communicating a result honestly — is something you’ve now done at least once in this book, on data built specifically to teach that one skill in isolation. The capstone’s real challenge isn’t learning anything new; it’s deciding, on your own, which of those sixteen chapters’ worth of tools actually fit the questions in front of you, and using them with the same judgment a professional would bring to an unfamiliar engagement. That judgment is the actual subject this course has been teaching all along.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -978,7 +1228,7 @@ a.citation, a.citation:visited {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><ul><li><a href="https://github.com/msharifbd/accounting-analytics-book/edit/main/17-capstone-project.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/blob/main/17-capstone-project.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/msharifbd/accounting-analytics-book/edit/main/17-capstone-project.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/blob/main/17-capstone-project.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This book was built with <a href="https://quarto.org/">Quarto</a></p>
 </div>

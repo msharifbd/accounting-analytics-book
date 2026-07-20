@@ -1,0 +1,693 @@
+entry_id,entry_date,account,debit,credit,department,posted_by,description
+JE6081,2025-01-02,Cash,1620.66,0.0,Sales,tgarcia,Cash - Sales activity
+JE6081,2025-01-02,Accounts Receivable,0.0,1620.66,Sales,tgarcia,Cash - Sales activity
+JE6129,2025-01-02,Cost of Goods Sold,2159.72,0.0,Operations,apatel,Cost of Goods Sold - Operations activity
+JE6129,2025-01-02,Inventory,0.0,2159.72,Operations,apatel,Cost of Goods Sold - Operations activity
+JE6336,2025-01-03,Cost of Goods Sold,2495.49,0.0,Operations,apatel,Cost of Goods Sold - Operations activity
+JE6336,2025-01-03,Inventory,0.0,2495.49,Operations,apatel,Cost of Goods Sold - Operations activity
+JE6147,2025-01-06,Accounts Receivable,1240.24,0.0,Sales,jmartin,Accounts Receivable - Sales activity
+JE6147,2025-01-06,Sales Revenue,0.0,1240.24,Sales,jmartin,Accounts Receivable - Sales activity
+JE6015,2025-01-09,Cost of Goods Sold,912.59,0.0,Operations,tgarcia,Cost of Goods Sold - Operations activity
+JE6015,2025-01-09,Inventory,0.0,912.59,Operations,tgarcia,Cost of Goods Sold - Operations activity
+JE6076,2025-01-09,Inventory,5622.08,0.0,Operations,tgarcia,Inventory - Operations activity
+JE6076,2025-01-09,Accounts Payable,0.0,5622.08,Operations,tgarcia,Inventory - Operations activity
+JE6326,2025-01-09,Accounts Payable,2402.21,0.0,Operations,rwilliams,Accounts Payable - Operations activity
+JE6326,2025-01-09,Cash,0.0,2402.21,Operations,rwilliams,Accounts Payable - Operations activity
+JE6041,2025-01-10,Accounts Payable,2903.16,0.0,Operations,apatel,Accounts Payable - Operations activity
+JE6041,2025-01-10,Cash,0.0,2903.16,Operations,apatel,Accounts Payable - Operations activity
+JE6242,2025-01-10,Marketing Expense,875.31,0.0,Sales,jmartin,Marketing Expense - Sales activity
+JE6242,2025-01-10,Cash,0.0,875.31,Sales,jmartin,Marketing Expense - Sales activity
+JE6064,2025-01-13,Accounts Receivable,3744.81,0.0,Sales,apatel,Accounts Receivable - Sales activity
+JE6064,2025-01-13,Sales Revenue,0.0,3744.81,Sales,apatel,Accounts Receivable - Sales activity
+JE6044,2025-01-17,Accounts Payable,1993.96,0.0,Operations,jmartin,Accounts Payable - Operations activity
+JE6044,2025-01-17,Cash,0.0,1993.96,Operations,jmartin,Accounts Payable - Operations activity
+JE6065,2025-01-21,Utilities Expense,929.21,0.0,Operations,apatel,Utilities Expense - Operations activity
+JE6065,2025-01-21,Accounts Payable,0.0,929.21,Operations,apatel,Utilities Expense - Operations activity
+JE6165,2025-01-21,Cash,1620.48,0.0,Sales,clee,Cash - Sales activity
+JE6165,2025-01-21,Accounts Receivable,0.0,1620.48,Sales,clee,Cash - Sales activity
+JE6280,2025-01-21,Cost of Goods Sold,2341.06,0.0,Operations,tgarcia,Cost of Goods Sold - Operations activity
+JE6280,2025-01-21,Inventory,0.0,2341.06,Operations,tgarcia,Cost of Goods Sold - Operations activity
+JE6088,2025-01-22,Inventory,2796.98,0.0,Operations,jmartin,Inventory - Operations activity
+JE6088,2025-01-22,Accounts Payable,0.0,2796.98,Operations,jmartin,Inventory - Operations activity
+JE6238,2025-01-22,Accounts Payable,2261.77,0.0,Operations,apatel,Accounts Payable - Operations activity
+JE6238,2025-01-22,Cash,0.0,2261.77,Operations,apatel,Accounts Payable - Operations activity
+JE6304,2025-01-23,Cost of Goods Sold,2092.64,0.0,Operations,clee,Cost of Goods Sold - Operations activity
+JE6304,2025-01-23,Inventory,0.0,2092.64,Operations,clee,Cost of Goods Sold - Operations activity
+JE6260,2025-01-24,Inventory,1474.08,0.0,Operations,rwilliams,Inventory - Operations activity
+JE6260,2025-01-24,Accounts Payable,0.0,1474.08,Operations,rwilliams,Inventory - Operations activity
+JE6069,2025-01-28,Accounts Payable,1316.76,0.0,Operations,clee,Accounts Payable - Operations activity
+JE6069,2025-01-28,Cash,0.0,1316.76,Operations,clee,Accounts Payable - Operations activity
+JE6092,2025-01-28,Accounts Receivable,2899.85,0.0,Sales,tgarcia,Accounts Receivable - Sales activity
+JE6092,2025-01-28,Sales Revenue,0.0,2899.85,Sales,tgarcia,Accounts Receivable - Sales activity
+JE6145,2025-01-28,Depreciation Expense,1141.8,0.0,Finance,ksmith,Depreciation Expense - Finance activity
+JE6145,2025-01-28,Accumulated Depreciation - Equipment,0.0,1141.8,Finance,ksmith,Depreciation Expense - Finance activity
+JE6013,2025-01-29,Inventory,2521.95,0.0,Operations,ksmith,Inventory - Operations activity
+JE6013,2025-01-29,Accounts Payable,0.0,2521.95,Operations,ksmith,Inventory - Operations activity
+JE6079,2025-01-30,Accounts Receivable,4443.92,0.0,Sales,ksmith,Accounts Receivable - Sales activity
+JE6079,2025-01-30,Sales Revenue,0.0,4443.92,Sales,ksmith,Accounts Receivable - Sales activity
+JE6093,2025-01-30,Marketing Expense,1407.1,0.0,Sales,clee,Marketing Expense - Sales activity
+JE6093,2025-01-30,Cash,0.0,1407.1,Sales,clee,Marketing Expense - Sales activity
+JE6339,2025-01-30,Marketing Expense,2158.15,0.0,Sales,apatel,Marketing Expense - Sales activity
+JE6339,2025-01-30,Cash,0.0,2158.15,Sales,apatel,Marketing Expense - Sales activity
+JE6340,2025-01-31,Marketing Expense,1013.96,0.0,Sales,jmartin,Marketing Expense - Sales activity
+JE6340,2025-01-31,Cash,0.0,1013.96,Sales,jmartin,Marketing Expense - Sales activity
+JE6112,2025-02-03,Cash,3561.25,0.0,Sales,ksmith,Cash - Sales activity
+JE6112,2025-02-03,Accounts Receivable,0.0,3561.25,Sales,ksmith,Cash - Sales activity
+JE6204,2025-02-03,Accounts Payable,2576.37,0.0,Operations,apatel,Accounts Payable - Operations activity
+JE6204,2025-02-03,Cash,0.0,2576.37,Operations,apatel,Accounts Payable - Operations activity
+JE6028,2025-02-04,Inventory,887.04,0.0,Operations,ksmith,Inventory - Operations activity
+JE6028,2025-02-04,Accounts Payable,0.0,887.04,Operations,ksmith,Inventory - Operations activity
+JE6032,2025-02-04,Rent Expense,2674.93,0.0,Operations,apatel,Rent Expense - Operations activity
+JE6032,2025-02-04,Cash,0.0,2674.93,Operations,apatel,Rent Expense - Operations activity
+JE6120,2025-02-04,Cost of Goods Sold,773.31,0.0,Operations,apatel,Cost of Goods Sold - Operations activity
+JE6120,2025-02-04,Inventory,0.0,773.31,Operations,apatel,Cost of Goods Sold - Operations activity
+JE6272,2025-02-04,Marketing Expense,1669.81,0.0,Sales,rwilliams,Marketing Expense - Sales activity
+JE6272,2025-02-04,Cash,0.0,1669.81,Sales,rwilliams,Marketing Expense - Sales activity
+JE6212,2025-02-06,Cost of Goods Sold,694.28,0.0,Operations,tgarcia,Cost of Goods Sold - Operations activity
+JE6212,2025-02-06,Inventory,0.0,694.28,Operations,tgarcia,Cost of Goods Sold - Operations activity
+JE6168,2025-02-07,Accounts Receivable,7021.22,0.0,Sales,tgarcia,Accounts Receivable - Sales activity
+JE6168,2025-02-07,Sales Revenue,0.0,7021.22,Sales,tgarcia,Accounts Receivable - Sales activity
+JE6159,2025-02-09,Accounts Receivable,3866.78,0.0,Sales,ksmith,Accounts Receivable - Sales activity
+JE6159,2025-02-09,Sales Revenue,0.0,3866.78,Sales,ksmith,Accounts Receivable - Sales activity
+JE6198,2025-02-11,Accounts Receivable,3203.06,0.0,Sales,ksmith,Accounts Receivable - Sales activity
+JE6198,2025-02-11,Sales Revenue,0.0,3203.06,Sales,ksmith,Accounts Receivable - Sales activity
+JE6180,2025-02-12,Cash,2281.6,0.0,Sales,apatel,Cash - Sales activity
+JE6180,2025-02-12,Accounts Receivable,0.0,2281.6,Sales,apatel,Cash - Sales activity
+JE6095,2025-02-14,Inventory,3146.72,0.0,Operations,apatel,Inventory - Operations activity
+JE6095,2025-02-14,Accounts Payable,0.0,3146.72,Operations,apatel,Inventory - Operations activity
+JE6116,2025-02-17,Accounts Receivable,5530.24,0.0,Sales,tgarcia,Accounts Receivable - Sales activity
+JE6116,2025-02-17,Sales Revenue,0.0,5530.24,Sales,tgarcia,Accounts Receivable - Sales activity
+JE6247,2025-02-17,Cost of Goods Sold,2486.78,0.0,Operations,apatel,Cost of Goods Sold - Operations activity
+JE6247,2025-02-17,Inventory,0.0,2486.78,Operations,apatel,Cost of Goods Sold - Operations activity
+JE6310,2025-02-17,Accounts Receivable,5731.92,0.0,Sales,tgarcia,Accounts Receivable - Sales activity
+JE6310,2025-02-17,Sales Revenue,0.0,5731.92,Sales,tgarcia,Accounts Receivable - Sales activity
+JE6126,2025-02-18,Accounts Receivable,2293.59,0.0,Sales,apatel,Accounts Receivable - Sales activity
+JE6126,2025-02-18,Sales Revenue,0.0,2293.59,Sales,apatel,Accounts Receivable - Sales activity
+JE6150,2025-02-18,Cash,10270.83,0.0,Sales,rwilliams,Cash - Sales activity
+JE6150,2025-02-18,Accounts Receivable,0.0,10270.83,Sales,rwilliams,Cash - Sales activity
+JE6036,2025-02-21,Marketing Expense,1823.16,0.0,Sales,rwilliams,Marketing Expense - Sales activity
+JE6036,2025-02-21,Cash,0.0,1823.16,Sales,rwilliams,Marketing Expense - Sales activity
+JE6256,2025-02-21,Accounts Payable,2800.47,0.0,Operations,jmartin,Accounts Payable - Operations activity
+JE6256,2025-02-21,Cash,0.0,2800.47,Operations,jmartin,Accounts Payable - Operations activity
+JE6096,2025-02-23,Inventory,2322.44,0.0,Operations,apatel,Inventory - Operations activity
+JE6096,2025-02-23,Accounts Payable,0.0,2322.44,Operations,apatel,Inventory - Operations activity
+JE6003,2025-02-24,Cost of Goods Sold,2283.27,0.0,Operations,apatel,Cost of Goods Sold - Operations activity
+JE6003,2025-02-24,Inventory,0.0,2283.27,Operations,apatel,Cost of Goods Sold - Operations activity
+JE6011,2025-02-25,Depreciation Expense,956.36,0.0,Finance,ksmith,Depreciation Expense - Finance activity
+JE6011,2025-02-25,Accumulated Depreciation - Equipment,0.0,956.36,Finance,ksmith,Depreciation Expense - Finance activity
+JE6050,2025-02-26,Cost of Goods Sold,5365.4,0.0,Operations,tgarcia,Cost of Goods Sold - Operations activity
+JE6050,2025-02-26,Inventory,0.0,5365.4,Operations,tgarcia,Cost of Goods Sold - Operations activity
+JE6009,2025-02-28,Inventory,2786.25,0.0,Operations,apatel,Inventory - Operations activity
+JE6009,2025-02-28,Accounts Payable,0.0,2786.25,Operations,apatel,Inventory - Operations activity
+JE6160,2025-02-28,Accounts Payable,3684.42,0.0,Operations,ksmith,Accounts Payable - Operations activity
+JE6160,2025-02-28,Cash,0.0,3684.42,Operations,ksmith,Accounts Payable - Operations activity
+JE6243,2025-02-28,Insurance Expense,645.77,0.0,Finance,apatel,Insurance Expense - Finance activity
+JE6243,2025-02-28,Prepaid Insurance,0.0,645.77,Finance,apatel,Insurance Expense - Finance activity
+JE6255,2025-02-28,Inventory,4364.24,0.0,Operations,jmartin,Inventory - Operations activity
+JE6255,2025-02-28,Accounts Payable,0.0,4364.24,Operations,jmartin,Inventory - Operations activity
+JE6022,2025-03-03,Cost of Goods Sold,2267.72,0.0,Operations,ksmith,Cost of Goods Sold - Operations activity
+JE6022,2025-03-03,Inventory,0.0,2267.72,Operations,ksmith,Cost of Goods Sold - Operations activity
+JE6193,2025-03-03,Cost of Goods Sold,1886.17,0.0,Operations,clee,Cost of Goods Sold - Operations activity
+JE6193,2025-03-03,Inventory,0.0,1886.17,Operations,clee,Cost of Goods Sold - Operations activity
+JE6196,2025-03-03,Cost of Goods Sold,1508.38,0.0,Operations,clee,Cost of Goods Sold - Operations activity
+JE6196,2025-03-03,Inventory,0.0,1508.38,Operations,clee,Cost of Goods Sold - Operations activity
+JE6239,2025-03-03,Cash,2539.96,0.0,Sales,clee,Cash - Sales activity
+JE6239,2025-03-03,Accounts Receivable,0.0,2539.96,Sales,clee,Cash - Sales activity
+JE6143,2025-03-06,Accounts Receivable,3184.08,0.0,Sales,apatel,Accounts Receivable - Sales activity
+JE6143,2025-03-06,Sales Revenue,0.0,3184.08,Sales,apatel,Accounts Receivable - Sales activity
+JE6299,2025-03-06,Cost of Goods Sold,1494.68,0.0,Operations,apatel,Cost of Goods Sold - Operations activity
+JE6299,2025-03-06,Inventory,0.0,1494.68,Operations,apatel,Cost of Goods Sold - Operations activity
+JE6207,2025-03-11,Accounts Receivable,3736.13,0.0,Sales,tgarcia,Accounts Receivable - Sales activity
+JE6207,2025-03-11,Sales Revenue,0.0,3736.13,Sales,tgarcia,Accounts Receivable - Sales activity
+JE6106,2025-03-12,Accounts Receivable,4874.46,0.0,Sales,jmartin,Accounts Receivable - Sales activity
+JE6106,2025-03-12,Sales Revenue,0.0,4874.46,Sales,jmartin,Accounts Receivable - Sales activity
+JE6133,2025-03-12,Accounts Payable,2175.93,0.0,Operations,tgarcia,Accounts Payable - Operations activity
+JE6133,2025-03-12,Cash,0.0,2175.93,Operations,tgarcia,Accounts Payable - Operations activity
+JE6008,2025-03-14,Accounts Receivable,1888.06,0.0,Sales,jmartin,Accounts Receivable - Sales activity
+JE6008,2025-03-14,Sales Revenue,0.0,1888.06,Sales,jmartin,Accounts Receivable - Sales activity
+JE6113,2025-03-18,Accounts Payable,1918.61,0.0,Operations,ksmith,Accounts Payable - Operations activity
+JE6113,2025-03-18,Cash,0.0,1918.61,Operations,ksmith,Accounts Payable - Operations activity
+JE6254,2025-03-18,Marketing Expense,1004.57,0.0,Sales,ksmith,Marketing Expense - Sales activity
+JE6254,2025-03-18,Cash,0.0,1004.57,Sales,ksmith,Marketing Expense - Sales activity
+JE6030,2025-03-19,Cash,3699.33,0.0,Sales,tgarcia,Cash - Sales activity
+JE6030,2025-03-19,Accounts Receivable,0.0,3699.33,Sales,tgarcia,Cash - Sales activity
+JE6071,2025-03-19,Inventory,2192.06,0.0,Operations,rwilliams,Inventory - Operations activity
+JE6071,2025-03-19,Accounts Payable,0.0,2192.06,Operations,rwilliams,Inventory - Operations activity
+JE6061,2025-03-20,Cost of Goods Sold,3787.39,0.0,Operations,clee,Cost of Goods Sold - Operations activity
+JE6061,2025-03-20,Inventory,0.0,3787.39,Operations,clee,Cost of Goods Sold - Operations activity
+JE6174,2025-03-20,Marketing Expense,2390.13,0.0,Sales,jmartin,Marketing Expense - Sales activity
+JE6174,2025-03-20,Cash,0.0,2390.13,Sales,jmartin,Marketing Expense - Sales activity
+JE6108,2025-03-21,Rent Expense,2863.48,0.0,Operations,ksmith,Rent Expense - Operations activity
+JE6108,2025-03-21,Cash,0.0,2863.48,Operations,ksmith,Rent Expense - Operations activity
+JE6119,2025-03-24,Cash,1599.45,0.0,Sales,clee,Cash - Sales activity
+JE6119,2025-03-24,Accounts Receivable,0.0,1599.45,Sales,clee,Cash - Sales activity
+JE6218,2025-03-24,Marketing Expense,1447.31,0.0,Sales,clee,Marketing Expense - Sales activity
+JE6218,2025-03-24,Cash,0.0,1447.31,Sales,clee,Marketing Expense - Sales activity
+JE6305,2025-03-24,Accounts Receivable,3159.81,0.0,Sales,ksmith,Accounts Receivable - Sales activity
+JE6305,2025-03-24,Sales Revenue,0.0,3159.81,Sales,ksmith,Accounts Receivable - Sales activity
+JE6303,2025-03-25,Accounts Receivable,2348.61,0.0,Sales,apatel,Accounts Receivable - Sales activity
+JE6303,2025-03-25,Sales Revenue,0.0,2348.61,Sales,apatel,Accounts Receivable - Sales activity
+JE6316,2025-03-25,Accounts Receivable,5731.98,0.0,Sales,jmartin,Accounts Receivable - Sales activity
+JE6316,2025-03-25,Sales Revenue,0.0,5731.98,Sales,jmartin,Accounts Receivable - Sales activity
+JE6086,2025-03-26,Inventory,2899.94,0.0,Operations,ksmith,Inventory - Operations activity
+JE6086,2025-03-26,Accounts Payable,0.0,2899.94,Operations,ksmith,Inventory - Operations activity
+JE6125,2025-03-26,Cash,700.45,0.0,Sales,rwilliams,Cash - Sales activity
+JE6125,2025-03-26,Accounts Receivable,0.0,700.45,Sales,rwilliams,Cash - Sales activity
+JE6141,2025-03-26,Inventory,3629.52,0.0,Operations,tgarcia,Inventory - Operations activity
+JE6141,2025-03-26,Accounts Payable,0.0,3629.52,Operations,tgarcia,Inventory - Operations activity
+JE6236,2025-03-26,Cash,3390.1,0.0,Sales,apatel,Cash - Sales activity
+JE6236,2025-03-26,Accounts Receivable,0.0,3390.1,Sales,apatel,Cash - Sales activity
+JE6039,2025-03-27,Utilities Expense,691.93,0.0,Operations,clee,Utilities Expense - Operations activity
+JE6039,2025-03-27,Accounts Payable,0.0,691.93,Operations,clee,Utilities Expense - Operations activity
+JE6223,2025-03-27,Inventory,2089.52,0.0,Operations,apatel,Inventory - Operations activity
+JE6223,2025-03-27,Accounts Payable,0.0,2089.52,Operations,apatel,Inventory - Operations activity
+JE6268,2025-03-28,Accounts Receivable,2804.33,0.0,Sales,rwilliams,Accounts Receivable - Sales activity
+JE6268,2025-03-28,Sales Revenue,0.0,2804.33,Sales,rwilliams,Accounts Receivable - Sales activity
+JE6047,2025-04-01,Inventory,1392.36,0.0,Operations,ksmith,Inventory - Operations activity
+JE6047,2025-04-01,Accounts Payable,0.0,1392.36,Operations,ksmith,Inventory - Operations activity
+JE6327,2025-04-02,Cash,4487.98,0.0,Sales,clee,Cash - Sales activity
+JE6327,2025-04-02,Accounts Receivable,0.0,4487.98,Sales,clee,Cash - Sales activity
+JE6062,2025-04-03,Cash,3911.91,0.0,Sales,clee,Cash - Sales activity
+JE6062,2025-04-03,Accounts Receivable,0.0,3911.91,Sales,clee,Cash - Sales activity
+JE6139,2025-04-04,Cash,2602.44,0.0,Sales,rwilliams,Cash - Sales activity
+JE6139,2025-04-04,Accounts Receivable,0.0,2602.44,Sales,rwilliams,Cash - Sales activity
+JE6249,2025-04-04,Accounts Receivable,2690.47,0.0,Sales,jmartin,Accounts Receivable - Sales activity
+JE6249,2025-04-04,Sales Revenue,0.0,2690.47,Sales,jmartin,Accounts Receivable - Sales activity
+JE6162,2025-04-08,Cost of Goods Sold,1482.61,0.0,Operations,jmartin,Cost of Goods Sold - Operations activity
+JE6162,2025-04-08,Inventory,0.0,1482.61,Operations,jmartin,Cost of Goods Sold - Operations activity
+JE6291,2025-04-10,Cost of Goods Sold,1611.35,0.0,Operations,tgarcia,Cost of Goods Sold - Operations activity
+JE6291,2025-04-10,Inventory,0.0,1611.35,Operations,tgarcia,Cost of Goods Sold - Operations activity
+JE6330,2025-04-11,Salaries Expense,5483.46,0.0,HR,clee,Salaries Expense - HR activity
+JE6330,2025-04-11,Cash,0.0,5483.46,HR,clee,Salaries Expense - HR activity
+JE6057,2025-04-14,Inventory,1817.63,0.0,Operations,apatel,Inventory - Operations activity
+JE6057,2025-04-14,Accounts Payable,0.0,1817.63,Operations,apatel,Inventory - Operations activity
+JE6189,2025-04-14,Accounts Payable,1563.35,0.0,Operations,tgarcia,Accounts Payable - Operations activity
+JE6189,2025-04-14,Cash,0.0,1563.35,Operations,tgarcia,Accounts Payable - Operations activity
+JE6019,2025-04-15,Cash,2652.41,0.0,Sales,tgarcia,Cash - Sales activity
+JE6019,2025-04-15,Accounts Receivable,0.0,2652.41,Sales,tgarcia,Cash - Sales activity
+JE6235,2025-04-15,Cost of Goods Sold,2437.49,0.0,Operations,rwilliams,Cost of Goods Sold - Operations activity
+JE6235,2025-04-15,Inventory,0.0,2437.49,Operations,rwilliams,Cost of Goods Sold - Operations activity
+JE6279,2025-04-15,Cash,2674.86,0.0,Sales,ksmith,Cash - Sales activity
+JE6279,2025-04-15,Accounts Receivable,0.0,2674.86,Sales,ksmith,Cash - Sales activity
+JE6085,2025-04-16,Accounts Receivable,1560.95,0.0,Sales,clee,Accounts Receivable - Sales activity
+JE6085,2025-04-16,Sales Revenue,0.0,1560.95,Sales,clee,Accounts Receivable - Sales activity
+JE6105,2025-04-16,Accounts Payable,1239.99,0.0,Operations,jmartin,Accounts Payable - Operations activity
+JE6105,2025-04-16,Cash,0.0,1239.99,Operations,jmartin,Accounts Payable - Operations activity
+JE6166,2025-04-16,Accounts Receivable,3770.13,0.0,Sales,clee,Accounts Receivable - Sales activity
+JE6166,2025-04-16,Sales Revenue,0.0,3770.13,Sales,clee,Accounts Receivable - Sales activity
+JE6287,2025-04-16,Accounts Payable,2233.52,0.0,Operations,jmartin,Accounts Payable - Operations activity
+JE6287,2025-04-16,Cash,0.0,2233.52,Operations,jmartin,Accounts Payable - Operations activity
+JE6017,2025-04-17,Cost of Goods Sold,1723.7,0.0,Operations,tgarcia,Cost of Goods Sold - Operations activity
+JE6017,2025-04-17,Inventory,0.0,1723.7,Operations,tgarcia,Cost of Goods Sold - Operations activity
+JE6098,2025-04-21,Marketing Expense,2354.33,0.0,Sales,ksmith,Marketing Expense - Sales activity
+JE6098,2025-04-21,Cash,0.0,2354.33,Sales,ksmith,Marketing Expense - Sales activity
+JE6324,2025-04-21,Accounts Payable,1665.77,0.0,Operations,apatel,Accounts Payable - Operations activity
+JE6324,2025-04-21,Cash,0.0,1665.77,Operations,apatel,Accounts Payable - Operations activity
+JE6046,2025-04-22,Cost of Goods Sold,2525.85,0.0,Operations,tgarcia,Cost of Goods Sold - Operations activity
+JE6046,2025-04-22,Inventory,0.0,2525.85,Operations,tgarcia,Cost of Goods Sold - Operations activity
+JE6164,2025-04-22,Salaries Expense,7225.78,0.0,HR,rwilliams,Salaries Expense - HR activity
+JE6164,2025-04-22,Cash,0.0,7225.78,HR,rwilliams,Salaries Expense - HR activity
+JE6067,2025-04-25,Accounts Receivable,2117.97,0.0,Sales,ksmith,Accounts Receivable - Sales activity
+JE6067,2025-04-25,Sales Revenue,0.0,2117.97,Sales,ksmith,Accounts Receivable - Sales activity
+JE6135,2025-04-29,Cash,1560.55,0.0,Sales,tgarcia,Cash - Sales activity
+JE6135,2025-04-29,Accounts Receivable,0.0,1560.55,Sales,tgarcia,Cash - Sales activity
+JE6087,2025-05-01,Cost of Goods Sold,2048.08,0.0,Operations,rwilliams,Cost of Goods Sold - Operations activity
+JE6087,2025-05-01,Inventory,0.0,2048.08,Operations,rwilliams,Cost of Goods Sold - Operations activity
+JE6115,2025-05-01,Cash,2482.67,0.0,Sales,jmartin,Cash - Sales activity
+JE6115,2025-05-01,Accounts Receivable,0.0,2482.67,Sales,jmartin,Cash - Sales activity
+JE6300,2025-05-05,Accounts Payable,2034.55,0.0,Operations,ksmith,Accounts Payable - Operations activity
+JE6300,2025-05-05,Cash,0.0,2034.55,Operations,ksmith,Accounts Payable - Operations activity
+JE6208,2025-05-07,Accounts Receivable,3090.89,0.0,Sales,apatel,Accounts Receivable - Sales activity
+JE6208,2025-05-07,Sales Revenue,0.0,3090.89,Sales,apatel,Accounts Receivable - Sales activity
+JE6158,2025-05-08,Cost of Goods Sold,755.29,0.0,Operations,rwilliams,Cost of Goods Sold - Operations activity
+JE6158,2025-05-08,Inventory,0.0,755.29,Operations,rwilliams,Cost of Goods Sold - Operations activity
+JE6290,2025-05-08,Salaries Expense,6496.12,0.0,HR,tgarcia,Salaries Expense - HR activity
+JE6290,2025-05-08,Cash,0.0,6496.12,HR,tgarcia,Salaries Expense - HR activity
+JE6185,2025-05-09,Cash,2009.64,0.0,Sales,ksmith,Cash - Sales activity
+JE6185,2025-05-09,Accounts Receivable,0.0,2009.64,Sales,ksmith,Cash - Sales activity
+JE6222,2025-05-09,Cost of Goods Sold,865.56,0.0,Operations,jmartin,Cost of Goods Sold - Operations activity
+JE6222,2025-05-09,Inventory,0.0,865.56,Operations,jmartin,Cost of Goods Sold - Operations activity
+JE6905,2025-05-09,Utilities Expense,1250.0,0.0,Operations,apatel,Utility true-up
+JE6905,2025-05-09,Accounts Payable,0.0,12500.0,Operations,apatel,Utility true-up
+JE6038,2025-05-12,Cost of Goods Sold,1814.53,0.0,Operations,ksmith,Cost of Goods Sold - Operations activity
+JE6038,2025-05-12,Inventory,0.0,1814.53,Operations,ksmith,Cost of Goods Sold - Operations activity
+JE6337,2025-05-14,Salaries Expense,6322.5,0.0,HR,rwilliams,Salaries Expense - HR activity
+JE6337,2025-05-14,Cash,0.0,6322.5,HR,rwilliams,Salaries Expense - HR activity
+JE6052,2025-05-15,Cost of Goods Sold,1781.48,0.0,Operations,tgarcia,Cost of Goods Sold - Operations activity
+JE6052,2025-05-15,Inventory,0.0,1781.48,Operations,tgarcia,Cost of Goods Sold - Operations activity
+JE6031,2025-05-16,Accounts Receivable,5572.3,0.0,Sales,jmartin,Accounts Receivable - Sales activity
+JE6031,2025-05-16,Sales Revenue,0.0,5572.3,Sales,jmartin,Accounts Receivable - Sales activity
+JE6250,2025-05-16,Cash,6127.64,0.0,Sales,rwilliams,Cash - Sales activity
+JE6250,2025-05-16,Accounts Receivable,0.0,6127.64,Sales,rwilliams,Cash - Sales activity
+JE6338,2025-05-16,Cost of Goods Sold,1508.83,0.0,Operations,rwilliams,Cost of Goods Sold - Operations activity
+JE6338,2025-05-16,Inventory,0.0,1508.83,Operations,rwilliams,Cost of Goods Sold - Operations activity
+JE6026,2025-05-20,Cash,7673.37,0.0,Sales,jmartin,Cash - Sales activity
+JE6026,2025-05-20,Accounts Receivable,0.0,7673.37,Sales,jmartin,Cash - Sales activity
+JE6054,2025-05-20,Cost of Goods Sold,2056.29,0.0,Operations,apatel,Cost of Goods Sold - Operations activity
+JE6054,2025-05-20,Inventory,0.0,2056.29,Operations,apatel,Cost of Goods Sold - Operations activity
+JE6258,2025-05-20,Marketing Expense,960.99,0.0,Sales,ksmith,Marketing Expense - Sales activity
+JE6258,2025-05-20,Cash,0.0,960.99,Sales,ksmith,Marketing Expense - Sales activity
+JE6167,2025-05-21,Depreciation Expense,1223.2,0.0,Finance,apatel,Depreciation Expense - Finance activity
+JE6167,2025-05-21,Accumulated Depreciation - Equipment,0.0,1223.2,Finance,apatel,Depreciation Expense - Finance activity
+JE6075,2025-05-23,Utilities Expense,533.02,0.0,Operations,apatel,Utilities Expense - Operations activity
+JE6075,2025-05-23,Accounts Payable,0.0,533.02,Operations,apatel,Utilities Expense - Operations activity
+JE6308,2025-05-23,Cost of Goods Sold,1821.69,0.0,Operations,rwilliams,Cost of Goods Sold - Operations activity
+JE6308,2025-05-23,Inventory,0.0,1821.69,Operations,rwilliams,Cost of Goods Sold - Operations activity
+JE6335,2025-05-23,Accounts Payable,1851.11,0.0,Operations,rwilliams,Accounts Payable - Operations activity
+JE6335,2025-05-23,Cash,0.0,1851.11,Operations,rwilliams,Accounts Payable - Operations activity
+JE6063,2025-05-26,Cost of Goods Sold,478.09,0.0,Operations,ksmith,Cost of Goods Sold - Operations activity
+JE6063,2025-05-26,Inventory,0.0,478.09,Operations,ksmith,Cost of Goods Sold - Operations activity
+JE6130,2025-05-26,Inventory,4525.33,0.0,Operations,clee,Inventory - Operations activity
+JE6130,2025-05-26,Accounts Payable,0.0,4525.33,Operations,clee,Inventory - Operations activity
+JE6142,2025-05-27,Cost of Goods Sold,3665.97,0.0,Operations,ksmith,Cost of Goods Sold - Operations activity
+JE6142,2025-05-27,Inventory,0.0,3665.97,Operations,ksmith,Cost of Goods Sold - Operations activity
+JE6302,2025-05-27,Cash,3483.23,0.0,Sales,tgarcia,Cash - Sales activity
+JE6302,2025-05-27,Accounts Receivable,0.0,3483.23,Sales,tgarcia,Cash - Sales activity
+JE6131,2025-05-28,Marketing Expense,1918.01,0.0,Sales,jmartin,Marketing Expense - Sales activity
+JE6131,2025-05-28,Cash,0.0,1918.01,Sales,jmartin,Marketing Expense - Sales activity
+JE6245,2025-05-29,Accounts Receivable,3782.61,0.0,Sales,clee,Accounts Receivable - Sales activity
+JE6245,2025-05-29,Sales Revenue,0.0,3782.61,Sales,clee,Accounts Receivable - Sales activity
+JE6264,2025-05-29,Salaries Expense,6751.04,0.0,HR,ksmith,Salaries Expense - HR activity
+JE6264,2025-05-29,Cash,0.0,6751.04,HR,ksmith,Salaries Expense - HR activity
+JE6014,2025-05-30,Accounts Payable,3477.92,0.0,Operations,jmartin,Accounts Payable - Operations activity
+JE6014,2025-05-30,Cash,0.0,3477.92,Operations,jmartin,Accounts Payable - Operations activity
+JE6099,2025-05-30,Cash,2456.41,0.0,Sales,tgarcia,Cash - Sales activity
+JE6099,2025-05-30,Accounts Receivable,0.0,2456.41,Sales,tgarcia,Cash - Sales activity
+JE6100,2025-05-30,Inventory,2048.88,0.0,Operations,clee,Inventory - Operations activity
+JE6100,2025-05-30,Accounts Payable,0.0,2048.88,Operations,clee,Inventory - Operations activity
+JE6171,2025-06-01,Accounts Receivable,3821.01,0.0,Sales,clee,Accounts Receivable - Sales activity
+JE6171,2025-06-01,Sales Revenue,0.0,3821.01,Sales,clee,Accounts Receivable - Sales activity
+JE6127,2025-06-03,Accounts Payable,1402.14,0.0,Operations,ksmith,Accounts Payable - Operations activity
+JE6127,2025-06-03,Cash,0.0,1402.14,Operations,ksmith,Accounts Payable - Operations activity
+JE6225,2025-06-03,Cost of Goods Sold,1062.34,0.0,Operations,rwilliams,Cost of Goods Sold - Operations activity
+JE6225,2025-06-03,Inventory,0.0,1062.34,Operations,rwilliams,Cost of Goods Sold - Operations activity
+JE6169,2025-06-06,Accounts Receivable,1125.68,0.0,Sales,apatel,Accounts Receivable - Sales activity
+JE6169,2025-06-06,Sales Revenue,0.0,1125.68,Sales,apatel,Accounts Receivable - Sales activity
+JE6045,2025-06-09,Cash,6065.49,0.0,Sales,ksmith,Cash - Sales activity
+JE6045,2025-06-09,Accounts Receivable,0.0,6065.49,Sales,ksmith,Cash - Sales activity
+JE6213,2025-06-11,Cash,1526.04,0.0,Sales,jmartin,Cash - Sales activity
+JE6213,2025-06-11,Accounts Receivable,0.0,1526.04,Sales,jmartin,Cash - Sales activity
+JE6284,2025-06-12,Accounts Payable,1778.68,0.0,Operations,ksmith,Accounts Payable - Operations activity
+JE6284,2025-06-12,Cash,0.0,1778.68,Operations,ksmith,Accounts Payable - Operations activity
+JE6082,2025-06-13,Accounts Payable,3660.08,0.0,Operations,tgarcia,Accounts Payable - Operations activity
+JE6082,2025-06-13,Cash,0.0,3660.08,Operations,tgarcia,Accounts Payable - Operations activity
+JE6251,2025-06-13,Insurance Expense,773.73,0.0,Finance,clee,Insurance Expense - Finance activity
+JE6251,2025-06-13,Prepaid Insurance,0.0,773.73,Finance,clee,Insurance Expense - Finance activity
+JE6277,2025-06-16,Accounts Receivable,2398.8,0.0,Sales,jmartin,Accounts Receivable - Sales activity
+JE6277,2025-06-16,Sales Revenue,0.0,2398.8,Sales,jmartin,Accounts Receivable - Sales activity
+JE6314,2025-06-16,Utilities Expense,442.16,0.0,Operations,jmartin,Utilities Expense - Operations activity
+JE6314,2025-06-16,Accounts Payable,0.0,442.16,Operations,jmartin,Utilities Expense - Operations activity
+JE6018,2025-06-20,Cash,3268.66,0.0,Sales,apatel,Cash - Sales activity
+JE6018,2025-06-20,Accounts Receivable,0.0,3268.66,Sales,apatel,Cash - Sales activity
+JE6043,2025-06-23,Cash,1765.44,0.0,Sales,ksmith,Cash - Sales activity
+JE6043,2025-06-23,Accounts Receivable,0.0,1765.44,Sales,ksmith,Cash - Sales activity
+JE6102,2025-06-23,Accounts Receivable,3393.29,0.0,Sales,ksmith,Accounts Receivable - Sales activity
+JE6102,2025-06-23,Sales Revenue,0.0,3393.29,Sales,ksmith,Accounts Receivable - Sales activity
+JE6034,2025-06-26,Inventory,949.44,0.0,Operations,apatel,Inventory - Operations activity
+JE6034,2025-06-26,Accounts Payable,0.0,949.44,Operations,apatel,Inventory - Operations activity
+JE6144,2025-06-26,Cash,2544.35,0.0,Sales,tgarcia,Cash - Sales activity
+JE6144,2025-06-26,Accounts Receivable,0.0,2544.35,Sales,tgarcia,Cash - Sales activity
+JE6226,2025-06-26,Cash,8850.15,0.0,Sales,apatel,Cash - Sales activity
+JE6226,2025-06-26,Accounts Receivable,0.0,8850.15,Sales,apatel,Cash - Sales activity
+JE6172,2025-06-30,Cash,4941.79,0.0,Sales,ksmith,Cash - Sales activity
+JE6172,2025-06-30,Accounts Receivable,0.0,4941.79,Sales,ksmith,Cash - Sales activity
+JE6104,2025-07-01,Cost of Goods Sold,2787.08,0.0,Operations,apatel,Cost of Goods Sold - Operations activity
+JE6104,2025-07-01,Inventory,0.0,2787.08,Operations,apatel,Cost of Goods Sold - Operations activity
+JE6148,2025-07-01,Cash,1286.51,0.0,Sales,ksmith,Cash - Sales activity
+JE6148,2025-07-01,Accounts Receivable,0.0,1286.51,Sales,ksmith,Cash - Sales activity
+JE6177,2025-07-01,Rent Expense,2748.47,0.0,Operations,jmartin,Rent Expense - Operations activity
+JE6177,2025-07-01,Cash,0.0,2748.47,Operations,jmartin,Rent Expense - Operations activity
+JE6219,2025-07-03,Inventory,2404.24,0.0,Operations,clee,Inventory - Operations activity
+JE6219,2025-07-03,Accounts Payable,0.0,2404.24,Operations,clee,Inventory - Operations activity
+JE6313,2025-07-03,Cost of Goods Sold,3270.06,0.0,Operations,tgarcia,Cost of Goods Sold - Operations activity
+JE6313,2025-07-03,Inventory,0.0,3270.06,Operations,tgarcia,Cost of Goods Sold - Operations activity
+JE6209,2025-07-04,Utilities Expense,559.11,0.0,Operations,rwilliams,Utilities Expense - Operations activity
+JE6209,2025-07-04,Accounts Payable,0.0,559.11,Operations,rwilliams,Utilities Expense - Operations activity
+JE6263,2025-07-04,Cost of Goods Sold,1685.35,0.0,Operations,rwilliams,Cost of Goods Sold - Operations activity
+JE6263,2025-07-04,Inventory,0.0,1685.35,Operations,rwilliams,Cost of Goods Sold - Operations activity
+JE6266,2025-07-04,Accounts Receivable,2292.4,0.0,Sales,jmartin,Accounts Receivable - Sales activity
+JE6266,2025-07-04,Sales Revenue,0.0,2292.4,Sales,jmartin,Accounts Receivable - Sales activity
+JE6020,2025-07-08,Cash,8282.72,0.0,Sales,jmartin,Cash - Sales activity
+JE6020,2025-07-08,Accounts Receivable,0.0,8282.72,Sales,jmartin,Cash - Sales activity
+JE6124,2025-07-08,Cash,3096.03,0.0,Sales,apatel,Cash - Sales activity
+JE6124,2025-07-08,Accounts Receivable,0.0,3096.03,Sales,apatel,Cash - Sales activity
+JE6220,2025-07-08,Accounts Receivable,4207.79,0.0,Sales,rwilliams,Accounts Receivable - Sales activity
+JE6220,2025-07-08,Sales Revenue,0.0,4207.79,Sales,rwilliams,Accounts Receivable - Sales activity
+JE6042,2025-07-11,Cash,2205.55,0.0,Sales,apatel,Cash - Sales activity
+JE6042,2025-07-11,Accounts Receivable,0.0,2205.55,Sales,apatel,Cash - Sales activity
+JE6321,2025-07-11,Salaries Expense,6597.38,0.0,HR,ksmith,Salaries Expense - HR activity
+JE6321,2025-07-11,Cash,0.0,6597.38,HR,ksmith,Salaries Expense - HR activity
+JE6006,2025-07-13,Salaries Expense,4013.84,0.0,HR,rwilliams,Salaries Expense - HR activity
+JE6006,2025-07-13,Cash,0.0,4013.84,HR,rwilliams,Salaries Expense - HR activity
+JE6007,2025-07-14,Utilities Expense,633.63,0.0,Operations,jmartin,Utilities Expense - Operations activity
+JE6007,2025-07-14,Accounts Payable,0.0,633.63,Operations,jmartin,Utilities Expense - Operations activity
+JE6152,2025-07-14,Cash,1585.28,0.0,Sales,clee,Cash - Sales activity
+JE6152,2025-07-14,Accounts Receivable,0.0,1585.28,Sales,clee,Cash - Sales activity
+JE6237,2025-07-14,Cash,3943.09,0.0,Sales,jmartin,Cash - Sales activity
+JE6237,2025-07-14,Accounts Receivable,0.0,3943.09,Sales,jmartin,Cash - Sales activity
+JE6261,2025-07-14,Insurance Expense,617.73,0.0,Finance,clee,Insurance Expense - Finance activity
+JE6261,2025-07-14,Prepaid Insurance,0.0,617.73,Finance,clee,Insurance Expense - Finance activity
+JE6902,2025-07-14,Rent Expense,3200.0,0.0,Operations,rwilliams,Monthly rent payment
+JE6902,2025-07-14,Cash,0.0,3200.0,Operations,rwilliams,Monthly rent payment
+JE6903,2025-07-14,Rent Expense,3200.0,0.0,Operations,rwilliams,Monthly rent payment
+JE6903,2025-07-14,Cash,0.0,3200.0,Operations,rwilliams,Monthly rent payment
+JE6323,2025-07-15,Cost of Goods Sold,1034.15,0.0,Operations,apatel,Cost of Goods Sold - Operations activity
+JE6323,2025-07-15,Inventory,0.0,1034.15,Operations,apatel,Cost of Goods Sold - Operations activity
+JE6197,2025-07-16,Utilities Expense,585.56,0.0,Operations,tgarcia,Utilities Expense - Operations activity
+JE6197,2025-07-16,Accounts Payable,0.0,585.56,Operations,tgarcia,Utilities Expense - Operations activity
+JE6175,2025-07-17,Marketing Expense,741.22,0.0,Sales,tgarcia,Marketing Expense - Sales activity
+JE6175,2025-07-17,Cash,0.0,741.22,Sales,tgarcia,Marketing Expense - Sales activity
+JE6206,2025-07-17,Salaries Expense,6498.72,0.0,HR,tgarcia,Salaries Expense - HR activity
+JE6206,2025-07-17,Cash,0.0,6498.72,HR,tgarcia,Salaries Expense - HR activity
+JE6179,2025-07-18,Salaries Expense,5159.63,0.0,HR,apatel,Salaries Expense - HR activity
+JE6179,2025-07-18,Cash,0.0,5159.63,HR,apatel,Salaries Expense - HR activity
+JE6078,2025-07-24,Marketing Expense,1293.36,0.0,Sales,tgarcia,Marketing Expense - Sales activity
+JE6078,2025-07-24,Cash,0.0,1293.36,Sales,tgarcia,Marketing Expense - Sales activity
+JE6080,2025-07-28,Cash,6301.0,0.0,Sales,rwilliams,Cash - Sales activity
+JE6080,2025-07-28,Accounts Receivable,0.0,6301.0,Sales,rwilliams,Cash - Sales activity
+JE6122,2025-07-28,Utilities Expense,509.52,0.0,Operations,tgarcia,Utilities Expense - Operations activity
+JE6122,2025-07-28,Accounts Payable,0.0,509.52,Operations,tgarcia,Utilities Expense - Operations activity
+JE6334,2025-07-29,Accounts Payable,3114.19,0.0,Operations,rwilliams,Accounts Payable - Operations activity
+JE6334,2025-07-29,Cash,0.0,3114.19,Operations,rwilliams,Accounts Payable - Operations activity
+JE6201,2025-07-30,Salaries Expense,4513.02,0.0,HR,tgarcia,Salaries Expense - HR activity
+JE6201,2025-07-30,Cash,0.0,4513.02,HR,tgarcia,Salaries Expense - HR activity
+JE6306,2025-07-30,Cash,1377.49,0.0,Sales,jmartin,Cash - Sales activity
+JE6306,2025-07-30,Accounts Receivable,0.0,1377.49,Sales,jmartin,Cash - Sales activity
+JE6157,2025-08-01,Salaries Expense,6169.49,0.0,HR,jmartin,Salaries Expense - HR activity
+JE6157,2025-08-01,Cash,0.0,6169.49,HR,jmartin,Salaries Expense - HR activity
+JE6292,2025-08-01,Cash,1681.29,0.0,Sales,ksmith,Cash - Sales activity
+JE6292,2025-08-01,Accounts Receivable,0.0,1681.29,Sales,ksmith,Cash - Sales activity
+JE6184,2025-08-04,Depreciation Expense,979.48,0.0,Finance,clee,Depreciation Expense - Finance activity
+JE6184,2025-08-04,Accumulated Depreciation - Equipment,0.0,979.48,Finance,clee,Depreciation Expense - Finance activity
+JE6234,2025-08-04,Inventory,2348.92,0.0,Operations,tgarcia,Inventory - Operations activity
+JE6234,2025-08-04,Accounts Payable,0.0,2348.92,Operations,tgarcia,Inventory - Operations activity
+JE6246,2025-08-04,Accounts Receivable,2253.77,0.0,Sales,apatel,Accounts Receivable - Sales activity
+JE6246,2025-08-04,Sales Revenue,0.0,2253.77,Sales,apatel,Accounts Receivable - Sales activity
+JE6178,2025-08-05,Accounts Receivable,3027.29,0.0,Sales,rwilliams,Accounts Receivable - Sales activity
+JE6178,2025-08-05,Sales Revenue,0.0,3027.29,Sales,rwilliams,Accounts Receivable - Sales activity
+JE6252,2025-08-05,Accounts Receivable,4017.11,0.0,Sales,tgarcia,Accounts Receivable - Sales activity
+JE6252,2025-08-05,Sales Revenue,0.0,4017.11,Sales,tgarcia,Accounts Receivable - Sales activity
+JE6151,2025-08-06,Utilities Expense,558.75,0.0,Operations,tgarcia,Utilities Expense - Operations activity
+JE6151,2025-08-06,Accounts Payable,0.0,558.75,Operations,tgarcia,Utilities Expense - Operations activity
+JE6200,2025-08-06,Cash,2520.3,0.0,Sales,jmartin,Cash - Sales activity
+JE6200,2025-08-06,Accounts Receivable,0.0,2520.3,Sales,jmartin,Cash - Sales activity
+JE6217,2025-08-06,Cash,5850.2,0.0,Sales,rwilliams,Cash - Sales activity
+JE6217,2025-08-06,Accounts Receivable,0.0,5850.2,Sales,rwilliams,Cash - Sales activity
+JE6049,2025-08-07,Accounts Payable,1282.59,0.0,Operations,tgarcia,Accounts Payable - Operations activity
+JE6049,2025-08-07,Cash,0.0,1282.59,Operations,tgarcia,Accounts Payable - Operations activity
+JE6053,2025-08-07,Cost of Goods Sold,2459.39,0.0,Operations,clee,Cost of Goods Sold - Operations activity
+JE6053,2025-08-07,Inventory,0.0,2459.39,Operations,clee,Cost of Goods Sold - Operations activity
+JE6110,2025-08-07,Cash,1741.08,0.0,Sales,ksmith,Cash - Sales activity
+JE6110,2025-08-07,Accounts Receivable,0.0,1741.08,Sales,ksmith,Cash - Sales activity
+JE6269,2025-08-07,Rent Expense,2758.56,0.0,Operations,jmartin,Rent Expense - Operations activity
+JE6269,2025-08-07,Cash,0.0,2758.56,Operations,jmartin,Rent Expense - Operations activity
+JE6091,2025-08-08,Marketing Expense,2522.91,0.0,Sales,jmartin,Marketing Expense - Sales activity
+JE6091,2025-08-08,Cash,0.0,2522.91,Sales,jmartin,Marketing Expense - Sales activity
+JE6215,2025-08-08,Accounts Receivable,4280.82,0.0,Sales,jmartin,Accounts Receivable - Sales activity
+JE6215,2025-08-08,Sales Revenue,0.0,4280.82,Sales,jmartin,Accounts Receivable - Sales activity
+JE6060,2025-08-09,Salaries Expense,4321.18,0.0,HR,tgarcia,Salaries Expense - HR activity
+JE6060,2025-08-09,Cash,0.0,4321.18,HR,tgarcia,Salaries Expense - HR activity
+JE6109,2025-08-11,Inventory,2334.14,0.0,Operations,apatel,Inventory - Operations activity
+JE6109,2025-08-11,Accounts Payable,0.0,2334.14,Operations,apatel,Inventory - Operations activity
+JE6276,2025-08-11,Inventory,3140.96,0.0,Operations,tgarcia,Inventory - Operations activity
+JE6276,2025-08-11,Accounts Payable,0.0,3140.96,Operations,tgarcia,Inventory - Operations activity
+JE6294,2025-08-11,Cost of Goods Sold,1154.44,0.0,Operations,jmartin,Cost of Goods Sold - Operations activity
+JE6294,2025-08-11,Inventory,0.0,1154.44,Operations,jmartin,Cost of Goods Sold - Operations activity
+JE6083,2025-08-13,Cost of Goods Sold,1615.1,0.0,Operations,ksmith,Cost of Goods Sold - Operations activity
+JE6083,2025-08-13,Inventory,0.0,1615.1,Operations,ksmith,Cost of Goods Sold - Operations activity
+JE6059,2025-08-14,Accounts Receivable,4023.73,0.0,Sales,clee,Accounts Receivable - Sales activity
+JE6059,2025-08-14,Sales Revenue,0.0,4023.73,Sales,clee,Accounts Receivable - Sales activity
+JE6244,2025-08-14,Cost of Goods Sold,867.92,0.0,Operations,jmartin,Cost of Goods Sold - Operations activity
+JE6244,2025-08-14,Inventory,0.0,867.92,Operations,jmartin,Cost of Goods Sold - Operations activity
+JE6233,2025-08-20,Rent Expense,2420.97,0.0,Operations,tgarcia,Rent Expense - Operations activity
+JE6233,2025-08-20,Cash,0.0,2420.97,Operations,tgarcia,Rent Expense - Operations activity
+JE6270,2025-08-20,Cost of Goods Sold,3180.23,0.0,Operations,tgarcia,Cost of Goods Sold - Operations activity
+JE6270,2025-08-20,Inventory,0.0,3180.23,Operations,tgarcia,Cost of Goods Sold - Operations activity
+JE6055,2025-08-21,Cost of Goods Sold,3440.43,0.0,Operations,apatel,Cost of Goods Sold - Operations activity
+JE6055,2025-08-21,Inventory,0.0,3440.43,Operations,apatel,Cost of Goods Sold - Operations activity
+JE6004,2025-08-26,Cost of Goods Sold,1483.8,0.0,Operations,apatel,Cost of Goods Sold - Operations activity
+JE6004,2025-08-26,Inventory,0.0,1483.8,Operations,apatel,Cost of Goods Sold - Operations activity
+JE6021,2025-08-28,Cost of Goods Sold,1819.02,0.0,Operations,ksmith,Cost of Goods Sold - Operations activity
+JE6021,2025-08-28,Inventory,0.0,1819.02,Operations,ksmith,Cost of Goods Sold - Operations activity
+JE6040,2025-08-28,Cash,6354.44,0.0,Sales,rwilliams,Cash - Sales activity
+JE6040,2025-08-28,Accounts Receivable,0.0,6354.44,Sales,rwilliams,Cash - Sales activity
+JE6016,2025-08-29,Salaries Expense,5437.46,0.0,HR,clee,Salaries Expense - HR activity
+JE6016,2025-08-29,Cash,0.0,5437.46,HR,clee,Salaries Expense - HR activity
+JE6114,2025-08-29,Accounts Receivable,1461.93,0.0,Sales,rwilliams,Accounts Receivable - Sales activity
+JE6114,2025-08-29,Sales Revenue,0.0,1461.93,Sales,rwilliams,Accounts Receivable - Sales activity
+JE6066,2025-08-30,Insurance Expense,603.45,0.0,Finance,apatel,Insurance Expense - Finance activity
+JE6066,2025-08-30,Prepaid Insurance,0.0,603.45,Finance,apatel,Insurance Expense - Finance activity
+JE6132,2025-09-03,Accounts Payable,4293.34,0.0,Operations,tgarcia,Accounts Payable - Operations activity
+JE6132,2025-09-03,Cash,0.0,4293.34,Operations,tgarcia,Accounts Payable - Operations activity
+JE6229,2025-09-03,Cost of Goods Sold,1656.53,0.0,Operations,tgarcia,Cost of Goods Sold - Operations activity
+JE6229,2025-09-03,Inventory,0.0,1656.53,Operations,tgarcia,Cost of Goods Sold - Operations activity
+JE6186,2025-09-04,Inventory,1821.51,0.0,Operations,jmartin,Inventory - Operations activity
+JE6186,2025-09-04,Accounts Payable,0.0,1821.51,Operations,jmartin,Inventory - Operations activity
+JE6228,2025-09-04,Depreciation Expense,867.81,0.0,Finance,apatel,Depreciation Expense - Finance activity
+JE6228,2025-09-04,Accumulated Depreciation - Equipment,0.0,867.81,Finance,apatel,Depreciation Expense - Finance activity
+JE6241,2025-09-05,Salaries Expense,4878.01,0.0,HR,ksmith,Salaries Expense - HR activity
+JE6241,2025-09-05,Cash,0.0,4878.01,HR,ksmith,Salaries Expense - HR activity
+JE6322,2025-09-05,Salaries Expense,4209.59,0.0,HR,ksmith,Salaries Expense - HR activity
+JE6322,2025-09-05,Cash,0.0,4209.59,HR,ksmith,Salaries Expense - HR activity
+JE6056,2025-09-06,Accounts Payable,550.36,0.0,Operations,apatel,Accounts Payable - Operations activity
+JE6056,2025-09-06,Cash,0.0,550.36,Operations,apatel,Accounts Payable - Operations activity
+JE6128,2025-09-08,Salaries Expense,5206.54,0.0,HR,apatel,Salaries Expense - HR activity
+JE6128,2025-09-08,Cash,0.0,5206.54,HR,apatel,Salaries Expense - HR activity
+JE6274,2025-09-08,Accounts Payable,1008.85,0.0,Operations,clee,Accounts Payable - Operations activity
+JE6274,2025-09-08,Cash,0.0,1008.85,Operations,clee,Accounts Payable - Operations activity
+JE6074,2025-09-09,Marketing Expense,983.72,0.0,Sales,rwilliams,Marketing Expense - Sales activity
+JE6074,2025-09-09,Cash,0.0,983.72,Sales,rwilliams,Marketing Expense - Sales activity
+JE6101,2025-09-12,Salaries Expense,5059.15,0.0,HR,tgarcia,Salaries Expense - HR activity
+JE6101,2025-09-12,Cash,0.0,5059.15,HR,tgarcia,Salaries Expense - HR activity
+JE6154,2025-09-12,Cash,1828.98,0.0,Sales,rwilliams,Cash - Sales activity
+JE6154,2025-09-12,Accounts Receivable,0.0,1828.98,Sales,rwilliams,Cash - Sales activity
+JE6240,2025-09-16,Cost of Goods Sold,3827.88,0.0,Operations,ksmith,Cost of Goods Sold - Operations activity
+JE6240,2025-09-16,Inventory,0.0,3827.88,Operations,ksmith,Cost of Goods Sold - Operations activity
+JE6298,2025-09-16,Accounts Receivable,1763.34,0.0,Sales,ksmith,Accounts Receivable - Sales activity
+JE6298,2025-09-16,Sales Revenue,0.0,1763.34,Sales,ksmith,Accounts Receivable - Sales activity
+JE6297,2025-09-17,Accounts Receivable,4290.05,0.0,Sales,jmartin,Accounts Receivable - Sales activity
+JE6297,2025-09-17,Sales Revenue,0.0,4290.05,Sales,jmartin,Accounts Receivable - Sales activity
+JE6181,2025-09-18,Accounts Payable,2537.57,0.0,Operations,apatel,Accounts Payable - Operations activity
+JE6181,2025-09-18,Cash,0.0,2537.57,Operations,apatel,Accounts Payable - Operations activity
+JE6231,2025-09-18,Accounts Receivable,4163.78,0.0,Sales,tgarcia,Accounts Receivable - Sales activity
+JE6231,2025-09-18,Sales Revenue,0.0,4163.78,Sales,tgarcia,Accounts Receivable - Sales activity
+JE6286,2025-09-18,Utilities Expense,372.73,0.0,Operations,tgarcia,Utilities Expense - Operations activity
+JE6286,2025-09-18,Accounts Payable,0.0,372.73,Operations,tgarcia,Utilities Expense - Operations activity
+JE6068,2025-09-20,Cash,3194.83,0.0,Sales,apatel,Cash - Sales activity
+JE6068,2025-09-20,Accounts Receivable,0.0,3194.83,Sales,apatel,Cash - Sales activity
+JE6904,2025-09-20,Salaries Expense,52000.0,0.0,HR,dcfo,Special bonus accrual
+JE6904,2025-09-20,Cash,0.0,52000.0,HR,dcfo,Special bonus accrual
+JE6199,2025-09-23,Cash,2154.15,0.0,Sales,ksmith,Cash - Sales activity
+JE6199,2025-09-23,Accounts Receivable,0.0,2154.15,Sales,ksmith,Cash - Sales activity
+JE6012,2025-09-24,Marketing Expense,2064.17,0.0,Sales,tgarcia,Marketing Expense - Sales activity
+JE6012,2025-09-24,Cash,0.0,2064.17,Sales,tgarcia,Marketing Expense - Sales activity
+JE6118,2025-09-24,Inventory,2371.94,0.0,Operations,apatel,Inventory - Operations activity
+JE6118,2025-09-24,Accounts Payable,0.0,2371.94,Operations,apatel,Inventory - Operations activity
+JE6191,2025-09-24,Accounts Receivable,2231.74,0.0,Sales,apatel,Accounts Receivable - Sales activity
+JE6191,2025-09-24,Sales Revenue,0.0,2231.74,Sales,apatel,Accounts Receivable - Sales activity
+JE6285,2025-09-25,Utilities Expense,349.89,0.0,Operations,ksmith,Utilities Expense - Operations activity
+JE6285,2025-09-25,Accounts Payable,0.0,349.89,Operations,ksmith,Utilities Expense - Operations activity
+JE6005,2025-09-29,Cash,1233.35,0.0,Sales,jmartin,Cash - Sales activity
+JE6005,2025-09-29,Accounts Receivable,0.0,1233.35,Sales,jmartin,Cash - Sales activity
+JE6070,2025-09-29,Cash,6209.35,0.0,Sales,tgarcia,Cash - Sales activity
+JE6070,2025-09-29,Accounts Receivable,0.0,6209.35,Sales,tgarcia,Cash - Sales activity
+JE6224,2025-10-01,Cost of Goods Sold,805.36,0.0,Operations,rwilliams,Cost of Goods Sold - Operations activity
+JE6224,2025-10-01,Inventory,0.0,805.36,Operations,rwilliams,Cost of Goods Sold - Operations activity
+JE6281,2025-10-01,Accounts Payable,799.09,0.0,Operations,clee,Accounts Payable - Operations activity
+JE6281,2025-10-01,Cash,0.0,799.09,Operations,clee,Accounts Payable - Operations activity
+JE6195,2025-10-02,Inventory,1414.62,0.0,Operations,tgarcia,Inventory - Operations activity
+JE6195,2025-10-02,Accounts Payable,0.0,1414.62,Operations,tgarcia,Inventory - Operations activity
+JE6051,2025-10-03,Inventory,2517.5,0.0,Operations,rwilliams,Inventory - Operations activity
+JE6051,2025-10-03,Accounts Payable,0.0,2517.5,Operations,rwilliams,Inventory - Operations activity
+JE6107,2025-10-03,Inventory,3092.48,0.0,Operations,jmartin,Inventory - Operations activity
+JE6107,2025-10-03,Accounts Payable,0.0,3092.48,Operations,jmartin,Inventory - Operations activity
+JE6153,2025-10-03,Inventory,2666.03,0.0,Operations,apatel,Inventory - Operations activity
+JE6153,2025-10-03,Accounts Payable,0.0,2666.03,Operations,apatel,Inventory - Operations activity
+JE6262,2025-10-03,Cost of Goods Sold,3094.31,0.0,Operations,jmartin,Cost of Goods Sold - Operations activity
+JE6262,2025-10-03,Inventory,0.0,3094.31,Operations,jmartin,Cost of Goods Sold - Operations activity
+JE6077,2025-10-06,Accounts Receivable,4204.04,0.0,Sales,clee,Accounts Receivable - Sales activity
+JE6077,2025-10-06,Sales Revenue,0.0,4204.04,Sales,clee,Accounts Receivable - Sales activity
+JE6205,2025-10-06,Salaries Expense,6450.46,0.0,HR,ksmith,Salaries Expense - HR activity
+JE6205,2025-10-06,Cash,0.0,6450.46,HR,ksmith,Salaries Expense - HR activity
+JE6288,2025-10-07,Depreciation Expense,942.78,0.0,Finance,jmartin,Depreciation Expense - Finance activity
+JE6288,2025-10-07,Accumulated Depreciation - Equipment,0.0,942.78,Finance,jmartin,Depreciation Expense - Finance activity
+JE6203,2025-10-08,Accounts Receivable,4725.0,0.0,Sales,clee,Accounts Receivable - Sales activity
+JE6203,2025-10-08,Sales Revenue,0.0,4725.0,Sales,clee,Accounts Receivable - Sales activity
+JE6023,2025-10-10,Accounts Payable,1968.24,0.0,Operations,ksmith,Accounts Payable - Operations activity
+JE6023,2025-10-10,Cash,0.0,1968.24,Operations,ksmith,Accounts Payable - Operations activity
+JE6257,2025-10-10,Cash,3047.28,0.0,Sales,ksmith,Cash - Sales activity
+JE6257,2025-10-10,Accounts Receivable,0.0,3047.28,Sales,ksmith,Cash - Sales activity
+JE6333,2025-10-10,Cost of Goods Sold,1179.24,0.0,Operations,clee,Cost of Goods Sold - Operations activity
+JE6333,2025-10-10,Inventory,0.0,1179.24,Operations,clee,Cost of Goods Sold - Operations activity
+JE6010,2025-10-14,Cash,2474.23,0.0,Sales,rwilliams,Cash - Sales activity
+JE6010,2025-10-14,Accounts Receivable,0.0,2474.23,Sales,rwilliams,Cash - Sales activity
+JE6024,2025-10-14,Accounts Receivable,4074.96,0.0,Sales,tgarcia,Accounts Receivable - Sales activity
+JE6024,2025-10-14,Sales Revenue,0.0,4074.96,Sales,tgarcia,Accounts Receivable - Sales activity
+JE6097,2025-10-14,Cost of Goods Sold,3087.65,0.0,Operations,rwilliams,Cost of Goods Sold - Operations activity
+JE6097,2025-10-14,Inventory,0.0,3087.65,Operations,rwilliams,Cost of Goods Sold - Operations activity
+JE6309,2025-10-16,Cost of Goods Sold,2960.91,0.0,Operations,apatel,Cost of Goods Sold - Operations activity
+JE6309,2025-10-16,Inventory,0.0,2960.91,Operations,apatel,Cost of Goods Sold - Operations activity
+JE6156,2025-10-17,Accounts Receivable,6611.18,0.0,Sales,ksmith,Accounts Receivable - Sales activity
+JE6156,2025-10-17,Sales Revenue,0.0,6611.18,Sales,ksmith,Accounts Receivable - Sales activity
+JE6278,2025-10-17,Accounts Receivable,6848.28,0.0,Sales,tgarcia,Accounts Receivable - Sales activity
+JE6278,2025-10-17,Sales Revenue,0.0,6848.28,Sales,tgarcia,Accounts Receivable - Sales activity
+JE6170,2025-10-20,Cost of Goods Sold,2564.25,0.0,Operations,rwilliams,Cost of Goods Sold - Operations activity
+JE6170,2025-10-20,Inventory,0.0,2564.25,Operations,rwilliams,Cost of Goods Sold - Operations activity
+JE6084,2025-10-21,Accounts Receivable,5345.06,0.0,Sales,ksmith,Accounts Receivable - Sales activity
+JE6084,2025-10-21,Sales Revenue,0.0,5345.06,Sales,ksmith,Accounts Receivable - Sales activity
+JE6273,2025-10-22,Insurance Expense,687.7,0.0,Finance,rwilliams,Insurance Expense - Finance activity
+JE6273,2025-10-22,Prepaid Insurance,0.0,687.7,Finance,rwilliams,Insurance Expense - Finance activity
+JE6265,2025-10-23,Inventory,3193.18,0.0,Operations,jmartin,Inventory - Operations activity
+JE6265,2025-10-23,Accounts Payable,0.0,3193.18,Operations,jmartin,Inventory - Operations activity
+JE6301,2025-10-23,Accounts Payable,3674.11,0.0,Operations,apatel,Accounts Payable - Operations activity
+JE6301,2025-10-23,Cash,0.0,3674.11,Operations,apatel,Accounts Payable - Operations activity
+JE6103,2025-10-24,Inventory,2277.51,0.0,Operations,apatel,Inventory - Operations activity
+JE6103,2025-10-24,Accounts Payable,0.0,2277.51,Operations,apatel,Inventory - Operations activity
+JE6282,2025-10-24,Accounts Receivable,4823.04,0.0,Sales,jmartin,Accounts Receivable - Sales activity
+JE6282,2025-10-24,Sales Revenue,0.0,4823.04,Sales,jmartin,Accounts Receivable - Sales activity
+JE6332,2025-10-24,Utilities Expense,576.7,0.0,Operations,rwilliams,Utilities Expense - Operations activity
+JE6332,2025-10-24,Accounts Payable,0.0,576.7,Operations,rwilliams,Utilities Expense - Operations activity
+JE6311,2025-10-28,Accounts Receivable,1479.39,0.0,Sales,clee,Accounts Receivable - Sales activity
+JE6311,2025-10-28,Sales Revenue,0.0,1479.39,Sales,clee,Accounts Receivable - Sales activity
+JE6136,2025-10-29,Inventory,5304.29,0.0,Operations,rwilliams,Inventory - Operations activity
+JE6136,2025-10-29,Accounts Payable,0.0,5304.29,Operations,rwilliams,Inventory - Operations activity
+JE6155,2025-10-29,Accounts Payable,1613.43,0.0,Operations,clee,Accounts Payable - Operations activity
+JE6155,2025-10-29,Cash,0.0,1613.43,Operations,clee,Accounts Payable - Operations activity
+JE6058,2025-10-30,Cost of Goods Sold,3499.76,0.0,Operations,jmartin,Cost of Goods Sold - Operations activity
+JE6058,2025-10-30,Inventory,0.0,3499.76,Operations,jmartin,Cost of Goods Sold - Operations activity
+JE6137,2025-10-30,Accounts Payable,1395.33,0.0,Operations,rwilliams,Accounts Payable - Operations activity
+JE6137,2025-10-30,Cash,0.0,1395.33,Operations,rwilliams,Accounts Payable - Operations activity
+JE6283,2025-10-30,Accounts Receivable,2518.2,0.0,Sales,apatel,Accounts Receivable - Sales activity
+JE6283,2025-10-30,Sales Revenue,0.0,2518.2,Sales,apatel,Accounts Receivable - Sales activity
+JE6033,2025-11-01,Salaries Expense,5343.25,0.0,HR,jmartin,Salaries Expense - HR activity
+JE6033,2025-11-01,Cash,0.0,5343.25,HR,jmartin,Salaries Expense - HR activity
+JE6149,2025-11-03,Accounts Receivable,4889.18,0.0,Sales,tgarcia,Accounts Receivable - Sales activity
+JE6149,2025-11-03,Sales Revenue,0.0,4889.18,Sales,tgarcia,Accounts Receivable - Sales activity
+JE6121,2025-11-04,Inventory,2466.52,0.0,Operations,apatel,Inventory - Operations activity
+JE6121,2025-11-04,Accounts Payable,0.0,2466.52,Operations,apatel,Inventory - Operations activity
+JE6140,2025-11-04,Accounts Payable,974.85,0.0,Operations,ksmith,Accounts Payable - Operations activity
+JE6140,2025-11-04,Cash,0.0,974.85,Operations,ksmith,Accounts Payable - Operations activity
+JE6214,2025-11-05,Cost of Goods Sold,965.2,0.0,Operations,jmartin,Cost of Goods Sold - Operations activity
+JE6214,2025-11-05,Inventory,0.0,965.2,Operations,jmartin,Cost of Goods Sold - Operations activity
+JE6202,2025-11-06,Inventory,1728.94,0.0,Operations,jmartin,Inventory - Operations activity
+JE6202,2025-11-06,Accounts Payable,0.0,1728.94,Operations,jmartin,Inventory - Operations activity
+JE6216,2025-11-10,Cash,2327.41,0.0,Sales,tgarcia,Cash - Sales activity
+JE6216,2025-11-10,Accounts Receivable,0.0,2327.41,Sales,tgarcia,Cash - Sales activity
+JE6210,2025-11-11,Utilities Expense,493.93,0.0,Operations,rwilliams,Utilities Expense - Operations activity
+JE6210,2025-11-11,Accounts Payable,0.0,493.93,Operations,rwilliams,Utilities Expense - Operations activity
+JE6275,2025-11-11,Cost of Goods Sold,4115.73,0.0,Operations,tgarcia,Cost of Goods Sold - Operations activity
+JE6275,2025-11-11,Inventory,0.0,4115.73,Operations,tgarcia,Cost of Goods Sold - Operations activity
+JE6248,2025-11-12,Accounts Receivable,1700.85,0.0,Sales,apatel,Accounts Receivable - Sales activity
+JE6248,2025-11-12,Sales Revenue,0.0,1700.85,Sales,apatel,Accounts Receivable - Sales activity
+JE6072,2025-11-13,Cost of Goods Sold,1530.46,0.0,Operations,apatel,Cost of Goods Sold - Operations activity
+JE6072,2025-11-13,Inventory,0.0,1530.46,Operations,apatel,Cost of Goods Sold - Operations activity
+JE6027,2025-11-14,Accounts Receivable,4352.32,0.0,Sales,jmartin,Accounts Receivable - Sales activity
+JE6027,2025-11-14,Sales Revenue,0.0,4352.32,Sales,jmartin,Accounts Receivable - Sales activity
+JE6161,2025-11-14,Inventory,4021.63,0.0,Operations,clee,Inventory - Operations activity
+JE6161,2025-11-14,Accounts Payable,0.0,4021.63,Operations,clee,Inventory - Operations activity
+JE6192,2025-11-14,Cost of Goods Sold,1164.49,0.0,Operations,tgarcia,Cost of Goods Sold - Operations activity
+JE6192,2025-11-14,Inventory,0.0,1164.49,Operations,tgarcia,Cost of Goods Sold - Operations activity
+JE6134,2025-11-17,Utilities Expense,721.61,0.0,Operations,clee,Utilities Expense - Operations activity
+JE6134,2025-11-17,Accounts Payable,0.0,721.61,Operations,clee,Utilities Expense - Operations activity
+JE6090,2025-11-18,Utilities Expense,720.84,0.0,Operations,clee,Utilities Expense - Operations activity
+JE6090,2025-11-18,Accounts Payable,0.0,720.84,Operations,clee,Utilities Expense - Operations activity
+JE6293,2025-11-18,Utilities Expense,361.69,0.0,Operations,tgarcia,Utilities Expense - Operations activity
+JE6293,2025-11-18,Accounts Payable,0.0,361.69,Operations,tgarcia,Utilities Expense - Operations activity
+JE6901,2025-11-18,Accounts Receivable,41500.0,0.0,Sales,clee,"Order confirmed, awaiting warehouse release"
+JE6901,2025-11-18,Sales Revenue,0.0,41500.0,Sales,clee,"Order confirmed, awaiting warehouse release"
+JE6138,2025-11-19,Salaries Expense,4668.04,0.0,HR,rwilliams,Salaries Expense - HR activity
+JE6138,2025-11-19,Cash,0.0,4668.04,HR,rwilliams,Salaries Expense - HR activity
+JE6211,2025-11-19,Accounts Receivable,7816.37,0.0,Sales,tgarcia,Accounts Receivable - Sales activity
+JE6211,2025-11-19,Sales Revenue,0.0,7816.37,Sales,tgarcia,Accounts Receivable - Sales activity
+JE6037,2025-11-21,Inventory,1986.6,0.0,Operations,rwilliams,Inventory - Operations activity
+JE6037,2025-11-21,Accounts Payable,0.0,1986.6,Operations,rwilliams,Inventory - Operations activity
+JE6320,2025-11-21,Accounts Receivable,4817.12,0.0,Sales,clee,Accounts Receivable - Sales activity
+JE6320,2025-11-21,Sales Revenue,0.0,4817.12,Sales,clee,Accounts Receivable - Sales activity
+JE6117,2025-11-24,Accounts Receivable,3113.11,0.0,Sales,jmartin,Accounts Receivable - Sales activity
+JE6117,2025-11-24,Sales Revenue,0.0,3113.11,Sales,jmartin,Accounts Receivable - Sales activity
+JE6163,2025-11-24,Cash,3673.36,0.0,Sales,jmartin,Cash - Sales activity
+JE6163,2025-11-24,Accounts Receivable,0.0,3673.36,Sales,jmartin,Cash - Sales activity
+JE6221,2025-11-24,Cost of Goods Sold,917.15,0.0,Operations,apatel,Cost of Goods Sold - Operations activity
+JE6221,2025-11-24,Inventory,0.0,917.15,Operations,apatel,Cost of Goods Sold - Operations activity
+JE6001,2025-11-25,Accounts Receivable,3140.39,0.0,Sales,tgarcia,Accounts Receivable - Sales activity
+JE6001,2025-11-25,Sales Revenue,0.0,3140.39,Sales,tgarcia,Accounts Receivable - Sales activity
+JE6073,2025-11-27,Salaries Expense,7388.22,0.0,HR,rwilliams,Salaries Expense - HR activity
+JE6073,2025-11-27,Cash,0.0,7388.22,HR,rwilliams,Salaries Expense - HR activity
+JE6267,2025-11-27,Cost of Goods Sold,3480.7,0.0,Operations,tgarcia,Cost of Goods Sold - Operations activity
+JE6267,2025-11-27,Inventory,0.0,3480.7,Operations,tgarcia,Cost of Goods Sold - Operations activity
+JE6271,2025-11-27,Accounts Receivable,1285.55,0.0,Sales,tgarcia,Accounts Receivable - Sales activity
+JE6271,2025-11-27,Sales Revenue,0.0,1285.55,Sales,tgarcia,Accounts Receivable - Sales activity
+JE6002,2025-11-28,Inventory,2651.29,0.0,Operations,rwilliams,Inventory - Operations activity
+JE6002,2025-11-28,Accounts Payable,0.0,2651.29,Operations,rwilliams,Inventory - Operations activity
+JE6315,2025-11-28,Rent Expense,2795.04,0.0,Operations,ksmith,Rent Expense - Operations activity
+JE6315,2025-11-28,Cash,0.0,2795.04,Operations,ksmith,Rent Expense - Operations activity
+JE6182,2025-11-30,Accounts Payable,3343.29,0.0,Operations,tgarcia,Accounts Payable - Operations activity
+JE6182,2025-11-30,Cash,0.0,3343.29,Operations,tgarcia,Accounts Payable - Operations activity
+JE6318,2025-12-02,Cost of Goods Sold,1524.93,0.0,Operations,clee,Cost of Goods Sold - Operations activity
+JE6318,2025-12-02,Inventory,0.0,1524.93,Operations,clee,Cost of Goods Sold - Operations activity
+JE6296,2025-12-03,Cost of Goods Sold,1018.57,0.0,Operations,apatel,Cost of Goods Sold - Operations activity
+JE6296,2025-12-03,Inventory,0.0,1018.57,Operations,apatel,Cost of Goods Sold - Operations activity
+JE6317,2025-12-03,Cost of Goods Sold,2682.56,0.0,Operations,tgarcia,Cost of Goods Sold - Operations activity
+JE6317,2025-12-03,Inventory,0.0,2682.56,Operations,tgarcia,Cost of Goods Sold - Operations activity
+JE6183,2025-12-04,Rent Expense,3047.5,0.0,Operations,rwilliams,Rent Expense - Operations activity
+JE6183,2025-12-04,Cash,0.0,3047.5,Operations,rwilliams,Rent Expense - Operations activity
+JE6259,2025-12-04,Depreciation Expense,1142.19,0.0,Finance,tgarcia,Depreciation Expense - Finance activity
+JE6259,2025-12-04,Accumulated Depreciation - Equipment,0.0,1142.19,Finance,tgarcia,Depreciation Expense - Finance activity
+JE6307,2025-12-04,Inventory,5338.7,0.0,Operations,jmartin,Inventory - Operations activity
+JE6307,2025-12-04,Accounts Payable,0.0,5338.7,Operations,jmartin,Inventory - Operations activity
+JE6048,2025-12-05,Accounts Receivable,5280.06,0.0,Sales,clee,Accounts Receivable - Sales activity
+JE6048,2025-12-05,Sales Revenue,0.0,5280.06,Sales,clee,Accounts Receivable - Sales activity
+JE6123,2025-12-05,Cash,2309.09,0.0,Sales,ksmith,Cash - Sales activity
+JE6123,2025-12-05,Accounts Receivable,0.0,2309.09,Sales,ksmith,Cash - Sales activity
+JE6312,2025-12-05,Salaries Expense,3204.76,0.0,HR,tgarcia,Salaries Expense - HR activity
+JE6312,2025-12-05,Cash,0.0,3204.76,HR,tgarcia,Salaries Expense - HR activity
+JE6328,2025-12-05,Cost of Goods Sold,2571.64,0.0,Operations,tgarcia,Cost of Goods Sold - Operations activity
+JE6328,2025-12-05,Inventory,0.0,2571.64,Operations,tgarcia,Cost of Goods Sold - Operations activity
+JE6089,2025-12-08,Inventory,1852.66,0.0,Operations,jmartin,Inventory - Operations activity
+JE6089,2025-12-08,Accounts Payable,0.0,1852.66,Operations,jmartin,Inventory - Operations activity
+JE6094,2025-12-08,Salaries Expense,6676.56,0.0,HR,jmartin,Salaries Expense - HR activity
+JE6094,2025-12-08,Cash,0.0,6676.56,HR,jmartin,Salaries Expense - HR activity
+JE6230,2025-12-08,Utilities Expense,594.03,0.0,Operations,tgarcia,Utilities Expense - Operations activity
+JE6230,2025-12-08,Accounts Payable,0.0,594.03,Operations,tgarcia,Utilities Expense - Operations activity
+JE6190,2025-12-09,Cash,2693.86,0.0,Sales,ksmith,Cash - Sales activity
+JE6190,2025-12-09,Accounts Receivable,0.0,2693.86,Sales,ksmith,Cash - Sales activity
+JE6025,2025-12-10,Cost of Goods Sold,3512.49,0.0,Operations,rwilliams,Cost of Goods Sold - Operations activity
+JE6025,2025-12-10,Inventory,0.0,3512.49,Operations,rwilliams,Cost of Goods Sold - Operations activity
+JE6187,2025-12-11,Accounts Payable,1200.67,0.0,Operations,rwilliams,Accounts Payable - Operations activity
+JE6187,2025-12-11,Cash,0.0,1200.67,Operations,rwilliams,Accounts Payable - Operations activity
+JE6329,2025-12-15,Utilities Expense,374.24,0.0,Operations,apatel,Utilities Expense - Operations activity
+JE6329,2025-12-15,Accounts Payable,0.0,374.24,Operations,apatel,Utilities Expense - Operations activity
+JE6146,2025-12-16,Cash,6825.11,0.0,Sales,rwilliams,Cash - Sales activity
+JE6146,2025-12-16,Accounts Receivable,0.0,6825.11,Sales,rwilliams,Cash - Sales activity
+JE6232,2025-12-16,Accounts Receivable,4521.16,0.0,Sales,jmartin,Accounts Receivable - Sales activity
+JE6232,2025-12-16,Sales Revenue,0.0,4521.16,Sales,jmartin,Accounts Receivable - Sales activity
+JE6319,2025-12-16,Accounts Receivable,3039.61,0.0,Sales,rwilliams,Accounts Receivable - Sales activity
+JE6319,2025-12-16,Sales Revenue,0.0,3039.61,Sales,rwilliams,Accounts Receivable - Sales activity
+JE6035,2025-12-18,Cash,2124.8,0.0,Sales,tgarcia,Cash - Sales activity
+JE6035,2025-12-18,Accounts Receivable,0.0,2124.8,Sales,tgarcia,Cash - Sales activity
+JE6111,2025-12-18,Inventory,1256.85,0.0,Operations,rwilliams,Inventory - Operations activity
+JE6111,2025-12-18,Accounts Payable,0.0,1256.85,Operations,rwilliams,Inventory - Operations activity
+JE6289,2025-12-18,Cost of Goods Sold,2066.04,0.0,Operations,ksmith,Cost of Goods Sold - Operations activity
+JE6289,2025-12-18,Inventory,0.0,2066.04,Operations,ksmith,Cost of Goods Sold - Operations activity
+JE6295,2025-12-22,Accounts Payable,1251.82,0.0,Operations,apatel,Accounts Payable - Operations activity
+JE6295,2025-12-22,Cash,0.0,1251.82,Operations,apatel,Accounts Payable - Operations activity
+JE6194,2025-12-23,Inventory,1131.46,0.0,Operations,apatel,Inventory - Operations activity
+JE6194,2025-12-23,Accounts Payable,0.0,1131.46,Operations,apatel,Inventory - Operations activity
+JE6227,2025-12-23,Inventory,1307.63,0.0,Operations,clee,Inventory - Operations activity
+JE6227,2025-12-23,Accounts Payable,0.0,1307.63,Operations,clee,Inventory - Operations activity
+JE6188,2025-12-24,Accounts Receivable,3764.74,0.0,Sales,tgarcia,Accounts Receivable - Sales activity
+JE6188,2025-12-24,Sales Revenue,0.0,3764.74,Sales,tgarcia,Accounts Receivable - Sales activity
+JE6253,2025-12-24,Accounts Receivable,5665.84,0.0,Sales,apatel,Accounts Receivable - Sales activity
+JE6253,2025-12-24,Sales Revenue,0.0,5665.84,Sales,apatel,Accounts Receivable - Sales activity
+JE6176,2025-12-26,Accounts Receivable,5357.33,0.0,Sales,jmartin,Accounts Receivable - Sales activity
+JE6176,2025-12-26,Sales Revenue,0.0,5357.33,Sales,jmartin,Accounts Receivable - Sales activity
+JE6325,2025-12-29,Cost of Goods Sold,1066.3,0.0,Operations,tgarcia,Cost of Goods Sold - Operations activity
+JE6325,2025-12-29,Inventory,0.0,1066.3,Operations,tgarcia,Cost of Goods Sold - Operations activity
+JE6029,2025-12-30,Cost of Goods Sold,1987.61,0.0,Operations,tgarcia,Cost of Goods Sold - Operations activity
+JE6029,2025-12-30,Inventory,0.0,1987.61,Operations,tgarcia,Cost of Goods Sold - Operations activity
+JE6900,2025-12-30,Accounts Receivable,68000.0,0.0,Sales,jmartin,Q4 large customer order
+JE6900,2025-12-30,Sales Revenue,0.0,68000.0,Sales,jmartin,Q4 large customer order
+JE6173,2025-12-31,Inventory,2850.93,0.0,Operations,ksmith,Inventory - Operations activity
+JE6173,2025-12-31,Accounts Payable,0.0,2850.93,Operations,ksmith,Inventory - Operations activity
+JE6331,2025-12-31,Cash,1826.21,0.0,Sales,jmartin,Cash - Sales activity
+JE6331,2025-12-31,Accounts Receivable,0.0,1826.21,Sales,jmartin,Cash - Sales activity
