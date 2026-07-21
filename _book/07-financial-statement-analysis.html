@@ -607,9 +607,16 @@ window.Quarto = {
   <li><a href="#dupont-decomposition-explaining-why-roe-changed" id="toc-dupont-decomposition-explaining-why-roe-changed" class="nav-link" data-scroll-target="#dupont-decomposition-explaining-why-roe-changed"><span class="header-section-number">7.6</span> DuPont Decomposition: Explaining <em>Why</em> ROE Changed</a></li>
   <li><a href="#visualizing-the-trends" id="toc-visualizing-the-trends" class="nav-link" data-scroll-target="#visualizing-the-trends"><span class="header-section-number">7.7</span> Visualizing the Trends</a></li>
   <li><a href="#putting-it-together-a-financial-health-memo" id="toc-putting-it-together-a-financial-health-memo" class="nav-link" data-scroll-target="#putting-it-together-a-financial-health-memo"><span class="header-section-number">7.8</span> Putting It Together: A Financial Health Memo</a></li>
-  <li><a href="#chapter-summary" id="toc-chapter-summary" class="nav-link" data-scroll-target="#chapter-summary"><span class="header-section-number">7.9</span> Chapter Summary</a></li>
-  <li><a href="#discussion-questions" id="toc-discussion-questions" class="nav-link" data-scroll-target="#discussion-questions"><span class="header-section-number">7.10</span> Discussion Questions</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">7.11</span> Exercises</a></li>
+  <li><a href="#why-these-numbers-matter-to-capital-markets" id="toc-why-these-numbers-matter-to-capital-markets" class="nav-link" data-scroll-target="#why-these-numbers-matter-to-capital-markets"><span class="header-section-number">7.9</span> Why These Numbers Matter to Capital Markets</a>
+  <ul class="collapse">
+  <li><a href="#financial-statements-as-an-information-bridge" id="toc-financial-statements-as-an-information-bridge" class="nav-link" data-scroll-target="#financial-statements-as-an-information-bridge"><span class="header-section-number">7.9.1</span> Financial Statements as an Information Bridge</a></li>
+  <li><a href="#market-reactions-to-financial-information" id="toc-market-reactions-to-financial-information" class="nav-link" data-scroll-target="#market-reactions-to-financial-information"><span class="header-section-number">7.9.2</span> Market Reactions to Financial Information</a></li>
+  <li><a href="#how-ratios-connect-to-valuation-and-the-cost-of-capital" id="toc-how-ratios-connect-to-valuation-and-the-cost-of-capital" class="nav-link" data-scroll-target="#how-ratios-connect-to-valuation-and-the-cost-of-capital"><span class="header-section-number">7.9.3</span> How Ratios Connect to Valuation and the Cost of Capital</a></li>
+  <li><a href="#a-word-of-caution-markets-use-more-than-ratios" id="toc-a-word-of-caution-markets-use-more-than-ratios" class="nav-link" data-scroll-target="#a-word-of-caution-markets-use-more-than-ratios"><span class="header-section-number">7.9.4</span> A Word of Caution: Markets Use More Than Ratios</a></li>
+  </ul></li>
+  <li><a href="#chapter-summary" id="toc-chapter-summary" class="nav-link" data-scroll-target="#chapter-summary"><span class="header-section-number">7.10</span> Chapter Summary</a></li>
+  <li><a href="#discussion-questions" id="toc-discussion-questions" class="nav-link" data-scroll-target="#discussion-questions"><span class="header-section-number">7.11</span> Discussion Questions</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">7.12</span> Exercises</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/msharifbd/accounting-analytics-book/edit/main/07-financial-statement-analysis.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/blob/main/07-financial-statement-analysis.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -619,7 +626,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./07-financial-statement-analysis.html">Part III: Applied Accounting Analytics</a></li><li class="breadcrumb-item"><a href="./07-financial-statement-analysis.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Financial Statement Analytics</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Financial Statement Analytics</span></h1>
+<h1 class="title"><span id="sec-financial-statement-analytics" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Financial Statement Analytics</span></span></h1>
 </div>
 
 
@@ -654,6 +661,7 @@ window.Quarto = {
 <li>Build a reusable function that automates ratio calculations across any set of financial statements</li>
 <li>Apply DuPont decomposition to explain <em>why</em> return on equity changed, not just that it changed</li>
 <li>Interpret ratio trends critically, rather than treating any single ratio as a verdict on its own</li>
+<li>Understand the siginicance of financial statments for capital markets efficiency</li>
 </ul>
 </div>
 </div>
@@ -665,14 +673,14 @@ window.Quarto = {
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="" aria-current="page">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">polars</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<div id="b5849623" class="cell" data-execution_count="1">
+<div id="9e21f8c4" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>inc <span class="op">=</span> pd.read_csv(<span class="st">"data/income_statement.csv"</span>)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>bs <span class="op">=</span> pd.read_csv(<span class="st">"data/balance_sheet.csv"</span>)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>inc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="233">
+<div class="cell-output cell-output-display" data-execution_count="35">
 <div>
 
 
@@ -772,12 +780,12 @@ window.Quarto = {
 </div>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<div id="1753b9c5" class="cell" data-execution_count="2">
+<div id="a021be04" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>inc_pl <span class="op">=</span> pl.read_csv(<span class="st">"data/income_statement.csv"</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>bs_pl <span class="op">=</span> pl.read_csv(<span class="st">"data/balance_sheet.csv"</span>)</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>bs_pl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="234">
+<div class="cell-output cell-output-display" data-execution_count="36">
 <div><style>
 .dataframe > thead > tr,
 .dataframe > tbody > tr {
@@ -928,9 +936,9 @@ window.Quarto = {
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">polars</a></li></ul>
 <div class="tab-content">
 <div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
-<div id="17d08ca8" class="cell" data-execution_count="3">
+<div id="44e5288d" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>bs[[<span class="st">"year"</span>, <span class="st">"Cash"</span>, <span class="st">"Total Current Assets"</span>, <span class="st">"Total Assets"</span>, <span class="st">"Total Liabilities"</span>, <span class="st">"Total Equity"</span>]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="235">
+<div class="cell-output cell-output-display" data-execution_count="37">
 <div>
 
 
@@ -1000,9 +1008,9 @@ window.Quarto = {
 </div>
 </div>
 <div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
-<div id="f053c204" class="cell" data-execution_count="4">
+<div id="c47033d4" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>bs_pl.select(<span class="st">"year"</span>, <span class="st">"Cash"</span>, <span class="st">"Total Current Assets"</span>, <span class="st">"Total Assets"</span>, <span class="st">"Total Liabilities"</span>, <span class="st">"Total Equity"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="236">
+<div class="cell-output cell-output-display" data-execution_count="38">
 <div><style>
 .dataframe > thead > tr,
 .dataframe > tbody > tr {
@@ -1097,10 +1105,10 @@ window.Quarto = {
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">polars</a></li></ul>
 <div class="tab-content">
 <div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
-<div id="f90e67a6" class="cell" data-execution_count="5">
+<div id="6414b891" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>imbalance <span class="op">=</span> bs[<span class="st">"Total Assets"</span>] <span class="op">-</span> bs[<span class="st">"Total Liabilities and Equity"</span>]</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>imbalance</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="237">
+<div class="cell-output cell-output-display" data-execution_count="39">
 <pre><code>0    0
 1    0
 2    0
@@ -1111,10 +1119,10 @@ dtype: int64</code></pre>
 </div>
 </div>
 <div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
-<div id="a2e47db6" class="cell" data-execution_count="6">
+<div id="18abda9c" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>imbalance_pl <span class="op">=</span> bs_pl.select(<span class="st">"Total Assets"</span>) <span class="op">-</span> bs_pl.select(<span class="st">"Total Liabilities and Equity"</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>imbalance_pl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="238">
+<div class="cell-output cell-output-display" data-execution_count="40">
 <div><style>
 .dataframe > thead > tr,
 .dataframe > tbody > tr {
@@ -1165,12 +1173,12 @@ dtype: int64</code></pre>
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false" href="">polars</a></li></ul>
 <div class="tab-content">
 <div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
-<div id="2cbf9d99" class="cell" data-execution_count="7">
+<div id="68af1402" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>income_by_year <span class="op">=</span> inc.set_index(<span class="st">"year"</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>dollar_change <span class="op">=</span> income_by_year.diff()</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>dollar_change[[<span class="st">"Revenue"</span>, <span class="st">"Net Income"</span>]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="239">
+<div class="cell-output cell-output-display" data-execution_count="41">
 <div>
 
 
@@ -1219,10 +1227,10 @@ dtype: int64</code></pre>
 </div>
 </div>
 </div>
-<div id="034ff602" class="cell" data-execution_count="8">
+<div id="b7e95d56" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>pct_change <span class="op">=</span> income_by_year.pct_change() <span class="op">*</span> <span class="dv">100</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>pct_change[[<span class="st">"Revenue"</span>, <span class="st">"Net Income"</span>]].<span class="bu">round</span>(<span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="240">
+<div class="cell-output cell-output-display" data-execution_count="42">
 <div>
 
 
@@ -1273,7 +1281,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 <div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
-<div id="0c4d3861" class="cell" data-execution_count="9">
+<div id="4ba77dfa" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>dollar_change_pl <span class="op">=</span> (</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    inc_pl</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    .sort(<span class="st">"year"</span>)</span>
@@ -1284,7 +1292,7 @@ dtype: int64</code></pre>
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>dollar_change_pl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="241">
+<div class="cell-output cell-output-display" data-execution_count="43">
 <div><style>
 .dataframe > thead > tr,
 .dataframe > tbody > tr {
@@ -1337,7 +1345,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 </div>
-<div id="8096bfd5" class="cell" data-execution_count="10">
+<div id="be2e0004" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>pct_change_pl <span class="op">=</span> (</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    inc_pl</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    .sort(<span class="st">"year"</span>)</span>
@@ -1348,7 +1356,7 @@ dtype: int64</code></pre>
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>pct_change_pl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="242">
+<div class="cell-output cell-output-display" data-execution_count="44">
 <div><style>
 .dataframe > thead > tr,
 .dataframe > tbody > tr {
@@ -1412,10 +1420,10 @@ dtype: int64</code></pre>
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false" href="">polars</a></li></ul>
 <div class="tab-content">
 <div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
-<div id="179d26ff" class="cell" data-execution_count="11">
+<div id="420f9953" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>indexed <span class="op">=</span> income_by_year <span class="op">/</span> income_by_year.iloc[<span class="dv">0</span>] <span class="op">*</span> <span class="dv">100</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>indexed[[<span class="st">"Revenue"</span>, <span class="st">"Cost of Goods Sold"</span>, <span class="st">"Net Income"</span>]].<span class="bu">round</span>(<span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="243">
+<div class="cell-output cell-output-display" data-execution_count="45">
 <div>
 
 
@@ -1473,7 +1481,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 <div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
-<div id="ffc3bf1f" class="cell" data-execution_count="12">
+<div id="f031cf99" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>indexed_pl <span class="op">=</span> (</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    inc_pl</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    .sort(<span class="st">"year"</span>)</span>
@@ -1488,7 +1496,7 @@ dtype: int64</code></pre>
 <span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>indexed_pl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="244">
+<div class="cell-output cell-output-display" data-execution_count="46">
 <div><style>
 .dataframe > thead > tr,
 .dataframe > tbody > tr {
@@ -1554,10 +1562,10 @@ dtype: int64</code></pre>
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-6-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-1" role="tab" aria-controls="tabset-6-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-6-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-2" role="tab" aria-controls="tabset-6-2" aria-selected="false" href="">polars</a></li></ul>
 <div class="tab-content">
 <div id="tabset-6-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-6-1-tab">
-<div id="0dd287aa" class="cell" data-execution_count="13">
+<div id="116fe2d2" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>common_size_is <span class="op">=</span> income_by_year.div(income_by_year[<span class="st">"Revenue"</span>], axis<span class="op">=</span><span class="dv">0</span>) <span class="op">*</span> <span class="dv">100</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>common_size_is[[<span class="st">"Cost of Goods Sold"</span>, <span class="st">"Gross Profit"</span>, <span class="st">"Operating Income"</span>, <span class="st">"Net Income"</span>]].<span class="bu">round</span>(<span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="245">
+<div class="cell-output cell-output-display" data-execution_count="47">
 <div>
 
 
@@ -1622,7 +1630,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 <div id="tabset-6-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-6-2-tab">
-<div id="5a62e2dd" class="cell" data-execution_count="14">
+<div id="ade6680a" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>common_size_is_pl <span class="op">=</span> (</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    inc_pl</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    .sort(<span class="st">"year"</span>)</span>
@@ -1641,7 +1649,7 @@ dtype: int64</code></pre>
 <span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>common_size_is_pl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="246">
+<div class="cell-output cell-output-display" data-execution_count="48">
 <div><style>
 .dataframe > thead > tr,
 .dataframe > tbody > tr {
@@ -1716,11 +1724,11 @@ dtype: int64</code></pre>
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false" href="">polars</a></li></ul>
 <div class="tab-content">
 <div id="tabset-7-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-7-1-tab">
-<div id="375b8b21" class="cell" data-execution_count="15">
+<div id="45c4d487" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>balance_by_year <span class="op">=</span> bs.set_index(<span class="st">"year"</span>)</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>common_size_bs <span class="op">=</span> balance_by_year.div(balance_by_year[<span class="st">"Total Assets"</span>], axis<span class="op">=</span><span class="dv">0</span>) <span class="op">*</span> <span class="dv">100</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>common_size_bs[[<span class="st">"Cash"</span>, <span class="st">"Accounts Receivable"</span>, <span class="st">"Inventory"</span>, <span class="st">"Property, Plant &amp; Equipment (net)"</span>]].<span class="bu">round</span>(<span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="247">
+<div class="cell-output cell-output-display" data-execution_count="49">
 <div>
 
 
@@ -1785,7 +1793,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 <div id="tabset-7-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-7-2-tab">
-<div id="dabb194f" class="cell" data-execution_count="16">
+<div id="42553009" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>common_size_bs_pl <span class="op">=</span> (</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    bs_pl</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    .sort(<span class="st">"year"</span>)</span>
@@ -1804,7 +1812,7 @@ dtype: int64</code></pre>
 <span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>common_size_bs_pl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="248">
+<div class="cell-output cell-output-display" data-execution_count="50">
 <div><style>
 .dataframe > thead > tr,
 .dataframe > tbody > tr {
@@ -1898,14 +1906,14 @@ dtype: int64</code></pre>
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-8-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-1" role="tab" aria-controls="tabset-8-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-2" role="tab" aria-controls="tabset-8-2" aria-selected="false" href="">polars</a></li></ul>
 <div class="tab-content">
 <div id="tabset-8-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-8-1-tab">
-<div id="1fce3836" class="cell" data-execution_count="17">
+<div id="0412c744" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>merged <span class="op">=</span> inc.merge(bs, on<span class="op">=</span><span class="st">"year"</span>)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>current_ratio <span class="op">=</span> merged[<span class="st">"Total Current Assets"</span>] <span class="op">/</span> merged[<span class="st">"Total Current Liabilities"</span>]</span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>quick_ratio <span class="op">=</span> (merged[<span class="st">"Cash"</span>] <span class="op">+</span> merged[<span class="st">"Accounts Receivable"</span>]) <span class="op">/</span> merged[<span class="st">"Total Current Liabilities"</span>]</span>
 <span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>pd.DataFrame({<span class="st">"year"</span>: merged[<span class="st">"year"</span>], <span class="st">"Current Ratio"</span>: current_ratio, <span class="st">"Quick Ratio"</span>: quick_ratio}).<span class="bu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="249">
+<div class="cell-output cell-output-display" data-execution_count="51">
 <div>
 
 
@@ -1957,7 +1965,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 <div id="tabset-8-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-8-2-tab">
-<div id="e8ae1eec" class="cell" data-execution_count="18">
+<div id="3b15671c" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>ratios_pl <span class="op">=</span> (</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    inc_pl</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    .join(bs_pl, on<span class="op">=</span><span class="st">"year"</span>, how<span class="op">=</span><span class="st">"inner"</span>)</span>
@@ -1975,7 +1983,7 @@ dtype: int64</code></pre>
 <span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>ratios_pl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="250">
+<div class="cell-output cell-output-display" data-execution_count="52">
 <div><style>
 .dataframe > thead > tr,
 .dataframe > tbody > tr {
@@ -2041,7 +2049,7 @@ dtype: int64</code></pre>
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-9-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-1" role="tab" aria-controls="tabset-9-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-9-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-2" role="tab" aria-controls="tabset-9-2" aria-selected="false" href="">polars</a></li></ul>
 <div class="tab-content">
 <div id="tabset-9-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-9-1-tab">
-<div id="e554916a" class="cell" data-execution_count="19">
+<div id="db7f980f" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>gross_margin <span class="op">=</span> merged[<span class="st">"Gross Profit"</span>] <span class="op">/</span> merged[<span class="st">"Revenue"</span>]</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>operating_margin <span class="op">=</span> merged[<span class="st">"Operating Income"</span>] <span class="op">/</span> merged[<span class="st">"Revenue"</span>]</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>net_margin <span class="op">=</span> merged[<span class="st">"Net Income"</span>] <span class="op">/</span> merged[<span class="st">"Revenue"</span>]</span>
@@ -2056,7 +2064,7 @@ dtype: int64</code></pre>
 <span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ROA"</span>: roa,</span>
 <span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ROE"</span>: roe,</span>
 <span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>}).<span class="bu">round</span>(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="251">
+<div class="cell-output cell-output-display" data-execution_count="53">
 <div>
 
 
@@ -2126,13 +2134,13 @@ dtype: int64</code></pre>
 </div>
 </div>
 <div id="tabset-9-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-9-2-tab">
-<div id="0f66db79" class="cell" data-execution_count="20">
+<div id="c434b03f" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>merged_pl <span class="op">=</span> (</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    inc_pl</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    .join(bs_pl, on<span class="op">=</span><span class="st">"year"</span>, how<span class="op">=</span><span class="st">"inner"</span>)</span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cd71594b" class="cell" data-execution_count="21">
+<div id="15932ec6" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>profitability_ratios <span class="op">=</span> (</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    merged_pl</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    .select(</span>
@@ -2156,7 +2164,7 @@ dtype: int64</code></pre>
 <span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>profitability_ratios</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="253">
+<div class="cell-output cell-output-display" data-execution_count="55">
 <div><style>
 .dataframe > thead > tr,
 .dataframe > tbody > tr {
@@ -2244,7 +2252,7 @@ dtype: int64</code></pre>
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-10-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-1" role="tab" aria-controls="tabset-10-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-10-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-2" role="tab" aria-controls="tabset-10-2" aria-selected="false" href="">polars</a></li></ul>
 <div class="tab-content">
 <div id="tabset-10-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-10-1-tab">
-<div id="4a54f672" class="cell" data-execution_count="22">
+<div id="99d3e546" class="cell" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>debt_to_equity <span class="op">=</span> (merged[<span class="st">"Short-term Debt"</span>] <span class="op">+</span> merged[<span class="st">"Long-term Debt"</span>]) <span class="op">/</span> merged[<span class="st">"Total Equity"</span>]</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>interest_coverage <span class="op">=</span> merged[<span class="st">"Operating Income"</span>] <span class="op">/</span> merged[<span class="st">"Interest Expense"</span>]</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -2253,7 +2261,7 @@ dtype: int64</code></pre>
 <span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Debt-to-Equity"</span>: debt_to_equity,</span>
 <span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Interest Coverage"</span>: interest_coverage,</span>
 <span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>}).<span class="bu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="254">
+<div class="cell-output cell-output-display" data-execution_count="56">
 <div>
 
 
@@ -2305,7 +2313,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 <div id="tabset-10-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-10-2-tab">
-<div id="315be9fb" class="cell" data-execution_count="23">
+<div id="6b195193" class="cell" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>leverage_ratios_pl <span class="op">=</span> (</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    merged_pl</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    .select(</span>
@@ -2322,7 +2330,7 @@ dtype: int64</code></pre>
 <span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>leverage_ratios_pl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="255">
+<div class="cell-output cell-output-display" data-execution_count="57">
 <div><style>
 .dataframe > thead > tr,
 .dataframe > tbody > tr {
@@ -2387,7 +2395,7 @@ dtype: int64</code></pre>
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-11-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-11-1" role="tab" aria-controls="tabset-11-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-11-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-11-2" role="tab" aria-controls="tabset-11-2" aria-selected="false" href="">polars</a></li></ul>
 <div class="tab-content">
 <div id="tabset-11-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-11-1-tab">
-<div id="cb4ba969" class="cell" data-execution_count="24">
+<div id="41015793" class="cell" data-execution_count="24">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>asset_turnover <span class="op">=</span> merged[<span class="st">"Revenue"</span>] <span class="op">/</span> merged[<span class="st">"Total Assets"</span>]</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>dso <span class="op">=</span> merged[<span class="st">"Accounts Receivable"</span>] <span class="op">/</span> merged[<span class="st">"Revenue"</span>] <span class="op">*</span> <span class="dv">365</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>dio <span class="op">=</span> merged[<span class="st">"Inventory"</span>] <span class="op">/</span> merged[<span class="st">"Cost of Goods Sold"</span>] <span class="op">*</span> <span class="dv">365</span></span>
@@ -2398,7 +2406,7 @@ dtype: int64</code></pre>
 <span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Days Sales Outstanding"</span>: dso,</span>
 <span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Days Inventory Outstanding"</span>: dio,</span>
 <span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>}).<span class="bu">round</span>(<span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="256">
+<div class="cell-output cell-output-display" data-execution_count="58">
 <div>
 
 
@@ -2456,7 +2464,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 <div id="tabset-11-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-11-2-tab">
-<div id="ab43f136" class="cell" data-execution_count="25">
+<div id="8202f980" class="cell" data-execution_count="25">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>asset_efficiency_pl <span class="op">=</span> (</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    merged_pl</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    .select(</span>
@@ -2479,7 +2487,7 @@ dtype: int64</code></pre>
 <span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>asset_efficiency_pl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="257">
+<div class="cell-output cell-output-display" data-execution_count="59">
 <div><style>
 .dataframe > thead > tr,
 .dataframe > tbody > tr {
@@ -2552,7 +2560,7 @@ dtype: int64</code></pre>
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-12-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-12-1" role="tab" aria-controls="tabset-12-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-12-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-12-2" role="tab" aria-controls="tabset-12-2" aria-selected="false" href="">polars</a></li></ul>
 <div class="tab-content">
 <div id="tabset-12-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-12-1-tab">
-<div id="65dc6176" class="cell" data-execution_count="26">
+<div id="3a5a72ae" class="cell" data-execution_count="26">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_ratios(income_df: pd.DataFrame, balance_df: pd.DataFrame) <span class="op">-&gt;</span> pd.DataFrame:</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Compute standard liquidity, profitability, leverage, and efficiency ratios</span></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co">    from an income statement and balance sheet sharing a common 'year' column."""</span></span>
@@ -2581,10 +2589,10 @@ dtype: int64</code></pre>
 <span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> r.set_index(<span class="st">"year"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="01464d05" class="cell" data-execution_count="27">
+<div id="ebfd705a" class="cell" data-execution_count="27">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>ratios <span class="op">=</span> compute_ratios(inc, bs)</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>ratios.<span class="bu">round</span>(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="259">
+<div class="cell-output cell-output-display" data-execution_count="61">
 <div>
 
 
@@ -2705,7 +2713,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 <div id="tabset-12-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-12-2-tab">
-<div id="e90e3ccc" class="cell" data-execution_count="28">
+<div id="4c540f1d" class="cell" data-execution_count="28">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_ratios_pl(income_df: pl.DataFrame, balance_df: pl.DataFrame) <span class="op">-&gt;</span> pl.DataFrame:</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Compute standard liquidity, profitability, leverage, and efficiency ratios</span></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co">    from an income statement and balance sheet sharing a common 'year' column."""</span></span>
@@ -2787,7 +2795,7 @@ dtype: int64</code></pre>
 <span id="cb29-79"><a href="#cb29-79" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-80"><a href="#cb29-80" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> r</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="c2d098bf" class="cell" data-execution_count="29">
+<div id="42d3bfbc" class="cell" data-execution_count="29">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>ratios_pl <span class="op">=</span> compute_ratios_pl(inc_pl, bs_pl)</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>ratios_pl <span class="op">=</span> ratios_pl.with_columns(</span>
@@ -2795,7 +2803,7 @@ dtype: int64</code></pre>
 <span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>ratios_pl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="261">
+<div class="cell-output cell-output-display" data-execution_count="63">
 <div><style>
 .dataframe > thead > tr,
 .dataframe > tbody > tr {
@@ -2945,7 +2953,7 @@ dtype: int64</code></pre>
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-13-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-13-1" role="tab" aria-controls="tabset-13-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-13-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-13-2" role="tab" aria-controls="tabset-13-2" aria-selected="false" href="">polars</a></li></ul>
 <div class="tab-content">
 <div id="tabset-13-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-13-1-tab">
-<div id="c53c4f25" class="cell" data-execution_count="30">
+<div id="ec5e06b3" class="cell" data-execution_count="30">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>dupont <span class="op">=</span> pd.DataFrame({<span class="st">"year"</span>: merged[<span class="st">"year"</span>]})</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>dupont[<span class="st">"Net Margin"</span>] <span class="op">=</span> merged[<span class="st">"Net Income"</span>] <span class="op">/</span> merged[<span class="st">"Revenue"</span>]</span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>dupont[<span class="st">"Asset Turnover"</span>] <span class="op">=</span> merged[<span class="st">"Revenue"</span>] <span class="op">/</span> merged[<span class="st">"Total Assets"</span>]</span>
@@ -2953,7 +2961,7 @@ dtype: int64</code></pre>
 <span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>dupont[<span class="st">"ROE (DuPont)"</span>] <span class="op">=</span> dupont[<span class="st">"Net Margin"</span>] <span class="op">*</span> dupont[<span class="st">"Asset Turnover"</span>] <span class="op">*</span> dupont[<span class="st">"Equity Multiplier"</span>]</span>
 <span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>dupont.set_index(<span class="st">"year"</span>).<span class="bu">round</span>(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="262">
+<div class="cell-output cell-output-display" data-execution_count="64">
 <div>
 
 
@@ -3018,7 +3026,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 <div id="tabset-13-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-13-2-tab">
-<div id="3c6811e1" class="cell" data-execution_count="31">
+<div id="04044aa0" class="cell" data-execution_count="31">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>dupont_pl <span class="op">=</span> (</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    merged_pl</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    .select(</span>
@@ -3050,7 +3058,7 @@ dtype: int64</code></pre>
 <span id="cb32-29"><a href="#cb32-29" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb32-30"><a href="#cb32-30" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-31"><a href="#cb32-31" aria-hidden="true" tabindex="-1"></a>dupont_pl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="263">
+<div class="cell-output cell-output-display" data-execution_count="65">
 <div><style>
 .dataframe > thead > tr,
 .dataframe > tbody > tr {
@@ -3148,7 +3156,7 @@ dtype: int64</code></pre>
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-14-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-14-1" role="tab" aria-controls="tabset-14-1" aria-selected="true" href="">seaborn</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-14-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-14-2" role="tab" aria-controls="tabset-14-2" aria-selected="false" href="">plotnine</a></li></ul>
 <div class="tab-content">
 <div id="tabset-14-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-14-1-tab">
-<div id="58ad473a" class="cell" data-execution_count="32">
+<div id="3ed9223f" class="cell" data-execution_count="32">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.ticker <span class="im">as</span> mticker</span>
@@ -3174,7 +3182,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 <div id="tabset-14-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-14-2-tab">
-<div id="ff310913" class="cell" data-execution_count="33">
+<div id="1d0812ae" class="cell" data-execution_count="33">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> <span class="op">*</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>(</span>
@@ -3185,7 +3193,7 @@ dtype: int64</code></pre>
 <span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> labs(title<span class="op">=</span><span class="st">"Margin Trends, 2021-2025"</span>, x<span class="op">=</span><span class="st">"Year"</span>, y<span class="op">=</span><span class="st">"Margin (</span><span class="sc">% o</span><span class="st">f Revenue)"</span>)</span>
 <span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> theme_minimal()</span>
 <span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="265">
+<div class="cell-output cell-output-display" data-execution_count="67">
 <div>
 <figure class="figure">
 <p><img src="07-financial-statement-analysis_files/figure-html/cell-34-output-1.png" width="672" height="480" class="figure-img"></p>
@@ -3197,7 +3205,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 <p>All three margins trend upward and roughly in parallel — visual confirmation that the profitability improvement is broad-based (starting at the gross profit level) rather than coming from just one line item, like a one-time tax benefit.</p>
-<div id="1c4b03c5" class="cell" data-execution_count="34">
+<div id="b9d108a8" class="cell" data-execution_count="34">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="fl">4.5</span>))</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>sns.lineplot(data<span class="op">=</span>dupont, x<span class="op">=</span><span class="st">"year"</span>, y<span class="op">=</span><span class="st">"ROE (DuPont)"</span>, marker<span class="op">=</span><span class="st">"o"</span>, color<span class="op">=</span><span class="st">"#8a4fbe"</span>)</span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Return on Equity, 2021-2025"</span>)</span>
@@ -3233,26 +3241,85 @@ dtype: int64</code></pre>
 </div>
 <p>Notice that this memo doesn’t just repeat the numbers — it interprets what they mean <em>together</em>, flags a genuine open question (the growing cash pile) rather than treating every metric as unambiguously good news, and avoids the trap of reporting the ROE decline without its DuPont explanation.</p>
 </section>
-<section id="chapter-summary" class="level2" data-number="7.9">
-<h2 data-number="7.9" class="anchored" data-anchor-id="chapter-summary"><span class="header-section-number">7.9</span> Chapter Summary</h2>
+<section id="why-these-numbers-matter-to-capital-markets" class="level2" data-number="7.9">
+<h2 data-number="7.9" class="anchored" data-anchor-id="why-these-numbers-matter-to-capital-markets"><span class="header-section-number">7.9</span> Why These Numbers Matter to Capital Markets</h2>
+<p>Every ratio computed in this chapter has a purpose beyond internal analysis: financial statements are the primary channel through which a company communicates its performance to the outside investors, lenders, and analysts who allocate capital in public and private markets. It’s worth stepping back to understand <em>why</em> that communication role matters, and how the specific numbers in this chapter connect to it.</p>
+<section id="financial-statements-as-an-information-bridge" class="level3" data-number="7.9.1">
+<h3 data-number="7.9.1" class="anchored" data-anchor-id="financial-statements-as-an-information-bridge"><span class="header-section-number">7.9.1</span> Financial Statements as an Information Bridge</h3>
+<p>Company managers know far more about their business than outside investors ever can — a gap economists call <strong>information asymmetry</strong>. Audited financial statements exist largely to narrow that gap: they give outside capital providers a standardized, independently verified basis for judging a company’s performance without needing direct access to its internal records. This is precisely why the audit techniques in Chapter 9 matter so much to capital markets — a number nobody trusts is a number capital markets can’t efficiently price.</p>
+</section>
+<section id="market-reactions-to-financial-information" class="level3" data-number="7.9.2">
+<h3 data-number="7.9.2" class="anchored" data-anchor-id="market-reactions-to-financial-information"><span class="header-section-number">7.9.2</span> Market Reactions to Financial Information</h3>
+<p>When a company releases financial results, especially quarterly earnings, market prices often move — sometimes sharply — in response. Researchers and practitioners study this using <strong>event studies</strong>: measuring a stock’s price movement in a narrow window around an announcement to isolate the market’s reaction to the <em>new</em> information specifically, separate from broader market movements. A company that reports earnings <strong>above</strong> what analysts expected (a positive “earnings surprise”) tends to see its stock price rise; one that misses expectations tends to see it fall — often regardless of whether the absolute numbers were “good” in isolation, since markets are reacting to information <em>relative to what was already priced in</em>.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Connect to Practice
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This is exactly why the <em>trend</em> and <em>DuPont</em> analysis in this chapter matter more than any single year’s numbers in isolation. A market that already expects margin improvement won’t react much to a company merely delivering it — but the same result would move markets substantially if it arrived as a surprise. Context, not just the raw figure, drives market reaction.</p>
+</div>
+</div>
+</section>
+<section id="how-ratios-connect-to-valuation-and-the-cost-of-capital" class="level3" data-number="7.9.3">
+<h3 data-number="7.9.3" class="anchored" data-anchor-id="how-ratios-connect-to-valuation-and-the-cost-of-capital"><span class="header-section-number">7.9.3</span> How Ratios Connect to Valuation and the Cost of Capital</h3>
+<p>The specific ratio categories from this chapter map directly onto how capital markets participants evaluate a company:</p>
+<ul>
+<li><strong>Profitability ratios</strong> (margins, ROA, ROE) feed directly into valuation multiples like the price-to-earnings (P/E) ratio — equity analysts routinely build forecasts of future margins from exactly the kind of trend analysis performed earlier in this chapter.</li>
+<li><strong>Leverage ratios</strong> (debt-to-equity, interest coverage) are central to how credit rating agencies assess default risk, which in turn determines a company’s <strong>cost of debt</strong> — Ledger &amp; Co.’s improving interest coverage (10x to nearly 40x) is exactly the kind of trend that would support a credit rating upgrade and cheaper future borrowing.</li>
+<li><strong>Liquidity ratios</strong> (current ratio, quick ratio) inform short-term credit risk assessments — lenders extending short-term credit look at these first.</li>
+<li><strong>Efficiency ratios</strong> (asset turnover, DSO, DIO) help analysts judge whether management is deploying capital productively, directly relevant to whether a stock trades at a premium or discount to its peers.</li>
+</ul>
+</section>
+<section id="a-word-of-caution-markets-use-more-than-ratios" class="level3" data-number="7.9.4">
+<h3 data-number="7.9.4" class="anchored" data-anchor-id="a-word-of-caution-markets-use-more-than-ratios"><span class="header-section-number">7.9.4</span> A Word of Caution: Markets Use More Than Ratios</h3>
+<p>It would be a mistake to conclude that capital markets simply mechanically calculate ratios and price securities accordingly. A few important caveats:</p>
+<ul>
+<li><strong>Financial statements are backward-looking.</strong> They report what already happened; markets price what’s expected to happen next. This is why forward guidance, analyst forecasts, and macroeconomic conditions all matter alongside historical ratios.</li>
+<li><strong>Accounting numbers involve judgment and estimates</strong>, not pure objective fact — recall Chapter 11’s revenue recognition red flags. A market’s confidence in a company’s <em>reporting quality</em>, not just its reported numbers, affects how much weight investors place on them.</li>
+<li><strong>Market efficiency is a matter of ongoing academic and practical debate.</strong> The Efficient Market Hypothesis, in its various forms, argues that prices reflect available information to different degrees — but the extent to which this holds in practice, and for which markets, remains genuinely contested among finance researchers and practitioners. This book takes no position on that debate; the point relevant here is narrower and less controversial: financial statement information demonstrably influences prices, whatever the underlying market efficiency actually is.</li>
+</ul>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Why This Matters for Your Career
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Whether you end up in equity research, credit analysis, corporate finance, or audit, the techniques in this chapter are the same ones capital markets participants use every day to translate financial statements into investment, lending, and valuation decisions. Understanding <em>why</em> a ratio matters to a market participant — not just how to calculate it — is what separates mechanical number-crunching from analysis that actually informs a decision.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="chapter-summary" class="level2" data-number="7.10">
+<h2 data-number="7.10" class="anchored" data-anchor-id="chapter-summary"><span class="header-section-number">7.10</span> Chapter Summary</h2>
 <ul>
 <li>Horizontal analysis compares a line item across time (dollar and percent change, or indexed to a base year); vertical (common-size) analysis expresses every line item as a percentage of a base figure within the same year.</li>
 <li>Liquidity, profitability, leverage, and efficiency ratios each capture a different dimension of financial performance, and no single ratio tells the whole story on its own.</li>
 <li>Wrapping ratio calculations in a reusable function (like <code>compute_ratios()</code>) means the same analysis can be rerun on any future period’s data without rewriting code.</li>
 <li>DuPont decomposition breaks ROE into net margin, asset turnover, and equity multiplier — essential for explaining <em>why</em> ROE changed, not just that it did, and for avoiding misleading single-ratio conclusions.</li>
 <li>A rising ratio isn’t automatically good news (e.g., an extremely high current ratio can signal underused cash) any more than a falling ratio is automatically bad news (e.g., falling ROE driven by prudent deleveraging) — ratio analysis requires interpretation, not just calculation.</li>
+<li>These same ratios are the language capital markets use to price securities and assess risk: profitability ratios inform valuation multiples, leverage ratios inform credit ratings and the cost of debt, and market reactions to financial statement releases depend on results relative to expectations, not just the absolute numbers.</li>
 </ul>
 </section>
-<section id="discussion-questions" class="level2" data-number="7.10">
-<h2 data-number="7.10" class="anchored" data-anchor-id="discussion-questions"><span class="header-section-number">7.10</span> Discussion Questions</h2>
+<section id="discussion-questions" class="level2" data-number="7.11">
+<h2 data-number="7.11" class="anchored" data-anchor-id="discussion-questions"><span class="header-section-number">7.11</span> Discussion Questions</h2>
 <ol type="1">
 <li>Ledger &amp; Co.’s current ratio rose from 4.05 to 7.37 over five years. At what point, if any, does “more liquidity” stop being a good thing? What would you want to know before deciding?</li>
 <li>Explain in your own words why ROE declined even though every margin (gross, operating, net) improved over the same period.</li>
 <li>If you were advising this company’s CFO, what would you recommend they consider doing with the growing cash balance, and what additional information would you want before making that recommendation?</li>
+<li>If Ledger &amp; Co.&nbsp;were a public company and reported this chapter’s 2025 results in line with what analysts already expected, how might the market’s reaction differ from a scenario where these same results arrived as a surprise? What does this imply about the relationship between “good numbers” and “stock price reaction”?</li>
 </ol>
 </section>
-<section id="exercises" class="level2" data-number="7.11">
-<h2 data-number="7.11" class="anchored" data-anchor-id="exercises"><span class="header-section-number">7.11</span> Exercises</h2>
+<section id="exercises" class="level2" data-number="7.12">
+<h2 data-number="7.12" class="anchored" data-anchor-id="exercises"><span class="header-section-number">7.12</span> Exercises</h2>
 <ol type="1">
 <li>Using <code>compute_ratios()</code>, add one additional ratio of your choice (e.g., <strong>Return on Invested Capital</strong>, <strong>Cash Ratio</strong>, or <strong>Fixed Asset Turnover</strong>) and compute it for all five years.</li>
 <li>Perform vertical analysis on the <em>liabilities and equity</em> side of the balance sheet (not just assets, which this chapter covered). How has the company’s financing mix shifted between 2021 and 2025?</li>

@@ -1,15 +1,13 @@
 # An Introduction to EDGAR Database
 
+
 ::: {.callout-note}
-## Learning Objectives
-By the end of this Appendix, you should be able to:
+## Who This Appendix Is For
+This appendix provides idea about EDGAR database, which is maintained by US SEC as a central repository of corporate disclosures. Therefore, EDGAR contains real companies' data. If you need to use these data, you should know how to extract data from EDGAR database. 
 
-- Gain an Understanding about `EDGAR` Database and its importance
-- Learn how to extract financial statements from `EDGAR` database
-- Learn how to extract non-structured data from `EDGAR` database 
-- Learn about `XBRL`  
-
+Since accounting numbers have implications for capital market, you need to combine accounting data with share price. Therefore, you should know how to extract capital market data. This appendix provides you with  tools and knowledge about how to extract data from both sources. You can combine them and test the significance or implications of accounting numbers. 
 :::
+
 
 ## EDGAR Database and Its Implications
 
@@ -54,6 +52,7 @@ from edgar.xbrl import XBRLS
 ```
 
 ```{python}
+# Getting data for one company
 company = Company("AAPL")
 
 # Get all 10-K filings, then filter to the date range you want
@@ -118,8 +117,132 @@ debt_to_equity = total_liabilities / stockholders_equity
 net_margin = net_income / revenue
 ```
 
-## edgar-analytics - Python Package Built on edgartools for Analytics
+
+
+If you want to extract financial statement information from more than one company, you can run the following code. 
+
 ```{python}
+import pandas as pd
+from edgar import Company, set_identity
+from edgar.xbrl import XBRLS
+
+set_identity("Sharif Islam mdshariful.islam@siu.edu")
+
+tickers = ["AAPL", "MSFT", "WMT"]
+date_range = "2010-01-01:2025-12-31"
+
+# Step 1: Fetch and stitch XBRL data for each company
+xbrls_by_ticker = {}
+
+for ticker in tickers:
+    company = Company(ticker)
+    filings = company.get_filings(form="10-K", date=date_range)
+    xbrls = XBRLS.from_filings(filings)
+    xbrls_by_ticker[ticker] = xbrls
+    print(f"{ticker}: {len(filings)} filings retrieved")
+
+# Step 2: Pull each statement type per company, tag with ticker, and combine
+def build_combined_df(statement_method_name):
+    """Fetch a given statement type for all companies and combine into one DataFrame."""
+    frames = []
+    for ticker, xbrls in xbrls_by_ticker.items():
+        try:
+            statement = getattr(xbrls.statements, statement_method_name)()
+            df = statement.to_dataframe()
+            df["ticker"] = ticker
+            frames.append(df)
+        except Exception as e:
+            print(f"Could not get {statement_method_name} for {ticker}: {e}")
+    return pd.concat(frames, ignore_index=True) if frames else pd.DataFrame()
+
+income_statement_df = build_combined_df("income_statement")
+balance_sheet_df = build_combined_df("balance_sheet")
+cashflow_statement_df = build_combined_df("cashflow_statement")
+equity_statement_df = build_combined_df("statement_of_equity")  # method name unverified — see note below
+
+# Quick check
+#print(income_statement_df.head())
+#print(balance_sheet_df.head())
+#print(cashflow_statement_df.head())
+#print(equity_statement_df.head())
+
+```
+
+
+
+## tidyfinance - Python package for Share Price Data
+
+In @sec-financial-statement-analytics, we talked about the significance of financial statement information for capital market efficiency. Therefore, just getting data or information from financial statements is not enough, we also need capital market data, particulary share price data of a given company. We can get these data using `tidyfinance` python package. There are two widely used models that examine whether stock prices are associated with accounting numbers. One model is called price model, and the other one is called Return model. 
+
+The **price model** examines the relationship between a firm's stock price and its accounting information, such as earnings per share (EPS) and book value per share (BVPS). A commonly used specification based on the Ohlson (1995) valuation model is:
+
+$$
+\text{Price}_i = \beta_0 + \beta_1 \text{EPS}_i + \beta_2 \text{BVPS}_i + \varepsilon_i
+$$
+
+where:
+
+- $\text{Price}_i$ = Stock price of firm $i$
+- $\text{EPS}_i$ = Earnings per share of firm $i$
+- $\text{BVPS}_i$ = Book value per share of firm $i$
+- $\beta_0$ = Intercept
+- $\beta_1, \beta_2$ = Regression coefficients
+- $\varepsilon_i$ = Error term
+
+The model tests whether accounting information explains cross-sectional differences in stock prices.
+
+The **return model** examines whether accounting earnings explain stock returns. A simple specification is:
+
+$$
+\text{Return}_i = \beta_0 + \beta_1 \text{Earnings}_i + \varepsilon_i
+$$
+
+A more common empirical specification uses changes in earnings:
+
+$$
+\text{Return}_i = \beta_0 + \beta_1 \Delta \text{EPS}_i + \varepsilon_i
+$$
+
+where:
+
+- $\text{Return}_i$ = Stock return for firm $i$
+- $\text{Earnings}_i$ = Earnings of firm $i$
+- $\Delta \text{EPS}_i$ = Change in earnings per share
+- $\beta_0$ = Intercept
+- $\beta_1$ = Earnings response coefficient (ERC)
+- $\varepsilon_i$ = Error term
+
+The return model evaluates whether new accounting information is reflected in stock returns.
+
+```{python}
+import polars as pl
+import tidyfinance as tf
+tf.set_backend("polars")
+```
+
+```{python}
+prices = tf.download_data(
+    domain="Stock Prices",
+    symbols= ["AAPL", "GOOGL", "WMT"],
+    start_date="2000-01-01",
+    end_date="2025-12-31"
+)
+prices.head()
+```
+
+The variable `volume` indicates trading volume; the variables `open`, `low`, `high`, and `close` indicate opening, low, high, and closing price of the stock in a given day. The `adjusted_close` takes the closing price and adjusts retroactively for dividend payouts or stock splits or other corporate actions. We can merge the data extracted using `edgartools` and `tidyfinance` and run either price or return model to test the economic significance of accounting numbers. 
+
+## Summary 
+
+- EDGAR database is a central repository of corporate disclosures in the US. All US public companies issue their financial statement using Form 10-K in EDGAR. Therefore, understanding the EDGAR database is critical for hands-on application of accounting knowledge. 
+- `edgartools` is a python package that is very efficient in parsing data from EDGAR databases. All kinds of forms 10-K, 10-Q, 8-K can be easily parsed by using edgartools 
+- `tidyfinance` python package is a python package that helps to get data about stock price of companies. 
+
+```{python}
+#| eval: false
+#| include: false
+
+## edgar-analytics - Python Package Built on edgartools for Analytics
 import edgar_analytics as ea
 import os
 import pandas as pd
@@ -136,6 +259,8 @@ pd.DataFrame(annual)
 ```
 
 ```{python}
+#| eval: false
+#| include: false
 from edgar_analytics.multi_period_analysis import retrieve_multi_year_data
 aapl = retrieve_multi_year_data("AAPL", n_years=15)
 msft = retrieve_multi_year_data("MSFT", n_years=15)
@@ -144,6 +269,8 @@ googl = retrieve_multi_year_data("GOOGL", n_years=15)
 
 
 ```{python}
+#| eval: false
+#| include: false
 aapl_df = pd.DataFrame(aapl["annual_data"])
 msft_df = pd.DataFrame(msft["annual_data"])
 googl_df = pd.DataFrame(googl['annual_data'])
@@ -151,5 +278,5 @@ googl_df = pd.DataFrame(googl['annual_data'])
 
 
 ```{python}
-aapl_df
+
 ```
