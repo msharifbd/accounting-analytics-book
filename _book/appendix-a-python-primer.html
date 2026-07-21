@@ -23,6 +23,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -515,8 +550,33 @@ a.citation, a.citation:visited {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#what-is-python-and-why-this-book-uses-it" id="toc-what-is-python-and-why-this-book-uses-it" class="nav-link active" data-scroll-target="#what-is-python-and-why-this-book-uses-it"><span class="header-section-number">A.1</span> What Is Python, and Why This Book Uses It</a></li>
+  <li><a href="#data-types" id="toc-data-types" class="nav-link" data-scroll-target="#data-types"><span class="header-section-number">A.2</span> Data Types</a></li>
+  <li><a href="#data-structures" id="toc-data-structures" class="nav-link" data-scroll-target="#data-structures"><span class="header-section-number">A.3</span> Data Structures</a></li>
+  <li><a href="#functions" id="toc-functions" class="nav-link" data-scroll-target="#functions"><span class="header-section-number">A.4</span> Functions</a></li>
+  <li><a href="#numpy-and-arrays" id="toc-numpy-and-arrays" class="nav-link" data-scroll-target="#numpy-and-arrays"><span class="header-section-number">A.5</span> NumPy and Arrays</a>
+  <ul class="collapse">
+  <li><a href="#why-not-just-use-a-list" id="toc-why-not-just-use-a-list" class="nav-link" data-scroll-target="#why-not-just-use-a-list"><span class="header-section-number">A.5.1</span> Why Not Just Use a List?</a></li>
+  <li><a href="#creating-arrays" id="toc-creating-arrays" class="nav-link" data-scroll-target="#creating-arrays"><span class="header-section-number">A.5.2</span> Creating Arrays</a></li>
+  <li><a href="#vectorized-operations-and-filtering" id="toc-vectorized-operations-and-filtering" class="nav-link" data-scroll-target="#vectorized-operations-and-filtering"><span class="header-section-number">A.5.3</span> Vectorized Operations and Filtering</a></li>
+  <li><a href="#common-aggregate-functions" id="toc-common-aggregate-functions" class="nav-link" data-scroll-target="#common-aggregate-functions"><span class="header-section-number">A.5.4</span> Common Aggregate Functions</a></li>
+  <li><a href="#reshaping-arrays" id="toc-reshaping-arrays" class="nav-link" data-scroll-target="#reshaping-arrays"><span class="header-section-number">A.5.5</span> Reshaping Arrays</a></li>
+  <li><a href="#conditional-logic-with-np.where" id="toc-conditional-logic-with-np.where" class="nav-link" data-scroll-target="#conditional-logic-with-np.where"><span class="header-section-number">A.5.6</span> Conditional Logic with <code>np.where()</code></a></li>
+  <li><a href="#random-number-generation" id="toc-random-number-generation" class="nav-link" data-scroll-target="#random-number-generation"><span class="header-section-number">A.5.7</span> Random Number Generation</a></li>
+  </ul></li>
+  <li><a href="#classes-objects-attributes-and-methods" id="toc-classes-objects-attributes-and-methods" class="nav-link" data-scroll-target="#classes-objects-attributes-and-methods"><span class="header-section-number">A.6</span> Classes, Objects, Attributes, and Methods</a>
+  <ul class="collapse">
+  <li><a href="#defining-a-class" id="toc-defining-a-class" class="nav-link" data-scroll-target="#defining-a-class"><span class="header-section-number">A.6.1</span> Defining a Class</a></li>
+  <li><a href="#creating-and-using-an-object" id="toc-creating-and-using-an-object" class="nav-link" data-scroll-target="#creating-and-using-an-object"><span class="header-section-number">A.6.2</span> Creating and Using an Object</a></li>
+  </ul></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">A.7</span> Summary</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/msharifbd/accounting-analytics-book/edit/main/appendix-a-python-primer.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/blob/main/appendix-a-python-primer.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -524,7 +584,7 @@ a.citation, a.citation:visited {
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./appendix-a-python-primer.html">Appendices</a></li><li class="breadcrumb-item"><a href="./appendix-a-python-primer.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">A Primer on Python</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Appendix A — A Primer on Python</h1>
+<h1 class="title"><span id="sec-python-primer" class="quarto-section-identifier">Appendix A — A Primer on Python</span></h1>
 </div>
 
 
@@ -541,8 +601,363 @@ a.citation, a.citation:visited {
 </header>
 
 
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Who This Appendix Is For
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This appendix is a self-contained introduction to Python fundamentals — the language mechanics this book assumes you’re comfortable with starting in Chapter 3. If you’ve never written Python before, work through this appendix before continuing. If you already know another programming language, this should read quickly as a syntax reference rather than a full course.</p>
+<p>This appendix doesn’t cover pandas or polars directly — those get a full, dedicated treatment starting in Chapter 4. What’s here is the foundation those chapters build on: values, data structures, functions, NumPy arrays, and just enough object-oriented programming to understand what’s actually happening every time you call <code>.groupby()</code> or <code>.mean()</code> on a DataFrame later in this book.</p>
+</div>
+</div>
+<section id="what-is-python-and-why-this-book-uses-it" class="level2" data-number="A.1">
+<h2 data-number="A.1" class="anchored" data-anchor-id="what-is-python-and-why-this-book-uses-it"><span class="header-section-number">A.1</span> What Is Python, and Why This Book Uses It</h2>
+<p>Python is a general-purpose programming language that has become the dominant choice for data analysis, thanks to a large ecosystem of libraries (pandas, NumPy, scikit-learn, and others used throughout this book) and a syntax designed to be readable. Code in Python is organized into <strong>statements</strong> (individual instructions) and relies on <strong>indentation</strong> — consistent spacing at the start of a line — to define which statements belong together, rather than curly braces or explicit block markers used by some other languages.</p>
+<div id="1a7aa4a0" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"This is a Python statement."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>This is a Python statement.</code></pre>
+</div>
+</div>
+</section>
+<section id="data-types" class="level2" data-number="A.2">
+<h2 data-number="A.2" class="anchored" data-anchor-id="data-types"><span class="header-section-number">A.2</span> Data Types</h2>
+<p>Every value in Python has a <strong>type</strong>, which determines what you can do with it. The <code>type()</code> function tells you what type any value is.</p>
+<div id="881396c2" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">42</span>            <span class="co"># int -- a whole number</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="fl">3.14</span>           <span class="co"># float -- a decimal number</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>name <span class="op">=</span> <span class="st">"Alice"</span>     <span class="co"># str -- text, in quotes</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>is_active <span class="op">=</span> <span class="va">True</span>   <span class="co"># bool -- True or False</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>nothing <span class="op">=</span> <span class="va">None</span>     <span class="co"># NoneType -- represents "no value"</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(x), <span class="bu">type</span>(y), <span class="bu">type</span>(name), <span class="bu">type</span>(is_active), <span class="bu">type</span>(nothing))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'int'&gt; &lt;class 'float'&gt; &lt;class 'str'&gt; &lt;class 'bool'&gt; &lt;class 'NoneType'&gt;</code></pre>
+</div>
+</div>
+<p>A few things worth knowing about these five types:</p>
+<ul>
+<li><strong>Integers and floats</strong> behave as you’d expect arithmetically, but dividing two integers with <code>/</code> always produces a float in Python, even if the result is a whole number (<code>10 / 2</code> gives <code>5.0</code>, not <code>5</code>).</li>
+<li><strong>Strings</strong> support many built-in operations: <code>name.upper()</code>, <code>name.lower()</code>, <code>len(name)</code>, and combining strings with <code>+</code>.</li>
+<li><strong>Booleans</strong> are the result of any comparison (<code>5 &gt; 3</code> evaluates to <code>True</code>) and are essential for the filtering operations used constantly in later chapters (e.g., <code>debit &gt; 0</code> in Chapter 4).</li>
+<li><strong><code>None</code></strong> represents the deliberate absence of a value — different from <code>0</code> or an empty string, and directly related to how pandas represents missing data (<code>NaN</code>) starting in Chapter 3.</li>
+</ul>
+<div id="105e9d69" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">10</span> <span class="op">/</span> <span class="dv">2</span>)       <span class="co"># true division always returns a float</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">10</span> <span class="op">//</span> <span class="dv">3</span>)      <span class="co"># floor division discards the remainder</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">10</span> <span class="op">%</span> <span class="dv">3</span>)       <span class="co"># modulo returns the remainder</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"abc"</span> <span class="op">+</span> <span class="st">"def"</span>) <span class="co"># string concatenation</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>5.0
+3
+1
+abcdef</code></pre>
+</div>
+</div>
+</section>
+<section id="data-structures" class="level2" data-number="A.3">
+<h2 data-number="A.3" class="anchored" data-anchor-id="data-structures"><span class="header-section-number">A.3</span> Data Structures</h2>
+<p>Beyond single values, Python has four built-in structures for holding <em>collections</em> of values. Choosing the right one matters — each has different rules about ordering, uniqueness, and whether it can be changed after creation.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Structure</th>
+<th>Ordered?</th>
+<th>Duplicates Allowed?</th>
+<th>Mutable?</th>
+<th>Syntax</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>List</strong></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td><code>[1, 2, 3]</code></td>
+</tr>
+<tr class="even">
+<td><strong>Tuple</strong></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td><code>(1, 2, 3)</code></td>
+</tr>
+<tr class="odd">
+<td><strong>Dictionary</strong></td>
+<td>Yes (insertion order)</td>
+<td>Keys must be unique</td>
+<td>Yes</td>
+<td><code>{"key": "value"}</code></td>
+</tr>
+<tr class="even">
+<td><strong>Set</strong></td>
+<td>No</td>
+<td>No (auto-removes duplicates)</td>
+<td>Yes</td>
+<td><code>{1, 2, 3}</code></td>
+</tr>
+</tbody>
+</table>
+<div id="4cc3a492" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>my_list <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="st">"four"</span>]      <span class="co"># a list can hold mixed types</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>my_tuple <span class="op">=</span> (<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)              <span class="co"># tuples look like lists but can't be changed</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>my_dict <span class="op">=</span> {<span class="st">"account"</span>: <span class="st">"Cash"</span>, <span class="st">"balance"</span>: <span class="dv">1000</span>}</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>my_set <span class="op">=</span> {<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>}              <span class="co"># note: the duplicate 2 is automatically dropped</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(my_list, my_tuple, my_dict, my_set)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1, 2, 3, 'four'] (1, 2, 3) {'account': 'Cash', 'balance': 1000} {1, 2, 3}</code></pre>
+</div>
+</div>
+<p><strong>Indexing and accessing values:</strong></p>
+<div id="50579369" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(my_list[<span class="dv">0</span>])          <span class="co"># first item in a list (indexing starts at 0)</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(my_dict[<span class="st">"account"</span>])  <span class="co"># access a dictionary value by its key</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1
+Cash</code></pre>
+</div>
+</div>
+<p><strong>Lists are mutable — they can be changed after creation:</strong></p>
+<div id="7bd475e5" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>my_list.append(<span class="dv">5</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(my_list)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1, 2, 3, 'four', 5]</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Connect to This Book
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Every one of these structures shows up constantly once you start using pandas. A DataFrame’s columns behave much like dictionary keys. A single column of data, once extracted, behaves a lot like a list or a NumPy array (covered next). Understanding these four structures now makes almost every later chapter’s syntax feel far more predictable.</p>
+</div>
+</div>
+</section>
+<section id="functions" class="level2" data-number="A.4">
+<h2 data-number="A.4" class="anchored" data-anchor-id="functions"><span class="header-section-number">A.4</span> Functions</h2>
+<p>A <strong>function</strong> packages a block of reusable code that can be called with different inputs. You’ve already seen one built-in function (<code>print()</code>); Python also lets you define your own with <code>def</code>.</p>
+<div id="1198683c" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add_tax(amount, rate<span class="op">=</span><span class="fl">0.07</span>):</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Return the amount plus tax, using a default 7% rate unless told otherwise."""</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> amount <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> rate)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(add_tax(<span class="dv">100</span>))          <span class="co"># uses the default rate</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(add_tax(<span class="dv">100</span>, rate<span class="op">=</span><span class="fl">0.10</span>)) <span class="co"># overrides the default</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>107.0
+110.00000000000001</code></pre>
+</div>
+</div>
+<p>A few pieces of that function definition worth naming explicitly:</p>
+<ul>
+<li><strong><code>amount</code></strong> and <strong><code>rate</code></strong> are <strong>parameters</strong> — placeholders for values the function needs to run.</li>
+<li><strong><code>rate=0.07</code></strong> gives <code>rate</code> a <strong>default value</strong>, so callers don’t have to specify it every time.</li>
+<li><strong><code>return</code></strong> sends a value back to whatever called the function — without it, a function produces <code>None</code>.</li>
+<li>The text in triple quotes right after <code>def</code> is a <strong>docstring</strong>, a convention for documenting what a function does (you’ll see this same convention throughout well-written pandas/polars code, and it’s good practice in your own functions too — recall the <code>compute_ratios()</code> function from Chapter 7).</li>
+</ul>
+<p><strong>Lambda functions</strong> are a compact way to write small, throwaway functions in a single line — you’ll see these frequently as arguments to pandas methods like <code>.apply()</code>:</p>
+<div id="54f52c11" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>square <span class="op">=</span> <span class="kw">lambda</span> x: x <span class="op">**</span> <span class="dv">2</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(square(<span class="dv">5</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>25</code></pre>
+</div>
+</div>
+</section>
+<section id="numpy-and-arrays" class="level2" data-number="A.5">
+<h2 data-number="A.5" class="anchored" data-anchor-id="numpy-and-arrays"><span class="header-section-number">A.5</span> NumPy and Arrays</h2>
+<p><strong>NumPy</strong> (Numerical Python) is the foundational library for numeric computing in Python — pandas itself is built on top of it, and you’ll use it directly throughout this book, especially for generating and transforming numeric data.</p>
+<div id="226ef648" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="why-not-just-use-a-list" class="level3" data-number="A.5.1">
+<h3 data-number="A.5.1" class="anchored" data-anchor-id="why-not-just-use-a-list"><span class="header-section-number">A.5.1</span> Why Not Just Use a List?</h3>
+<p>A Python list can hold numbers, but it isn’t built for fast numeric computation — operations on a list happen one element at a time in a slow loop under the hood. A NumPy <strong>array</strong> stores numbers far more efficiently and supports <strong>vectorized operations</strong> — applying an operation to every element at once, without writing an explicit loop.</p>
+<div id="44cbce56" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>arr <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>])</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(arr)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(arr.shape, arr.dtype, arr.ndim)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1 2 3 4 5]
+(5,) int64 1</code></pre>
+</div>
+</div>
+<ul>
+<li><strong><code>.shape</code></strong> — the array’s dimensions (a 1-D array of 5 elements here)</li>
+<li><strong><code>.dtype</code></strong> — the data type stored in the array (all elements in a NumPy array share one type)</li>
+<li><strong><code>.ndim</code></strong> — the number of dimensions (1 here; a table of data would have <code>ndim = 2</code>)</li>
+</ul>
+</section>
+<section id="creating-arrays" class="level3" data-number="A.5.2">
+<h3 data-number="A.5.2" class="anchored" data-anchor-id="creating-arrays"><span class="header-section-number">A.5.2</span> Creating Arrays</h3>
+<div id="e0d5c86a" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>arr2 <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">2</span>)   <span class="co"># like Python's range(), but returns an array</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>zeros <span class="op">=</span> np.zeros((<span class="dv">2</span>, <span class="dv">3</span>))      <span class="co"># a 2x3 array of zeros</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>ones <span class="op">=</span> np.ones(<span class="dv">4</span>)             <span class="co"># a 1-D array of four ones</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>lin <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">5</span>)    <span class="co"># 5 evenly spaced values between 0 and 1</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(arr2)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(zeros)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ones)</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(lin)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[0 2 4 6 8]
+[[0. 0. 0.]
+ [0. 0. 0.]]
+[1. 1. 1. 1.]
+[0.   0.25 0.5  0.75 1.  ]</code></pre>
+</div>
+</div>
+</section>
+<section id="vectorized-operations-and-filtering" class="level3" data-number="A.5.3">
+<h3 data-number="A.5.3" class="anchored" data-anchor-id="vectorized-operations-and-filtering"><span class="header-section-number">A.5.3</span> Vectorized Operations and Filtering</h3>
+<div id="777a4ff0" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(arr <span class="op">*</span> <span class="dv">2</span>)          <span class="co"># every element multiplied by 2, no loop needed</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(arr[arr <span class="op">&gt;</span> <span class="dv">2</span>])     <span class="co"># boolean filtering: keep only elements greater than 2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[ 2  4  6  8 10]
+[3 4 5]</code></pre>
+</div>
+</div>
+<p>That second line — indexing an array with a condition — is exactly the same logic behind filtering a pandas DataFrame in Chapter 4 (e.g., <code>gl_pd[gl_pd["debit"] &gt; 5000]</code>). It’s not a coincidence; pandas’ filtering syntax is built directly on this NumPy pattern.</p>
+</section>
+<section id="common-aggregate-functions" class="level3" data-number="A.5.4">
+<h3 data-number="A.5.4" class="anchored" data-anchor-id="common-aggregate-functions"><span class="header-section-number">A.5.4</span> Common Aggregate Functions</h3>
+<div id="9aac76a4" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(arr.<span class="bu">sum</span>(), arr.mean(), arr.std(), arr.<span class="bu">min</span>(), arr.<span class="bu">max</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>15 3.0 1.4142135623730951 1 5</code></pre>
+</div>
+</div>
+<p>These same five operations — sum, mean, standard deviation, min, max — are exactly the summary statistics computed constantly starting in Chapter 5’s exploratory data analysis, just called on a pandas Series instead of a raw NumPy array.</p>
+</section>
+<section id="reshaping-arrays" class="level3" data-number="A.5.5">
+<h3 data-number="A.5.5" class="anchored" data-anchor-id="reshaping-arrays"><span class="header-section-number">A.5.5</span> Reshaping Arrays</h3>
+<div id="6f85467c" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>mat <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>]])</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mat.reshape(<span class="dv">3</span>, <span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1 2]
+ [3 4]
+ [5 6]]</code></pre>
+</div>
+</div>
+<p><code>.reshape()</code> rearranges the same data into a different shape, as long as the total number of elements stays the same (here, 6 elements stay 6 elements, just arranged as 3 rows × 2 columns instead of 2 × 3).</p>
+</section>
+<section id="conditional-logic-with-np.where" class="level3" data-number="A.5.6">
+<h3 data-number="A.5.6" class="anchored" data-anchor-id="conditional-logic-with-np.where"><span class="header-section-number">A.5.6</span> Conditional Logic with <code>np.where()</code></h3>
+<div id="f85d0b6c" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.where(arr <span class="op">&gt;</span> <span class="dv">2</span>, <span class="st">"high"</span>, <span class="st">"low"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['low' 'low' 'high' 'high' 'high']</code></pre>
+</div>
+</div>
+<p><code>np.where(condition, value_if_true, value_if_false)</code> builds a new array by checking a condition element-by-element — the same logic behind flagging outliers or building categorical labels throughout the audit and fraud detection chapters (e.g., Chapter 9’s <code>is_outlier</code> flag).</p>
+</section>
+<section id="random-number-generation" class="level3" data-number="A.5.7">
+<h3 data-number="A.5.7" class="anchored" data-anchor-id="random-number-generation"><span class="header-section-number">A.5.7</span> Random Number Generation</h3>
+<p>Every synthetic dataset in this book was built using NumPy’s random number generator, seeded for reproducibility (see Appendix on reproducibility practices in Chapter 16):</p>
+<div id="7340069e" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(seed<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(rng.normal(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">3</span>))   <span class="co"># 3 random values from a normal distribution</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[ 0.30471708 -1.03998411  0.7504512 ]</code></pre>
+</div>
+</div>
+<p>Using a fixed <code>seed</code> means this exact code produces this exact output every time it runs — the same principle behind every dataset generated throughout this book being fully reproducible.</p>
+</section>
+</section>
+<section id="classes-objects-attributes-and-methods" class="level2" data-number="A.6">
+<h2 data-number="A.6" class="anchored" data-anchor-id="classes-objects-attributes-and-methods"><span class="header-section-number">A.6</span> Classes, Objects, Attributes, and Methods</h2>
+<p>Everything in Python — including a NumPy array and, later, every pandas DataFrame you’ll create — is an <strong>object</strong>: a bundle of data (<strong>attributes</strong>) and the functions that operate on that data (<strong>methods</strong>), defined by a <strong>class</strong>.</p>
+<section id="defining-a-class" class="level3" data-number="A.6.1">
+<h3 data-number="A.6.1" class="anchored" data-anchor-id="defining-a-class"><span class="header-section-number">A.6.1</span> Defining a Class</h3>
+<div id="e5ea7283" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Account:</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""A simple representation of a financial account."""</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name, balance<span class="op">=</span><span class="dv">0</span>):</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.name <span class="op">=</span> name</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.balance <span class="op">=</span> balance</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> deposit(<span class="va">self</span>, amount):</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.balance <span class="op">+=</span> amount</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> withdraw(<span class="va">self</span>, amount):</span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> amount <span class="op">&gt;</span> <span class="va">self</span>.balance:</span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"Insufficient funds"</span>)</span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.balance <span class="op">-=</span> amount</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>A few pieces of this definition worth naming explicitly:</p>
+<ul>
+<li><strong><code>class Account:</code></strong> defines a new type, much like <code>int</code> or <code>str</code> are types, but one you’ve designed yourself.</li>
+<li><strong><code>__init__</code></strong> is a special method that runs automatically whenever a new <code>Account</code> is created, setting up its initial attributes.</li>
+<li><strong><code>self</code></strong> refers to the specific object being worked with — it’s how a method knows <em>which</em> account’s balance to change, when many <code>Account</code> objects might exist at once.</li>
+<li><strong><code>self.name</code></strong> and <strong><code>self.balance</code></strong> are <strong>attributes</strong> — data that belongs to each individual object.</li>
+<li><strong><code>deposit()</code></strong> and <strong><code>withdraw()</code></strong> are <strong>methods</strong> — functions that belong to the class and operate on its attributes.</li>
+</ul>
+</section>
+<section id="creating-and-using-an-object" class="level3" data-number="A.6.2">
+<h3 data-number="A.6.2" class="anchored" data-anchor-id="creating-and-using-an-object"><span class="header-section-number">A.6.2</span> Creating and Using an Object</h3>
+<div id="b7d25307" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>acct <span class="op">=</span> Account(<span class="st">"Cash"</span>, <span class="dv">1000</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>acct.deposit(<span class="dv">500</span>)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>acct.withdraw(<span class="dv">200</span>)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(acct.name, acct.balance)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Cash 1300</code></pre>
+</div>
+</div>
+<p><code>acct</code> is an <strong>instance</strong> of the <code>Account</code> class — a specific object with its own <code>name</code> and <code>balance</code>, created from the general blueprint the class defines. You could create as many separate <code>Account</code> objects as you like, each with independent attribute values.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Why This Matters for the Rest of This Book
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Every time you write <code>gl_pd.groupby("account")</code> or <code>df.shape</code> starting in Chapter 4, you’re calling a <strong>method</strong> (<code>.groupby()</code>) or reading an <strong>attribute</strong> (<code>.shape</code>) on a pandas DataFrame <strong>object</strong> — <code>gl_pd</code> is an instance of pandas’ <code>DataFrame</code> class, in exactly the same sense that <code>acct</code> above is an instance of <code>Account</code>. Understanding this pattern demystifies a lot of pandas/polars syntax: <code>.mean()</code>, <code>.describe()</code>, <code>.sort_values()</code>, and every other method you’ll use throughout this book are simply methods defined on the DataFrame class, working on the attributes (the actual data) that a specific DataFrame object holds. You’ll never need to <em>write</em> a class as complex as pandas’ <code>DataFrame</code> yourself, but recognizing this object → attribute / method relationship makes the rest of this book’s syntax far more predictable rather than something to memorize line by line.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="summary" class="level2" data-number="A.7">
+<h2 data-number="A.7" class="anchored" data-anchor-id="summary"><span class="header-section-number">A.7</span> Summary</h2>
+<ul>
+<li>Every Python value has a type (<code>int</code>, <code>float</code>, <code>str</code>, <code>bool</code>, <code>NoneType</code>), and <code>type()</code> tells you which one you’re working with.</li>
+<li>Lists, tuples, dictionaries, and sets each store collections of values with different rules around ordering, uniqueness, and mutability — choosing the right one matters.</li>
+<li>Functions (<code>def</code>) package reusable code, accept parameters with optional default values, and <code>return</code> a result; <code>lambda</code> provides a compact syntax for small one-line functions.</li>
+<li>NumPy arrays support fast, vectorized numeric operations without explicit loops — the foundation pandas itself is built on, and the source of syntax patterns (boolean filtering, aggregate functions, <code>np.where()</code>) that reappear constantly starting in Chapter 4.</li>
+<li>A fixed random seed (<code>np.random.default_rng(seed=...)</code>) makes randomly generated data fully reproducible — the technique behind every synthetic dataset in this book.</li>
+<li>Python objects bundle data (attributes) and behavior (methods), defined by a class — understanding this pattern is what makes pandas and polars syntax feel logical rather than arbitrary, since a DataFrame is simply an object like any other, with its own attributes and methods.</li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -978,7 +1393,7 @@ a.citation, a.citation:visited {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><ul><li><a href="https://github.com/msharifbd/accounting-analytics-book/edit/main/appendix-a-python-primer.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/blob/main/appendix-a-python-primer.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/msharifbd/accounting-analytics-book/edit/main/appendix-a-python-primer.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/blob/main/appendix-a-python-primer.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This book was built with <a href="https://quarto.org/">Quarto</a></p>
 </div>
