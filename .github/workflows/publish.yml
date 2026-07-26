@@ -41,6 +41,9 @@ jobs:
       - name: Render the book (HTML and PDF)
         run: quarto render
 
+      - name: Disable Jekyll processing on GitHub Pages
+        run: touch _book/.nojekyll
+
       - name: Publish to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
