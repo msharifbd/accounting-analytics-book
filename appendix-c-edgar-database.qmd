@@ -232,6 +232,41 @@ prices.head()
 
 The variable `volume` indicates trading volume; the variables `open`, `low`, `high`, and `close` indicate opening, low, high, and closing price of the stock in a given day. The `adjusted_close` takes the closing price and adjusts retroactively for dividend payouts or stock splits or other corporate actions. We can merge the data extracted using `edgartools` and `tidyfinance` and run either price or return model to test the economic significance of accounting numbers. 
 
+If we want to use **return model**, we need returns for each stock. The return are calculated: 
+
+$$
+\text{r}_t = {P}_t/{P}_{t-1}-1
+$$
+where:
+
+- $\text{P}_t$ = Adjusted Price at the End of Day $t$
+
+
+```{python}
+returns = (
+     prices
+     .sort(["symbol", 'date'])
+     .with_columns(pl.col("adjusted_close").pct_change().over("symbol").alias("ret"))
+     .select("symbol", "date", "adjusted_close", "ret")
+)
+returns 
+```
+
+We can also visualize the prices or returns of companies to identify patterns, if any. 
+
+```{python}
+from plotnine import *
+theme_set(theme_minimal())
+price_viz = (
+    ggplot(prices, aes(y = "adjusted_close", x = "date", color = "symbol"))
+    + geom_line()
+    + scale_x_date(date_breaks="5 years", date_labels="%Y")
+    + labs(x="", y="", color="", title="Stock prices of Apple, Google, and Walmart")
+    + theme(legend_position="bottom")
+)
+price_viz.show()
+```
+
 ## Summary 
 
 - EDGAR database is a central repository of corporate disclosures in the US. All US public companies issue their financial statement using Form 10-K in EDGAR. Therefore, understanding the EDGAR database is critical for hands-on application of accounting knowledge. 
