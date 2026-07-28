@@ -84,7 +84,7 @@ format:
     classoption: ["fontsize=13pt", "extrafontsizes"]
     geometry:
       - margin=1in
-    toc: true
+    toc: false
     number-sections: true
     colorlinks: true
     citecolor: blue
@@ -96,6 +96,7 @@ format:
     pdf-engine: xelatex
     mainfont: "EB Garamond"
     include-in-header: preamble.tex
+    include-before-body: toc-brief.tex
 
   epub: 
     cover-image: images/Front-page-image.png
