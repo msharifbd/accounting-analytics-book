@@ -84,9 +84,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-343830dee7e81009abd9657442190b55.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-def84ad44d3f8eb91118907a1603e740.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-343830dee7e81009abd9657442190b55.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-47a8a932e246a042265a2f3d12b6c6e8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-71e1f49803ea75cd3319df8a388b1419.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-47a8a932e246a042265a2f3d12b6c6e8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -464,7 +464,7 @@ a.citation, a.citation:visited {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
- <span class="menu-text">Part IV: Predictive Methods and GenAI</span></a>
+ <span class="menu-text">Part IV: Advanced Analytics and Artificial Intelligence</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -478,8 +478,14 @@ a.citation, a.citation:visited {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./14-genai-in-accounting.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Generative AI in Accounting</span></span></a>
+  <a href="./14-text-analytics-in-accounting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Text Analytics in Accounting</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-genai-in-accounting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI in Accounting</span></span></a>
   </div>
 </li>
       </ul>
@@ -495,20 +501,20 @@ a.citation, a.citation:visited {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./15-automated-reporting-quarto.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Automated Reporting and Dashboards with Quarto</span></span></a>
+  <a href="./16-automated-reporting-quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Automated Reporting and Dashboards with Quarto</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./16-data-ethics-reproducibility.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Data Ethics, Governance, and Reproducibility</span></span></a>
+  <a href="./17-data-ethics-reproducibility.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Data Ethics, Governance, and Reproducibility</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./17-capstone-project.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Capstone Project</span></span></a>
+  <a href="./18-capstone-project.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Capstone Project</span></span></a>
   </div>
 </li>
       </ul>
@@ -621,7 +627,7 @@ a.citation, a.citation:visited {
 <section id="what-is-python-and-why-this-book-uses-it" class="level2" data-number="A.1">
 <h2 data-number="A.1" class="anchored" data-anchor-id="what-is-python-and-why-this-book-uses-it"><span class="header-section-number">A.1</span> What Is Python, and Why This Book Uses It</h2>
 <p>Python is a general-purpose programming language that has become the dominant choice for data analysis, thanks to a large ecosystem of libraries (pandas, NumPy, scikit-learn, and others used throughout this book) and a syntax designed to be readable. Code in Python is organized into <strong>statements</strong> (individual instructions) and relies on <strong>indentation</strong> — consistent spacing at the start of a line — to define which statements belong together, rather than curly braces or explicit block markers used by some other languages.</p>
-<div id="1a7aa4a0" class="cell" data-execution_count="1">
+<div id="da82ef8e" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"This is a Python statement."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>This is a Python statement.</code></pre>
@@ -631,7 +637,7 @@ a.citation, a.citation:visited {
 <section id="data-types" class="level2" data-number="A.2">
 <h2 data-number="A.2" class="anchored" data-anchor-id="data-types"><span class="header-section-number">A.2</span> Data Types</h2>
 <p>Every value in Python has a <strong>type</strong>, which determines what you can do with it. The <code>type()</code> function tells you what type any value is.</p>
-<div id="881396c2" class="cell" data-execution_count="2">
+<div id="222dcfa0" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">42</span>            <span class="co"># int -- a whole number</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="fl">3.14</span>           <span class="co"># float -- a decimal number</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>name <span class="op">=</span> <span class="st">"Alice"</span>     <span class="co"># str -- text, in quotes</span></span>
@@ -650,7 +656,7 @@ a.citation, a.citation:visited {
 <li><strong>Booleans</strong> are the result of any comparison (<code>5 &gt; 3</code> evaluates to <code>True</code>) and are essential for the filtering operations used constantly in later chapters (e.g., <code>debit &gt; 0</code> in Chapter 4).</li>
 <li><strong><code>None</code></strong> represents the deliberate absence of a value — different from <code>0</code> or an empty string, and directly related to how pandas represents missing data (<code>NaN</code>) starting in Chapter 3.</li>
 </ul>
-<div id="105e9d69" class="cell" data-execution_count="3">
+<div id="0a702457" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">10</span> <span class="op">/</span> <span class="dv">2</span>)       <span class="co"># true division always returns a float</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">10</span> <span class="op">//</span> <span class="dv">3</span>)      <span class="co"># floor division discards the remainder</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">10</span> <span class="op">%</span> <span class="dv">3</span>)       <span class="co"># modulo returns the remainder</span></span>
@@ -714,7 +720,7 @@ abcdef</code></pre>
 </tr>
 </tbody>
 </table>
-<div id="4cc3a492" class="cell" data-execution_count="4">
+<div id="4e7140b0" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>my_list <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="st">"four"</span>]      <span class="co"># a list can hold mixed types</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>my_tuple <span class="op">=</span> (<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)              <span class="co"># tuples look like lists but can't be changed</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>my_dict <span class="op">=</span> {<span class="st">"account"</span>: <span class="st">"Cash"</span>, <span class="st">"balance"</span>: <span class="dv">1000</span>}</span>
@@ -726,7 +732,7 @@ abcdef</code></pre>
 </div>
 </div>
 <p><strong>Indexing and accessing values:</strong></p>
-<div id="50579369" class="cell" data-execution_count="5">
+<div id="9799cde4" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(my_list[<span class="dv">0</span>])          <span class="co"># first item in a list (indexing starts at 0)</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(my_dict[<span class="st">"account"</span>])  <span class="co"># access a dictionary value by its key</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -735,7 +741,7 @@ Cash</code></pre>
 </div>
 </div>
 <p><strong>Lists are mutable — they can be changed after creation:</strong></p>
-<div id="7bd475e5" class="cell" data-execution_count="6">
+<div id="3dea928d" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>my_list.append(<span class="dv">5</span>)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(my_list)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -759,7 +765,7 @@ Cash</code></pre>
 <section id="functions" class="level2" data-number="A.4">
 <h2 data-number="A.4" class="anchored" data-anchor-id="functions"><span class="header-section-number">A.4</span> Functions</h2>
 <p>A <strong>function</strong> packages a block of reusable code that can be called with different inputs. You’ve already seen one built-in function (<code>print()</code>); Python also lets you define your own with <code>def</code>.</p>
-<div id="1198683c" class="cell" data-execution_count="7">
+<div id="5f7ecc69" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add_tax(amount, rate<span class="op">=</span><span class="fl">0.07</span>):</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Return the amount plus tax, using a default 7% rate unless told otherwise."""</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> amount <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> rate)</span>
@@ -779,7 +785,7 @@ Cash</code></pre>
 <li>The text in triple quotes right after <code>def</code> is a <strong>docstring</strong>, a convention for documenting what a function does (you’ll see this same convention throughout well-written pandas/polars code, and it’s good practice in your own functions too — recall the <code>compute_ratios()</code> function from Chapter 7).</li>
 </ul>
 <p><strong>Lambda functions</strong> are a compact way to write small, throwaway functions in a single line — you’ll see these frequently as arguments to pandas methods like <code>.apply()</code>:</p>
-<div id="54f52c11" class="cell" data-execution_count="8">
+<div id="06f60cc7" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>square <span class="op">=</span> <span class="kw">lambda</span> x: x <span class="op">**</span> <span class="dv">2</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(square(<span class="dv">5</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -790,13 +796,13 @@ Cash</code></pre>
 <section id="numpy-and-arrays" class="level2" data-number="A.5">
 <h2 data-number="A.5" class="anchored" data-anchor-id="numpy-and-arrays"><span class="header-section-number">A.5</span> NumPy and Arrays</h2>
 <p><strong>NumPy</strong> (Numerical Python) is the foundational library for numeric computing in Python — pandas itself is built on top of it, and you’ll use it directly throughout this book, especially for generating and transforming numeric data.</p>
-<div id="226ef648" class="cell" data-execution_count="9">
+<div id="207b61c6" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="why-not-just-use-a-list" class="level3" data-number="A.5.1">
 <h3 data-number="A.5.1" class="anchored" data-anchor-id="why-not-just-use-a-list"><span class="header-section-number">A.5.1</span> Why Not Just Use a List?</h3>
 <p>A Python list can hold numbers, but it isn’t built for fast numeric computation — operations on a list happen one element at a time in a slow loop under the hood. A NumPy <strong>array</strong> stores numbers far more efficiently and supports <strong>vectorized operations</strong> — applying an operation to every element at once, without writing an explicit loop.</p>
-<div id="44cbce56" class="cell" data-execution_count="10">
+<div id="cce75d57" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>arr <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>])</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(arr)</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(arr.shape, arr.dtype, arr.ndim)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -813,7 +819,7 @@ Cash</code></pre>
 </section>
 <section id="creating-arrays" class="level3" data-number="A.5.2">
 <h3 data-number="A.5.2" class="anchored" data-anchor-id="creating-arrays"><span class="header-section-number">A.5.2</span> Creating Arrays</h3>
-<div id="e0d5c86a" class="cell" data-execution_count="11">
+<div id="53fc883d" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>arr2 <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">2</span>)   <span class="co"># like Python's range(), but returns an array</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>zeros <span class="op">=</span> np.zeros((<span class="dv">2</span>, <span class="dv">3</span>))      <span class="co"># a 2x3 array of zeros</span></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>ones <span class="op">=</span> np.ones(<span class="dv">4</span>)             <span class="co"># a 1-D array of four ones</span></span>
@@ -834,7 +840,7 @@ Cash</code></pre>
 </section>
 <section id="vectorized-operations-and-filtering" class="level3" data-number="A.5.3">
 <h3 data-number="A.5.3" class="anchored" data-anchor-id="vectorized-operations-and-filtering"><span class="header-section-number">A.5.3</span> Vectorized Operations and Filtering</h3>
-<div id="777a4ff0" class="cell" data-execution_count="12">
+<div id="8faa7fc1" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(arr <span class="op">*</span> <span class="dv">2</span>)          <span class="co"># every element multiplied by 2, no loop needed</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(arr[arr <span class="op">&gt;</span> <span class="dv">2</span>])     <span class="co"># boolean filtering: keep only elements greater than 2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -846,7 +852,7 @@ Cash</code></pre>
 </section>
 <section id="common-aggregate-functions" class="level3" data-number="A.5.4">
 <h3 data-number="A.5.4" class="anchored" data-anchor-id="common-aggregate-functions"><span class="header-section-number">A.5.4</span> Common Aggregate Functions</h3>
-<div id="9aac76a4" class="cell" data-execution_count="13">
+<div id="a15f47c5" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(arr.<span class="bu">sum</span>(), arr.mean(), arr.std(), arr.<span class="bu">min</span>(), arr.<span class="bu">max</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>15 3.0 1.4142135623730951 1 5</code></pre>
@@ -856,7 +862,7 @@ Cash</code></pre>
 </section>
 <section id="reshaping-arrays" class="level3" data-number="A.5.5">
 <h3 data-number="A.5.5" class="anchored" data-anchor-id="reshaping-arrays"><span class="header-section-number">A.5.5</span> Reshaping Arrays</h3>
-<div id="6f85467c" class="cell" data-execution_count="14">
+<div id="4d01c1e0" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>mat <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>]])</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mat.reshape(<span class="dv">3</span>, <span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -869,7 +875,7 @@ Cash</code></pre>
 </section>
 <section id="conditional-logic-with-np.where" class="level3" data-number="A.5.6">
 <h3 data-number="A.5.6" class="anchored" data-anchor-id="conditional-logic-with-np.where"><span class="header-section-number">A.5.6</span> Conditional Logic with <code>np.where()</code></h3>
-<div id="f85d0b6c" class="cell" data-execution_count="15">
+<div id="63891a34" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.where(arr <span class="op">&gt;</span> <span class="dv">2</span>, <span class="st">"high"</span>, <span class="st">"low"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>['low' 'low' 'high' 'high' 'high']</code></pre>
@@ -880,7 +886,7 @@ Cash</code></pre>
 <section id="random-number-generation" class="level3" data-number="A.5.7">
 <h3 data-number="A.5.7" class="anchored" data-anchor-id="random-number-generation"><span class="header-section-number">A.5.7</span> Random Number Generation</h3>
 <p>Every synthetic dataset in this book was built using NumPy’s random number generator, seeded for reproducibility (see Appendix on reproducibility practices in Chapter 16):</p>
-<div id="7340069e" class="cell" data-execution_count="16">
+<div id="3d77850c" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(seed<span class="op">=</span><span class="dv">42</span>)</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(rng.normal(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">3</span>))   <span class="co"># 3 random values from a normal distribution</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -895,7 +901,7 @@ Cash</code></pre>
 <p>Everything in Python — including a NumPy array and, later, every pandas DataFrame you’ll create — is an <strong>object</strong>: a bundle of data (<strong>attributes</strong>) and the functions that operate on that data (<strong>methods</strong>), defined by a <strong>class</strong>.</p>
 <section id="defining-a-class" class="level3" data-number="A.6.1">
 <h3 data-number="A.6.1" class="anchored" data-anchor-id="defining-a-class"><span class="header-section-number">A.6.1</span> Defining a Class</h3>
-<div id="e5ea7283" class="cell" data-execution_count="17">
+<div id="87b4a465" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Account:</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""A simple representation of a financial account."""</span></span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -922,7 +928,7 @@ Cash</code></pre>
 </section>
 <section id="creating-and-using-an-object" class="level3" data-number="A.6.2">
 <h3 data-number="A.6.2" class="anchored" data-anchor-id="creating-and-using-an-object"><span class="header-section-number">A.6.2</span> Creating and Using an Object</h3>
-<div id="b7d25307" class="cell" data-execution_count="18">
+<div id="bc9a1a10" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>acct <span class="op">=</span> Account(<span class="st">"Cash"</span>, <span class="dv">1000</span>)</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>acct.deposit(<span class="dv">500</span>)</span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>acct.withdraw(<span class="dv">200</span>)</span>
