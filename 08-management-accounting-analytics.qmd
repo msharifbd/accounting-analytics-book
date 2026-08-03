@@ -141,9 +141,9 @@ The labor **efficiency** variance is favorable by roughly $30,600 — the workfo
 
 Overhead variances measure the difference between actual manufacturing overhead costs and **applied** standard costs. Variable overhead splits into *spending* and *efficiency* variances based on activity levels. Variable overhead variances are very similar in terms of computation to materials and labor variances. Fixed overhead splits into spending (budget) and volume variances based on capacity and production.
 
-$$\small \text{VC Spending Variance} = \text{Actual Hours} \times (\text{Actual Rate} - \text{Standard Rate})$$
+$$ \text{VC Spending Variance} = \text{Actual Hours} \times (\text{Actual Rate} - \text{Standard Rate})$$
 
-$$\small \text{VC Efficiency Variance} = \text{Standard Rate} \times (\text{Actual Hours} - \text{Standard Hours})$$
+$$ \text{VC Efficiency Variance} = \text{Standard Rate} \times (\text{Actual Hours} - \text{Standard Hours})$$
 
 Fixed overhead costs remain constant in total regardless of changes in production volume within a relevant range. @fig-overhead-variance shows total fixed cost overhead variance breakdown.
 

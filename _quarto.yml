@@ -33,15 +33,16 @@ book:
         - 10-fraud-anomaly-detection.qmd
         - 11-revenue-recognition-analysis.qmd
         - 12-tax-analytics.qmd
-    - part: "Part IV: Predictive Methods and GenAI"
+    - part: "Part IV: Advanced Analytics and Artificial Intelligence"
       chapters:
         - 13-predictive-modeling-intro.qmd
-        - 14-genai-in-accounting.qmd
+        - 14-text-analytics-in-accounting.qmd
+        - 15-genai-in-accounting.qmd
     - part: "Part V: Communication and Capstone"
       chapters:
-        - 15-automated-reporting-quarto.qmd
-        - 16-data-ethics-reproducibility.qmd
-        - 17-capstone-project.qmd
+        - 16-automated-reporting-quarto.qmd
+        - 17-data-ethics-reproducibility.qmd
+        - 18-capstone-project.qmd
     - references.qmd
   appendices:
     - appendix-a-python-primer.qmd
@@ -78,6 +79,7 @@ format:
     toc-depth: 3
     code-fold: false
     code-tools: false
+    code-overflow: wrap
     
   pdf:
     documentclass: scrbook
@@ -96,7 +98,9 @@ format:
     pdf-engine: xelatex
     mainfont: "EB Garamond"
     include-in-header: preamble.tex
-    include-before-body: toc-brief.tex
+    include-before-body: 
+      - toc-brief.tex
+      - code-wrap.tex
 
   epub: 
     cover-image: images/Front-page-image.png

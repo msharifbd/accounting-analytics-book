@@ -168,6 +168,150 @@ equity_statement_df = build_combined_df("statement_of_equity")  # method name un
 
 ```
 
+## Unstructured Data in Company Filings
+
+Companay filings (e.g., 10-K) contain a large amount of unstructured text data, especially in sections such as the business description, risk factors, legal proceedings, and management’s discussion and analysis. Unlike structured financial statement data, this narrative information is not arranged in fixed rows and columns, which makes it more difficult to analyze using traditional spreadsheet methods. However, it is often rich in useful signals about firm strategy, uncertainty, governance, litigation exposure, and future expectations. `edgartools` can be used to extract unstructured data as well. 
+
+```{python}
+from edgar import *
+set_identity("Sharif Islam mdshariful.islam@siu.edu")
+filings = get_filings(form='10-K', amendments=False, filing_date="2026-01-05:2026-01-12")
+filings_df = filings.to_pandas()
+
+# Create a list to store the Item 1a and Item 7 text
+items_texts = []
+
+for n, filing in enumerate(filings):
+    url = filing.url
+    cik = filing.cik
+    filing_date = filing.header.filing_date,
+    reporting_date = filing.header.period_of_report,
+    comn = filing.company
+
+    # Extract the text for Item 1c
+    TenK = filing.obj()
+    
+    # Bypass None values
+    try:
+        item7_text = TenK['Item 7'] # Management Discussion & Analysis (MDA)
+        item1a_text = TenK['Item 1A'] # Risk Factors 
+    except:
+        item7_text = None
+        item1a_text = None
+
+    # Append the data to the list
+    # item1c_text = TenK['Item 1C']
+    items_texts.append({
+        'CIK': cik,
+        'Filing Date': str(filing_date),
+        'Item 7 Text': item7_text,
+        'Item 1a Text': item1a_text,
+        'url': url,
+        'reporting_date': str(reporting_date),
+        'comn': comn
+    })
+
+# Create a DataFrame from the Item 1c text data
+items_df = pd.DataFrame(items_texts)
+```
+
+If you want to extract some specific companies' unstructured data, you can do so as well. 
+
+```{python}
+tickers = ["AAPL", "MSFT", "WMT"]
+date_range = "2018-01-01:2022-12-31"
+
+# Step 1: Fetch and stitch XBRL data for each company
+# Create a list to store the Item 1c text
+items_texts = []
+
+for ticker in tickers:
+    filings = company.get_filings(form="10-K", date=date_range,amendments=False)
+    for n, filing in enumerate(filings):
+        url = filing.url
+        cik = filing.cik
+        filing_date = filing.header.filing_date,
+        reporting_date = filing.header.period_of_report,
+        comn = filing.company,
+        tic = Company(filing.cik).tickers
+
+        # Extract the text for Item 1c
+        TenK = filing.obj()
+        
+        # Bypass None values
+        try:
+            item7_text = TenK['Item 7'] # Management Discussion & Analysis (MDA)
+            item1a_text = TenK['Item 1A'] # Risk Factors 
+        except:
+            item7_text = None
+            item1a_text = None
+
+        # Append the data to the list
+        # item1c_text = TenK['Item 1C']
+        items_texts.append({
+        'Ticker': tic,
+        'CIK': cik,
+        'Filing Date': str(filing_date),
+        'Item 7 Text': item7_text,
+        'Item 1a Text': item1a_text,
+        'url': url,
+        'reporting_date': str(reporting_date),
+        'comn': comn
+    })
+# Create a DataFrame from the Item 1c text data
+company_items_df = pd.DataFrame(items_texts)
+```
+
+If you want to extract some accounting policies of some specific companies, you can do so using `edgartools` python package. 
+
+```{python}
+from edgar import Company
+import pandas as pd
+
+tickers = ["AAPL", "MSFT", "WMT"]
+date_range = "2018-01-01:2022-12-31"
+
+records = []
+
+for ticker in tickers:
+    company = Company(ticker)
+    filings = company.get_filings(
+        form="10-K",
+        date=date_range,
+        amendments=False,
+    )
+
+    for filing in filings:
+
+        try:
+            xbrl = filing.xbrl()
+
+            # Accounting Policies statement
+            acct_policy = xbrl.get_statement("accounting_policies")
+
+            records.append({
+                "ticker": ticker,
+                "cik": filing.cik,
+                "filing_date": filing.filing_date,
+                "report_date": filing.report_date,
+                #"fiscal_year": filing.report_date.year,
+                "accounting_policies": acct_policy,
+            })
+
+        except Exception as e:
+
+            records.append({
+                "ticker": ticker,
+                "cik": filing.cik,
+                "filing_date": filing.filing_date,
+                "report_date": filing.report_date,
+                #"fiscal_year": filing.report_date.year,
+                "accounting_policies": None,
+                "error": str(e),
+            })
+
+accounting_policy_df = pd.DataFrame(records)
+```
 
 
 ## tidyfinance - Python package for Share Price Data

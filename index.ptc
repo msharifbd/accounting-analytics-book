@@ -106,7 +106,7 @@
 \contentsline {section}{\numberline {4.32}polars}{64}{section.4.32}%
 \contentsline {subsection}{\numberline {4.32.1}Left Join}{64}{subsection.4.32.1}%
 \contentsline {section}{\numberline {4.33}pandas}{64}{section.4.33}%
-\contentsline {section}{\numberline {4.34}polars}{65}{section.4.34}%
+\contentsline {section}{\numberline {4.34}polars}{64}{section.4.34}%
 \contentsline {section}{\numberline {4.35}Reshaping Data}{65}{section.4.35}%
 \contentsline {subsection}{\numberline {4.35.1}Wide: Total Debits by Account and Department}{65}{subsection.4.35.1}%
 \contentsline {section}{\numberline {4.36}pandas}{65}{section.4.36}%
@@ -158,11 +158,11 @@
 \contentsline {section}{\numberline {6.1}Why Visualize? From Numbers to Insight}{93}{section.6.1}%
 \contentsline {section}{\numberline {6.2}Two Visualization Philosophies: Seaborn vs.~Plotnine}{93}{section.6.2}%
 \contentsline {section}{\numberline {6.3}Bar Charts: Comparing Categories}{95}{section.6.3}%
-\contentsline {section}{\numberline {6.4}seaborn}{95}{section.6.4}%
+\contentsline {section}{\numberline {6.4}seaborn}{96}{section.6.4}%
 \contentsline {section}{\numberline {6.5}plotnine}{96}{section.6.5}%
 \contentsline {section}{\numberline {6.6}Line Charts: Trends Over Time}{97}{section.6.6}%
 \contentsline {section}{\numberline {6.7}seaborn}{98}{section.6.7}%
-\contentsline {section}{\numberline {6.8}plotnine}{98}{section.6.8}%
+\contentsline {section}{\numberline {6.8}plotnine}{99}{section.6.8}%
 \contentsline {section}{\numberline {6.9}Distribution Plots: Revisiting Chapter 5, Properly Styled}{99}{section.6.9}%
 \contentsline {section}{\numberline {6.10}seaborn}{100}{section.6.10}%
 \contentsline {section}{\numberline {6.11}plotnine}{100}{section.6.11}%
@@ -175,15 +175,15 @@
 \contentsline {section}{\numberline {6.18}seaborn}{106}{section.6.18}%
 \contentsline {section}{\numberline {6.19}plotnine}{106}{section.6.19}%
 \contentsline {section}{\numberline {6.20}Faceting: Small Multiples}{107}{section.6.20}%
-\contentsline {section}{\numberline {6.21}seaborn}{107}{section.6.21}%
-\contentsline {section}{\numberline {6.22}plotnine}{108}{section.6.22}%
+\contentsline {section}{\numberline {6.21}seaborn}{108}{section.6.21}%
+\contentsline {section}{\numberline {6.22}plotnine}{109}{section.6.22}%
 \contentsline {section}{\numberline {6.23}When to Reach for Matplotlib}{109}{section.6.23}%
 \contentsline {section}{\numberline {6.24}Design Principles for Accounting Visualizations}{111}{section.6.24}%
 \contentsline {subsection}{\numberline {6.24.1}Truncated Axes Exaggerate Change}{111}{subsection.6.24.1}%
 \contentsline {subsection}{\numberline {6.24.2}Other Design Principles}{112}{subsection.6.24.2}%
-\contentsline {section}{\numberline {6.25}Chapter Summary}{112}{section.6.25}%
+\contentsline {section}{\numberline {6.25}Chapter Summary}{113}{section.6.25}%
 \contentsline {section}{\numberline {6.26}Discussion Questions}{113}{section.6.26}%
-\contentsline {section}{\numberline {6.27}Exercises}{113}{section.6.27}%
+\contentsline {section}{\numberline {6.27}Exercises}{114}{section.6.27}%
 \contentsline {part}{\numberline {III}Part III: Applied Accounting Analytics}{115}{part.3}%
 \contentsline {chapter}{\numberline {7}Financial Statement Analytics}{117}{chapter.7}%
 \contentsline {section}{\numberline {7.1}From General Ledger to Financial Statements}{117}{section.7.1}%
@@ -196,12 +196,12 @@
 \contentsline {section}{\numberline {7.8}Horizontal (Trend) Analysis}{120}{section.7.8}%
 \contentsline {section}{\numberline {7.9}pandas}{121}{section.7.9}%
 \contentsline {section}{\numberline {7.10}polars}{121}{section.7.10}%
-\contentsline {subsection}{\numberline {7.10.1}Indexed Trend Analysis}{122}{subsection.7.10.1}%
+\contentsline {subsection}{\numberline {7.10.1}Indexed Trend Analysis}{123}{subsection.7.10.1}%
 \contentsline {section}{\numberline {7.11}pandas}{123}{section.7.11}%
 \contentsline {section}{\numberline {7.12}polars}{123}{section.7.12}%
 \contentsline {section}{\numberline {7.13}Vertical (Common-Size) Analysis}{124}{section.7.13}%
 \contentsline {section}{\numberline {7.14}pandas}{124}{section.7.14}%
-\contentsline {section}{\numberline {7.15}polars}{124}{section.7.15}%
+\contentsline {section}{\numberline {7.15}polars}{125}{section.7.15}%
 \contentsline {section}{\numberline {7.16}pandas}{125}{section.7.16}%
 \contentsline {section}{\numberline {7.17}polars}{126}{section.7.17}%
 \contentsline {section}{\numberline {7.18}Ratio Analysis}{127}{section.7.18}%
@@ -214,18 +214,18 @@
 \contentsline {subsection}{\numberline {7.22.1}Leverage Ratios}{131}{subsection.7.22.1}%
 \contentsline {section}{\numberline {7.23}pandas}{131}{section.7.23}%
 \contentsline {section}{\numberline {7.24}polars}{132}{section.7.24}%
-\contentsline {subsection}{\numberline {7.24.1}Efficiency Ratios}{132}{subsection.7.24.1}%
+\contentsline {subsection}{\numberline {7.24.1}Efficiency Ratios}{133}{subsection.7.24.1}%
 \contentsline {section}{\numberline {7.25}pandas}{133}{section.7.25}%
-\contentsline {section}{\numberline {7.26}polars}{133}{section.7.26}%
-\contentsline {section}{\numberline {7.27}Automating Ratio Calculations}{134}{section.7.27}%
-\contentsline {section}{\numberline {7.28}pandas}{134}{section.7.28}%
-\contentsline {section}{\numberline {7.29}polars}{135}{section.7.29}%
-\contentsline {section}{\numberline {7.30}DuPont Decomposition: Explaining \emph {Why} ROE Changed}{138}{section.7.30}%
-\contentsline {section}{\numberline {7.31}pandas}{138}{section.7.31}%
-\contentsline {section}{\numberline {7.32}polars}{139}{section.7.32}%
+\contentsline {section}{\numberline {7.26}polars}{134}{section.7.26}%
+\contentsline {section}{\numberline {7.27}Automating Ratio Calculations}{135}{section.7.27}%
+\contentsline {section}{\numberline {7.28}pandas}{135}{section.7.28}%
+\contentsline {section}{\numberline {7.29}polars}{136}{section.7.29}%
+\contentsline {section}{\numberline {7.30}DuPont Decomposition: Explaining \emph {Why} ROE Changed}{139}{section.7.30}%
+\contentsline {section}{\numberline {7.31}pandas}{139}{section.7.31}%
+\contentsline {section}{\numberline {7.32}polars}{140}{section.7.32}%
 \contentsline {section}{\numberline {7.33}Visualizing the Trends}{141}{section.7.33}%
-\contentsline {section}{\numberline {7.34}seaborn}{141}{section.7.34}%
-\contentsline {section}{\numberline {7.35}plotnine}{142}{section.7.35}%
+\contentsline {section}{\numberline {7.34}seaborn}{142}{section.7.34}%
+\contentsline {section}{\numberline {7.35}plotnine}{143}{section.7.35}%
 \contentsline {section}{\numberline {7.36}Putting It Together: A Financial Health Memo}{144}{section.7.36}%
 \contentsline {section}{\numberline {7.37}Why These Numbers Matter to Capital Markets}{145}{section.7.37}%
 \contentsline {subsection}{\numberline {7.37.1}Financial Statements as an Information Bridge}{145}{subsection.7.37.1}%
@@ -233,347 +233,381 @@
 \contentsline {subsection}{\numberline {7.37.3}How Ratios Connect to Valuation and the Cost of Capital}{146}{subsection.7.37.3}%
 \contentsline {subsection}{\numberline {7.37.4}A Word of Caution: Markets Use More Than Ratios}{146}{subsection.7.37.4}%
 \contentsline {section}{\numberline {7.38}Chapter Summary}{147}{section.7.38}%
-\contentsline {section}{\numberline {7.39}Discussion Questions}{147}{section.7.39}%
+\contentsline {section}{\numberline {7.39}Discussion Questions}{148}{section.7.39}%
 \contentsline {section}{\numberline {7.40}Exercises}{148}{section.7.40}%
 \contentsline {chapter}{\numberline {8}Management Accounting Analytics}{149}{chapter.8}%
 \contentsline {section}{\numberline {8.1}Financial vs.~Management Accounting Analytics}{149}{section.8.1}%
 \contentsline {section}{\numberline {8.2}pandas}{150}{section.8.2}%
 \contentsline {section}{\numberline {8.3}polars}{150}{section.8.3}%
-\contentsline {section}{\numberline {8.4}Standard Costing Variance Analysis}{150}{section.8.4}%
+\contentsline {section}{\numberline {8.4}Standard Costing Variance Analysis}{151}{section.8.4}%
 \contentsline {subsection}{\numberline {8.4.1}Materials Variances}{151}{subsection.8.4.1}%
 \contentsline {section}{\numberline {8.5}pandas}{151}{section.8.5}%
 \contentsline {section}{\numberline {8.6}polars}{152}{section.8.6}%
-\contentsline {subsection}{\numberline {8.6.1}Labor Variances}{153}{subsection.8.6.1}%
+\contentsline {subsection}{\numberline {8.6.1}Labor Variances}{154}{subsection.8.6.1}%
 \contentsline {section}{\numberline {8.7}pandas}{154}{section.8.7}%
-\contentsline {section}{\numberline {8.8}polars}{154}{section.8.8}%
-\contentsline {subsection}{\numberline {8.8.1}Overhead Variances}{155}{subsection.8.8.1}%
-\contentsline {subsection}{\numberline {8.8.2}Visualizing the Full Variance Picture}{157}{subsection.8.8.2}%
-\contentsline {section}{\numberline {8.9}seaborn}{157}{section.8.9}%
-\contentsline {section}{\numberline {8.10}plotnine}{158}{section.8.10}%
-\contentsline {section}{\numberline {8.11}Cost-Volume-Profit (CVP) Analysis}{159}{section.8.11}%
-\contentsline {section}{\numberline {8.12}pandas}{159}{section.8.12}%
-\contentsline {section}{\numberline {8.13}polars}{160}{section.8.13}%
-\contentsline {subsection}{\numberline {8.13.1}Contribution Margin and Break-Even}{160}{subsection.8.13.1}%
-\contentsline {section}{\numberline {8.14}pandas}{162}{section.8.14}%
-\contentsline {section}{\numberline {8.15}polars}{162}{section.8.15}%
-\contentsline {subsection}{\numberline {8.15.1}The Break-Even Chart}{163}{subsection.8.15.1}%
-\contentsline {section}{\numberline {8.16}seaborn}{164}{section.8.16}%
-\contentsline {section}{\numberline {8.17}plotnine}{165}{section.8.17}%
-\contentsline {subsection}{\numberline {8.17.1}Target Profit Analysis}{165}{subsection.8.17.1}%
-\contentsline {section}{\numberline {8.18}Activity-Based Costing (ABC)}{166}{section.8.18}%
-\contentsline {section}{\numberline {8.19}pandas}{166}{section.8.19}%
-\contentsline {section}{\numberline {8.20}polars}{166}{section.8.20}%
-\contentsline {subsection}{\numberline {8.20.1}Traditional Allocation (Single Base: Machine Hours)}{167}{subsection.8.20.1}%
-\contentsline {section}{\numberline {8.21}pandas}{167}{section.8.21}%
-\contentsline {section}{\numberline {8.22}polars}{167}{section.8.22}%
-\contentsline {subsection}{\numberline {8.22.1}Activity-Based Allocation (Three Cost Pools)}{168}{subsection.8.22.1}%
-\contentsline {section}{\numberline {8.23}pandas}{168}{section.8.23}%
-\contentsline {section}{\numberline {8.24}polars}{169}{section.8.24}%
-\contentsline {section}{\numberline {8.25}seaborn}{170}{section.8.25}%
-\contentsline {section}{\numberline {8.26}plotnine}{171}{section.8.26}%
-\contentsline {section}{\numberline {8.27}Chapter Summary}{172}{section.8.27}%
-\contentsline {section}{\numberline {8.28}Discussion Questions}{173}{section.8.28}%
-\contentsline {section}{\numberline {8.29}Exercises}{173}{section.8.29}%
-\contentsline {chapter}{\numberline {9}Audit Analytics}{175}{chapter.9}%
-\contentsline {section}{\numberline {9.1}From EDA to Audit Testing}{175}{section.9.1}%
-\contentsline {section}{\numberline {9.2}pandas}{176}{section.9.2}%
-\contentsline {section}{\numberline {9.3}polars}{176}{section.9.3}%
-\contentsline {section}{\numberline {9.4}Benford's Law}{176}{section.9.4}%
-\contentsline {section}{\numberline {9.5}pandas}{177}{section.9.5}%
-\contentsline {section}{\numberline {9.6}polars}{178}{section.9.6}%
-\contentsline {section}{\numberline {9.7}matplotlib}{180}{section.9.7}%
-\contentsline {section}{\numberline {9.8}seaborn}{181}{section.9.8}%
-\contentsline {section}{\numberline {9.9}plotnine}{182}{section.9.9}%
-\contentsline {subsection}{\numberline {9.9.1}Testing Statistical Significance}{184}{subsection.9.9.1}%
-\contentsline {section}{\numberline {9.10}pandas}{184}{section.9.10}%
-\contentsline {section}{\numberline {9.11}polars}{185}{section.9.11}%
-\contentsline {section}{\numberline {9.12}Journal Entry Testing}{186}{section.9.12}%
-\contentsline {section}{\numberline {9.13}pandas}{186}{section.9.13}%
-\contentsline {section}{\numberline {9.14}polars}{187}{section.9.14}%
-\contentsline {subsection}{\numberline {9.14.1}Test 1: Weekend Postings}{187}{subsection.9.14.1}%
-\contentsline {section}{\numberline {9.15}pandas}{188}{section.9.15}%
-\contentsline {section}{\numberline {9.16}polars}{188}{section.9.16}%
-\contentsline {subsection}{\numberline {9.16.1}Test 2: Round-Dollar Amounts}{189}{subsection.9.16.1}%
-\contentsline {section}{\numberline {9.17}pandas}{189}{section.9.17}%
-\contentsline {section}{\numberline {9.18}polars}{189}{section.9.18}%
-\contentsline {subsection}{\numberline {9.18.1}Test 3: Period-End Cutoff Timing}{190}{subsection.9.18.1}%
-\contentsline {section}{\numberline {9.19}pandas}{190}{section.9.19}%
-\contentsline {section}{\numberline {9.20}polars}{191}{section.9.20}%
-\contentsline {subsection}{\numberline {9.20.1}Test 4: Duplicate Entries}{192}{subsection.9.20.1}%
-\contentsline {section}{\numberline {9.21}pandas}{192}{section.9.21}%
-\contentsline {section}{\numberline {9.22}polars}{192}{section.9.22}%
-\contentsline {subsection}{\numberline {9.22.1}Test 5: Unusual Posting Activity}{193}{subsection.9.22.1}%
-\contentsline {section}{\numberline {9.23}pandas}{193}{section.9.23}%
-\contentsline {section}{\numberline {9.24}polars}{194}{section.9.24}%
-\contentsline {section}{\numberline {9.25}pandas}{194}{section.9.25}%
-\contentsline {section}{\numberline {9.26}polars}{195}{section.9.26}%
-\contentsline {section}{\numberline {9.27}Combining Red Flags into a Composite Risk Score}{196}{section.9.27}%
-\contentsline {section}{\numberline {9.28}pandas}{196}{section.9.28}%
-\contentsline {section}{\numberline {9.29}polars}{197}{section.9.29}%
-\contentsline {section}{\numberline {9.30}Sampling Techniques}{202}{section.9.30}%
-\contentsline {section}{\numberline {9.31}pandas}{202}{section.9.31}%
-\contentsline {section}{\numberline {9.32}polars}{202}{section.9.32}%
-\contentsline {subsection}{\numberline {9.32.1}Simple Random Sampling}{202}{subsection.9.32.1}%
-\contentsline {section}{\numberline {9.33}pandas}{202}{section.9.33}%
-\contentsline {section}{\numberline {9.34}polars}{202}{section.9.34}%
-\contentsline {subsection}{\numberline {9.34.1}Systematic Sampling}{203}{subsection.9.34.1}%
-\contentsline {section}{\numberline {9.35}pandas}{203}{section.9.35}%
-\contentsline {section}{\numberline {9.36}polars}{204}{section.9.36}%
-\contentsline {subsection}{\numberline {9.36.1}Stratified Sampling}{204}{subsection.9.36.1}%
-\contentsline {section}{\numberline {9.37}pandas}{204}{section.9.37}%
-\contentsline {section}{\numberline {9.38}polars}{205}{section.9.38}%
-\contentsline {section}{\numberline {9.39}pandas}{205}{section.9.39}%
-\contentsline {section}{\numberline {9.40}polars}{207}{section.9.40}%
-\contentsline {subsection}{\numberline {9.40.1}Monetary Unit Sampling (MUS)}{208}{subsection.9.40.1}%
-\contentsline {section}{\numberline {9.41}pandas}{208}{section.9.41}%
-\contentsline {section}{\numberline {9.42}polars}{209}{section.9.42}%
-\contentsline {section}{\numberline {9.43}pandas}{210}{section.9.43}%
-\contentsline {section}{\numberline {9.44}polars}{210}{section.9.44}%
-\contentsline {subsection}{\numberline {9.44.1}Comparing Coverage Across Methods}{213}{subsection.9.44.1}%
-\contentsline {section}{\numberline {9.45}pandas}{213}{section.9.45}%
-\contentsline {section}{\numberline {9.46}polars}{213}{section.9.46}%
-\contentsline {section}{\numberline {9.47}Chapter Summary}{214}{section.9.47}%
-\contentsline {section}{\numberline {9.48}Discussion Questions}{215}{section.9.48}%
-\contentsline {section}{\numberline {9.49}Exercises}{215}{section.9.49}%
-\contentsline {chapter}{\numberline {10}Fraud and Anomaly Detection}{217}{chapter.10}%
-\contentsline {section}{\numberline {10.1}From Red Flags to Statistical Anomaly Detection}{217}{section.10.1}%
-\contentsline {section}{\numberline {10.2}Z Score - A Statistical Method for Anomaly Detection}{218}{section.10.2}%
-\contentsline {section}{\numberline {10.3}pandas}{219}{section.10.3}%
-\contentsline {section}{\numberline {10.4}polars}{219}{section.10.4}%
-\contentsline {section}{\numberline {10.5}Feature Engineering for Anomaly Detection}{220}{section.10.5}%
-\contentsline {section}{\numberline {10.6}pandas}{223}{section.10.6}%
-\contentsline {section}{\numberline {10.7}polars}{223}{section.10.7}%
-\contentsline {section}{\numberline {10.8}K-Means Clustering for Anomaly Detection}{224}{section.10.8}%
-\contentsline {subsection}{\numberline {10.8.1}Attempt 1: Clustering on Amount and Weekend Indicator}{224}{subsection.10.8.1}%
-\contentsline {section}{\numberline {10.9}pandas}{224}{section.10.9}%
-\contentsline {section}{\numberline {10.10}polars}{225}{section.10.10}%
-\contentsline {section}{\numberline {10.11}pandas}{226}{section.10.11}%
-\contentsline {section}{\numberline {10.12}polars}{227}{section.10.12}%
-\contentsline {subsection}{\numberline {10.12.1}Attempt 2: Clustering on Amount-Focused Features Only}{228}{subsection.10.12.1}%
-\contentsline {section}{\numberline {10.13}pandas}{228}{section.10.13}%
-\contentsline {section}{\numberline {10.14}polars}{228}{section.10.14}%
-\contentsline {section}{\numberline {10.15}pandas}{230}{section.10.15}%
-\contentsline {section}{\numberline {10.16}polars}{230}{section.10.16}%
-\contentsline {section}{\numberline {10.17}seaborn}{231}{section.10.17}%
-\contentsline {section}{\numberline {10.18}plotnine}{232}{section.10.18}%
-\contentsline {section}{\numberline {10.19}Isolation Forest}{234}{section.10.19}%
-\contentsline {section}{\numberline {10.20}pandas}{235}{section.10.20}%
-\contentsline {section}{\numberline {10.21}polars}{235}{section.10.21}%
-\contentsline {subsection}{\numberline {10.21.1}The \texttt {contamination} Parameter Controls the Precision-Recall Tradeoff}{237}{subsection.10.21.1}%
-\contentsline {section}{\numberline {10.22}pandas}{238}{section.10.22}%
-\contentsline {section}{\numberline {10.23}polars}{238}{section.10.23}%
-\contentsline {section}{\numberline {10.24}Combining Model-Based and Rule-Based Detection}{240}{section.10.24}%
-\contentsline {section}{\numberline {10.25}pandas}{240}{section.10.25}%
-\contentsline {section}{\numberline {10.26}polars}{241}{section.10.26}%
-\contentsline {section}{\numberline {10.27}Evaluating Unsupervised Methods Without Labels}{245}{section.10.27}%
-\contentsline {section}{\numberline {10.28}Chapter Summary}{246}{section.10.28}%
-\contentsline {section}{\numberline {10.29}Discussion Questions}{246}{section.10.29}%
-\contentsline {section}{\numberline {10.30}Exercises}{246}{section.10.30}%
-\contentsline {chapter}{\numberline {11}Revenue Recognition and Transaction-Level Analysis}{249}{chapter.11}%
-\contentsline {section}{\numberline {11.1}Why Revenue Recognition Is a Common Risk Area}{249}{section.11.1}%
-\contentsline {section}{\numberline {11.2}pandas}{250}{section.11.2}%
-\contentsline {section}{\numberline {11.3}polars}{250}{section.11.3}%
-\contentsline {section}{\numberline {11.4}Detecting Quarter-End Revenue Concentration}{251}{section.11.4}%
-\contentsline {section}{\numberline {11.5}pandas}{251}{section.11.5}%
-\contentsline {section}{\numberline {11.6}polars}{251}{section.11.6}%
-\contentsline {section}{\numberline {11.7}seaborn}{252}{section.11.7}%
-\contentsline {section}{\numberline {11.8}plotnine}{253}{section.11.8}%
-\contentsline {subsection}{\numberline {11.8.1}Which Customers Drive the Concentration?}{255}{subsection.11.8.1}%
-\contentsline {subsection}{\numberline {11.8.2}pandas}{255}{subsection.11.8.2}%
-\contentsline {section}{\numberline {11.9}polars}{256}{section.11.9}%
-\contentsline {section}{\numberline {11.10}Detecting Bill-and-Hold Patterns}{257}{section.11.10}%
-\contentsline {section}{\numberline {11.11}pandas}{257}{section.11.11}%
-\contentsline {section}{\numberline {11.12}polars}{258}{section.11.12}%
-\contentsline {section}{\numberline {11.13}pandas}{258}{section.11.13}%
-\contentsline {section}{\numberline {11.14}polars}{259}{section.11.14}%
-\contentsline {section}{\numberline {11.15}Accounts Receivable Aging}{259}{section.11.15}%
-\contentsline {section}{\numberline {11.16}pandas}{260}{section.11.16}%
-\contentsline {section}{\numberline {11.17}polars}{260}{section.11.17}%
-\contentsline {section}{\numberline {11.18}Days Sales Outstanding (DSO) by Quarter}{261}{section.11.18}%
-\contentsline {section}{\numberline {11.19}pandas}{262}{section.11.19}%
-\contentsline {section}{\numberline {11.20}polars}{262}{section.11.20}%
-\contentsline {section}{\numberline {11.21}Chapter Summary}{263}{section.11.21}%
-\contentsline {section}{\numberline {11.22}Discussion Questions}{264}{section.11.22}%
-\contentsline {section}{\numberline {11.23}Exercises}{264}{section.11.23}%
-\contentsline {chapter}{\numberline {12}Tax Analytics}{265}{chapter.12}%
-\contentsline {section}{\numberline {12.1}Two Kinds of Tax Analytics}{265}{section.12.1}%
-\contentsline {section}{\numberline {12.2}pandas}{266}{section.12.2}%
-\contentsline {section}{\numberline {12.3}polars}{266}{section.12.3}%
-\contentsline {section}{\numberline {12.4}Effective Tax Rate by Jurisdiction}{267}{section.12.4}%
-\contentsline {section}{\numberline {12.5}seaborn}{267}{section.12.5}%
-\contentsline {section}{\numberline {12.6}plotnine}{268}{section.12.6}%
-\contentsline {section}{\numberline {12.7}Consolidated Effective Tax Rate}{269}{section.12.7}%
-\contentsline {section}{\numberline {12.8}pandas}{269}{section.12.8}%
-\contentsline {section}{\numberline {12.9}polars}{270}{section.12.9}%
-\contentsline {section}{\numberline {12.10}Spotting Disproportionate Profit Allocation}{270}{section.12.10}%
-\contentsline {section}{\numberline {12.11}pandas}{270}{section.12.11}%
-\contentsline {section}{\numberline {12.12}polars}{271}{section.12.12}%
-\contentsline {subsection}{\numberline {12.12.1}Profit per Employee: A Sharper View of the Same Pattern}{272}{subsection.12.12.1}%
-\contentsline {section}{\numberline {12.13}pandas}{272}{section.12.13}%
-\contentsline {section}{\numberline {12.14}polars}{273}{section.12.14}%
-\contentsline {section}{\numberline {12.15}seaborn}{273}{section.12.15}%
-\contentsline {section}{\numberline {12.16}plotnine}{274}{section.12.16}%
-\contentsline {section}{\numberline {12.17}Rate Reconciliation}{275}{section.12.17}%
-\contentsline {section}{\numberline {12.18}pandas}{275}{section.12.18}%
-\contentsline {section}{\numberline {12.19}polars}{276}{section.12.19}%
-\contentsline {section}{\numberline {12.20}pandas}{277}{section.12.20}%
-\contentsline {section}{\numberline {12.21}polars}{278}{section.12.21}%
-\contentsline {section}{\numberline {12.22}Sales Tax Compliance Testing}{279}{section.12.22}%
-\contentsline {section}{\numberline {12.23}pandas}{279}{section.12.23}%
-\contentsline {section}{\numberline {12.24}polars}{279}{section.12.24}%
-\contentsline {section}{\numberline {12.25}pandas}{280}{section.12.25}%
-\contentsline {section}{\numberline {12.26}polars}{281}{section.12.26}%
-\contentsline {subsection}{\numberline {12.26.1}Quantifying the Exposure}{282}{subsection.12.26.1}%
-\contentsline {section}{\numberline {12.27}pandas}{282}{section.12.27}%
-\contentsline {section}{\numberline {12.28}polars}{282}{section.12.28}%
-\contentsline {subsection}{\numberline {12.28.1}The Materiality Threshold Matters}{283}{subsection.12.28.1}%
-\contentsline {section}{\numberline {12.29}pandas}{283}{section.12.29}%
-\contentsline {section}{\numberline {12.30}polars}{283}{section.12.30}%
-\contentsline {section}{\numberline {12.31}Chapter Summary}{284}{section.12.31}%
-\contentsline {section}{\numberline {12.32}Discussion Questions}{285}{section.12.32}%
-\contentsline {section}{\numberline {12.33}Exercises}{285}{section.12.33}%
-\contentsline {part}{\numberline {IV}Part IV: Predictive Methods and GenAI}{287}{part.4}%
-\contentsline {chapter}{\numberline {13}Introduction to Predictive Modeling}{289}{chapter.13}%
-\contentsline {section}{\numberline {13.1}From Descriptive to Predictive Analytics}{289}{section.13.1}%
-\contentsline {section}{\numberline {13.2}pandas}{290}{section.13.2}%
-\contentsline {section}{\numberline {13.3}polars}{290}{section.13.3}%
-\contentsline {section}{\numberline {13.4}Regression: Predicting Days to Collect}{290}{section.13.4}%
-\contentsline {subsection}{\numberline {13.4.1}Feature Engineering}{290}{subsection.13.4.1}%
-\contentsline {section}{\numberline {13.5}pandas}{290}{section.13.5}%
-\contentsline {section}{\numberline {13.6}polars}{291}{section.13.6}%
-\contentsline {subsection}{\numberline {13.6.1}Train/Test Split}{292}{subsection.13.6.1}%
-\contentsline {subsection}{\numberline {13.6.2}Fitting and Interpreting the Model}{292}{subsection.13.6.2}%
-\contentsline {section}{\numberline {13.7}scikit-learn}{292}{section.13.7}%
-\contentsline {section}{\numberline {13.8}pyfixest}{293}{section.13.8}%
-\contentsline {subsection}{\numberline {13.8.1}Evaluating the Model}{296}{subsection.13.8.1}%
-\contentsline {section}{\numberline {13.9}seaborn}{297}{section.13.9}%
-\contentsline {section}{\numberline {13.10}plotnine}{298}{section.13.10}%
-\contentsline {section}{\numberline {13.11}Classification: Predicting Financial Distress}{299}{section.13.11}%
-\contentsline {subsection}{\numberline {13.11.1}Comparing Distressed vs.~Healthy Companies}{300}{subsection.13.11.1}%
-\contentsline {section}{\numberline {13.12}pandas}{300}{section.13.12}%
-\contentsline {section}{\numberline {13.13}polars}{301}{section.13.13}%
-\contentsline {subsection}{\numberline {13.13.1}Train/Test Split and Standardization}{301}{subsection.13.13.1}%
-\contentsline {subsection}{\numberline {13.13.2}Fitting the Model}{302}{subsection.13.13.2}%
-\contentsline {section}{\numberline {13.14}scikit-learn}{302}{section.13.14}%
-\contentsline {section}{\numberline {13.15}pyfixest}{303}{section.13.15}%
-\contentsline {section}{\numberline {13.16}seaborn}{305}{section.13.16}%
-\contentsline {section}{\numberline {13.17}plotnine}{306}{section.13.17}%
-\contentsline {subsection}{\numberline {13.17.1}Evaluating the Model}{307}{subsection.13.17.1}%
-\contentsline {subsection}{\numberline {13.17.2}Confusion Matrix and ROC Curve}{308}{subsection.13.17.2}%
-\contentsline {section}{\numberline {13.18}seaborn}{309}{section.13.18}%
-\contentsline {section}{\numberline {13.19}plotnine}{310}{section.13.19}%
-\contentsline {section}{\numberline {13.20}Chapter Summary}{311}{section.13.20}%
-\contentsline {section}{\numberline {13.21}Discussion Questions}{312}{section.13.21}%
-\contentsline {section}{\numberline {13.22}Exercises}{312}{section.13.22}%
-\contentsline {chapter}{\numberline {14}Generative AI in Accounting}{313}{chapter.14}%
-\contentsline {section}{\numberline {14.1}Generative AI vs.~the Predictive Models in Chapter 12}{313}{section.14.1}%
-\contentsline {section}{\numberline {14.2}Current Use Cases in Accounting and Audit Practice}{314}{section.14.2}%
-\contentsline {section}{\numberline {14.3}Prompt Engineering Basics for Accounting Tasks}{314}{section.14.3}%
-\contentsline {section}{\numberline {14.4}Hands-On: Drafting a Financial Narrative with an LLM API}{315}{section.14.4}%
-\contentsline {section}{\numberline {14.5}pandas}{315}{section.14.5}%
-\contentsline {section}{\numberline {14.6}polars}{316}{section.14.6}%
-\contentsline {section}{\numberline {14.7}The Hallucination Check: Verifying AI Output Against Source Data}{318}{section.14.7}%
-\contentsline {section}{\numberline {14.8}Using GenAI for Synthetic Text Generation}{319}{section.14.8}%
-\contentsline {section}{\numberline {14.9}Risks and Limitations}{320}{section.14.9}%
-\contentsline {section}{\numberline {14.10}The Current Regulatory and Professional Landscape}{320}{section.14.10}%
-\contentsline {section}{\numberline {14.11}Designing an ``AI vs.~Analyst'' Exercise}{321}{section.14.11}%
-\contentsline {section}{\numberline {14.12}Chapter Summary}{321}{section.14.12}%
-\contentsline {section}{\numberline {14.13}Discussion Questions}{322}{section.14.13}%
-\contentsline {section}{\numberline {14.14}Exercises}{322}{section.14.14}%
-\contentsline {part}{\numberline {V}Part V: Communication and Capstone}{323}{part.5}%
-\contentsline {chapter}{\numberline {15}Automated Reporting and Dashboards with Quarto}{325}{chapter.15}%
-\contentsline {section}{\numberline {15.1}From One-Off Analysis to Repeatable Reporting}{325}{section.15.1}%
-\contentsline {section}{\numberline {15.2}Parameterized Reports}{325}{section.15.2}%
-\contentsline {subsection}{\numberline {15.2.1}Declaring a Parameter}{326}{subsection.15.2.1}%
-\contentsline {section}{\numberline {15.3}pandas}{326}{section.15.3}%
-\contentsline {section}{\numberline {15.4}polars}{326}{section.15.4}%
-\contentsline {subsection}{\numberline {15.4.1}Building the Rest of the Report Around the Parameter}{327}{subsection.15.4.1}%
-\contentsline {section}{\numberline {15.5}pandas}{327}{section.15.5}%
-\contentsline {section}{\numberline {15.6}polars}{328}{section.15.6}%
-\contentsline {subsection}{\numberline {15.6.1}Rendering the Same Template for a Different Department}{331}{subsection.15.6.1}%
-\contentsline {section}{\numberline {15.7}Batch Rendering Multiple Reports}{331}{section.15.7}%
-\contentsline {section}{\numberline {15.8}Quarto Dashboards}{332}{section.15.8}%
-\contentsline {subsection}{\numberline {15.8.1}Building the Dashboard's Content}{333}{subsection.15.8.1}%
-\contentsline {subsection}{\numberline {15.8.2}An Interactive Chart with Plotly}{334}{subsection.15.8.2}%
-\contentsline {subsection}{\numberline {15.8.3}Assembling the Full Dashboard}{335}{subsection.15.8.3}%
-\contentsline {section}{\numberline {15.9}Putting It Together: A Recurring Reporting Workflow}{339}{section.15.9}%
-\contentsline {section}{\numberline {15.10}Chapter Summary}{340}{section.15.10}%
-\contentsline {section}{\numberline {15.11}Discussion Questions}{340}{section.15.11}%
-\contentsline {section}{\numberline {15.12}Exercises}{341}{section.15.12}%
-\contentsline {chapter}{\numberline {16}Data Ethics, Governance, and Reproducibility}{343}{chapter.16}%
-\contentsline {section}{\numberline {16.1}Why This Chapter Matters}{343}{section.16.1}%
-\contentsline {section}{\numberline {16.2}Data Privacy and Confidentiality}{344}{section.16.2}%
-\contentsline {subsection}{\numberline {16.2.1}Pseudonymization}{344}{subsection.16.2.1}%
-\contentsline {subsection}{\numberline {16.2.2}Generalization}{345}{subsection.16.2.2}%
-\contentsline {section}{\numberline {16.3}Data Governance and Audit Trails}{346}{section.16.3}%
-\contentsline {subsection}{\numberline {16.3.1}Version Control as an Audit Trail}{347}{subsection.16.3.1}%
-\contentsline {subsection}{\numberline {16.3.2}Logging Data Transformations}{347}{subsection.16.3.2}%
-\contentsline {subsection}{\numberline {16.3.3}Access Control}{348}{subsection.16.3.3}%
-\contentsline {section}{\numberline {16.4}Reproducibility}{348}{section.16.4}%
-\contentsline {subsection}{\numberline {16.4.1}Fixed Random Seeds}{349}{subsection.16.4.1}%
-\contentsline {subsection}{\numberline {16.4.2}Capturing the Software Environment}{349}{subsection.16.4.2}%
-\contentsline {subsection}{\numberline {16.4.3}Quarto's Own Reproducibility Features}{350}{subsection.16.4.3}%
-\contentsline {section}{\numberline {16.5}A Practical Ethics, Governance, and Reproducibility Checklist}{350}{section.16.5}%
-\contentsline {section}{\numberline {16.6}Chapter Summary}{351}{section.16.6}%
-\contentsline {section}{\numberline {16.7}Discussion Questions}{351}{section.16.7}%
-\contentsline {section}{\numberline {16.8}Exercises}{352}{section.16.8}%
-\contentsline {chapter}{\numberline {17}Capstone Project}{353}{chapter.17}%
-\contentsline {section}{\numberline {17.1}The Scenario}{353}{section.17.1}%
-\contentsline {section}{\numberline {17.2}Choosing a Track}{354}{section.17.2}%
-\contentsline {subsection}{\numberline {17.2.1}Track A: Audit \& Fraud Analytics}{354}{subsection.17.2.1}%
-\contentsline {subsection}{\numberline {17.2.2}Track B: Financial Reporting \& Revenue Analytics}{354}{subsection.17.2.2}%
-\contentsline {subsection}{\numberline {17.2.3}Track C: Management Accounting \& Predictive Analytics}{355}{subsection.17.2.3}%
-\contentsline {section}{\numberline {17.3}Deliverables}{355}{section.17.3}%
-\contentsline {section}{\numberline {17.4}Suggested Milestones}{356}{section.17.4}%
-\contentsline {section}{\numberline {17.5}Example Starter Questions}{356}{section.17.5}%
-\contentsline {section}{\numberline {17.6}Grading Rubric}{357}{section.17.6}%
-\contentsline {section}{\numberline {17.7}Final Thoughts}{357}{section.17.7}%
-\contentsline {chapter}{References}{359}{chapter*.21}%
-\contentsline {part}{Appendices}{361}{section*.22}%
+\contentsline {section}{\numberline {8.8}polars}{155}{section.8.8}%
+\contentsline {subsection}{\numberline {8.8.1}Overhead Variances}{156}{subsection.8.8.1}%
+\contentsline {subsection}{\numberline {8.8.2}Visualizing the Full Variance Picture}{158}{subsection.8.8.2}%
+\contentsline {section}{\numberline {8.9}seaborn}{158}{section.8.9}%
+\contentsline {section}{\numberline {8.10}plotnine}{159}{section.8.10}%
+\contentsline {section}{\numberline {8.11}Cost-Volume-Profit (CVP) Analysis}{160}{section.8.11}%
+\contentsline {section}{\numberline {8.12}pandas}{160}{section.8.12}%
+\contentsline {section}{\numberline {8.13}polars}{161}{section.8.13}%
+\contentsline {subsection}{\numberline {8.13.1}Contribution Margin and Break-Even}{161}{subsection.8.13.1}%
+\contentsline {section}{\numberline {8.14}pandas}{163}{section.8.14}%
+\contentsline {section}{\numberline {8.15}polars}{163}{section.8.15}%
+\contentsline {subsection}{\numberline {8.15.1}The Break-Even Chart}{164}{subsection.8.15.1}%
+\contentsline {section}{\numberline {8.16}seaborn}{165}{section.8.16}%
+\contentsline {section}{\numberline {8.17}plotnine}{166}{section.8.17}%
+\contentsline {subsection}{\numberline {8.17.1}Target Profit Analysis}{167}{subsection.8.17.1}%
+\contentsline {section}{\numberline {8.18}Activity-Based Costing (ABC)}{167}{section.8.18}%
+\contentsline {section}{\numberline {8.19}pandas}{168}{section.8.19}%
+\contentsline {section}{\numberline {8.20}polars}{168}{section.8.20}%
+\contentsline {subsection}{\numberline {8.20.1}Traditional Allocation (Single Base: Machine Hours)}{169}{subsection.8.20.1}%
+\contentsline {section}{\numberline {8.21}pandas}{169}{section.8.21}%
+\contentsline {section}{\numberline {8.22}polars}{169}{section.8.22}%
+\contentsline {subsection}{\numberline {8.22.1}Activity-Based Allocation (Three Cost Pools)}{170}{subsection.8.22.1}%
+\contentsline {section}{\numberline {8.23}pandas}{170}{section.8.23}%
+\contentsline {section}{\numberline {8.24}polars}{171}{section.8.24}%
+\contentsline {section}{\numberline {8.25}seaborn}{172}{section.8.25}%
+\contentsline {section}{\numberline {8.26}plotnine}{174}{section.8.26}%
+\contentsline {section}{\numberline {8.27}Chapter Summary}{175}{section.8.27}%
+\contentsline {section}{\numberline {8.28}Discussion Questions}{175}{section.8.28}%
+\contentsline {section}{\numberline {8.29}Exercises}{176}{section.8.29}%
+\contentsline {chapter}{\numberline {9}Audit Analytics}{177}{chapter.9}%
+\contentsline {section}{\numberline {9.1}From EDA to Audit Testing}{177}{section.9.1}%
+\contentsline {section}{\numberline {9.2}pandas}{178}{section.9.2}%
+\contentsline {section}{\numberline {9.3}polars}{178}{section.9.3}%
+\contentsline {section}{\numberline {9.4}Benford's Law}{178}{section.9.4}%
+\contentsline {section}{\numberline {9.5}pandas}{179}{section.9.5}%
+\contentsline {section}{\numberline {9.6}polars}{180}{section.9.6}%
+\contentsline {section}{\numberline {9.7}matplotlib}{182}{section.9.7}%
+\contentsline {section}{\numberline {9.8}seaborn}{183}{section.9.8}%
+\contentsline {section}{\numberline {9.9}plotnine}{184}{section.9.9}%
+\contentsline {subsection}{\numberline {9.9.1}Testing Statistical Significance}{186}{subsection.9.9.1}%
+\contentsline {section}{\numberline {9.10}pandas}{186}{section.9.10}%
+\contentsline {section}{\numberline {9.11}polars}{187}{section.9.11}%
+\contentsline {section}{\numberline {9.12}Journal Entry Testing}{188}{section.9.12}%
+\contentsline {section}{\numberline {9.13}pandas}{188}{section.9.13}%
+\contentsline {section}{\numberline {9.14}polars}{189}{section.9.14}%
+\contentsline {subsection}{\numberline {9.14.1}Test 1: Weekend Postings}{189}{subsection.9.14.1}%
+\contentsline {section}{\numberline {9.15}pandas}{190}{section.9.15}%
+\contentsline {section}{\numberline {9.16}polars}{190}{section.9.16}%
+\contentsline {subsection}{\numberline {9.16.1}Test 2: Round-Dollar Amounts}{191}{subsection.9.16.1}%
+\contentsline {section}{\numberline {9.17}pandas}{191}{section.9.17}%
+\contentsline {section}{\numberline {9.18}polars}{191}{section.9.18}%
+\contentsline {subsection}{\numberline {9.18.1}Test 3: Period-End Cutoff Timing}{192}{subsection.9.18.1}%
+\contentsline {section}{\numberline {9.19}pandas}{193}{section.9.19}%
+\contentsline {section}{\numberline {9.20}polars}{193}{section.9.20}%
+\contentsline {subsection}{\numberline {9.20.1}Test 4: Duplicate Entries}{194}{subsection.9.20.1}%
+\contentsline {section}{\numberline {9.21}pandas}{194}{section.9.21}%
+\contentsline {section}{\numberline {9.22}polars}{194}{section.9.22}%
+\contentsline {subsection}{\numberline {9.22.1}Test 5: Unusual Posting Activity}{195}{subsection.9.22.1}%
+\contentsline {section}{\numberline {9.23}pandas}{195}{section.9.23}%
+\contentsline {section}{\numberline {9.24}polars}{196}{section.9.24}%
+\contentsline {section}{\numberline {9.25}pandas}{196}{section.9.25}%
+\contentsline {section}{\numberline {9.26}polars}{197}{section.9.26}%
+\contentsline {section}{\numberline {9.27}Combining Red Flags into a Composite Risk Score}{198}{section.9.27}%
+\contentsline {section}{\numberline {9.28}pandas}{198}{section.9.28}%
+\contentsline {section}{\numberline {9.29}polars}{200}{section.9.29}%
+\contentsline {section}{\numberline {9.30}Sampling Techniques}{204}{section.9.30}%
+\contentsline {section}{\numberline {9.31}pandas}{204}{section.9.31}%
+\contentsline {section}{\numberline {9.32}polars}{204}{section.9.32}%
+\contentsline {subsection}{\numberline {9.32.1}Simple Random Sampling}{204}{subsection.9.32.1}%
+\contentsline {section}{\numberline {9.33}pandas}{205}{section.9.33}%
+\contentsline {section}{\numberline {9.34}polars}{205}{section.9.34}%
+\contentsline {subsection}{\numberline {9.34.1}Systematic Sampling}{205}{subsection.9.34.1}%
+\contentsline {section}{\numberline {9.35}pandas}{206}{section.9.35}%
+\contentsline {section}{\numberline {9.36}polars}{206}{section.9.36}%
+\contentsline {subsection}{\numberline {9.36.1}Stratified Sampling}{206}{subsection.9.36.1}%
+\contentsline {section}{\numberline {9.37}pandas}{206}{section.9.37}%
+\contentsline {section}{\numberline {9.38}polars}{207}{section.9.38}%
+\contentsline {section}{\numberline {9.39}pandas}{208}{section.9.39}%
+\contentsline {section}{\numberline {9.40}polars}{209}{section.9.40}%
+\contentsline {subsection}{\numberline {9.40.1}Monetary Unit Sampling (MUS)}{210}{subsection.9.40.1}%
+\contentsline {section}{\numberline {9.41}pandas}{210}{section.9.41}%
+\contentsline {section}{\numberline {9.42}polars}{211}{section.9.42}%
+\contentsline {section}{\numberline {9.43}pandas}{212}{section.9.43}%
+\contentsline {section}{\numberline {9.44}polars}{213}{section.9.44}%
+\contentsline {subsection}{\numberline {9.44.1}Comparing Coverage Across Methods}{215}{subsection.9.44.1}%
+\contentsline {section}{\numberline {9.45}pandas}{215}{section.9.45}%
+\contentsline {section}{\numberline {9.46}polars}{216}{section.9.46}%
+\contentsline {section}{\numberline {9.47}Chapter Summary}{217}{section.9.47}%
+\contentsline {section}{\numberline {9.48}Discussion Questions}{217}{section.9.48}%
+\contentsline {section}{\numberline {9.49}Exercises}{218}{section.9.49}%
+\contentsline {chapter}{\numberline {10}Fraud and Anomaly Detection}{219}{chapter.10}%
+\contentsline {section}{\numberline {10.1}From Red Flags to Statistical Anomaly Detection}{219}{section.10.1}%
+\contentsline {section}{\numberline {10.2}Z Score - A Statistical Method for Anomaly Detection}{220}{section.10.2}%
+\contentsline {section}{\numberline {10.3}pandas}{221}{section.10.3}%
+\contentsline {section}{\numberline {10.4}polars}{221}{section.10.4}%
+\contentsline {section}{\numberline {10.5}Feature Engineering for Anomaly Detection}{222}{section.10.5}%
+\contentsline {section}{\numberline {10.6}pandas}{225}{section.10.6}%
+\contentsline {section}{\numberline {10.7}polars}{225}{section.10.7}%
+\contentsline {section}{\numberline {10.8}K-Means Clustering for Anomaly Detection}{226}{section.10.8}%
+\contentsline {subsection}{\numberline {10.8.1}Attempt 1: Clustering on Amount and Weekend Indicator}{226}{subsection.10.8.1}%
+\contentsline {section}{\numberline {10.9}pandas}{226}{section.10.9}%
+\contentsline {section}{\numberline {10.10}polars}{227}{section.10.10}%
+\contentsline {section}{\numberline {10.11}pandas}{228}{section.10.11}%
+\contentsline {section}{\numberline {10.12}polars}{229}{section.10.12}%
+\contentsline {subsection}{\numberline {10.12.1}Attempt 2: Clustering on Amount-Focused Features Only}{230}{subsection.10.12.1}%
+\contentsline {section}{\numberline {10.13}pandas}{230}{section.10.13}%
+\contentsline {section}{\numberline {10.14}polars}{230}{section.10.14}%
+\contentsline {section}{\numberline {10.15}pandas}{231}{section.10.15}%
+\contentsline {section}{\numberline {10.16}polars}{232}{section.10.16}%
+\contentsline {section}{\numberline {10.17}seaborn}{233}{section.10.17}%
+\contentsline {section}{\numberline {10.18}plotnine}{234}{section.10.18}%
+\contentsline {section}{\numberline {10.19}Isolation Forest}{236}{section.10.19}%
+\contentsline {section}{\numberline {10.20}pandas}{237}{section.10.20}%
+\contentsline {section}{\numberline {10.21}polars}{238}{section.10.21}%
+\contentsline {subsection}{\numberline {10.21.1}The \texttt {contamination} Parameter Controls the Precision-Recall Tradeoff}{239}{subsection.10.21.1}%
+\contentsline {section}{\numberline {10.22}pandas}{240}{section.10.22}%
+\contentsline {section}{\numberline {10.23}polars}{240}{section.10.23}%
+\contentsline {section}{\numberline {10.24}Combining Model-Based and Rule-Based Detection}{242}{section.10.24}%
+\contentsline {section}{\numberline {10.25}pandas}{242}{section.10.25}%
+\contentsline {section}{\numberline {10.26}polars}{243}{section.10.26}%
+\contentsline {section}{\numberline {10.27}Evaluating Unsupervised Methods Without Labels}{247}{section.10.27}%
+\contentsline {section}{\numberline {10.28}Chapter Summary}{248}{section.10.28}%
+\contentsline {section}{\numberline {10.29}Discussion Questions}{248}{section.10.29}%
+\contentsline {section}{\numberline {10.30}Exercises}{249}{section.10.30}%
+\contentsline {chapter}{\numberline {11}Revenue Recognition and Transaction-Level Analysis}{251}{chapter.11}%
+\contentsline {section}{\numberline {11.1}Why Revenue Recognition Is a Common Risk Area}{251}{section.11.1}%
+\contentsline {section}{\numberline {11.2}pandas}{252}{section.11.2}%
+\contentsline {section}{\numberline {11.3}polars}{252}{section.11.3}%
+\contentsline {section}{\numberline {11.4}Detecting Quarter-End Revenue Concentration}{253}{section.11.4}%
+\contentsline {section}{\numberline {11.5}pandas}{253}{section.11.5}%
+\contentsline {section}{\numberline {11.6}polars}{254}{section.11.6}%
+\contentsline {section}{\numberline {11.7}seaborn}{255}{section.11.7}%
+\contentsline {section}{\numberline {11.8}plotnine}{256}{section.11.8}%
+\contentsline {subsection}{\numberline {11.8.1}Which Customers Drive the Concentration?}{257}{subsection.11.8.1}%
+\contentsline {subsection}{\numberline {11.8.2}pandas}{257}{subsection.11.8.2}%
+\contentsline {section}{\numberline {11.9}polars}{258}{section.11.9}%
+\contentsline {section}{\numberline {11.10}Detecting Bill-and-Hold Patterns}{259}{section.11.10}%
+\contentsline {section}{\numberline {11.11}pandas}{259}{section.11.11}%
+\contentsline {section}{\numberline {11.12}polars}{260}{section.11.12}%
+\contentsline {section}{\numberline {11.13}pandas}{260}{section.11.13}%
+\contentsline {section}{\numberline {11.14}polars}{261}{section.11.14}%
+\contentsline {section}{\numberline {11.15}Accounts Receivable Aging}{262}{section.11.15}%
+\contentsline {section}{\numberline {11.16}pandas}{262}{section.11.16}%
+\contentsline {section}{\numberline {11.17}polars}{262}{section.11.17}%
+\contentsline {section}{\numberline {11.18}Days Sales Outstanding (DSO) by Quarter}{264}{section.11.18}%
+\contentsline {section}{\numberline {11.19}pandas}{264}{section.11.19}%
+\contentsline {section}{\numberline {11.20}polars}{264}{section.11.20}%
+\contentsline {section}{\numberline {11.21}Chapter Summary}{265}{section.11.21}%
+\contentsline {section}{\numberline {11.22}Discussion Questions}{266}{section.11.22}%
+\contentsline {section}{\numberline {11.23}Exercises}{266}{section.11.23}%
+\contentsline {chapter}{\numberline {12}Tax Analytics}{267}{chapter.12}%
+\contentsline {section}{\numberline {12.1}Two Kinds of Tax Analytics}{267}{section.12.1}%
+\contentsline {section}{\numberline {12.2}pandas}{268}{section.12.2}%
+\contentsline {section}{\numberline {12.3}polars}{268}{section.12.3}%
+\contentsline {section}{\numberline {12.4}Effective Tax Rate by Jurisdiction}{269}{section.12.4}%
+\contentsline {section}{\numberline {12.5}seaborn}{269}{section.12.5}%
+\contentsline {section}{\numberline {12.6}plotnine}{270}{section.12.6}%
+\contentsline {section}{\numberline {12.7}Consolidated Effective Tax Rate}{271}{section.12.7}%
+\contentsline {section}{\numberline {12.8}pandas}{271}{section.12.8}%
+\contentsline {section}{\numberline {12.9}polars}{272}{section.12.9}%
+\contentsline {section}{\numberline {12.10}Spotting Disproportionate Profit Allocation}{272}{section.12.10}%
+\contentsline {section}{\numberline {12.11}pandas}{273}{section.12.11}%
+\contentsline {section}{\numberline {12.12}polars}{273}{section.12.12}%
+\contentsline {subsection}{\numberline {12.12.1}Profit per Employee: A Sharper View of the Same Pattern}{275}{subsection.12.12.1}%
+\contentsline {section}{\numberline {12.13}pandas}{275}{section.12.13}%
+\contentsline {section}{\numberline {12.14}polars}{275}{section.12.14}%
+\contentsline {section}{\numberline {12.15}seaborn}{276}{section.12.15}%
+\contentsline {section}{\numberline {12.16}plotnine}{277}{section.12.16}%
+\contentsline {section}{\numberline {12.17}Rate Reconciliation}{278}{section.12.17}%
+\contentsline {section}{\numberline {12.18}pandas}{278}{section.12.18}%
+\contentsline {section}{\numberline {12.19}polars}{279}{section.12.19}%
+\contentsline {section}{\numberline {12.20}pandas}{280}{section.12.20}%
+\contentsline {section}{\numberline {12.21}polars}{281}{section.12.21}%
+\contentsline {section}{\numberline {12.22}Sales Tax Compliance Testing}{282}{section.12.22}%
+\contentsline {section}{\numberline {12.23}pandas}{282}{section.12.23}%
+\contentsline {section}{\numberline {12.24}polars}{282}{section.12.24}%
+\contentsline {section}{\numberline {12.25}pandas}{283}{section.12.25}%
+\contentsline {section}{\numberline {12.26}polars}{284}{section.12.26}%
+\contentsline {subsection}{\numberline {12.26.1}Quantifying the Exposure}{285}{subsection.12.26.1}%
+\contentsline {section}{\numberline {12.27}pandas}{285}{section.12.27}%
+\contentsline {section}{\numberline {12.28}polars}{285}{section.12.28}%
+\contentsline {subsection}{\numberline {12.28.1}The Materiality Threshold Matters}{286}{subsection.12.28.1}%
+\contentsline {section}{\numberline {12.29}pandas}{286}{section.12.29}%
+\contentsline {section}{\numberline {12.30}polars}{286}{section.12.30}%
+\contentsline {section}{\numberline {12.31}Chapter Summary}{287}{section.12.31}%
+\contentsline {section}{\numberline {12.32}Discussion Questions}{288}{section.12.32}%
+\contentsline {section}{\numberline {12.33}Exercises}{288}{section.12.33}%
+\contentsline {part}{\numberline {IV}Part IV: Advanced Analytics and Artificial Intelligence}{291}{part.4}%
+\contentsline {chapter}{\numberline {13}Introduction to Predictive Modeling}{293}{chapter.13}%
+\contentsline {section}{\numberline {13.1}From Descriptive to Predictive Analytics}{293}{section.13.1}%
+\contentsline {section}{\numberline {13.2}pandas}{294}{section.13.2}%
+\contentsline {section}{\numberline {13.3}polars}{294}{section.13.3}%
+\contentsline {section}{\numberline {13.4}Regression: Predicting Days to Collect}{294}{section.13.4}%
+\contentsline {subsection}{\numberline {13.4.1}Feature Engineering}{294}{subsection.13.4.1}%
+\contentsline {section}{\numberline {13.5}pandas}{294}{section.13.5}%
+\contentsline {section}{\numberline {13.6}polars}{295}{section.13.6}%
+\contentsline {subsection}{\numberline {13.6.1}Train/Test Split}{296}{subsection.13.6.1}%
+\contentsline {subsection}{\numberline {13.6.2}Fitting and Interpreting the Model}{297}{subsection.13.6.2}%
+\contentsline {section}{\numberline {13.7}scikit-learn}{297}{section.13.7}%
+\contentsline {section}{\numberline {13.8}pyfixest}{297}{section.13.8}%
+\contentsline {subsection}{\numberline {13.8.1}Evaluating the Model}{301}{subsection.13.8.1}%
+\contentsline {section}{\numberline {13.9}seaborn}{301}{section.13.9}%
+\contentsline {section}{\numberline {13.10}plotnine}{302}{section.13.10}%
+\contentsline {section}{\numberline {13.11}Classification: Predicting Financial Distress}{304}{section.13.11}%
+\contentsline {subsection}{\numberline {13.11.1}Comparing Distressed vs.~Healthy Companies}{304}{subsection.13.11.1}%
+\contentsline {section}{\numberline {13.12}pandas}{304}{section.13.12}%
+\contentsline {section}{\numberline {13.13}polars}{305}{section.13.13}%
+\contentsline {subsection}{\numberline {13.13.1}Train/Test Split and Standardization}{305}{subsection.13.13.1}%
+\contentsline {subsection}{\numberline {13.13.2}Fitting the Model}{306}{subsection.13.13.2}%
+\contentsline {section}{\numberline {13.14}scikit-learn}{306}{section.13.14}%
+\contentsline {section}{\numberline {13.15}pyfixest}{307}{section.13.15}%
+\contentsline {section}{\numberline {13.16}seaborn}{310}{section.13.16}%
+\contentsline {section}{\numberline {13.17}plotnine}{311}{section.13.17}%
+\contentsline {subsection}{\numberline {13.17.1}Evaluating the Model}{312}{subsection.13.17.1}%
+\contentsline {subsection}{\numberline {13.17.2}Confusion Matrix and ROC Curve}{313}{subsection.13.17.2}%
+\contentsline {section}{\numberline {13.18}seaborn}{314}{section.13.18}%
+\contentsline {section}{\numberline {13.19}plotnine}{315}{section.13.19}%
+\contentsline {section}{\numberline {13.20}Chapter Summary}{316}{section.13.20}%
+\contentsline {section}{\numberline {13.21}Discussion Questions}{317}{section.13.21}%
+\contentsline {section}{\numberline {13.22}Exercises}{317}{section.13.22}%
+\contentsline {chapter}{\numberline {14}Text Analytics in Accounting}{319}{chapter.14}%
+\contentsline {section}{\numberline {14.1}From Structured to Unstructured Data}{319}{section.14.1}%
+\contentsline {section}{\numberline {14.2}Where Text Shows Up in Accounting Practice}{320}{section.14.2}%
+\contentsline {section}{\numberline {14.3}Text Preprocessing Fundamentals}{320}{section.14.3}%
+\contentsline {section}{\numberline {14.4}pandas}{320}{section.14.4}%
+\contentsline {section}{\numberline {14.5}polars}{321}{section.14.5}%
+\contentsline {subsection}{\numberline {14.5.1}Tokenization and Cleaning}{321}{subsection.14.5.1}%
+\contentsline {section}{\numberline {14.6}Not pandas}{321}{section.14.6}%
+\contentsline {section}{\numberline {14.7}pandas}{322}{section.14.7}%
+\contentsline {section}{\numberline {14.8}polars}{322}{section.14.8}%
+\contentsline {subsection}{\numberline {14.8.1}Removing Stopwords}{324}{subsection.14.8.1}%
+\contentsline {section}{\numberline {14.9}Not pandas}{324}{section.14.9}%
+\contentsline {section}{\numberline {14.10}pandas}{324}{section.14.10}%
+\contentsline {section}{\numberline {14.11}polars}{325}{section.14.11}%
+\contentsline {subsection}{\numberline {14.11.1}Stemming}{325}{subsection.14.11.1}%
+\contentsline {section}{\numberline {14.12}Not pandas}{326}{section.14.12}%
+\contentsline {section}{\numberline {14.13}pandas}{326}{section.14.13}%
+\contentsline {section}{\numberline {14.14}polars}{327}{section.14.14}%
+\contentsline {subsection}{\numberline {14.14.1}Lemmatization}{327}{subsection.14.14.1}%
+\contentsline {section}{\numberline {14.15}pandas}{328}{section.14.15}%
+\contentsline {section}{\numberline {14.16}polars}{329}{section.14.16}%
+\contentsline {section}{\numberline {14.17}From Text to Numbers: Bag-of-Words and TF-IDF}{329}{section.14.17}%
+\contentsline {section}{\numberline {14.18}Visualizing Word Frequency}{331}{section.14.18}%
+\contentsline {section}{\numberline {14.19}seaborn}{331}{section.14.19}%
+\contentsline {section}{\numberline {14.20}plotnine}{332}{section.14.20}%
+\contentsline {section}{\numberline {14.21}Financial Sentiment Analysis}{337}{section.14.21}%
+\contentsline {section}{\numberline {14.22}seaborn}{339}{section.14.22}%
+\contentsline {section}{\numberline {14.23}plotnine}{340}{section.14.23}%
+\contentsline {section}{\numberline {14.24}Text Classification}{341}{section.14.24}%
+\contentsline {section}{\numberline {14.25}Limits and Risks of Text Analytics in Accounting}{343}{section.14.25}%
+\contentsline {section}{\numberline {14.26}Chapter Summary}{344}{section.14.26}%
+\contentsline {section}{\numberline {14.27}Discussion Questions}{344}{section.14.27}%
+\contentsline {section}{\numberline {14.28}Exercises}{345}{section.14.28}%
+\contentsline {chapter}{\numberline {15}Generative AI in Accounting}{347}{chapter.15}%
+\contentsline {section}{\numberline {15.1}Generative AI vs.~the Predictive Models in Chapter 12}{347}{section.15.1}%
+\contentsline {section}{\numberline {15.2}Current Use Cases in Accounting and Audit Practice}{348}{section.15.2}%
+\contentsline {section}{\numberline {15.3}Prompt Engineering Basics for Accounting Tasks}{348}{section.15.3}%
+\contentsline {section}{\numberline {15.4}Hands-On: Drafting a Financial Narrative with an LLM API}{349}{section.15.4}%
+\contentsline {section}{\numberline {15.5}pandas}{349}{section.15.5}%
+\contentsline {section}{\numberline {15.6}polars}{350}{section.15.6}%
+\contentsline {section}{\numberline {15.7}The Hallucination Check: Verifying AI Output Against Source Data}{352}{section.15.7}%
+\contentsline {section}{\numberline {15.8}Using GenAI for Synthetic Text Generation}{353}{section.15.8}%
+\contentsline {section}{\numberline {15.9}Risks and Limitations}{354}{section.15.9}%
+\contentsline {section}{\numberline {15.10}The Current Regulatory and Professional Landscape}{354}{section.15.10}%
+\contentsline {section}{\numberline {15.11}Designing an ``AI vs.~Analyst'' Exercise}{355}{section.15.11}%
+\contentsline {section}{\numberline {15.12}Chapter Summary}{355}{section.15.12}%
+\contentsline {section}{\numberline {15.13}Discussion Questions}{356}{section.15.13}%
+\contentsline {section}{\numberline {15.14}Exercises}{356}{section.15.14}%
+\contentsline {part}{\numberline {V}Part V: Communication and Capstone}{359}{part.5}%
+\contentsline {chapter}{\numberline {16}Automated Reporting and Dashboards with Quarto}{361}{chapter.16}%
+\contentsline {section}{\numberline {16.1}From One-Off Analysis to Repeatable Reporting}{361}{section.16.1}%
+\contentsline {section}{\numberline {16.2}Parameterized Reports}{361}{section.16.2}%
+\contentsline {subsection}{\numberline {16.2.1}Declaring a Parameter}{362}{subsection.16.2.1}%
+\contentsline {section}{\numberline {16.3}pandas}{362}{section.16.3}%
+\contentsline {section}{\numberline {16.4}polars}{362}{section.16.4}%
+\contentsline {subsection}{\numberline {16.4.1}Building the Rest of the Report Around the Parameter}{363}{subsection.16.4.1}%
+\contentsline {section}{\numberline {16.5}pandas}{363}{section.16.5}%
+\contentsline {section}{\numberline {16.6}polars}{364}{section.16.6}%
+\contentsline {subsection}{\numberline {16.6.1}Rendering the Same Template for a Different Department}{367}{subsection.16.6.1}%
+\contentsline {section}{\numberline {16.7}Batch Rendering Multiple Reports}{368}{section.16.7}%
+\contentsline {section}{\numberline {16.8}Quarto Dashboards}{369}{section.16.8}%
+\contentsline {subsection}{\numberline {16.8.1}Building the Dashboard's Content}{369}{subsection.16.8.1}%
+\contentsline {subsection}{\numberline {16.8.2}An Interactive Chart with Plotly}{370}{subsection.16.8.2}%
+\contentsline {subsection}{\numberline {16.8.3}Assembling the Full Dashboard}{371}{subsection.16.8.3}%
+\contentsline {section}{\numberline {16.9}Putting It Together: A Recurring Reporting Workflow}{376}{section.16.9}%
+\contentsline {section}{\numberline {16.10}Chapter Summary}{376}{section.16.10}%
+\contentsline {section}{\numberline {16.11}Discussion Questions}{377}{section.16.11}%
+\contentsline {section}{\numberline {16.12}Exercises}{377}{section.16.12}%
+\contentsline {chapter}{\numberline {17}Data Ethics, Governance, and Reproducibility}{379}{chapter.17}%
+\contentsline {section}{\numberline {17.1}Why This Chapter Matters}{379}{section.17.1}%
+\contentsline {section}{\numberline {17.2}Data Privacy and Confidentiality}{380}{section.17.2}%
+\contentsline {subsection}{\numberline {17.2.1}Pseudonymization}{380}{subsection.17.2.1}%
+\contentsline {subsection}{\numberline {17.2.2}Generalization}{381}{subsection.17.2.2}%
+\contentsline {section}{\numberline {17.3}Data Governance and Audit Trails}{382}{section.17.3}%
+\contentsline {subsection}{\numberline {17.3.1}Version Control as an Audit Trail}{383}{subsection.17.3.1}%
+\contentsline {subsection}{\numberline {17.3.2}Logging Data Transformations}{383}{subsection.17.3.2}%
+\contentsline {subsection}{\numberline {17.3.3}Access Control}{384}{subsection.17.3.3}%
+\contentsline {section}{\numberline {17.4}Reproducibility}{385}{section.17.4}%
+\contentsline {subsection}{\numberline {17.4.1}Fixed Random Seeds}{385}{subsection.17.4.1}%
+\contentsline {subsection}{\numberline {17.4.2}Capturing the Software Environment}{385}{subsection.17.4.2}%
+\contentsline {subsection}{\numberline {17.4.3}Quarto's Own Reproducibility Features}{386}{subsection.17.4.3}%
+\contentsline {section}{\numberline {17.5}A Practical Ethics, Governance, and Reproducibility Checklist}{387}{section.17.5}%
+\contentsline {section}{\numberline {17.6}Chapter Summary}{387}{section.17.6}%
+\contentsline {section}{\numberline {17.7}Discussion Questions}{388}{section.17.7}%
+\contentsline {section}{\numberline {17.8}Exercises}{388}{section.17.8}%
+\contentsline {chapter}{\numberline {18}Capstone Project}{389}{chapter.18}%
+\contentsline {section}{\numberline {18.1}The Scenario}{389}{section.18.1}%
+\contentsline {section}{\numberline {18.2}Choosing a Track}{390}{section.18.2}%
+\contentsline {subsection}{\numberline {18.2.1}Track A: Audit \& Fraud Analytics}{390}{subsection.18.2.1}%
+\contentsline {subsection}{\numberline {18.2.2}Track B: Financial Reporting \& Revenue Analytics}{390}{subsection.18.2.2}%
+\contentsline {subsection}{\numberline {18.2.3}Track C: Management Accounting \& Predictive Analytics}{391}{subsection.18.2.3}%
+\contentsline {section}{\numberline {18.3}Deliverables}{391}{section.18.3}%
+\contentsline {section}{\numberline {18.4}Suggested Milestones}{392}{section.18.4}%
+\contentsline {section}{\numberline {18.5}Example Starter Questions}{392}{section.18.5}%
+\contentsline {section}{\numberline {18.6}Grading Rubric}{393}{section.18.6}%
+\contentsline {section}{\numberline {18.7}Final Thoughts}{393}{section.18.7}%
+\contentsline {chapter}{References}{395}{chapter*.21}%
+\contentsline {part}{Appendices}{397}{section*.22}%
 \def \@chapapp {\appendixname }
-\contentsline {chapter}{\numberline {A}A Primer on Python}{361}{appendix.A}%
-\contentsline {section}{\numberline {A.1}What Is Python, and Why This Book Uses It}{361}{appendix.A.1}%
-\contentsline {section}{\numberline {A.2}Data Types}{361}{appendix.A.2}%
-\contentsline {section}{\numberline {A.3}Data Structures}{362}{appendix.A.3}%
-\contentsline {section}{\numberline {A.4}Functions}{364}{appendix.A.4}%
-\contentsline {section}{\numberline {A.5}NumPy and Arrays}{365}{appendix.A.5}%
-\contentsline {subsection}{\numberline {A.5.1}Why Not Just Use a List?}{365}{subsection.A.5.1}%
-\contentsline {subsection}{\numberline {A.5.2}Creating Arrays}{365}{subsection.A.5.2}%
-\contentsline {subsection}{\numberline {A.5.3}Vectorized Operations and Filtering}{366}{subsection.A.5.3}%
-\contentsline {subsection}{\numberline {A.5.4}Common Aggregate Functions}{366}{subsection.A.5.4}%
-\contentsline {subsection}{\numberline {A.5.5}Reshaping Arrays}{366}{subsection.A.5.5}%
-\contentsline {subsection}{\numberline {A.5.6}Conditional Logic with \texttt {np.where()}}{367}{subsection.A.5.6}%
-\contentsline {subsection}{\numberline {A.5.7}Random Number Generation}{367}{subsection.A.5.7}%
-\contentsline {section}{\numberline {A.6}Classes, Objects, Attributes, and Methods}{367}{appendix.A.6}%
-\contentsline {subsection}{\numberline {A.6.1}Defining a Class}{368}{subsection.A.6.1}%
-\contentsline {subsection}{\numberline {A.6.2}Creating and Using an Object}{368}{subsection.A.6.2}%
-\contentsline {section}{\numberline {A.7}Summary}{369}{appendix.A.7}%
-\contentsline {chapter}{\numberline {B}The Accounting Cycle: From Journal to Financial Statements}{371}{appendix.B}%
-\contentsline {section}{\numberline {B.1}The Accounting Cycle, at a Glance}{371}{appendix.B.1}%
-\contentsline {section}{\numberline {B.2}Our Worked Example: Bright Consulting LLC}{372}{appendix.B.2}%
-\contentsline {section}{\numberline {B.3}Step 1: Journalize Transactions}{372}{appendix.B.3}%
-\contentsline {section}{\numberline {B.4}Step 2: Post to the Ledger}{374}{appendix.B.4}%
-\contentsline {section}{\numberline {B.5}Step 3: Unadjusted Trial Balance}{374}{appendix.B.5}%
-\contentsline {section}{\numberline {B.6}Step 4: Adjusting Entries}{375}{appendix.B.6}%
-\contentsline {subsection}{\numberline {B.6.1}(a) Deferred Expense: Supplies Used}{375}{subsection.B.6.1}%
-\contentsline {subsection}{\numberline {B.6.2}(b) Deferred Expense: Insurance Expired}{376}{subsection.B.6.2}%
-\contentsline {subsection}{\numberline {B.6.3}(c) Depreciation}{376}{subsection.B.6.3}%
-\contentsline {subsection}{\numberline {B.6.4}(d) Accrued Expense: Unrecorded Salaries}{376}{subsection.B.6.4}%
-\contentsline {subsection}{\numberline {B.6.5}(e) Deferred Revenue: Unearned Revenue Now Earned}{377}{subsection.B.6.5}%
-\contentsline {section}{\numberline {B.7}Step 5: Adjusted Trial Balance}{377}{appendix.B.7}%
-\contentsline {section}{\numberline {B.8}Step 6: Prepare the Financial Statements}{378}{appendix.B.8}%
-\contentsline {subsection}{\numberline {B.8.1}Income Statement}{378}{subsection.B.8.1}%
-\contentsline {subsection}{\numberline {B.8.2}Statement of Retained Earnings}{378}{subsection.B.8.2}%
-\contentsline {subsection}{\numberline {B.8.3}Balance Sheet}{378}{subsection.B.8.3}%
-\contentsline {section}{\numberline {B.9}Step 7: Closing Entries}{379}{appendix.B.9}%
-\contentsline {section}{\numberline {B.10}Step 8: Post-Closing Trial Balance}{380}{appendix.B.10}%
-\contentsline {section}{\numberline {B.11}Seeing the Whole Cycle in Python}{381}{appendix.B.11}%
-\contentsline {section}{\numberline {B.12}Summary}{382}{appendix.B.12}%
-\contentsline {chapter}{\numberline {C}An Introduction to EDGAR Database}{383}{appendix.C}%
-\contentsline {section}{\numberline {C.1}EDGAR Database and Its Implications}{383}{appendix.C.1}%
-\contentsline {section}{\numberline {C.2}XBRL}{384}{appendix.C.2}%
-\contentsline {section}{\numberline {C.3}edgartools - Python Package for Parsing EDGAR Database}{385}{appendix.C.3}%
-\contentsline {section}{\numberline {C.4}tidyfinance - Python package for Share Price Data}{388}{appendix.C.4}%
-\contentsline {section}{\numberline {C.5}Summary}{391}{appendix.C.5}%
+\contentsline {chapter}{\numberline {A}A Primer on Python}{397}{appendix.A}%
+\contentsline {section}{\numberline {A.1}What Is Python, and Why This Book Uses It}{397}{appendix.A.1}%
+\contentsline {section}{\numberline {A.2}Data Types}{397}{appendix.A.2}%
+\contentsline {section}{\numberline {A.3}Data Structures}{398}{appendix.A.3}%
+\contentsline {section}{\numberline {A.4}Functions}{400}{appendix.A.4}%
+\contentsline {section}{\numberline {A.5}NumPy and Arrays}{401}{appendix.A.5}%
+\contentsline {subsection}{\numberline {A.5.1}Why Not Just Use a List?}{401}{subsection.A.5.1}%
+\contentsline {subsection}{\numberline {A.5.2}Creating Arrays}{401}{subsection.A.5.2}%
+\contentsline {subsection}{\numberline {A.5.3}Vectorized Operations and Filtering}{402}{subsection.A.5.3}%
+\contentsline {subsection}{\numberline {A.5.4}Common Aggregate Functions}{402}{subsection.A.5.4}%
+\contentsline {subsection}{\numberline {A.5.5}Reshaping Arrays}{402}{subsection.A.5.5}%
+\contentsline {subsection}{\numberline {A.5.6}Conditional Logic with \texttt {np.where()}}{403}{subsection.A.5.6}%
+\contentsline {subsection}{\numberline {A.5.7}Random Number Generation}{403}{subsection.A.5.7}%
+\contentsline {section}{\numberline {A.6}Classes, Objects, Attributes, and Methods}{403}{appendix.A.6}%
+\contentsline {subsection}{\numberline {A.6.1}Defining a Class}{404}{subsection.A.6.1}%
+\contentsline {subsection}{\numberline {A.6.2}Creating and Using an Object}{404}{subsection.A.6.2}%
+\contentsline {section}{\numberline {A.7}Summary}{405}{appendix.A.7}%
+\contentsline {chapter}{\numberline {B}The Accounting Cycle: From Journal to Financial Statements}{407}{appendix.B}%
+\contentsline {section}{\numberline {B.1}The Accounting Cycle - at a Glance}{407}{appendix.B.1}%
+\contentsline {section}{\numberline {B.2}Our Worked Example: Bright Consulting LLC}{408}{appendix.B.2}%
+\contentsline {section}{\numberline {B.3}Step 1: Journalize Transactions}{408}{appendix.B.3}%
+\contentsline {section}{\numberline {B.4}Step 2: Post to the Ledger}{410}{appendix.B.4}%
+\contentsline {section}{\numberline {B.5}Step 3: Unadjusted Trial Balance}{410}{appendix.B.5}%
+\contentsline {section}{\numberline {B.6}Step 4: Adjusting Entries}{411}{appendix.B.6}%
+\contentsline {subsection}{\numberline {B.6.1}(a) Deferred Expense: Supplies Used}{411}{subsection.B.6.1}%
+\contentsline {subsection}{\numberline {B.6.2}(b) Deferred Expense: Insurance Expired}{412}{subsection.B.6.2}%
+\contentsline {subsection}{\numberline {B.6.3}(c) Depreciation}{412}{subsection.B.6.3}%
+\contentsline {subsection}{\numberline {B.6.4}(d) Accrued Expense: Unrecorded Salaries}{412}{subsection.B.6.4}%
+\contentsline {subsection}{\numberline {B.6.5}(e) Deferred Revenue: Unearned Revenue Now Earned}{413}{subsection.B.6.5}%
+\contentsline {section}{\numberline {B.7}Step 5: Adjusted Trial Balance}{413}{appendix.B.7}%
+\contentsline {section}{\numberline {B.8}Step 6: Prepare the Financial Statements}{414}{appendix.B.8}%
+\contentsline {subsection}{\numberline {B.8.1}Income Statement}{414}{subsection.B.8.1}%
+\contentsline {subsection}{\numberline {B.8.2}Statement of Retained Earnings}{414}{subsection.B.8.2}%
+\contentsline {subsection}{\numberline {B.8.3}Balance Sheet}{414}{subsection.B.8.3}%
+\contentsline {section}{\numberline {B.9}Step 7: Closing Entries}{415}{appendix.B.9}%
+\contentsline {section}{\numberline {B.10}Step 8: Post-Closing Trial Balance}{416}{appendix.B.10}%
+\contentsline {section}{\numberline {B.11}Seeing the Whole Cycle in Python}{417}{appendix.B.11}%
+\contentsline {section}{\numberline {B.12}Summary}{418}{appendix.B.12}%
+\contentsline {chapter}{\numberline {C}An Introduction to EDGAR Database}{421}{appendix.C}%
+\contentsline {section}{\numberline {C.1}EDGAR Database and Its Implications}{421}{appendix.C.1}%
+\contentsline {section}{\numberline {C.2}XBRL}{422}{appendix.C.2}%
+\contentsline {section}{\numberline {C.3}edgartools - Python Package for Parsing EDGAR Database}{423}{appendix.C.3}%
+\contentsline {section}{\numberline {C.4}Unstructured Data in Company Filings}{426}{appendix.C.4}%
+\contentsline {section}{\numberline {C.5}tidyfinance - Python package for Share Price Data}{430}{appendix.C.5}%
+\contentsline {section}{\numberline {C.6}Summary}{433}{appendix.C.6}%
 \contentsfinish 
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

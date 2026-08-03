@@ -1,0 +1,2210 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>14&nbsp; Text Analytics in Accounting – Accounting Analytics with Python</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./15-genai-in-accounting.html" rel="next">
+<link href="./13-predictive-modeling-intro.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-1c9137b7b1c0320e377730bf2be1742e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-5a8d804490c71623f0dc461ebb6c4a40.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-1c9137b7b1c0320e377730bf2be1742e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+<style>
+.scrollable-table {
+  overflow-x: auto !important;
+}
+.scrollable-table table {
+  width: max-content !important;
+  max-width: none !important;
+}
+a.citation, a.citation:visited {
+  color: #1a56db !important;
+}
+#refs a {
+  color: #1a56db !important;
+}
+</style>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./13-predictive-modeling-intro.html">Part IV: Advanced Analytics and Artificial Intelligence</a></li><li class="breadcrumb-item"><a href="./14-text-analytics-in-accounting.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Text Analytics in Accounting</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Accounting Analytics with Python</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/msharifbd/accounting-analytics-book" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Download"><i class="bi bi-download"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./Accounting-Analytics-with-Python.pdf">
+              <i class="bi bi-file-pdf pe-1"></i>
+            Download PDF
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./Accounting-Analytics-with-Python.epub">
+              <i class="bi bi-journal pe-1"></i>
+            Download ePub
+            </a>
+          </li>
+      </ul>
+    </div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Part I: Foundations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-introduction-to-accounting-analytics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Accounting Analytics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-python-quarto-setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Python and Quarto Environment Setup</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-data-fundamentals.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Fundamentals for Accountants</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Part II: Core Data Skills</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-data-wrangling-pandas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Wrangling with <code>Pandas</code> and <code>Polars</code></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-exploratory-data-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis for Financial Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-data-visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Visualization for Accounting</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Part III: Applied Accounting Analytics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-financial-statement-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Financial Statement Analytics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-management-accounting-analytics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Management Accounting Analytics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-audit-analytics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Audit Analytics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-fraud-anomaly-detection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Fraud and Anomaly Detection</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-revenue-recognition-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Revenue Recognition and Transaction-Level Analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-tax-analytics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Tax Analytics</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Part IV: Advanced Analytics and Artificial Intelligence</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-predictive-modeling-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Introduction to Predictive Modeling</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-text-analytics-in-accounting.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Text Analytics in Accounting</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-genai-in-accounting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI in Accounting</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Part V: Communication and Capstone</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-automated-reporting-quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Automated Reporting and Dashboards with Quarto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-data-ethics-reproducibility.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Data Ethics, Governance, and Reproducibility</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./18-capstone-project.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Capstone Project</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendix-a-python-primer.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">A Primer on Python</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendix-b-financial-statement-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">The Accounting Cycle: From Journal to Financial Statements</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendix-c-edgar-database.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">An Introduction to EDGAR Database</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#from-structured-to-unstructured-data" id="toc-from-structured-to-unstructured-data" class="nav-link active" data-scroll-target="#from-structured-to-unstructured-data"><span class="header-section-number">14.1</span> From Structured to Unstructured Data</a></li>
+  <li><a href="#where-text-shows-up-in-accounting-practice" id="toc-where-text-shows-up-in-accounting-practice" class="nav-link" data-scroll-target="#where-text-shows-up-in-accounting-practice"><span class="header-section-number">14.2</span> Where Text Shows Up in Accounting Practice</a></li>
+  <li><a href="#text-preprocessing-fundamentals" id="toc-text-preprocessing-fundamentals" class="nav-link" data-scroll-target="#text-preprocessing-fundamentals"><span class="header-section-number">14.3</span> Text Preprocessing Fundamentals</a>
+  <ul class="collapse">
+  <li><a href="#tokenization-and-cleaning" id="toc-tokenization-and-cleaning" class="nav-link" data-scroll-target="#tokenization-and-cleaning"><span class="header-section-number">14.3.1</span> Tokenization and Cleaning</a></li>
+  <li><a href="#removing-stopwords" id="toc-removing-stopwords" class="nav-link" data-scroll-target="#removing-stopwords"><span class="header-section-number">14.3.2</span> Removing Stopwords</a></li>
+  <li><a href="#stemming" id="toc-stemming" class="nav-link" data-scroll-target="#stemming"><span class="header-section-number">14.3.3</span> Stemming</a></li>
+  <li><a href="#lemmatization" id="toc-lemmatization" class="nav-link" data-scroll-target="#lemmatization"><span class="header-section-number">14.3.4</span> Lemmatization</a></li>
+  </ul></li>
+  <li><a href="#from-text-to-numbers-bag-of-words-and-tf-idf" id="toc-from-text-to-numbers-bag-of-words-and-tf-idf" class="nav-link" data-scroll-target="#from-text-to-numbers-bag-of-words-and-tf-idf"><span class="header-section-number">14.4</span> From Text to Numbers: Bag-of-Words and TF-IDF</a></li>
+  <li><a href="#visualizing-word-frequency" id="toc-visualizing-word-frequency" class="nav-link" data-scroll-target="#visualizing-word-frequency"><span class="header-section-number">14.5</span> Visualizing Word Frequency</a></li>
+  <li><a href="#financial-sentiment-analysis" id="toc-financial-sentiment-analysis" class="nav-link" data-scroll-target="#financial-sentiment-analysis"><span class="header-section-number">14.6</span> Financial Sentiment Analysis</a></li>
+  <li><a href="#text-classification" id="toc-text-classification" class="nav-link" data-scroll-target="#text-classification"><span class="header-section-number">14.7</span> Text Classification</a></li>
+  <li><a href="#limits-and-risks-of-text-analytics-in-accounting" id="toc-limits-and-risks-of-text-analytics-in-accounting" class="nav-link" data-scroll-target="#limits-and-risks-of-text-analytics-in-accounting"><span class="header-section-number">14.8</span> Limits and Risks of Text Analytics in Accounting</a></li>
+  <li><a href="#chapter-summary" id="toc-chapter-summary" class="nav-link" data-scroll-target="#chapter-summary"><span class="header-section-number">14.9</span> Chapter Summary</a></li>
+  <li><a href="#discussion-questions" id="toc-discussion-questions" class="nav-link" data-scroll-target="#discussion-questions"><span class="header-section-number">14.10</span> Discussion Questions</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">14.11</span> Exercises</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/msharifbd/accounting-analytics-book/edit/main/14-text-analytics-in-accounting.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/blob/main/14-text-analytics-in-accounting.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./13-predictive-modeling-intro.html">Part IV: Advanced Analytics and Artificial Intelligence</a></li><li class="breadcrumb-item"><a href="./14-text-analytics-in-accounting.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Text Analytics in Accounting</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Text Analytics in Accounting</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Learning Objectives
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>By the end of this chapter, you should be able to:</p>
+<ul>
+<li>Explain where unstructured text data shows up in accounting practice, and why it requires different techniques than the numeric, tabular data used throughout this book</li>
+<li>Preprocess raw text into an analyzable form: tokenization, stopword removal, and stemming</li>
+<li>Convert text into numeric features using bag-of-words and TF-IDF</li>
+<li>Apply sentiment analysis to financial narrative text, and explain why general-purpose sentiment tools often misread financial language</li>
+<li>Build a text classification model using the same train/test/evaluate workflow from Chapter 13, applied to text instead of numeric ratios</li>
+<li>Recognize the specific limitations of classical text analytics techniques in an accounting context</li>
+</ul>
+</div>
+</div>
+<section id="from-structured-to-unstructured-data" class="level2" data-number="14.1">
+<h2 data-number="14.1" class="anchored" data-anchor-id="from-structured-to-unstructured-data"><span class="header-section-number">14.1</span> From Structured to Unstructured Data</h2>
+<p>Every dataset in this book so far has been <strong>structured</strong>: rows and columns, numbers and categories, ready to filter, group, and model. A huge and growing share of the data accountants and auditors actually encounter doesn’t look like that at all — it’s <strong>unstructured text</strong>: the paragraphs in a financial disclosure, the transcript of an earnings call, a free-text description in an audit workpaper, a customer complaint email. This chapter introduces <strong>text analytics</strong> (often called <strong>Natural Language Processing</strong>, or <strong>NLP</strong>) — a set of techniques for turning that unstructured text into something you can analyze quantitatively, using the same underlying workflow (train, test, evaluate) from Chapter 13, applied to text instead of numbers.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>A Note on Tools for This Chapter
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This chapter uses pandas (not polars) alongside scikit-learn, since text vectorization workflows in practice are built almost entirely on pandas + scikit-learn, and polars doesn’t offer a meaningful advantage for the dataset sizes here. Visualizations continue to use both seaborn and plotnine, consistent with the rest of the book.</p>
+</div>
+</div>
+</section>
+<section id="where-text-shows-up-in-accounting-practice" class="level2" data-number="14.2">
+<h2 data-number="14.2" class="anchored" data-anchor-id="where-text-shows-up-in-accounting-practice"><span class="header-section-number">14.2</span> Where Text Shows Up in Accounting Practice</h2>
+<p>A few common sources of text data relevant to accounting and audit work:</p>
+<ul>
+<li><strong>MD&amp;A (Management’s Discussion and Analysis)</strong> and other financial statement narrative disclosures</li>
+<li><strong>Earnings call transcripts</strong>, where tone and word choice are studied closely by analysts</li>
+<li><strong>Audit workpaper narratives</strong> — free-text descriptions of findings, exceptions, and follow-up items</li>
+<li><strong>Whistleblower tips and complaint text</strong>, often the first signal of a potential issue</li>
+<li><strong>Contract and lease language</strong>, increasingly relevant for revenue recognition and lease accounting judgments</li>
+<li><strong>Vendor and customer correspondence</strong>, sometimes reviewed during fraud investigations</li>
+</ul>
+</section>
+<section id="text-preprocessing-fundamentals" class="level2" data-number="14.3">
+<h2 data-number="14.3" class="anchored" data-anchor-id="text-preprocessing-fundamentals"><span class="header-section-number">14.3</span> Text Preprocessing Fundamentals</h2>
+<p>Raw text needs to be broken down and cleaned before it can be analyzed. We’ll work with <code>mda_narratives.csv</code>, a set of short, original MD&amp;A-style paragraphs written for this chapter, one per year (2021-2025), for the same fictional company from Chapter 7 — Ledger &amp; Co.&nbsp;These are <strong>not real filings</strong>; they’re written to reflect that chapter’s actual computed ratio trends, so we can check whether text-based analysis lines up with what we already know from the numbers.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="" aria-current="page">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div id="c0042fe0" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>mda <span class="op">=</span> pd.read_csv(<span class="st">"data/mda_narratives.csv"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>mda[[<span class="st">"year"</span>, <span class="st">"narrative_text"</span>]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">narrative_text</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>2021</td>
+<td>Ledger &amp; Co. delivered a solid year of growth,...</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>2022</td>
+<td>The company continued to grow revenue and impr...</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>2023</td>
+<td>Ledger &amp; Co. achieved another year of strong p...</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>2024</td>
+<td>The company again reported improved profitabil...</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>2025</td>
+<td>Ledger &amp; Co. delivered its strongest profitabi...</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div id="4541894d" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>mda_pl <span class="op">=</span> pl.read_csv(<span class="st">"data/mda_narratives.csv"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>mda_pl.select([<span class="st">"year"</span>, <span class="st">"narrative_text"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (5, 2)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">narrative_text</th>
+</tr>
+<tr class="even">
+<td>i64</td>
+<td>str</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2021</td>
+<td>"Ledger &amp; Co. delivered a solid…</td>
+</tr>
+<tr class="even">
+<td>2022</td>
+<td>"The company continued to grow …</td>
+</tr>
+<tr class="odd">
+<td>2023</td>
+<td>"Ledger &amp; Co. achieved another …</td>
+</tr>
+<tr class="even">
+<td>2024</td>
+<td>"The company again reported imp…</td>
+</tr>
+<tr class="odd">
+<td>2025</td>
+<td>"Ledger &amp; Co. delivered its str…</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section id="tokenization-and-cleaning" class="level3" data-number="14.3.1">
+<h3 data-number="14.3.1" class="anchored" data-anchor-id="tokenization-and-cleaning"><span class="header-section-number">14.3.1</span> Tokenization and Cleaning</h3>
+<p><strong>Tokenization</strong> splits text into individual words (tokens). Before that, we typically lowercase everything and remove punctuation, so “Revenue” and “revenue.” are treated as the same word.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Not pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-3" role="tab" aria-controls="tabset-2-3" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<div id="1afd7946" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> preprocess(text):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> text.lower()</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> re.sub(<span class="vs">r"</span><span class="pp">[^a-z</span><span class="dv">\s</span><span class="pp">]</span><span class="vs">"</span>, <span class="st">""</span>, text)  <span class="co"># keep only letters and spaces</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> text.split()</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>tokens <span class="op">=</span> preprocess(mda.loc[<span class="dv">0</span>, <span class="st">"narrative_text"</span>])</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>tokens[:<span class="dv">10</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>['ledger',
+ 'co',
+ 'delivered',
+ 'a',
+ 'solid',
+ 'year',
+ 'of',
+ 'growth',
+ 'with',
+ 'revenue']</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div id="54c0a58d" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>tokens_pd <span class="op">=</span> mda.loc[<span class="dv">0</span>,<span class="st">'narrative_text'</span>].lower().split()</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>tokens_pd[:<span class="dv">10</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>['ledger',
+ '&amp;',
+ 'co.',
+ 'delivered',
+ 'a',
+ 'solid',
+ 'year',
+ 'of',
+ 'growth,',
+ 'with']</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-2-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-3-tab">
+<div id="50973d49" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>tokens_pl <span class="op">=</span> (</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    mda_pl</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    .select(</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        pl.col(<span class="st">"narrative_text"</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        .<span class="bu">str</span>.to_lowercase()</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        .<span class="bu">str</span>.split(<span class="st">" "</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    .row(<span class="dv">0</span>)[<span class="dv">0</span>]</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>) </span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>tokens_pl[:<span class="dv">10</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>['ledger',
+ '&amp;',
+ 'co.',
+ 'delivered',
+ 'a',
+ 'solid',
+ 'year',
+ 'of',
+ 'growth,',
+ 'with']</code></pre>
+</div>
+</div>
+<p>Or you can use the simpler code like this -</p>
+<div id="34b0df26" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>tokens_pl <span class="op">=</span> (</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    mda_pl[<span class="st">"narrative_text"</span>][<span class="dv">0</span>]</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    .lower()</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    .split()</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>tokens_pl[:<span class="dv">10</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>['ledger',
+ '&amp;',
+ 'co.',
+ 'delivered',
+ 'a',
+ 'solid',
+ 'year',
+ 'of',
+ 'growth,',
+ 'with']</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="removing-stopwords" class="level3" data-number="14.3.2">
+<h3 data-number="14.3.2" class="anchored" data-anchor-id="removing-stopwords"><span class="header-section-number">14.3.2</span> Removing Stopwords</h3>
+<p><strong>Stopwords</strong> are common words (“the,” “and,” “is”) that carry little analytical meaning on their own and are usually removed before further analysis.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">Not pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-3" role="tab" aria-controls="tabset-3-3" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<div id="45873f29" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>stopwords <span class="op">=</span> {<span class="st">"the"</span>,<span class="st">"a"</span>,<span class="st">"an"</span>,<span class="st">"and"</span>,<span class="st">"or"</span>,<span class="st">"but"</span>,<span class="st">"of"</span>,<span class="st">"in"</span>,<span class="st">"on"</span>,<span class="st">"at"</span>,<span class="st">"to"</span>,<span class="st">"for"</span>,<span class="st">"with"</span>,<span class="st">"as"</span>,</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>             <span class="st">"is"</span>,<span class="st">"was"</span>,<span class="st">"were"</span>,<span class="st">"be"</span>,<span class="st">"been"</span>,<span class="st">"this"</span>,<span class="st">"that"</span>,<span class="st">"its"</span>,<span class="st">"it"</span>,<span class="st">"company"</span>,<span class="st">"during"</span>}</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>filtered <span class="op">=</span> [t <span class="cf">for</span> t <span class="kw">in</span> tokens <span class="cf">if</span> t <span class="kw">not</span> <span class="kw">in</span> stopwords]</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>filtered[:<span class="dv">10</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>['ledger',
+ 'co',
+ 'delivered',
+ 'solid',
+ 'year',
+ 'growth',
+ 'revenue',
+ 'increasing',
+ 'expanded',
+ 'customer']</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<div id="2575a8f9" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> nltk </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.corpus <span class="im">import</span> stopwords</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>nltk.download(<span class="st">"stopwords"</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>nltk.download(<span class="st">'punkt'</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>stop_words <span class="op">=</span> stopwords.words(<span class="st">"english"</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>custom_words <span class="op">=</span> [<span class="st">"&amp;"</span>, <span class="st">"co."</span>] <span class="co"># adding some words to stop words list </span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>stop_words.extend(custom_words)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>filtered_pd <span class="op">=</span> [word <span class="cf">for</span> word <span class="kw">in</span> tokens_pd <span class="cf">if</span> word.lower() <span class="kw">not</span> <span class="kw">in</span> stop_words]</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>filtered_pd[:<span class="dv">10</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>['ledger',
+ 'delivered',
+ 'solid',
+ 'year',
+ 'growth,',
+ 'revenue',
+ 'increasing',
+ 'company',
+ 'expanded',
+ 'customer']</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-3-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-3-tab">
+<div id="b8fdf7a0" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>filtered_pl <span class="op">=</span> [word <span class="cf">for</span> word <span class="kw">in</span> tokens_pl <span class="cf">if</span> word.lower() <span class="kw">not</span> <span class="kw">in</span> stop_words]</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>filtered_pl[:<span class="dv">10</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>['ledger',
+ 'delivered',
+ 'solid',
+ 'year',
+ 'growth,',
+ 'revenue',
+ 'increasing',
+ 'company',
+ 'expanded',
+ 'customer']</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="stemming" class="level3" data-number="14.3.3">
+<h3 data-number="14.3.3" class="anchored" data-anchor-id="stemming"><span class="header-section-number">14.3.3</span> Stemming</h3>
+<p><strong>Stemming</strong> reduces words to a common root, so “improve,” “improved,” and “improving” are all treated as the same underlying concept.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href="">Not pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-3" role="tab" aria-controls="tabset-4-3" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
+<div id="5308531c" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> simple_stem(word):</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> suffix <span class="kw">in</span> [<span class="st">"ing"</span>, <span class="st">"ed"</span>, <span class="st">"ly"</span>, <span class="st">"es"</span>, <span class="st">"s"</span>]:</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> word.endswith(suffix) <span class="kw">and</span> <span class="bu">len</span>(word) <span class="op">-</span> <span class="bu">len</span>(suffix) <span class="op">&gt;</span> <span class="dv">3</span>:</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> word[: <span class="op">-</span><span class="bu">len</span>(suffix)]</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> word</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>stemmed <span class="op">=</span> [simple_stem(t) <span class="cf">for</span> t <span class="kw">in</span> filtered]</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>stemmed[:<span class="dv">10</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<pre><code>['ledger',
+ 'co',
+ 'deliver',
+ 'solid',
+ 'year',
+ 'growth',
+ 'revenue',
+ 'increas',
+ 'expand',
+ 'customer']</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
+<div id="1df6023e" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.stem <span class="im">import</span> PorterStemmer</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>nltk.download(<span class="st">"punkt"</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>stemmer_porter <span class="op">=</span> PorterStemmer()</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>stemmed_pd <span class="op">=</span> [stemmer_porter.stem(word) <span class="cf">for</span> word <span class="kw">in</span> filtered_pd]</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>stemmed_pd[:<span class="dv">10</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<pre><code>['ledger',
+ 'deliv',
+ 'solid',
+ 'year',
+ 'growth,',
+ 'revenu',
+ 'increas',
+ 'compani',
+ 'expand',
+ 'custom']</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-4-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-3-tab">
+<div id="330080e3" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.stem <span class="im">import</span> PorterStemmer</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>nltk.download(<span class="st">"punkt"</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>stemmer_porter <span class="op">=</span> PorterStemmer()</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>stemmed_pl <span class="op">=</span> [stemmer_porter.stem(word) <span class="cf">for</span> word <span class="kw">in</span> filtered_pl]</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>stemmed_pl[:<span class="dv">10</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<pre><code>['ledger',
+ 'deliv',
+ 'solid',
+ 'year',
+ 'growth,',
+ 'revenu',
+ 'increas',
+ 'compani',
+ 'expand',
+ 'custom']</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>A Deliberately Simple Stemmer, and Its Limitation
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Look closely: <strong>“gross” became “gros”</strong> — our simple rule stripped a trailing “s” without understanding it wasn’t actually a plural or verb ending. This is a genuine, common failure mode of naive suffix-stripping stemmers, not a bug in this example specifically. Production NLP work typically uses more sophisticated <strong>lemmatization</strong> instead, which uses a dictionary and grammatical rules to find a word’s true root (“gross” would correctly stay “gross”). We’re using this simplified version purely to show the <em>concept</em> of reducing words to a common form without requiring an external dictionary download — know that real tools handle this more carefully.</p>
+</div>
+</div>
+</section>
+<section id="lemmatization" class="level3" data-number="14.3.4">
+<h3 data-number="14.3.4" class="anchored" data-anchor-id="lemmatization"><span class="header-section-number">14.3.4</span> Lemmatization</h3>
+<p><strong>Lemmatization</strong> is an advanced text normalization technique in natural language processing (NLP) that reduces words to their meaningful, dictionary-based base form. To achieve high accuracy, a lemmatizer contextualizes the word by determining its part of speech (POS)—such as identifying whether “coding” functions as a noun or a verb in a sentence. This ensures that complex irregular transformations, like mapping the word “better” back to “good” or “was” back to “be,” are resolved correctly based on grammar rules rather than guesswork.</p>
+<p>When evaluated side-by-side, <strong>lemmatization</strong> offers grammatical precision while <strong>stemming</strong> prioritizes processing speed. Stemming operates by applying crude, heuristic rules to slice off the ends of words, which frequently results in non-existent words or chopped roots like reducing “studies” and “studying” to just “studi.” Conversely, lemmatization relies on deep semantic databases like WordNet to consistently output valid, real-world words like “study.” While stemming is computationally lightweight and ideal for rapid search indexing on massive datasets, lemmatization is far superior for tasks demanding absolute contextual understanding, such as sentiment analysis, chatbots, and machine translation.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Feature</th>
+<th style="text-align: left;">Stemming</th>
+<th style="text-align: left;">Lemmatization</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Approach</strong></td>
+<td style="text-align: left;">Rule-based suffix cutting (heuristic)</td>
+<td style="text-align: left;">Dictionary-based morphological analysis</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Output Word</strong></td>
+<td style="text-align: left;">Often an invalid word root (e.g., <code>chang</code>)</td>
+<td style="text-align: left;">Always a valid dictionary word (e.g., <code>change</code>)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Context Aware</strong></td>
+<td style="text-align: left;">No (ignores surrounding sentence structure)</td>
+<td style="text-align: left;">Yes (uses Part of Speech tagging)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Speed</strong></td>
+<td style="text-align: left;">Extremely fast and lightweight</td>
+<td style="text-align: left;">Slower due to database lookups</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Example (“better”)</strong></td>
+<td style="text-align: left;"><code>better</code></td>
+<td style="text-align: left;"><code>good</code></td>
+</tr>
+</tbody>
+</table>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false" href="">polars</a></li></ul>
+<div class="tab-content">
+<div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
+<div id="f9de465f" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> nltk</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.stem <span class="im">import</span> WordNetLemmatizer</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>lemmatizer <span class="op">=</span> WordNetLemmatizer()</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>lemmatizer_pd <span class="op">=</span> [lemmatizer.lemmatize(word) <span class="cf">for</span> word <span class="kw">in</span> filtered_pd]</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>lemmatizer_pd[:<span class="dv">10</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<pre><code>['ledger',
+ 'delivered',
+ 'solid',
+ 'year',
+ 'growth,',
+ 'revenue',
+ 'increasing',
+ 'company',
+ 'expanded',
+ 'customer']</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
+<div id="7e337401" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> nltk</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.stem <span class="im">import</span> WordNetLemmatizer</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>lemmatizer <span class="op">=</span> WordNetLemmatizer()</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>lemmatizer_pl <span class="op">=</span> [lemmatizer.lemmatize(word) <span class="cf">for</span> word <span class="kw">in</span> filtered_pl]</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>lemmatizer_pl[:<span class="dv">10</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<pre><code>['ledger',
+ 'delivered',
+ 'solid',
+ 'year',
+ 'growth,',
+ 'revenue',
+ 'increasing',
+ 'company',
+ 'expanded',
+ 'customer']</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="from-text-to-numbers-bag-of-words-and-tf-idf" class="level2" data-number="14.4">
+<h2 data-number="14.4" class="anchored" data-anchor-id="from-text-to-numbers-bag-of-words-and-tf-idf"><span class="header-section-number">14.4</span> From Text to Numbers: Bag-of-Words and TF-IDF</h2>
+<p>Machine learning models need numbers, not words. The <strong>bag-of-words</strong> approach counts how often each word appears in each document, ignoring word order entirely.</p>
+<div id="f88ee651" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.feature_extraction.text <span class="im">import</span> CountVectorizer</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>count_vec <span class="op">=</span> CountVectorizer(stop_words<span class="op">=</span><span class="st">"english"</span>)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>count_matrix <span class="op">=</span> count_vec.fit_transform(mda[<span class="st">"narrative_text"</span>])</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>count_df <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    count_matrix.toarray(), columns<span class="op">=</span>count_vec.get_feature_names_out(), index<span class="op">=</span>mda[<span class="st">"year"</span>]</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>count_df[[<span class="st">"revenue"</span>, <span class="st">"margin"</span>, <span class="st">"debt"</span>, <span class="st">"cash"</span>, <span class="st">"liquidity"</span>]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">revenue</th>
+<th data-quarto-table-cell-role="th">margin</th>
+<th data-quarto-table-cell-role="th">debt</th>
+<th data-quarto-table-cell-role="th">cash</th>
+<th data-quarto-table-cell-role="th">liquidity</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2021</th>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2022</th>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2023</th>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2024</th>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2025</th>
+<td>0</td>
+<td>3</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Notice “cash” appears zero times in 2021-2022 but grows to 2 mentions by 2025 — consistent with Chapter 7’s finding that the company’s cash position grew substantially over this period.</p>
+<p><strong>TF-IDF</strong> (Term Frequency-Inverse Document Frequency) improves on simple counts by <em>downweighting</em> words that appear in every document (and are therefore less distinctive) and <em>upweighting</em> words that are frequent in one document but rare across the rest.</p>
+<div id="181f3428" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.feature_extraction.text <span class="im">import</span> TfidfVectorizer</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>tfidf_vec <span class="op">=</span> TfidfVectorizer(stop_words<span class="op">=</span><span class="st">"english"</span>)</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>tfidf_matrix <span class="op">=</span> tfidf_vec.fit_transform(mda[<span class="st">"narrative_text"</span>])</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>tfidf_df <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    tfidf_matrix.toarray(), columns<span class="op">=</span>tfidf_vec.get_feature_names_out(), index<span class="op">=</span>mda[<span class="st">"year"</span>]</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>tfidf_df[[<span class="st">"revenue"</span>, <span class="st">"margin"</span>, <span class="st">"debt"</span>, <span class="st">"cash"</span>, <span class="st">"liquidity"</span>]].<span class="bu">round</span>(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="16">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">revenue</th>
+<th data-quarto-table-cell-role="th">margin</th>
+<th data-quarto-table-cell-role="th">debt</th>
+<th data-quarto-table-cell-role="th">cash</th>
+<th data-quarto-table-cell-role="th">liquidity</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2021</th>
+<td>0.161</td>
+<td>0.095</td>
+<td>0.095</td>
+<td>0.000</td>
+<td>0.113</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2022</th>
+<td>0.158</td>
+<td>0.093</td>
+<td>0.093</td>
+<td>0.000</td>
+<td>0.110</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2023</th>
+<td>0.000</td>
+<td>0.098</td>
+<td>0.098</td>
+<td>0.138</td>
+<td>0.000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2024</th>
+<td>0.000</td>
+<td>0.095</td>
+<td>0.095</td>
+<td>0.133</td>
+<td>0.112</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2025</th>
+<td>0.000</td>
+<td>0.245</td>
+<td>0.164</td>
+<td>0.230</td>
+<td>0.097</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>“Margin” and “debt” both carry noticeably higher TF-IDF weight in 2025 than in earlier years — reflecting that year’s narrative repeatedly emphasizing margin improvement and debt reduction, exactly the two trends Chapter 7 identified as most significant.</p>
+</section>
+<section id="visualizing-word-frequency" class="level2" data-number="14.5">
+<h2 data-number="14.5" class="anchored" data-anchor-id="visualizing-word-frequency"><span class="header-section-number">14.5</span> Visualizing Word Frequency</h2>
+<p>Visualizing word frequency helps turn raw text into a quick, intuitive summary of the most common terms. It makes it easier to spot key themes, repeated concepts, and dominant topics in documents, survey responses, or research text.</p>
+<p>Common ways to visualize word frequency include bar charts, word clouds, and frequency tables. A bar chart is usually better for precise comparison, while a word cloud is more visually appealing for highlighting prominent words at a glance.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-6-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-1" role="tab" aria-controls="tabset-6-1" aria-selected="true" href="">seaborn</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-6-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-2" role="tab" aria-controls="tabset-6-2" aria-selected="false" href="">plotnine</a></li></ul>
+<div class="tab-content">
+<div id="tabset-6-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-6-1-tab">
+<div id="969af6bd" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>count_vec_top <span class="op">=</span> CountVectorizer(stop_words<span class="op">=</span><span class="st">"english"</span>, max_features<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>count_matrix_top <span class="op">=</span> count_vec_top.fit_transform(mda[<span class="st">"narrative_text"</span>])</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>word_freq <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"word"</span>: count_vec_top.get_feature_names_out(),</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"count"</span>: count_matrix_top.toarray().<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">0</span>),</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>}).sort_values(<span class="st">"count"</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="fl">4.5</span>))</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>sns.barplot(data<span class="op">=</span>word_freq, x<span class="op">=</span><span class="st">"count"</span>, y<span class="op">=</span><span class="st">"word"</span>, color<span class="op">=</span><span class="st">"#1c7c73"</span>)</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Most Frequent Words Across MD&amp;A Narratives (2021-2025)"</span>)</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="14-text-analytics-in-accounting_files/figure-html/cell-18-output-1.png" width="666" height="422" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-6-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-6-2-tab">
+<div id="df06f675" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    ggplot(word_freq, aes(x<span class="op">=</span><span class="st">"reorder(word, count)"</span>, y<span class="op">=</span><span class="st">"count"</span>))</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_col(fill<span class="op">=</span><span class="st">"#1c7c73"</span>)</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> coord_flip()</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> labs(title<span class="op">=</span><span class="st">"Most Frequent Words Across MD&amp;A Narratives (2021-2025)"</span>, x<span class="op">=</span><span class="st">""</span>, y<span class="op">=</span><span class="st">"Count"</span>)</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> theme_minimal()</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<div>
+<figure class="figure">
+<p><img src="14-text-analytics-in-accounting_files/figure-html/cell-19-output-1.png" width="672" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>A word cloud is a text visualization where more frequent words appear larger. It is often used to quickly spot the dominant terms in a document, survey responses, or a corpus.</p>
+<div id="d4344cbc" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> wordcloud <span class="im">import</span> WordCloud, STOPWORDS</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="st">Accounting is the language of business, and it helps organizations record, classify, and summarize financial activity. In a typical accounting cycle, transactions are identified, journal entries are prepared, and reports  are produced for managers and outside users. Accurate accounting supports informed decisions and improves  transparency across the firm.</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="st">Financial accounting focuses on preparing financial statements for external stakeholders such as investors, creditors, regulators, and analysts. These statements include the balance sheet, income statement, cash flow statement, and statement of equity. Together, they show how a company performs, what it owns, what it owes, and how it generates cash.</span></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="st">Managerial accounting is used inside the organization for planning, control, and decision-making. It often includes budgeting, cost analysis, variance analysis, and performance measurement. Unlike financial accounting, managerial accounting is not governed by the same external reporting standards and can be tailored to internal needs.</span></span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a><span class="st">Auditing plays an important role in ensuring that accounting information is reliable and fairly presented. External auditors examine financial statements and test internal controls to provide assurance to users. Internal auditors, by contrast, evaluate risk management, governance, and operational efficiency.</span></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a><span class="st">Corporate governance is closely connected to accounting because strong oversight reduces the risk of fraud and misstatement. Boards of directors, audit committees, and executives all influence the quality of reporting. Good governance helps ensure that financial reporting reflects economic reality rather than managerial manipulation.</span></span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a><span class="st">The use of technology in accounting has grown rapidly through enterprise systems, data analytics, and artificial intelligence. Automated tools can process invoices, detect anomalies, and flag unusual transactions. At the same time, professionals must understand the limitations of algorithms and maintain ethical oversight.</span></span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a><span class="st">Accounting standards provide consistency and comparability across firms and industries. In the United States, many public companies follow GAAP, while firms in other jurisdictions may use IFRS. Standards guide recognition, measurement, presentation, and disclosure decisions in financial reporting.</span></span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a><span class="st">Tax accounting differs from financial accounting because it is concerned with compliance and tax law rather than external reporting alone. Firms must track deductible expenses, taxable income, credits, and timing differences. Effective tax planning can reduce costs while remaining within legal requirements.</span></span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a><span class="st">Cost accounting helps organizations understand how resources are consumed in producing goods and services. It assigns direct materials, direct labor, and overhead to products, departments, or projects. This information supports pricing, profitability analysis, and operational improvement.</span></span>
+<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a><span class="st">Modern accounting research examines topics such as earnings quality, audit quality, disclosure, ESG reporting, and the effects of AI on decision-making. Researchers use archival data, experiments, and advanced statistical methods to study these issues. As business environments evolve, accounting continues to adapt to new risks, technologies, and stakeholder expectations.</span></span>
+<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Clean text</span></span>
+<span id="cb31-29"><a href="#cb31-29" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> text.lower()</span>
+<span id="cb31-30"><a href="#cb31-30" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> re.sub(<span class="vs">r"</span><span class="pp">[^a-z</span><span class="dv">\s</span><span class="pp">]</span><span class="vs">"</span>, <span class="st">" "</span>, text)</span>
+<span id="cb31-31"><a href="#cb31-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-32"><a href="#cb31-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove stopwords</span></span>
+<span id="cb31-33"><a href="#cb31-33" aria-hidden="true" tabindex="-1"></a>stopwords <span class="op">=</span> <span class="bu">set</span>(STOPWORDS)</span>
+<span id="cb31-34"><a href="#cb31-34" aria-hidden="true" tabindex="-1"></a>stopwords.update({</span>
+<span id="cb31-35"><a href="#cb31-35" aria-hidden="true" tabindex="-1"></a>    <span class="st">"accounting"</span>, <span class="st">"financial"</span>, <span class="st">"company"</span>, <span class="st">"companies"</span>,</span>
+<span id="cb31-36"><a href="#cb31-36" aria-hidden="true" tabindex="-1"></a>    <span class="st">"organization"</span>, <span class="st">"organizations"</span> <span class="co">#, "reporting", "statement","statements"</span></span>
+<span id="cb31-37"><a href="#cb31-37" aria-hidden="true" tabindex="-1"></a>    , <span class="st">"users"</span></span>
+<span id="cb31-38"><a href="#cb31-38" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb31-39"><a href="#cb31-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-40"><a href="#cb31-40" aria-hidden="true" tabindex="-1"></a>clean_text <span class="op">=</span> <span class="st">" "</span>.join(word <span class="cf">for</span> word <span class="kw">in</span> text.split() <span class="cf">if</span> word <span class="kw">not</span> <span class="kw">in</span> stopwords)</span>
+<span id="cb31-41"><a href="#cb31-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-42"><a href="#cb31-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate word cloud</span></span>
+<span id="cb31-43"><a href="#cb31-43" aria-hidden="true" tabindex="-1"></a>wc <span class="op">=</span> WordCloud(</span>
+<span id="cb31-44"><a href="#cb31-44" aria-hidden="true" tabindex="-1"></a>    width<span class="op">=</span><span class="dv">1200</span>,</span>
+<span id="cb31-45"><a href="#cb31-45" aria-hidden="true" tabindex="-1"></a>    height<span class="op">=</span><span class="dv">600</span>,</span>
+<span id="cb31-46"><a href="#cb31-46" aria-hidden="true" tabindex="-1"></a>    background_color<span class="op">=</span><span class="st">"white"</span>,</span>
+<span id="cb31-47"><a href="#cb31-47" aria-hidden="true" tabindex="-1"></a>    stopwords<span class="op">=</span>stopwords,</span>
+<span id="cb31-48"><a href="#cb31-48" aria-hidden="true" tabindex="-1"></a>    collocations<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb31-49"><a href="#cb31-49" aria-hidden="true" tabindex="-1"></a>    max_words<span class="op">=</span><span class="dv">100</span></span>
+<span id="cb31-50"><a href="#cb31-50" aria-hidden="true" tabindex="-1"></a>).generate(clean_text)</span>
+<span id="cb31-51"><a href="#cb31-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-52"><a href="#cb31-52" aria-hidden="true" tabindex="-1"></a><span class="co"># Display</span></span>
+<span id="cb31-53"><a href="#cb31-53" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
+<span id="cb31-54"><a href="#cb31-54" aria-hidden="true" tabindex="-1"></a>plt.imshow(wc, interpolation<span class="op">=</span><span class="st">"bilinear"</span>)</span>
+<span id="cb31-55"><a href="#cb31-55" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">"off"</span>)</span>
+<span id="cb31-56"><a href="#cb31-56" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb31-57"><a href="#cb31-57" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="14-text-analytics-in-accounting_files/figure-html/cell-20-output-1.png" width="730" height="374" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>You can also provide different shapes to your word cloud. We generate a word cloud of the state of Illinois shape.</p>
+<div id="0dae26ec" class="cell" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> wordcloud <span class="im">import</span> WordCloud, STOPWORDS</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> PIL <span class="im">import</span> Image</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Load your Illinois shape image</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>img <span class="op">=</span> Image.<span class="bu">open</span>(<span class="st">"images/illinois.png"</span>).convert(<span class="st">"L"</span>)  <span class="co"># grayscale</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> np.array(img)</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate word cloud in Illinois shape</span></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>wc <span class="op">=</span> WordCloud(</span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>    background_color<span class="op">=</span><span class="st">"white"</span>,</span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>    mask<span class="op">=</span>mask,</span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>    stopwords<span class="op">=</span>stopwords,</span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>    contour_width<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>    contour_color<span class="op">=</span><span class="st">"darkblue"</span>,</span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>    collocations<span class="op">=</span><span class="va">False</span></span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>).generate(text)</span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Show it</span></span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a>plt.imshow(wc, interpolation<span class="op">=</span><span class="st">"bilinear"</span>)</span>
+<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">"off"</span>)</span>
+<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="14-text-analytics-in-accounting_files/figure-html/cell-21-output-1.png" width="379" height="470" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="financial-sentiment-analysis" class="level2" data-number="14.6">
+<h2 data-number="14.6" class="anchored" data-anchor-id="financial-sentiment-analysis"><span class="header-section-number">14.6</span> Financial Sentiment Analysis</h2>
+<p><strong>Sentiment analysis</strong> scores text as positive, negative, or neutral, typically using a <strong>lexicon</strong>: a list of words tagged with a sentiment polarity. This is where financial text creates a genuine, well-documented problem: general-purpose sentiment lexicons are usually built from product reviews or social media, where words like “liability,” “tax,” “cost,” and “debt” are treated as negative — but in ordinary financial narrative, these are often just <strong>neutral accounting terms</strong>, not expressions of bad news.</p>
+<div id="b47259ca" class="cell" data-execution_count="21">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># An illustrative generic-style lexicon (not a real published tool)</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>generic_positive <span class="op">=</span> {<span class="st">"strong"</span>,<span class="st">"solid"</span>,<span class="st">"growth"</span>,<span class="st">"improved"</span>,<span class="st">"improve"</span>,<span class="st">"optimistic"</span>,<span class="st">"pleased"</span>,</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"positive"</span>,<span class="st">"opportunity"</span>,<span class="st">"gains"</span>,<span class="st">"growing"</span>,<span class="st">"grow"</span>,<span class="st">"expansion"</span>,<span class="st">"expand"</span>}</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>generic_negative <span class="op">=</span> {<span class="st">"debt"</span>,<span class="st">"decline"</span>,<span class="st">"declined"</span>,<span class="st">"liability"</span>,<span class="st">"liabilities"</span>,<span class="st">"risk"</span>,<span class="st">"cost"</span>,<span class="st">"costs"</span>,</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"cautious"</span>,<span class="st">"pressure"</span>,<span class="st">"pressures"</span>,<span class="st">"tax"</span>,<span class="st">"expense"</span>,<span class="st">"expenses"</span>,<span class="st">"loss"</span>,<span class="st">"losses"</span>}</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="co"># A finance-adjusted version: the same list, with neutral accounting/finance</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="co"># terms removed from the negative set, since they aren't inherently negative in this context</span></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>finance_adjusted_negative <span class="op">=</span> generic_negative <span class="op">-</span> {</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"debt"</span>, <span class="st">"liability"</span>, <span class="st">"liabilities"</span>, <span class="st">"tax"</span>, <span class="st">"expense"</span>, <span class="st">"expenses"</span>, <span class="st">"cost"</span>, <span class="st">"costs"</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> score_sentiment(text, positive_words, negative_words):</span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> text.lower()</span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>    tokens <span class="op">=</span> re.sub(<span class="vs">r"</span><span class="pp">[^a-z</span><span class="dv">\s</span><span class="pp">]</span><span class="vs">"</span>, <span class="st">""</span>, text).split()</span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>    pos_count <span class="op">=</span> <span class="bu">sum</span>(<span class="dv">1</span> <span class="cf">for</span> t <span class="kw">in</span> tokens <span class="cf">if</span> t <span class="kw">in</span> positive_words)</span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>    neg_count <span class="op">=</span> <span class="bu">sum</span>(<span class="dv">1</span> <span class="cf">for</span> t <span class="kw">in</span> tokens <span class="cf">if</span> t <span class="kw">in</span> negative_words)</span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>    total <span class="op">=</span> pos_count <span class="op">+</span> neg_count</span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fl">0.0</span> <span class="cf">if</span> total <span class="op">==</span> <span class="dv">0</span> <span class="cf">else</span> (pos_count <span class="op">-</span> neg_count) <span class="op">/</span> total</span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>mda[<span class="st">"Generic Lexicon"</span>] <span class="op">=</span> mda[<span class="st">"narrative_text"</span>].<span class="bu">apply</span>(</span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>    <span class="kw">lambda</span> t: score_sentiment(t, generic_positive, generic_negative)</span>
+<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>mda[<span class="st">"Finance-Adjusted Lexicon"</span>] <span class="op">=</span> mda[<span class="st">"narrative_text"</span>].<span class="bu">apply</span>(</span>
+<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">lambda</span> t: score_sentiment(t, generic_positive, finance_adjusted_negative)</span>
+<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a>mda[[<span class="st">"year"</span>, <span class="st">"Generic Lexicon"</span>, <span class="st">"Finance-Adjusted Lexicon"</span>]].<span class="bu">round</span>(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="21">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">Generic Lexicon</th>
+<th data-quarto-table-cell-role="th">Finance-Adjusted Lexicon</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>2021</td>
+<td>0.000</td>
+<td>0.500</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>2022</td>
+<td>0.111</td>
+<td>0.667</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>2023</td>
+<td>0.200</td>
+<td>0.500</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>2024</td>
+<td>0.333</td>
+<td>0.600</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>2025</td>
+<td>0.000</td>
+<td>1.000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>A Striking, Real Result From This Exact Data
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Look at <strong>2025</strong> — the year Chapter 7 identified as the company’s <em>strongest</em> year across every profitability and leverage metric. The generic lexicon scores it as perfectly <strong>neutral (0.000)</strong>, entirely because the word “debt” appears twice (in the context of paying it down, a genuinely positive development). The finance-adjusted lexicon correctly scores 2025 as the <strong>most positive</strong> year in the entire series (1.000). This is not a contrived example — it’s exactly what happens when a sentiment tool built for product reviews is applied unmodified to financial narrative. This is precisely why specialized financial sentiment dictionaries (the best-known being the academic Loughran-McDonald word lists, which you’re encouraged to look up and explore further) exist as a distinct tool from general-purpose sentiment analysis.</p>
+</div>
+</div>
+<div id="ab125d4e" class="cell" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>sentiment_long <span class="op">=</span> mda.melt(</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    id_vars<span class="op">=</span><span class="st">"year"</span>, value_vars<span class="op">=</span>[<span class="st">"Generic Lexicon"</span>, <span class="st">"Finance-Adjusted Lexicon"</span>],</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    var_name<span class="op">=</span><span class="st">"Lexicon"</span>, value_name<span class="op">=</span><span class="st">"Sentiment Score"</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true" href="">seaborn</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false" href="">plotnine</a></li></ul>
+<div class="tab-content">
+<div id="tabset-7-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-7-1-tab">
+<div id="7568d8ab" class="cell" data-execution_count="23">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="fl">4.5</span>))</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>sns.lineplot(data<span class="op">=</span>sentiment_long, x<span class="op">=</span><span class="st">"year"</span>, y<span class="op">=</span><span class="st">"Sentiment Score"</span>, hue<span class="op">=</span><span class="st">"Lexicon"</span>, marker<span class="op">=</span><span class="st">"o"</span>)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Sentiment Score by Lexicon Type, 2021-2025"</span>)</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="14-text-analytics-in-accounting_files/figure-html/cell-24-output-1.png" width="664" height="422" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-7-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-7-2-tab">
+<div id="ed07d539" class="cell" data-execution_count="24">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>    ggplot(sentiment_long, aes(x<span class="op">=</span><span class="st">"year"</span>, y<span class="op">=</span><span class="st">"Sentiment Score"</span>, color<span class="op">=</span><span class="st">"Lexicon"</span>))</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_line(size<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_point()</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> labs(title<span class="op">=</span><span class="st">"Sentiment Score by Lexicon Type, 2021-2025"</span>, x<span class="op">=</span><span class="st">"Year"</span>, y<span class="op">=</span><span class="st">"Sentiment Score"</span>)</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> theme_minimal()</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="24">
+<div>
+<figure class="figure">
+<p><img src="14-text-analytics-in-accounting_files/figure-html/cell-25-output-1.png" width="672" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>The finance-adjusted line trends upward, consistent with the company’s actual improving fundamentals; the generic line is noisy and even dips in the company’s best year — a clear illustration of why lexicon choice matters enormously in financial text analysis.</p>
+</section>
+<section id="text-classification" class="level2" data-number="14.7">
+<h2 data-number="14.7" class="anchored" data-anchor-id="text-classification"><span class="header-section-number">14.7</span> Text Classification</h2>
+<p>Beyond sentiment, a common accounting task is <strong>classifying</strong> text into categories — for example, sorting audit finding descriptions into issue types to prioritize review. This uses exactly the same train/test/evaluate workflow as Chapter 13’s financial distress classifier, with TF-IDF features standing in for financial ratios.</p>
+<div id="c2916dd3" class="cell" data-execution_count="25">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>findings <span class="op">=</span> pd.read_csv(<span class="st">"data/audit_findings_labeled.csv"</span>)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>findings[<span class="st">"category"</span>].value_counts()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="25">
+<pre><code>category
+Documentation/Support Missing    43
+Cutoff/Timing                    41
+Authorization/Access             38
+Duplicate/Data Entry             37
+Name: count, dtype: int64</code></pre>
+</div>
+</div>
+<div id="d3da4d48" class="cell" data-execution_count="26">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>findings[[<span class="st">"category"</span>, <span class="st">"description"</span>]].head(<span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="26">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">category</th>
+<th data-quarto-table-cell-role="th">description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Cutoff/Timing</td>
+<td>Revenue recognized 16 days before shipment dat...</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Duplicate/Data Entry</td>
+<td>Identical debit and credit amounts posted on t...</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Cutoff/Timing</td>
+<td>Journal entry dated last day of the quarter re...</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Authorization/Access</td>
+<td>No segregation of duties was evident between p...</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>Authorization/Access</td>
+<td>No segregation of duties was evident between p...</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="7a49f088" class="cell" data-execution_count="27">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score, classification_report</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>X_train_text, X_test_text, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>    findings[<span class="st">"description"</span>], findings[<span class="st">"category"</span>],</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>    test_size<span class="op">=</span><span class="fl">0.25</span>, random_state<span class="op">=</span><span class="dv">42</span>, stratify<span class="op">=</span>findings[<span class="st">"category"</span>]</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>vectorizer <span class="op">=</span> TfidfVectorizer(stop_words<span class="op">=</span><span class="st">"english"</span>, max_features<span class="op">=</span><span class="dv">200</span>)</span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> vectorizer.fit_transform(X_train_text)</span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> vectorizer.transform(X_test_text)</span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a>clf <span class="op">=</span> LogisticRegression(max_iter<span class="op">=</span><span class="dv">1000</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a>clf.fit(X_train, y_train)</span>
+<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> clf.predict(X_test)</span>
+<span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-18"><a href="#cb40-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Accuracy:"</span>, accuracy_score(y_test, y_pred))</span>
+<span id="cb40-19"><a href="#cb40-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(classification_report(y_test, y_pred))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Accuracy: 1.0
+                               precision    recall  f1-score   support
+
+         Authorization/Access       1.00      1.00      1.00        10
+                Cutoff/Timing       1.00      1.00      1.00        10
+Documentation/Support Missing       1.00      1.00      1.00        11
+         Duplicate/Data Entry       1.00      1.00      1.00         9
+
+                     accuracy                           1.00        40
+                    macro avg       1.00      1.00      1.00        40
+                 weighted avg       1.00      1.00      1.00        40
+</code></pre>
+</div>
+</div>
+<div id="9c4b1a3b" class="cell" data-execution_count="28">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># classify a brand-new, unseen finding description</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>new_finding <span class="op">=</span> [<span class="st">"The journal entry was approved by someone without proper sign-off authority."</span>]</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>new_vec <span class="op">=</span> vectorizer.transform(new_finding)</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>clf.predict(new_vec)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="28">
+<pre><code>array(['Authorization/Access'], dtype=object)</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Why Is Accuracy a Perfect 100%? (And Why That’s a Red Flag Here, Not a Success)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Unlike Chapter 13’s financial distress model (which topped out around 88% accuracy on real-feeling data), this model classifies with perfect accuracy. That’s <strong>not</strong> because text classification is inherently easier than numeric classification — it’s because this chapter’s finding descriptions were generated from a small number of category-specific templates, giving each category cleanly distinctive vocabulary (“duplicate,” “authorization,” “shipment,” “supporting documentation”) that a model can separate perfectly. <strong>Real audit findings are almost never this clean</strong>: the same finding might involve both a timing issue <em>and</em> a documentation gap, phrasing varies enormously between different auditors, and vocabulary overlaps heavily between categories. Treat this chapter’s 100% accuracy as a property of intentionally clean training data, not as a realistic expectation for a production text classifier — a good habit is to be <em>more</em> suspicious of a perfect score, not more confident, since it often signals a data leakage or over-simplification problem rather than genuine model quality.</p>
+</div>
+</div>
+</section>
+<section id="limits-and-risks-of-text-analytics-in-accounting" class="level2" data-number="14.8">
+<h2 data-number="14.8" class="anchored" data-anchor-id="limits-and-risks-of-text-analytics-in-accounting"><span class="header-section-number">14.8</span> Limits and Risks of Text Analytics in Accounting</h2>
+<p>The classical techniques in this chapter — bag-of-words, TF-IDF, lexicon-based sentiment, and TF-IDF-based classification — are useful but genuinely limited in ways worth naming directly:</p>
+<ul>
+<li><strong>No understanding of context.</strong> “The company <strong>is not</strong> at risk of default” and “the company <strong>is</strong> at risk of default” share almost identical bag-of-words representations despite opposite meanings — negation is invisible to these techniques.</li>
+<li><strong>No handling of sarcasm or subtlety.</strong> A skeptical or hedging tone (“management remains <em>cautiously</em> optimistic, though several risks remain unresolved”) is easily miscounted as simply positive by a lexicon that only tallies individual words.</li>
+<li><strong>Boilerplate dilutes signal.</strong> Real financial disclosures contain large amounts of standardized legal and risk-factor boilerplate repeated across companies and years, which can drown out the specific, meaningful language analysts actually care about.</li>
+<li><strong>Category and vocabulary overlap.</strong> As the audit finding classifier’s suspiciously perfect accuracy illustrates, real-world text rarely separates as cleanly as engineered examples do.</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Looking Ahead
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Every one of these limitations is exactly where large language models — the subject of the next chapter — represent a genuine leap forward: they capture context, negation, and tone in ways bag-of-words and lexicon counting fundamentally cannot. Understanding <em>why</em> these classical techniques struggle is what makes it possible to appreciate specifically what’s new and different about the GenAI-based approaches in Chapter 15, rather than treating “AI” as one undifferentiated technology.</p>
+</div>
+</div>
+</section>
+<section id="chapter-summary" class="level2" data-number="14.9">
+<h2 data-number="14.9" class="anchored" data-anchor-id="chapter-summary"><span class="header-section-number">14.9</span> Chapter Summary</h2>
+<ul>
+<li>Text analytics (NLP) extends this book’s analytical toolkit from structured, numeric data to unstructured text — MD&amp;A disclosures, earnings call transcripts, audit narratives, and more.</li>
+<li>Preprocessing (tokenization, stopword removal, stemming) turns raw text into a cleaned, analyzable form, though simple stemming rules can produce their own errors, as this chapter’s “gross” → “gros” example showed directly.</li>
+<li>Bag-of-words and TF-IDF convert text into numeric features usable by any machine learning model, with TF-IDF specifically upweighting distinctive, less common terms.</li>
+<li>General-purpose sentiment lexicons systematically misread financial text, since ordinary accounting terms like “debt,” “tax,” and “liability” get miscounted as negative — this chapter’s own data showed a generic lexicon scoring the company’s <em>best</em> year as perfectly neutral.</li>
+<li>Text classification follows the identical train/test/evaluate workflow from Chapter 13, just with TF-IDF features instead of financial ratios — and a suspiciously perfect accuracy score is a reason for more scrutiny, not less.</li>
+<li>Classical NLP techniques can’t handle negation, sarcasm, tone, or boilerplate dilution — exactly the gap that large language models, covered next, are designed to close.</li>
+</ul>
+</section>
+<section id="discussion-questions" class="level2" data-number="14.10">
+<h2 data-number="14.10" class="anchored" data-anchor-id="discussion-questions"><span class="header-section-number">14.10</span> Discussion Questions</h2>
+<ol type="1">
+<li>Why did the generic sentiment lexicon score 2025 — the company’s strongest year by every financial metric in Chapter 7 — as perfectly neutral? What does this suggest about applying general-purpose NLP tools to financial text without adaptation?</li>
+<li>The audit finding classifier achieved 100% accuracy. Why should that result make you <em>more</em> skeptical of the model, not more confident, and what would you want to test before trusting it on new, real findings?</li>
+<li>Give an example sentence (financial or otherwise) where bag-of-words would completely miss the actual meaning due to negation or sarcasm.</li>
+</ol>
+</section>
+<section id="exercises" class="level2" data-number="14.11">
+<h2 data-number="14.11" class="anchored" data-anchor-id="exercises"><span class="header-section-number">14.11</span> Exercises</h2>
+<ol type="1">
+<li>Add three new words to both the generic and finance-adjusted negative lexicons (e.g., “depreciation,” “obligation,” “amortization”) and recompute the sentiment scores. Does the gap between the two lexicons widen or narrow?</li>
+<li>Using <code>audit_findings_labeled.csv</code>, write five new finding descriptions in your own words for any one category, deliberately making the vocabulary overlap more with a <em>different</em> category than templates in this chapter did. Add them to the dataset and see whether the classifier’s accuracy drops.</li>
+<li>Rebuild the word frequency chart using only 2021 and 2025’s narratives separately (rather than combined). How does the most frequent vocabulary differ between the company’s weakest and strongest years?</li>
+<li>Using <code>simple_stem()</code> from this chapter, find at least two other words from the MD&amp;A narratives (besides “gross”) where the naive stemming rule produces an incorrect or confusing result, and explain why.</li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./13-predictive-modeling-intro.html" class="pagination-link" aria-label="Introduction to Predictive Modeling">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Introduction to Predictive Modeling</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./15-genai-in-accounting.html" class="pagination-link" aria-label="Generative AI in Accounting">
+        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI in Accounting</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Accounting Analytics with Python</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/msharifbd/accounting-analytics-book/edit/main/14-text-analytics-in-accounting.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/blob/main/14-text-analytics-in-accounting.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>This book was built with <a href="https://quarto.org/">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

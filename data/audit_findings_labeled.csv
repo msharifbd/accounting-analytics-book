@@ -1,0 +1,160 @@
+finding_id,category,description
+FIND7030,Cutoff/Timing,Revenue recognized 16 days before shipment date for invoice JE7030.
+FIND7043,Duplicate/Data Entry,Identical debit and credit amounts posted on the same day under two separate entry numbers.
+FIND7015,Cutoff/Timing,Journal entry dated last day of the quarter recognizes revenue prior to delivery.
+FIND7092,Authorization/Access,No segregation of duties was evident between preparation and approval of entry JE7092.
+FIND7082,Authorization/Access,No segregation of duties was evident between preparation and approval of entry JE7082.
+FIND7020,Cutoff/Timing,Invoice JE7020 was booked in advance of the related shipment confirmation.
+FIND7045,Duplicate/Data Entry,Identical debit and credit amounts posted on the same day under two separate entry numbers.
+FIND7012,Cutoff/Timing,Transaction posted at period-end appears to relate to the following fiscal year.
+FIND7041,Cutoff/Timing,Transaction posted at period-end appears to relate to the following fiscal year.
+FIND7098,Authorization/Access,No segregation of duties was evident between preparation and approval of entry JE7098.
+FIND7090,Authorization/Access,Entry JE7090 was posted by an employee outside their normal job responsibilities.
+FIND7095,Authorization/Access,No segregation of duties was evident between preparation and approval of entry JE7095.
+FIND7074,Duplicate/Data Entry,Duplicate posting detected for the same vendor invoice on the same date.
+FIND7106,Authorization/Access,Journal entry lacks evidence of required managerial approval prior to posting.
+FIND7060,Duplicate/Data Entry,Entry JE7060 appears to be a repeat of a prior posting with no distinguishing reference.
+FIND7091,Authorization/Access,No segregation of duties was evident between preparation and approval of entry JE7091.
+FIND7067,Duplicate/Data Entry,Entry JE7067 appears to be a repeat of a prior posting with no distinguishing reference.
+FIND7055,Duplicate/Data Entry,Same transaction was recorded twice due to a data entry error during month-end close.
+FIND7109,Authorization/Access,Journal entry lacks evidence of required managerial approval prior to posting.
+FIND7101,Authorization/Access,No segregation of duties was evident between preparation and approval of entry JE7101.
+FIND7154,Documentation/Support Missing,Supporting documentation for entry JE7154 could not be located during testing.
+FIND7036,Cutoff/Timing,Revenue recognized 35 days before shipment date for invoice JE7036.
+FIND7052,Duplicate/Data Entry,Duplicate posting detected for the same vendor invoice on the same date.
+FIND7006,Cutoff/Timing,Revenue recognized 5 days before shipment date for invoice JE7006.
+FIND7085,Authorization/Access,Posting was made by a user account with access beyond their assigned role.
+FIND7032,Cutoff/Timing,Revenue recognized 10 days before shipment date for invoice JE7032.
+FIND7017,Cutoff/Timing,Entry recorded before the performance obligation was satisfied per contract terms.
+FIND7146,Documentation/Support Missing,No vendor confirmation was available to support the recorded liability.
+FIND7144,Documentation/Support Missing,Supporting documentation for entry JE7144 could not be located during testing.
+FIND7094,Authorization/Access,Journal entry lacks evidence of required managerial approval prior to posting.
+FIND7128,Documentation/Support Missing,Supporting documentation for entry JE7128 could not be located during testing.
+FIND7104,Authorization/Access,No segregation of duties was evident between preparation and approval of entry JE7104.
+FIND7112,Authorization/Access,Entry JE7112 was posted by an employee outside their normal job responsibilities.
+FIND7132,Documentation/Support Missing,Transaction lacks a contract or purchase order to support the recorded amount.
+FIND7059,Duplicate/Data Entry,Entry JE7059 appears to be a repeat of a prior posting with no distinguishing reference.
+FIND7103,Authorization/Access,No segregation of duties was evident between preparation and approval of entry JE7103.
+FIND7048,Duplicate/Data Entry,"Two journal entries with identical date, account, and amount were identified for entry JE7048."
+FIND7070,Duplicate/Data Entry,Entry JE7070 appears to be a repeat of a prior posting with no distinguishing reference.
+FIND7034,Cutoff/Timing,Revenue recognized 35 days before shipment date for invoice JE7034.
+FIND7057,Duplicate/Data Entry,"Two journal entries with identical date, account, and amount were identified for entry JE7057."
+FIND7133,Documentation/Support Missing,Expense report attached to the entry does not itemize the underlying charges.
+FIND7111,Authorization/Access,Posting was made by a user account with access beyond their assigned role.
+FIND7107,Authorization/Access,Transaction was approved by an individual without documented signing authority.
+FIND7155,Documentation/Support Missing,Supporting documentation for entry JE7155 could not be located during testing.
+FIND7013,Cutoff/Timing,Transaction posted at period-end appears to relate to the following fiscal year.
+FIND7115,Authorization/Access,Journal entry lacks evidence of required managerial approval prior to posting.
+FIND7076,Duplicate/Data Entry,Duplicate posting detected for the same vendor invoice on the same date.
+FIND7029,Cutoff/Timing,Journal entry dated last day of the quarter recognizes revenue prior to delivery.
+FIND7054,Duplicate/Data Entry,Identical debit and credit amounts posted on the same day under two separate entry numbers.
+FIND7118,Documentation/Support Missing,No supporting invoice or receipt was attached to journal entry JE7118.
+FIND7137,Documentation/Support Missing,Transaction lacks a contract or purchase order to support the recorded amount.
+FIND7018,Cutoff/Timing,Journal entry dated last day of the quarter recognizes revenue prior to delivery.
+FIND7078,Duplicate/Data Entry,Duplicate posting detected for the same vendor invoice on the same date.
+FIND7158,Documentation/Support Missing,No vendor confirmation was available to support the recorded liability.
+FIND7014,Cutoff/Timing,Transaction posted at period-end appears to relate to the following fiscal year.
+FIND7079,Authorization/Access,Entry JE7079 was posted by an employee outside their normal job responsibilities.
+FIND7019,Cutoff/Timing,Revenue recognized 27 days before shipment date for invoice JE7019.
+FIND7049,Duplicate/Data Entry,Same transaction was recorded twice due to a data entry error during month-end close.
+FIND7093,Authorization/Access,Entry JE7093 was posted by an employee outside their normal job responsibilities.
+FIND7005,Cutoff/Timing,Revenue recognized 19 days before shipment date for invoice JE7005.
+FIND7046,Duplicate/Data Entry,Entry JE7046 appears to be a repeat of a prior posting with no distinguishing reference.
+FIND7142,Documentation/Support Missing,Transaction lacks a contract or purchase order to support the recorded amount.
+FIND7040,Cutoff/Timing,Revenue recognized 25 days before shipment date for invoice JE7040.
+FIND7037,Cutoff/Timing,Invoice JE7037 was booked in advance of the related shipment confirmation.
+FIND7127,Documentation/Support Missing,Expense report attached to the entry does not itemize the underlying charges.
+FIND7148,Documentation/Support Missing,Supporting documentation for entry JE7148 could not be located during testing.
+FIND7152,Documentation/Support Missing,Supporting documentation for entry JE7152 could not be located during testing.
+FIND7147,Documentation/Support Missing,Supporting documentation for entry JE7147 could not be located during testing.
+FIND7123,Documentation/Support Missing,No vendor confirmation was available to support the recorded liability.
+FIND7003,Cutoff/Timing,Revenue recognized 6 days before shipment date for invoice JE7003.
+FIND7124,Documentation/Support Missing,Expense report attached to the entry does not itemize the underlying charges.
+FIND7113,Authorization/Access,Journal entry lacks evidence of required managerial approval prior to posting.
+FIND7007,Cutoff/Timing,Transaction posted at period-end appears to relate to the following fiscal year.
+FIND7001,Cutoff/Timing,Invoice JE7001 was booked in advance of the related shipment confirmation.
+FIND7120,Documentation/Support Missing,No supporting invoice or receipt was attached to journal entry JE7120.
+FIND7066,Duplicate/Data Entry,"Two journal entries with identical date, account, and amount were identified for entry JE7066."
+FIND7056,Duplicate/Data Entry,"Two journal entries with identical date, account, and amount were identified for entry JE7056."
+FIND7086,Authorization/Access,Transaction was approved by an individual without documented signing authority.
+FIND7089,Authorization/Access,Posting was made by a user account with access beyond their assigned role.
+FIND7047,Duplicate/Data Entry,Duplicate posting detected for the same vendor invoice on the same date.
+FIND7063,Duplicate/Data Entry,"Two journal entries with identical date, account, and amount were identified for entry JE7063."
+FIND7075,Duplicate/Data Entry,Identical debit and credit amounts posted on the same day under two separate entry numbers.
+FIND7126,Documentation/Support Missing,No supporting invoice or receipt was attached to journal entry JE7126.
+FIND7100,Authorization/Access,Posting was made by a user account with access beyond their assigned role.
+FIND7108,Authorization/Access,Posting was made by a user account with access beyond their assigned role.
+FIND7096,Authorization/Access,Posting was made by a user account with access beyond their assigned role.
+FIND7011,Cutoff/Timing,Journal entry dated last day of the quarter recognizes revenue prior to delivery.
+FIND7035,Cutoff/Timing,Invoice JE7035 was booked in advance of the related shipment confirmation.
+FIND7033,Cutoff/Timing,Entry recorded before the performance obligation was satisfied per contract terms.
+FIND7131,Documentation/Support Missing,Expense report attached to the entry does not itemize the underlying charges.
+FIND7039,Cutoff/Timing,Entry recorded before the performance obligation was satisfied per contract terms.
+FIND7084,Authorization/Access,Transaction was approved by an individual without documented signing authority.
+FIND7121,Documentation/Support Missing,Transaction lacks a contract or purchase order to support the recorded amount.
+FIND7159,Documentation/Support Missing,Supporting documentation for entry JE7159 could not be located during testing.
+FIND7028,Cutoff/Timing,Entry recorded before the performance obligation was satisfied per contract terms.
+FIND7024,Cutoff/Timing,Transaction posted at period-end appears to relate to the following fiscal year.
+FIND7068,Duplicate/Data Entry,Same transaction was recorded twice due to a data entry error during month-end close.
+FIND7010,Cutoff/Timing,Entry recorded before the performance obligation was satisfied per contract terms.
+FIND7136,Documentation/Support Missing,No vendor confirmation was available to support the recorded liability.
+FIND7105,Authorization/Access,Transaction was approved by an individual without documented signing authority.
+FIND7117,Documentation/Support Missing,No vendor confirmation was available to support the recorded liability.
+FIND7139,Documentation/Support Missing,No vendor confirmation was available to support the recorded liability.
+FIND7088,Authorization/Access,Entry JE7088 was posted by an employee outside their normal job responsibilities.
+FIND7099,Authorization/Access,Journal entry lacks evidence of required managerial approval prior to posting.
+FIND7149,Documentation/Support Missing,No supporting invoice or receipt was attached to journal entry JE7149.
+FIND7119,Documentation/Support Missing,Supporting documentation for entry JE7119 could not be located during testing.
+FIND7065,Duplicate/Data Entry,Same transaction was recorded twice due to a data entry error during month-end close.
+FIND7016,Cutoff/Timing,Journal entry dated last day of the quarter recognizes revenue prior to delivery.
+FIND7083,Authorization/Access,Transaction was approved by an individual without documented signing authority.
+FIND7042,Duplicate/Data Entry,Entry JE7042 appears to be a repeat of a prior posting with no distinguishing reference.
+FIND7110,Authorization/Access,Posting was made by a user account with access beyond their assigned role.
+FIND7081,Authorization/Access,No segregation of duties was evident between preparation and approval of entry JE7081.
+FIND7053,Duplicate/Data Entry,Entry JE7053 appears to be a repeat of a prior posting with no distinguishing reference.
+FIND7027,Cutoff/Timing,Transaction posted at period-end appears to relate to the following fiscal year.
+FIND7077,Duplicate/Data Entry,Same transaction was recorded twice due to a data entry error during month-end close.
+FIND7044,Duplicate/Data Entry,"Two journal entries with identical date, account, and amount were identified for entry JE7044."
+FIND7114,Authorization/Access,Journal entry lacks evidence of required managerial approval prior to posting.
+FIND7025,Cutoff/Timing,Transaction posted at period-end appears to relate to the following fiscal year.
+FIND7153,Documentation/Support Missing,No vendor confirmation was available to support the recorded liability.
+FIND7125,Documentation/Support Missing,Transaction lacks a contract or purchase order to support the recorded amount.
+FIND7150,Documentation/Support Missing,Supporting documentation for entry JE7150 could not be located during testing.
+FIND7050,Duplicate/Data Entry,Identical debit and credit amounts posted on the same day under two separate entry numbers.
+FIND7022,Cutoff/Timing,Entry recorded before the performance obligation was satisfied per contract terms.
+FIND7071,Duplicate/Data Entry,Identical debit and credit amounts posted on the same day under two separate entry numbers.
+FIND7004,Cutoff/Timing,Journal entry dated last day of the quarter recognizes revenue prior to delivery.
+FIND7151,Documentation/Support Missing,Transaction lacks a contract or purchase order to support the recorded amount.
+FIND7031,Cutoff/Timing,Revenue recognized 22 days before shipment date for invoice JE7031.
+FIND7157,Documentation/Support Missing,Transaction lacks a contract or purchase order to support the recorded amount.
+FIND7122,Documentation/Support Missing,No supporting invoice or receipt was attached to journal entry JE7122.
+FIND7116,Authorization/Access,No segregation of duties was evident between preparation and approval of entry JE7116.
+FIND7009,Cutoff/Timing,Revenue recognized 12 days before shipment date for invoice JE7009.
+FIND7061,Duplicate/Data Entry,"Two journal entries with identical date, account, and amount were identified for entry JE7061."
+FIND7129,Documentation/Support Missing,Transaction lacks a contract or purchase order to support the recorded amount.
+FIND7002,Cutoff/Timing,Invoice JE7002 was booked in advance of the related shipment confirmation.
+FIND7058,Duplicate/Data Entry,Identical debit and credit amounts posted on the same day under two separate entry numbers.
+FIND7023,Cutoff/Timing,Entry recorded before the performance obligation was satisfied per contract terms.
+FIND7062,Duplicate/Data Entry,Entry JE7062 appears to be a repeat of a prior posting with no distinguishing reference.
+FIND7064,Duplicate/Data Entry,Duplicate posting detected for the same vendor invoice on the same date.
+FIND7008,Cutoff/Timing,Invoice JE7008 was booked in advance of the related shipment confirmation.
+FIND7156,Documentation/Support Missing,Supporting documentation for entry JE7156 could not be located during testing.
+FIND7087,Authorization/Access,Journal entry lacks evidence of required managerial approval prior to posting.
+FIND7097,Authorization/Access,Posting was made by a user account with access beyond their assigned role.
+FIND7069,Duplicate/Data Entry,Entry JE7069 appears to be a repeat of a prior posting with no distinguishing reference.
+FIND7051,Duplicate/Data Entry,Identical debit and credit amounts posted on the same day under two separate entry numbers.
+FIND7143,Documentation/Support Missing,Transaction lacks a contract or purchase order to support the recorded amount.
+FIND7140,Documentation/Support Missing,No supporting invoice or receipt was attached to journal entry JE7140.
+FIND7102,Authorization/Access,Entry JE7102 was posted by an employee outside their normal job responsibilities.
+FIND7021,Cutoff/Timing,Journal entry dated last day of the quarter recognizes revenue prior to delivery.
+FIND7026,Cutoff/Timing,Entry recorded before the performance obligation was satisfied per contract terms.
+FIND7135,Documentation/Support Missing,Supporting documentation for entry JE7135 could not be located during testing.
+FIND7072,Duplicate/Data Entry,Identical debit and credit amounts posted on the same day under two separate entry numbers.
+FIND7130,Documentation/Support Missing,No supporting invoice or receipt was attached to journal entry JE7130.
+FIND7145,Documentation/Support Missing,Expense report attached to the entry does not itemize the underlying charges.
+FIND7080,Authorization/Access,Posting was made by a user account with access beyond their assigned role.
+FIND7134,Documentation/Support Missing,Supporting documentation for entry JE7134 could not be located during testing.
+FIND7138,Documentation/Support Missing,Expense report attached to the entry does not itemize the underlying charges.
+FIND7073,Duplicate/Data Entry,Identical debit and credit amounts posted on the same day under two separate entry numbers.
+FIND7141,Documentation/Support Missing,No vendor confirmation was available to support the recorded liability.
+FIND7038,Cutoff/Timing,Journal entry dated last day of the quarter recognizes revenue prior to delivery.
