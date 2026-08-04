@@ -149,7 +149,7 @@ The red points cluster visibly at the right edge of each quarter — exactly whe
 
 :::{.panel-tabset}
 
-### pandas 
+## pandas 
 ```{python}
 customer_summary = sales_pd.groupby("customer_id").apply(
     lambda x: pd.Series({
