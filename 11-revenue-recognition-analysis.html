@@ -591,12 +591,12 @@ a.citation, a.citation:visited {
   <ul class="collapse">
   <li><a href="#which-customers-drive-the-concentration" id="toc-which-customers-drive-the-concentration" class="nav-link" data-scroll-target="#which-customers-drive-the-concentration"><span class="header-section-number">11.2.1</span> Which Customers Drive the Concentration?</a></li>
   </ul></li>
-  <li><a href="#detecting-bill-and-hold-patterns" id="toc-detecting-bill-and-hold-patterns" class="nav-link" data-scroll-target="#detecting-bill-and-hold-patterns"><span class="header-section-number">11.4</span> Detecting Bill-and-Hold Patterns</a></li>
-  <li><a href="#accounts-receivable-aging" id="toc-accounts-receivable-aging" class="nav-link" data-scroll-target="#accounts-receivable-aging"><span class="header-section-number">11.5</span> Accounts Receivable Aging</a></li>
-  <li><a href="#days-sales-outstanding-dso-by-quarter" id="toc-days-sales-outstanding-dso-by-quarter" class="nav-link" data-scroll-target="#days-sales-outstanding-dso-by-quarter"><span class="header-section-number">11.6</span> Days Sales Outstanding (DSO) by Quarter</a></li>
-  <li><a href="#chapter-summary" id="toc-chapter-summary" class="nav-link" data-scroll-target="#chapter-summary"><span class="header-section-number">11.7</span> Chapter Summary</a></li>
-  <li><a href="#discussion-questions" id="toc-discussion-questions" class="nav-link" data-scroll-target="#discussion-questions"><span class="header-section-number">11.8</span> Discussion Questions</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">11.9</span> Exercises</a></li>
+  <li><a href="#detecting-bill-and-hold-patterns" id="toc-detecting-bill-and-hold-patterns" class="nav-link" data-scroll-target="#detecting-bill-and-hold-patterns"><span class="header-section-number">11.3</span> Detecting Bill-and-Hold Patterns</a></li>
+  <li><a href="#accounts-receivable-aging" id="toc-accounts-receivable-aging" class="nav-link" data-scroll-target="#accounts-receivable-aging"><span class="header-section-number">11.4</span> Accounts Receivable Aging</a></li>
+  <li><a href="#days-sales-outstanding-dso-by-quarter" id="toc-days-sales-outstanding-dso-by-quarter" class="nav-link" data-scroll-target="#days-sales-outstanding-dso-by-quarter"><span class="header-section-number">11.5</span> Days Sales Outstanding (DSO) by Quarter</a></li>
+  <li><a href="#chapter-summary" id="toc-chapter-summary" class="nav-link" data-scroll-target="#chapter-summary"><span class="header-section-number">11.6</span> Chapter Summary</a></li>
+  <li><a href="#discussion-questions" id="toc-discussion-questions" class="nav-link" data-scroll-target="#discussion-questions"><span class="header-section-number">11.7</span> Discussion Questions</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">11.8</span> Exercises</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/msharifbd/accounting-analytics-book/edit/main/11-revenue-recognition-analysis.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/blob/main/11-revenue-recognition-analysis.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/msharifbd/accounting-analytics-book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -657,7 +657,7 @@ a.citation, a.citation:visited {
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="" aria-current="page">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">polars</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<div id="5ed72392" class="cell" data-execution_count="1">
+<div id="8f459f23" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>sales_pd <span class="op">=</span> pd.read_csv(<span class="st">"data/sales_transactions.csv"</span>, parse_dates<span class="op">=</span>[<span class="st">"invoice_date"</span>, <span class="st">"ship_date"</span>, <span class="st">"payment_date"</span>])</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>sales_pd.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -749,7 +749,7 @@ a.citation, a.citation:visited {
 </div>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<div id="890b0b94" class="cell" data-execution_count="2">
+<div id="b0b3ba7f" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>sales_pl <span class="op">=</span> pl.read_csv(<span class="st">"data/sales_transactions.csv"</span>, try_parse_dates<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>sales_pl.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -860,7 +860,7 @@ a.citation, a.citation:visited {
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">polars</a></li></ul>
 <div class="tab-content">
 <div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
-<div id="36b778cd" class="cell" data-execution_count="3">
+<div id="2233c3d8" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>sales_pd[<span class="st">"quarter_end_date"</span>] <span class="op">=</span> sales_pd.groupby(<span class="st">"quarter"</span>)[<span class="st">"invoice_date"</span>].transform(<span class="st">"max"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>sales_pd[<span class="st">"days_before_qend"</span>] <span class="op">=</span> (sales_pd[<span class="st">"quarter_end_date"</span>] <span class="op">-</span> sales_pd[<span class="st">"invoice_date"</span>]).dt.days</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>sales_pd[<span class="st">"is_quarter_end_spike"</span>] <span class="op">=</span> sales_pd[<span class="st">"days_before_qend"</span>] <span class="op">&lt;=</span> <span class="dv">3</span></span>
@@ -939,7 +939,7 @@ a.citation, a.citation:visited {
 </div>
 </div>
 <div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
-<div id="458f5deb" class="cell" data-execution_count="4">
+<div id="da861f14" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>sales_pl <span class="op">=</span> sales_pl.with_columns(</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    pl.col(<span class="st">"invoice_date"</span>).<span class="bu">max</span>().over(<span class="st">"quarter"</span>).alias(<span class="st">"quarter_end_date"</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>).with_columns(</span>
@@ -1040,7 +1040,7 @@ a.citation, a.citation:visited {
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">seaborn</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">plotnine</a></li></ul>
 <div class="tab-content">
 <div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
-<div id="8658acf1" class="cell" data-execution_count="5">
+<div id="c62c837b" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1063,7 +1063,7 @@ a.citation, a.citation:visited {
 </div>
 </div>
 <div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
-<div id="bd50f502" class="cell" data-execution_count="6">
+<div id="5b814d5f" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> (</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    ggplot,</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    aes,</span>
@@ -1119,12 +1119,12 @@ a.citation, a.citation:visited {
 </div>
 <p>The red points cluster visibly at the right edge of each quarter — exactly where we’d expect to see them if revenue is being pushed into period-end.</p>
 <section id="which-customers-drive-the-concentration" class="level3" data-number="11.2.1">
-<h3 data-number="11.2.1" class="anchored"><span class="header-section-number">11.2.1</span> Which Customers Drive the Concentration?</h3>
+<h3 data-number="11.2.1" class="anchored" data-anchor-id="which-customers-drive-the-concentration"><span class="header-section-number">11.2.1</span> Which Customers Drive the Concentration?</h3>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href="">pandas</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false" href="">polars</a></li></ul>
 <div class="tab-content">
 <div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
-<div id="d2cc828c" class="cell" data-execution_count="7">
+<div id="f6220dae" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>customer_summary <span class="op">=</span> sales_pd.groupby(<span class="st">"customer_id"</span>).<span class="bu">apply</span>(</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">lambda</span> x: pd.Series({</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"total_revenue"</span>: x[<span class="st">"amount"</span>].<span class="bu">sum</span>(),</span>
@@ -1209,9 +1209,9 @@ a.citation, a.citation:visited {
 </div>
 </div>
 </div>
-<section id="polars-2" class="level2" data-number="11.3">
-<h2 data-number="11.3" class="anchored" data-anchor-id="polars-2"><span class="header-section-number">11.3</span> polars</h2>
-<div id="6abec4bd" class="cell" data-execution_count="8">
+</div>
+<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
+<div id="adb4a6a3" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>customer_summary_pl <span class="op">=</span> (</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    sales_pl</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    .group_by(<span class="st">"customer_id"</span>)</span>
@@ -1315,21 +1315,20 @@ a.citation, a.citation:visited {
 </div>
 </div>
 </div>
-</section>
 </div>
 </div>
 </div>
 <p>Four customers stand out with well over half their annual revenue concentrated in quarter-end spike windows — worth remembering, since we’ll come back to these exact customers in the next section.</p>
 </section>
 </section>
-<section id="detecting-bill-and-hold-patterns" class="level2" data-number="11.4">
-<h2 data-number="11.4" class="anchored" data-anchor-id="detecting-bill-and-hold-patterns"><span class="header-section-number">11.4</span> Detecting Bill-and-Hold Patterns</h2>
+<section id="detecting-bill-and-hold-patterns" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="detecting-bill-and-hold-patterns"><span class="header-section-number">11.3</span> Detecting Bill-and-Hold Patterns</h2>
 <p>A <strong>bill-and-hold</strong> arrangement — invoicing a customer before goods actually ship — is a classic revenue recognition red flag, since control of the goods hasn’t transferred to the customer yet. We can detect this directly by comparing <code>invoice_date</code> to <code>ship_date</code>.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false" href="">polars</a></li></ul>
 <div class="tab-content">
 <div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
-<div id="679adc8c" class="cell" data-execution_count="9">
+<div id="471bb63f" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>sales_pd[<span class="st">"ship_lag_days"</span>] <span class="op">=</span> (sales_pd[<span class="st">"ship_date"</span>] <span class="op">-</span> sales_pd[<span class="st">"invoice_date"</span>]).dt.days</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>bill_and_hold_pd <span class="op">=</span> sales_pd[sales_pd[<span class="st">"ship_lag_days"</span>] <span class="op">&gt;</span> <span class="dv">10</span>]</span>
@@ -1404,7 +1403,7 @@ a.citation, a.citation:visited {
 </div>
 </div>
 <div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
-<div id="aa64508b" class="cell" data-execution_count="10">
+<div id="cc1c91d6" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>sales_pl <span class="op">=</span> sales_pl.with_columns(</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    (pl.col(<span class="st">"ship_date"</span>) <span class="op">-</span> pl.col(<span class="st">"invoice_date"</span>)).dt.total_days().alias(<span class="st">"ship_lag_days"</span>)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -1493,7 +1492,7 @@ a.citation, a.citation:visited {
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-6-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-1" role="tab" aria-controls="tabset-6-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-6-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-2" role="tab" aria-controls="tabset-6-2" aria-selected="false" href="">polars</a></li></ul>
 <div class="tab-content">
 <div id="tabset-6-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-6-1-tab">
-<div id="818d2a1f" class="cell" data-execution_count="11">
+<div id="ec939a77" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>sales_pd[<span class="st">"ship_lag_days"</span>].describe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
 <pre><code>count    427.000000
@@ -1509,7 +1508,7 @@ Name: ship_lag_days, dtype: float64</code></pre>
 </div>
 </div>
 <div id="tabset-6-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-6-2-tab">
-<div id="2928d4bc" class="cell" data-execution_count="12">
+<div id="32ce7961" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>sales_pl.select(<span class="st">"ship_lag_days"</span>).describe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
 <div><style>
@@ -1591,14 +1590,14 @@ Name: ship_lag_days, dtype: float64</code></pre>
 </div>
 </div>
 </section>
-<section id="accounts-receivable-aging" class="level2" data-number="11.5">
-<h2 data-number="11.5" class="anchored" data-anchor-id="accounts-receivable-aging"><span class="header-section-number">11.5</span> Accounts Receivable Aging</h2>
+<section id="accounts-receivable-aging" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="accounts-receivable-aging"><span class="header-section-number">11.4</span> Accounts Receivable Aging</h2>
 <p>An <strong>AR aging schedule</strong> aging is an accounting method that categorizes a company’s unpaid customer invoices based on the length of time they have been due. It groups outstanding balances into specific time buckets (e.g., 0-30, 31-60, 61-90, and 90+ days) to help businesses track collections, assess credit risk, and manage cash flow.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false" href="">polars</a></li></ul>
 <div class="tab-content">
 <div id="tabset-7-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-7-1-tab">
-<div id="c7b469a8" class="cell" data-execution_count="13">
+<div id="fd37c358" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>as_of_date <span class="op">=</span> pd.Timestamp(<span class="st">"2025-12-31"</span>)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>unpaid_pd <span class="op">=</span> sales_pd[sales_pd[<span class="st">"payment_date"</span>].isna()].copy()</span>
@@ -1656,7 +1655,7 @@ Name: ship_lag_days, dtype: float64</code></pre>
 </div>
 </div>
 <div id="tabset-7-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-7-2-tab">
-<div id="0080c801" class="cell" data-execution_count="14">
+<div id="fb3b1f07" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>as_of_pl <span class="op">=</span> pl.date(<span class="dv">2025</span>, <span class="dv">12</span>, <span class="dv">31</span>)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>unpaid_pl <span class="op">=</span> sales_pl.<span class="bu">filter</span>(pl.col(<span class="st">"payment_date"</span>).is_null()).with_columns(</span>
@@ -1743,14 +1742,14 @@ Name: ship_lag_days, dtype: float64</code></pre>
 </div>
 <p>Roughly $27,600 sits in the 90+ day bucket — the balances most at risk of never being collected, and the ones a real audit or collections team would prioritize reviewing first.</p>
 </section>
-<section id="days-sales-outstanding-dso-by-quarter" class="level2" data-number="11.6">
-<h2 data-number="11.6" class="anchored" data-anchor-id="days-sales-outstanding-dso-by-quarter"><span class="header-section-number">11.6</span> Days Sales Outstanding (DSO) by Quarter</h2>
+<section id="days-sales-outstanding-dso-by-quarter" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="days-sales-outstanding-dso-by-quarter"><span class="header-section-number">11.5</span> Days Sales Outstanding (DSO) by Quarter</h2>
 <p>Days Sales Outstanding (DSO) is a financial metric that measures the average number of days it takes a company to collect payment after making a sale. A lower DSO indicates healthy cash flow and efficient collections, while a higher DSO points to potential liquidity risks and delayed payments.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-8-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-1" role="tab" aria-controls="tabset-8-1" aria-selected="true" href="">pandas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-2" role="tab" aria-controls="tabset-8-2" aria-selected="false" href="">polars</a></li></ul>
 <div class="tab-content">
 <div id="tabset-8-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-8-1-tab">
-<div id="014b5591" class="cell" data-execution_count="15">
+<div id="90677cca" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>paid_pd <span class="op">=</span> sales_pd[sales_pd[<span class="st">"is_paid"</span>]].copy()</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>paid_pd[<span class="st">"days_to_collect"</span>] <span class="op">=</span> (paid_pd[<span class="st">"payment_date"</span>] <span class="op">-</span> paid_pd[<span class="st">"invoice_date"</span>]).dt.days</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1767,7 +1766,7 @@ Name: days_to_collect, dtype: float64</code></pre>
 </div>
 </div>
 <div id="tabset-8-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-8-2-tab">
-<div id="dd971027" class="cell" data-execution_count="16">
+<div id="d0392c1c" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>paid_pl <span class="op">=</span> sales_pl.<span class="bu">filter</span>(pl.col(<span class="st">"is_paid"</span>)).with_columns(</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    (pl.col(<span class="st">"payment_date"</span>) <span class="op">-</span> pl.col(<span class="st">"invoice_date"</span>)).dt.total_days().alias(<span class="st">"days_to_collect"</span>)</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -1840,8 +1839,8 @@ Name: days_to_collect, dtype: float64</code></pre>
 </div>
 </div>
 </section>
-<section id="chapter-summary" class="level2" data-number="11.7">
-<h2 data-number="11.7" class="anchored" data-anchor-id="chapter-summary"><span class="header-section-number">11.7</span> Chapter Summary</h2>
+<section id="chapter-summary" class="level2" data-number="11.6">
+<h2 data-number="11.6" class="anchored" data-anchor-id="chapter-summary"><span class="header-section-number">11.6</span> Chapter Summary</h2>
 <ul>
 <li>Revenue recognition timing is one of the highest-risk areas in financial reporting, since a large share of reported profitability depends on <em>when</em> revenue is recorded, not just whether the underlying sale is genuine.</li>
 <li>Quarter-end revenue concentration (a disproportionate share of a period’s revenue landing in its final days) is a standard analytics test associated with channel stuffing risk.</li>
@@ -1851,16 +1850,16 @@ Name: days_to_collect, dtype: float64</code></pre>
 <li>DSO and other time-to-event metrics computed near a data cutoff are vulnerable to survivorship bias: recent periods will systematically appear to collect faster, simply because slow payers haven’t had time to be captured yet, not because collection genuinely improved.</li>
 </ul>
 </section>
-<section id="discussion-questions" class="level2" data-number="11.8">
-<h2 data-number="11.8" class="anchored" data-anchor-id="discussion-questions"><span class="header-section-number">11.8</span> Discussion Questions</h2>
+<section id="discussion-questions" class="level2" data-number="11.7">
+<h2 data-number="11.7" class="anchored" data-anchor-id="discussion-questions"><span class="header-section-number">11.7</span> Discussion Questions</h2>
 <ol type="1">
 <li>A 20-30% revenue concentration in the last 4 days of a quarter isn’t proof of a problem by itself. What additional information would you want before deciding whether this pattern reflects a real business practice versus a reporting concern?</li>
 <li>Why does convergence between the quarter-end spike analysis and the bill-and-hold analysis (both flagging the same four customers) matter more than either finding alone?</li>
 <li>Explain, in your own words, why the declining DSO trend from Q1 to Q4 is at least partly misleading, and describe a concrete way you could measure DSO that would avoid this bias.</li>
 </ol>
 </section>
-<section id="exercises" class="level2" data-number="11.9">
-<h2 data-number="11.9" class="anchored" data-anchor-id="exercises"><span class="header-section-number">11.9</span> Exercises</h2>
+<section id="exercises" class="level2" data-number="11.8">
+<h2 data-number="11.8" class="anchored" data-anchor-id="exercises"><span class="header-section-number">11.8</span> Exercises</h2>
 <ol type="1">
 <li>Recompute DSO by quarter, but restrict the analysis to only invoices at least 120 days old as of December 31, 2025 (i.e., invoiced on or before September 3, 2025). Does the “improving DSO” trend still appear once this restriction removes the survivorship bias?</li>
 <li>Using the customer-level spike concentration table, identify any customer with more than 30% of their revenue from quarter-end spikes who was <em>not</em> one of the five bill-and-hold invoices. What follow-up would you recommend for that customer specifically?</li>
