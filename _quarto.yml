@@ -13,6 +13,11 @@ book:
   page-footer:
     left: "Accounting Analytics with Python"
     right: "This book was built with [Quarto](https://quarto.org/)"
+  sidebar:
+    tools:
+      - icon: cup-hot
+        href: https://www.buymeacoffee.com/msharifbd
+        text: "Buy Me a Coffee"
   chapters:
     - index.qmd
     - part: "Part I: Foundations"
