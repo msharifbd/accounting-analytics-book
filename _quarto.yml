@@ -5,11 +5,18 @@ project:
 book:
   title: "Accounting Analytics with Python"
   subtitle: "Analytics Powered by Large Language Models (LLM)"
-  author: "Sharif Islam, DBA, CPA, CMA"
+  author: 
+    - name: "Sharif Islam, DBA, CPA, CMA"
+      email: mdshariful.islam@siu.edu 
+      affiliations:
+        - name: "Southern Illinois University Carbondale"
+
   downloads: [pdf, epub] 
   date: today
+  site-url: https://msharifbd.github.io/accounting-analytics-book/
   repo-url: https://github.com/msharifbd/accounting-analytics-book
   repo-actions: [edit, source, issue]
+  sharing: [twitter, facebook, linkedin]
   page-footer:
     left: "Accounting Analytics with Python"
     right: "This book was built with [Quarto](https://quarto.org/)"
