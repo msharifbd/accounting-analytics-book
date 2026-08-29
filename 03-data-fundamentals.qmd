@@ -170,7 +170,7 @@ A few things worth noticing just from visual inspection, before we write a singl
 
 - This table is **tidy**: each column is a single variable (date, account, debit, credit, etc.), and each row is one line of a journal entry.
 - The **level of measurement** varies by column: `debit`/`credit` are ratio-level (arithmetic is meaningful), `account_type` and `department` are nominal (categories only), `entry_date` is a date type requiring careful handling.
-- This is **transaction-level** data — far more granular than the trial balance from Chapter 2 — which is exactly the kind of dataset audit and fraud analytics techniques (Chapters 8–9) are designed to work with.
+- This is **transaction-level** data — far more granular than the trial balance from Chapter 2 — which is exactly the kind of dataset audit and fraud analytics techniques (Chapters 9-10) are designed to work with.
 
 We'll load and work with this exact file in Chapter 4.
 
