@@ -16,15 +16,15 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      # CHANGED: uv replaces setup-python and pip
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v6
         with:
           python-version: "3.11"
 
+      # CHANGED: install from pyproject.toml + uv.lock
       - name: Install Python dependencies
-        run: |
-          pip install --upgrade pip
-          pip install -r requirements.txt
+        run: uv sync --locked
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
@@ -38,8 +38,9 @@ jobs:
           sudo apt-get install -y fonts-ebgaramond
           fc-cache -f -v
 
+      # CHANGED: run Quarto inside the uv environment
       - name: Render the book (HTML and PDF)
-        run: quarto render
+        run: uv run quarto render
 
       - name: Disable Jekyll processing on GitHub Pages
         run: touch _book/.nojekyll
