@@ -181,9 +181,10 @@ plt.show()
 
 ## plotnine
 ```{python}
+from plotnine import geom_boxplot
 (
     ggplot(zoomed, aes(x="department", y="debit"))
-    + geom_violin(fill="#c9482f", alpha=0.6)
+    + geom_boxplot(fill="#c9482f", alpha=0.6)
     + labs(title="Debit Amount by Department (under $10,000)", x="Department", y="Debit Amount ($)")
     + theme_minimal()
 )

@@ -3,8 +3,9 @@ name = "ACCOUNTING-ANALYTICS-BOOK"
 version = "0.1.0"
 requires-python = ">= 3.11.0"
 dependencies = [
+    "edgar>=5.6.3",
     "edgar-analytics>=1.0.7",
-    "edgartools>=5.42.0",
+    "edgartools>=5.61",
     "ipykernel>=7.3.0",
     "jupyter>=1.1.1",
     "matplotlib>=3.11.0",

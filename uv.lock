@@ -1,15 +1,15 @@
 version = 1
-revision = 3
+revision = 5
 requires-python = ">=3.11.0"
 resolution-markers = [
     "python_full_version >= '3.14' and sys_platform == 'win32'",
     "python_full_version >= '3.14' and sys_platform == 'emscripten'",
     "python_full_version >= '3.14' and sys_platform != 'emscripten' and sys_platform != 'win32'",
     "python_full_version == '3.13.*' and sys_platform == 'win32'",
-    "python_full_version == '3.12.*' and sys_platform == 'win32'",
     "python_full_version == '3.13.*' and sys_platform == 'emscripten'",
-    "python_full_version == '3.12.*' and sys_platform == 'emscripten'",
     "python_full_version == '3.13.*' and sys_platform != 'emscripten' and sys_platform != 'win32'",
+    "python_full_version == '3.12.*' and sys_platform == 'win32'",
+    "python_full_version == '3.12.*' and sys_platform == 'emscripten'",
     "python_full_version == '3.12.*' and sys_platform != 'emscripten' and sys_platform != 'win32'",
     "python_full_version < '3.12' and sys_platform == 'win32'",
     "python_full_version < '3.12' and sys_platform == 'emscripten'",
@@ -21,6 +21,7 @@ name = "accounting-analytics-book"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
+    { name = "edgar" },
     { name = "edgar-analytics" },
     { name = "edgartools" },
     { name = "ipykernel" },
@@ -45,8 +46,9 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
+    { name = "edgar", specifier = ">=5.6.3" },
     { name = "edgar-analytics", specifier = ">=1.0.7" },
-    { name = "edgartools", specifier = ">=5.42.0" },
+    { name = "edgartools", specifier = ">=5.61" },
     { name = "ipykernel", specifier = ">=7.3.0" },
     { name = "jupyter", specifier = ">=1.1.1" },
     { name = "matplotlib", specifier = ">=3.11.0" },
@@ -608,6 +610,21 @@ wheels = [
 ]
 
 [[package]]
+name = "edgar"
+version = "5.6.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "lxml" },
+    { name = "rapidfuzz" },
+    { name = "requests" },
+    { name = "tqdm" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/fc/62/6aad0e8c98c11935b90e4c256bdc209fd38ebfe4c4dfd4ffe7a4f14cad07/edgar-5.6.3.tar.gz", hash = "sha256:6e8ca83809a72ee3872736fac211b01fada7d3228052a088437717147f445a07", size = 24883, upload-time = "2024-10-13T08:13:39.657Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d0/b4/36966cabbaddc606111c59adb6b0fa25b615679089fcbc9bbfc167e2f582/edgar-5.6.3-py3-none-any.whl", hash = "sha256:4f4d1c299c8ef61e4be40812d24588ff6d230ed16e884083204a5601f6a465ba", size = 23632, upload-time = "2024-10-13T08:13:36.82Z" },
+]
+
+[[package]]
 name = "edgar-analytics"
 version = "1.0.7"
 source = { registry = "https://pypi.org/simple" }
@@ -626,12 +643,12 @@ wheels = [
 
 [[package]]
 name = "edgartools"
-version = "5.45.0"
+version = "5.61.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "beautifulsoup4" },
     { name = "httpx" },
-    { name = "httpxthrottlecache" },
+    { name = "httpxthrottlecache", extra = ["httpx"] },
     { name = "humanize" },
     { name = "jinja2" },
     { name = "lxml" },
@@ -651,9 +668,9 @@ dependencies = [
     { name = "truststore" },
     { name = "unidecode" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/94/00/41e76d0eb935a598b60838c240a1cb1b15c40e980c22aee03e4d8d73c46a/edgartools-5.45.0.tar.gz", hash = "sha256:7e9e89d8d1a944d86938475e55ee8a8955f833376705fcd1046c4ef5dbee09e8", size = 3070431, upload-time = "2026-08-03T01:20:40.851Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/2b/e2/e5015733b023d3beb1ecd7e98e9ffd034e312218cffe6a779fdab94ba9d5/edgartools-5.61.1.tar.gz", hash = "sha256:4acbe0c7be55fcd007d4d1c2f2fc679221b28cbdb9a7b5d7fc773b71719eab6a", size = 3251363, upload-time = "2026-10-06T22:29:27.807Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/4e/b0/22d84699fa90b98f20349ea3bb1663b0cc04277f1ccea248c773f8b6fc10/edgartools-5.45.0-py3-none-any.whl", hash = "sha256:7b0d383f3f11f30f04c469eb2dfa2e549543108ea170f3a6bfc01fe48e770860", size = 3380137, upload-time = "2026-08-03T01:20:42.41Z" },
+    { url = "https://files.pythonhosted.org/packages/9e/c1/10e2baaeb32364a7147a181de1d22cc1e74eaefb57d54a1aaabfe7e95074/edgartools-5.61.1-py3-none-any.whl", hash = "sha256:8229753d3fb4dfdc865291bf7fd684d11297094b88ec724c919630cf21e81037", size = 3555266, upload-time = "2026-10-06T22:29:25.305Z" },
 ]
 
 [[package]]
@@ -907,17 +924,21 @@ wheels = [
 
 [[package]]
 name = "httpxthrottlecache"
-version = "0.3.5"
+version = "0.6.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aiofiles" },
     { name = "filelock" },
-    { name = "httpx" },
     { name = "pyrate-limiter" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/e8/8b/f4bea9e257176d1f6a68ca4db271c3a1edf8a4fa56133baf1cd3ab8d0298/httpxthrottlecache-0.3.5.tar.gz", hash = "sha256:eda3611b9fcbf1e2046191695fb92855f73fc333a7c040d3660aac11b9a60c1f", size = 14571, upload-time = "2026-03-11T17:36:00.957Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/5d/1a/75849d73d510bfcde6b0a9798936af3af8ca1259e5fd9e348bd1f723c6d1/httpxthrottlecache-0.6.1.tar.gz", hash = "sha256:b01f28b6dee5cffec47ada16063568f9651825bb79a26bbfbcd97119b5287e00", size = 15849, upload-time = "2026-08-13T14:03:03.805Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/df/85/834c5837b9da6faa5cf895d448c41afb357c6d6d4d4bff508bb6e1fecab3/httpxthrottlecache-0.3.5-py3-none-any.whl", hash = "sha256:e1f0c8ce043a96d3a88ac518c504ede4c63f1aade12d248f8fec386c662508cd", size = 12953, upload-time = "2026-03-11T17:35:59.596Z" },
+    { url = "https://files.pythonhosted.org/packages/1a/b1/caa609d83a65cb53c60bd91f5562a14fb873befcd53f513447a16764effd/httpxthrottlecache-0.6.1-py3-none-any.whl", hash = "sha256:45387b7b0bf12a687d1a0b4a2c1a5faa7258f587e63caabc64e5486724b7149c", size = 14437, upload-time = "2026-08-13T14:03:02.463Z" },
+]
+
+[package.optional-dependencies]
+httpx = [
+    { name = "httpx" },
 ]
 
 [[package]]
@@ -2052,10 +2073,10 @@ resolution-markers = [
     "python_full_version >= '3.14' and sys_platform == 'emscripten'",
     "python_full_version >= '3.14' and sys_platform != 'emscripten' and sys_platform != 'win32'",
     "python_full_version == '3.13.*' and sys_platform == 'win32'",
-    "python_full_version == '3.12.*' and sys_platform == 'win32'",
     "python_full_version == '3.13.*' and sys_platform == 'emscripten'",
-    "python_full_version == '3.12.*' and sys_platform == 'emscripten'",
     "python_full_version == '3.13.*' and sys_platform != 'emscripten' and sys_platform != 'win32'",
+    "python_full_version == '3.12.*' and sys_platform == 'win32'",
+    "python_full_version == '3.12.*' and sys_platform == 'emscripten'",
     "python_full_version == '3.12.*' and sys_platform != 'emscripten' and sys_platform != 'win32'",
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/22/fd/89965aa4ac08c74998539fcbf24fa3540f3e15237fbeb6bcf9c908f4aade/numpy-2.5.1.tar.gz", hash = "sha256:a48a113e6afea91f5608793bafa7ef2ad481fefbda87ec5069f483de61cb9fa3", size = 20755553, upload-time = "2026-07-04T17:08:00.933Z" }
@@ -3562,10 +3583,10 @@ resolution-markers = [
     "python_full_version >= '3.14' and sys_platform == 'emscripten'",
     "python_full_version >= '3.14' and sys_platform != 'emscripten' and sys_platform != 'win32'",
     "python_full_version == '3.13.*' and sys_platform == 'win32'",
-    "python_full_version == '3.12.*' and sys_platform == 'win32'",
     "python_full_version == '3.13.*' and sys_platform == 'emscripten'",
-    "python_full_version == '3.12.*' and sys_platform == 'emscripten'",
     "python_full_version == '3.13.*' and sys_platform != 'emscripten' and sys_platform != 'win32'",
+    "python_full_version == '3.12.*' and sys_platform == 'win32'",
+    "python_full_version == '3.12.*' and sys_platform == 'emscripten'",
     "python_full_version == '3.12.*' and sys_platform != 'emscripten' and sys_platform != 'win32'",
 ]
 dependencies = [
@@ -3760,8 +3781,8 @@ resolution-markers = [
     "python_full_version >= '3.14' and sys_platform == 'win32'",
     "python_full_version >= '3.14' and sys_platform != 'emscripten' and sys_platform != 'win32'",
     "python_full_version == '3.13.*' and sys_platform == 'win32'",
-    "python_full_version == '3.12.*' and sys_platform == 'win32'",
     "python_full_version == '3.13.*' and sys_platform != 'emscripten' and sys_platform != 'win32'",
+    "python_full_version == '3.12.*' and sys_platform == 'win32'",
     "python_full_version == '3.12.*' and sys_platform != 'emscripten' and sys_platform != 'win32'",
     "python_full_version < '3.12' and sys_platform == 'win32'",
     "python_full_version < '3.12' and sys_platform != 'emscripten' and sys_platform != 'win32'",

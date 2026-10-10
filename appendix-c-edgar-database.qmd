@@ -314,6 +314,52 @@ accounting_policy_df = pd.DataFrame(records)
 ```
 
 
+```{python}
+# How to convert the accounting policies into a dataframe
+import ast
+import pandas as pd
+from bs4 import BeautifulSoup
+
+def clean_html(x):
+    """Strip HTML tags and return plain text."""
+    if not isinstance(x, str):
+        return x
+    return BeautifulSoup(x, "html.parser").get_text(" ", strip=True)
+
+def policies_to_df(items):
+    """Convert one cell (a list of concept dicts) into a tidy DataFrame."""
+    if isinstance(items, str):          # if the cell was saved to CSV as text
+        items = ast.literal_eval(items)
+    rows = []
+    for d in items or []:
+        if d.get("is_abstract") or not d.get("values"):
+            continue                    # skip header rows with no text
+        for period, text in d["values"].items():
+            parts = period.split("_")   # e.g. duration_2021-09-26_2022-09-24
+            rows.append({
+                "concept": d["concept"],
+                "label": d["label"],
+                "period_start": parts[1] if len(parts) > 2 else None,
+                "period_end": parts[-1],
+                "text": clean_html(text),
+            })
+    return pd.DataFrame(rows)
+
+
+
+id_cols = ["ticker", "cik", "filing_date", "report_date"]
+
+frames = []
+for idx, row in accounting_policy_df.iterrows():
+    out = policies_to_df(row["accounting_policies"])      # use your column name
+    for i, col in enumerate(id_cols):
+        out.insert(i, col, row[col])
+    frames.append(out)
+
+policies_df = pd.concat(frames, ignore_index=True)
+policies_df
+```
+
 ## tidyfinance - Python package for Share Price Data
 
 In @sec-financial-statement-analytics, we talked about the significance of financial statement information for capital market efficiency. Therefore, just getting data or information from financial statements is not enough, we also need capital market data, particulary share price data of a given company. We can get these data using `tidyfinance` python package. There are two widely used models that examine whether stock prices are associated with accounting numbers. One model is called price model, and the other one is called Return model. 
