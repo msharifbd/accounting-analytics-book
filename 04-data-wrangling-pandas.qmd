@@ -256,8 +256,20 @@ messy_pd = pd.read_csv("data/messy_general_ledger.csv")
 messy_pd
 ```
 
+
+## polars 
 ```{python}
-# pandas
+# polars
+messy_pl = pl.read_csv("data/messy_general_ledger.csv")
+messy_pl 
+```
+
+::: 
+
+
+::: {.panel-tabset}
+## pandas 
+```{python}
 df_pd = messy_pd.copy()
 for col in ["debit", "credit"]:
     df_pd[col] = (
@@ -270,11 +282,9 @@ for col in ["debit", "credit"]:
 df_pd[["entry_id", "debit", "credit"]]
 ```
 
-## polars 
-```{python}
-# polars
-messy_pl = pl.read_csv("data/messy_general_ledger.csv")
 
+## polars
+```{python}
 df_pl = messy_pl.with_columns([
     pl.col("debit").str.replace_all(r"\$", "").str.replace_all(",", "").cast(pl.Float64),
     pl.col("credit").str.replace_all(r"\$", "").str.replace_all(",", "").cast(pl.Float64),
@@ -282,7 +292,8 @@ df_pl = messy_pl.with_columns([
 df_pl.select(["entry_id", "debit", "credit"])
 ```
 
-::: 
+:::
+
 
 The `debit` and `credit` columns contain `$` and `,` characters, which force them to be read as text instead of numbers.
 
@@ -407,7 +418,7 @@ The two `JE2001` rows for `Cash` are now revealed as duplicates once formatting 
 
 ## Merging and Joining Tables
 
-Accounting data rarely lives in a single table. Let's enrich the general ledger with account type information from `chart_of_accounts.csv`.
+Accounting data rarely lives in a single table. Data may reside in multiple tables. In such cases, we might need to merge or join them together. In order to join two datasets, both datasets must have at least one common column such as `CustomerID`, or `OrderID`, or `ProductSKU` that acts as the bridge between rows. Let's enrich the general ledger with account type information from `chart_of_accounts.csv`.
 
 ::: {.panel-tabset}
 ## pandas 
@@ -424,10 +435,17 @@ coa_pl = pl.read_csv("data/chart_of_accounts.csv")
 
 :::
 
+## Types of Merging or Joining 
+
+Data joins are fundamentally defined by **how they match rows** across separate datasets using a shared, identical key column. The primary objective is to align corresponding records horizontally to create a unified view of your data. @fig-datajointypes illustrates the four most common types of joins: inner, left, right, and full. Each type serves a distinct purpose and is chosen based on the specific requirements of your analysis. 
+
+
+![Types of Data Merging or Joining](images/join_datasets.png){#fig-datajointypes width=60%}
+
 
 ### Inner Join
 
-An **inner join** keeps only rows where the join key (`account`) matches in *both* tables.
+An **inner join** keeps only rows where the join key (`account`) matches in *both* tables. An inner join serves as a strict filter that combines rows from two tables only when their designated keys match exactly. If a row's key exists in one table but is missing from the other, that row is entirely excluded from the final output dataset. This type of join is ideal when your analysis demands complete information from both sources, leaving you with a clean, fully intersected table free of missing values on the join keys.
 
 ::: {.panel-tabset}
 ## pandas
@@ -450,7 +468,7 @@ Notice the inner join result has fewer rows than the original general ledger (19
 
 ### Left Join
 
-A **left join** keeps *every* row from the left table (the general ledger), filling in `null`/`NaN` where there's no match in the chart of accounts.
+A **left join** keeps *every* row from the left table (the general ledger), filling in `null`/`NaN` where there's no match in the chart of accounts. A left join prioritizes the primary dataset by preserving every single row from the left table, regardless of whether a matching partner exists in the secondary table. When a key in the left table finds a match on the right, the corresponding attributes are pulled in; when no match is found, the missing slots are simply filled with null values. Analysts frequently default to this approach because it prevents data loss from the master dataset while safely appending supplementary context where available.
 
 ::: {.panel-tabset}
 ## pandas
@@ -477,9 +495,21 @@ Both approaches reveal the same finding: **"Utilities Expense"** appears in the 
 An inner join would have silently *dropped* the Utilities Expense transactions from any analysis without telling you — the row count would just be smaller, with no error or warning. A left join preserves every general ledger transaction and makes the mismatch visible. When enriching transaction data with reference tables, prefer a left join and explicitly check for unmatched rows, rather than defaulting to an inner join.
 :::
 
+
+### Right Join
+A **right join** acts as the exact mirror image of a left join, ensuring that every record from the right-hand table is maintained in the final result. If a row in this secondary table cannot find a corresponding key in the left table, the missing left columns are returned as null values. While it can be functionally replaced by simply swapping the table order in a left join, it remains highly useful when you are incrementally feeding your core tables into a new, dominant reference dataset.
+
+
+### Full Join 
+A **full join** is an all-inclusive combination that retains every single record from both the left and right tables, leaving no data behind. When keys align, the rows are cleanly merged into a single entry; when they do not align, the missing halves are populated with null values for whichever side lacks the data. This join is indispensable for comprehensive audits or data synchronization tasks where you need a holistic view of all available records across both systems.
+
+### Anti Join 
+An **anti join** acts as a powerful exclusion filter, returning rows from the left table only when their keys are completely absent from the right table. It isolates the anomalies and non-matching records, discarding any entries that find a counterpart in the secondary dataset. Data engineers frequently leverage anti joins for debugging, identifying orphan records, or isolating missing entries between two database systems.
+
+
 ## Reshaping Data
 
-Recall the tidy data discussion from Chapter 3. Let's build a **wide** summary table — one common way accountants like to view data — and then reshape it back to **long** (tidy) format.
+Recall the tidy data discussion from Chapter 3. Many times, we might need to reshape our data to better suit our analysis needs. **Reshaping a dataset** involves transforming its structure to make it clean, readable, and ready for analysis or visualization. This process typically means converting data between a wide format (where variables occupy individual columns) and a long format (where variables are stacked sequentially down rows). Reshaping does not alter the underlying information, but rather rearranges the layout so that software tools, statistical models, and charting libraries can interpret the data correctly.  Let's build a **wide** summary table — one common way accountants like to view data — and then reshape it back to **long** (tidy) format.
 
 ### Wide: Total Debits by Account and Department
 
