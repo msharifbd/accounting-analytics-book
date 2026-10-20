@@ -133,12 +133,14 @@ date_range = "2010-01-01:2025-12-31"
 
 # Step 1: Fetch and stitch XBRL data for each company
 xbrls_by_ticker = {}
+company_names = {}
 
 for ticker in tickers:
     company = Company(ticker)
     filings = company.get_filings(form="10-K", date=date_range)
     xbrls = XBRLS.from_filings(filings)
     xbrls_by_ticker[ticker] = xbrls
+    company_names[ticker] = company.display_name
     print(f"{ticker}: {len(filings)} filings retrieved")
 
 # Step 2: Pull each statement type per company, tag with ticker, and combine
@@ -150,6 +152,7 @@ def build_combined_df(statement_method_name):
             statement = getattr(xbrls.statements, statement_method_name)()
             df = statement.to_dataframe()
             df["ticker"] = ticker
+            df["company_name"] = company_names[ticker]
             frames.append(df)
         except Exception as e:
             print(f"Could not get {statement_method_name} for {ticker}: {e}")
