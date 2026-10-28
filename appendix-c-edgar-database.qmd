@@ -175,6 +175,10 @@ equity_statement_df = build_combined_df("statement_of_equity")  # method name un
 
 Companay filings (e.g., 10-K) contain a large amount of unstructured text data, especially in sections such as the business description, risk factors, legal proceedings, and management’s discussion and analysis. Unlike structured financial statement data, this narrative information is not arranged in fixed rows and columns, which makes it more difficult to analyze using traditional spreadsheet methods. However, it is often rich in useful signals about firm strategy, uncertainty, governance, litigation exposure, and future expectations. `edgartools` can be used to extract unstructured data as well. 
 
+### Extracting Item's Text from 10-K
+
+Form 10-K is an annual report required by the U.S. Securities and Exchange Commission (SEC) that provides a comprehensive summary of a public company's performance, organized into four main parts containing up to 16 specific items. Part I covers the core business operations (Item 1), risk factors (Item 1A), and physical properties (Item 2). Part II houses Management's Discussion and Analysis (Item 7) and the audited financial statements (Item 8). Parts III and IV detail executive leadership, ownership, corporate governance (Items 10–14), and required exhibits (Item 15). 
+
 ```{python}
 from edgar import *
 set_identity("Sharif Islam mdshariful.islam@siu.edu")
@@ -265,7 +269,8 @@ for ticker in tickers:
 company_items_df = pd.DataFrame(items_texts)
 ```
 
-If you want to extract some accounting policies of some specific companies, you can do so using `edgartools` python package. 
+### Extracting Accounting Policies from 10-K
+Accounting policies are the specific principles, bases, conventions, rules, and procedures chosen by management to prepare and present financial statements under frameworks like Generally Accepted Accounting Principles (GAAP) or International Financial Reporting Standards (IFRS). Typically detailed in the first footnote of a report—known as the summary of significant accounting policies—these choices cover critical areas such as revenue recognition, inventory valuation methods (such as FIFO or average cost), depreciation techniques, and consolidation principles. Because accounting standards allow for operational flexibility, disclosing these policies is essential for giving investors, auditors, and regulators a transparent, comparable view of the company’s financial health and performance. If you want to extract some accounting policies of some specific companies, you can do so using `edgartools` python package. 
 
 ```{python}
 from edgar import Company
@@ -362,6 +367,72 @@ for idx, row in accounting_policy_df.iterrows():
 policies_df = pd.concat(frames, ignore_index=True)
 policies_df
 ```
+
+
+### Extracting Notes to Financial Statements 
+
+Notes to financial statements are detailed explanatory disclosures that accompany primary financial reports like the balance sheet, income statement, and cash flow statement. They break down the underlying accounting policies, valuation methods, management estimates, and assumptions used to calculate the reported figures. Furthermore, these notes reveal crucial qualitative and off-balance-sheet information—such as debt repayment terms, tax disclosures, contingencies, commitments, and related-party transactions—that investors and lenders need to accurately assess a company's true financial risk and health.
+
+```{python}
+#| eval: false 
+
+import pandas as pd
+from edgar import Company, set_identity
+
+set_identity("Sharif Islam mdshariful.islam@siu.edu")
+
+tickers = ["AAPL", "MSFT", "WMT", "TSLA"]
+date_range = "2010-01-01:2025-12-31"
+
+notes_data = []
+
+for ticker in tickers:
+    company = Company(ticker)
+
+    filings = company.get_filings(
+        form="10-K",
+        date=date_range
+    )
+
+    for filing in filings:
+        try:
+            tenk = filing.obj()
+            notes = tenk.notes
+
+            note_context_FULL = notes.to_context(detail="full")
+            note_markdown_FULL = notes.to_markdown(detail="full")
+
+            # Get the collection's individual note titles
+            note_titles = notes.to_context(detail="minimal")
+
+            # Individual notes can be accessed by title.
+            # Inspect the collection first to identify the
+            # exact iteration/indexing method in your version.
+            for i in range(1, len(notes) + 1):
+                note = notes[i]
+
+                notes_data.append({
+                    "ticker": ticker,
+                    "cik": filing.cik,
+                    "filing_date": filing.filing_date,
+                    "reporting_date": filing.report_date,
+                    "notes": note.title,
+                    "note_context": note.to_context(detail="full"),
+                    "note_markdown": note.to_markdown(detail="full"),
+                    'note_context_FULL': note_context_FULL,
+                    'note_markdown_FULL': note_markdown_FULL
+                })
+
+        except Exception as e:
+            print(
+                f"Error processing {ticker}, "
+                f"filing date {filing.filing_date}: {e}"
+            )
+
+notes_df = pd.DataFrame(notes_data)
+```
+
+
 
 ## tidyfinance - Python package for Share Price Data
 

@@ -613,7 +613,10 @@
 \contentsline {section}{\numberline {C.2}XBRL}{424}{appendix.C.2}%
 \contentsline {section}{\numberline {C.3}edgartools - Python Package for Parsing EDGAR Database}{425}{appendix.C.3}%
 \contentsline {section}{\numberline {C.4}Unstructured Data in Company Filings}{428}{appendix.C.4}%
-\contentsline {section}{\numberline {C.5}tidyfinance - Python package for Share Price Data}{433}{appendix.C.5}%
-\contentsline {section}{\numberline {C.6}Summary}{437}{appendix.C.6}%
+\contentsline {subsection}{\numberline {C.4.1}Extracting Item's Text from 10-K}{428}{subsection.C.4.1}%
+\contentsline {subsection}{\numberline {C.4.2}Extracting Accounting Policies from 10-K}{431}{subsection.C.4.2}%
+\contentsline {subsection}{\numberline {C.4.3}Extracting Notes to Financial Statements}{434}{subsection.C.4.3}%
+\contentsline {section}{\numberline {C.5}tidyfinance - Python package for Share Price Data}{435}{appendix.C.5}%
+\contentsline {section}{\numberline {C.6}Summary}{439}{appendix.C.6}%
 \contentsfinish 
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
