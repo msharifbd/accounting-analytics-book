@@ -83,9 +83,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-f33c690696fd41d7fda21c68aa2185f1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-c45185835eb4b90df3c5056746dfcb88.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-f33c690696fd41d7fda21c68aa2185f1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-b58141772f248118d216200fb8a41989.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-37903c806b73837b5c40243b902afad7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-b58141772f248118d216200fb8a41989.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -622,7 +622,12 @@ window.Quarto = {
   <li><a href="#edgar-database-and-its-implications" id="toc-edgar-database-and-its-implications" class="nav-link active" data-scroll-target="#edgar-database-and-its-implications"><span class="header-section-number">C.1</span> EDGAR Database and Its Implications</a></li>
   <li><a href="#xbrl" id="toc-xbrl" class="nav-link" data-scroll-target="#xbrl"><span class="header-section-number">C.2</span> XBRL</a></li>
   <li><a href="#edgartools---python-package-for-parsing-edgar-database" id="toc-edgartools---python-package-for-parsing-edgar-database" class="nav-link" data-scroll-target="#edgartools---python-package-for-parsing-edgar-database"><span class="header-section-number">C.3</span> edgartools - Python Package for Parsing EDGAR Database</a></li>
-  <li><a href="#unstructured-data-in-company-filings" id="toc-unstructured-data-in-company-filings" class="nav-link" data-scroll-target="#unstructured-data-in-company-filings"><span class="header-section-number">C.4</span> Unstructured Data in Company Filings</a></li>
+  <li><a href="#unstructured-data-in-company-filings" id="toc-unstructured-data-in-company-filings" class="nav-link" data-scroll-target="#unstructured-data-in-company-filings"><span class="header-section-number">C.4</span> Unstructured Data in Company Filings</a>
+  <ul class="collapse">
+  <li><a href="#extracting-items-text-from-10-k" id="toc-extracting-items-text-from-10-k" class="nav-link" data-scroll-target="#extracting-items-text-from-10-k"><span class="header-section-number">C.4.1</span> Extracting Item’s Text from 10-K</a></li>
+  <li><a href="#extracting-accounting-policies-from-10-k" id="toc-extracting-accounting-policies-from-10-k" class="nav-link" data-scroll-target="#extracting-accounting-policies-from-10-k"><span class="header-section-number">C.4.2</span> Extracting Accounting Policies from 10-K</a></li>
+  <li><a href="#extracting-notes-to-financial-statements" id="toc-extracting-notes-to-financial-statements" class="nav-link" data-scroll-target="#extracting-notes-to-financial-statements"><span class="header-section-number">C.4.3</span> Extracting Notes to Financial Statements</a></li>
+  </ul></li>
   <li><a href="#tidyfinance---python-package-for-share-price-data" id="toc-tidyfinance---python-package-for-share-price-data" class="nav-link" data-scroll-target="#tidyfinance---python-package-for-share-price-data"><span class="header-section-number">C.5</span> tidyfinance - Python package for Share Price Data</a></li>
   <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">C.6</span> Summary</a></li>
   </ul>
@@ -687,15 +692,15 @@ window.Quarto = {
 <h2 data-number="C.3" class="anchored" data-anchor-id="edgartools---python-package-for-parsing-edgar-database"><span class="header-section-number">C.3</span> edgartools - Python Package for Parsing EDGAR Database</h2>
 <p><code>edgartools</code> is a Python library for accessing SEC EDGAR filings as structured data. SEC EDGAR has every filing back to 1994, free — and almost none of it is ready to use. <code>edgartools</code> turns any filing into a tidy data object. To learn more about the <code>edgartools</code>, you can go through <a href="https://edgartools.readthedocs.io/en/latest/">documentation</a>.</p>
 <p>After installing the <code>edgartools</code>, you need to identify yourself to the SEC because EDGAR requires an email with every request.</p>
-<div id="2894e137" class="cell" data-execution_count="1">
+<div id="59076869" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> edgar <span class="im">import</span> <span class="op">*</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>set_identity(<span class="st">"Sharif Islam mdshariful.islam@siu.edu"</span>)  <span class="co"># required by SEC</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="ddcc1d00" class="cell" data-execution_count="2">
+<div id="dd806029" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> edgar <span class="im">import</span> Company, set_identity</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> edgar.xbrl <span class="im">import</span> XBRLS</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="5cec6e81" class="cell" data-execution_count="3">
+<div id="e569ae3c" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Getting data for one company</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>company <span class="op">=</span> Company(<span class="st">"AAPL"</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -704,40 +709,40 @@ window.Quarto = {
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Stitch multiple filings' financials into one multi-period view</span></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>xbrls <span class="op">=</span> XBRLS.from_filings(filings)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="58da1eee" class="cell" data-execution_count="4">
+<div id="48f4a353" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Income Statement</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>income_statement <span class="op">=</span> xbrls.statements.income_statement()</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to a DataFrame for easier analysis/plotting</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>income_df <span class="op">=</span> income_statement.to_dataframe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="66de5d1b" class="cell" data-execution_count="5">
+<div id="a703b64a" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Balance Sheet</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>balance_sheet <span class="op">=</span> xbrls.statements.balance_sheet()</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>balance_df <span class="op">=</span> balance_sheet.to_dataframe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="8cec1f19" class="cell" data-execution_count="6">
+<div id="9ab51d24" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cash Flow Statement </span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>cash_flow_statement <span class="op">=</span> xbrls.statements.cash_flow_statement()</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>cash_flow_statement_df <span class="op">=</span> cash_flow_statement.to_dataframe()</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>cash_flow_statement2 <span class="op">=</span> xbrls.statements.cashflow_statement()</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>cash_flow_statement_df2 <span class="op">=</span> cash_flow_statement2.to_dataframe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="d43ab5e9" class="cell" data-execution_count="7">
+<div id="4d5b0eee" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Statement of Equity </span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>statement_of_equity <span class="op">=</span> xbrls.statements.statement_of_equity()</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>statement_of_equity_df <span class="op">=</span> statement_of_equity.to_dataframe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="9ac6852c" class="cell" data-execution_count="8">
+<div id="df76626e" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Comprehensive Income Statement</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>comp_income_statement <span class="op">=</span> xbrls.statements.comprehensive_income()</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>comp_income_statement_df <span class="op">=</span> comp_income_statement.to_dataframe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="455d8ab1" class="cell" data-execution_count="9">
+<div id="1be775d9" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>income_statement_detailed <span class="op">=</span> xbrls.statements.income_statement(view<span class="op">=</span><span class="st">"detailed"</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>income_df_detailed <span class="op">=</span> income_statement_detailed.to_dataframe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Alternatively, you can get some specific values from the financial statements instead of the whole financial statements to calculate different ratios using <code>edgartools</code>.</p>
-<div id="f3d1066e" class="cell" data-execution_count="10">
+<div id="00e689bd" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>financials <span class="op">=</span> company.get_financials()</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>revenue <span class="op">=</span> financials.get_revenue()</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>net_income <span class="op">=</span> financials.get_net_income()</span>
@@ -755,7 +760,7 @@ window.Quarto = {
 <span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>net_margin <span class="op">=</span> net_income <span class="op">/</span> revenue</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>If you want to extract financial statement information from more than one company, you can run the following code.</p>
-<div id="1756a5b5" class="cell" data-execution_count="11">
+<div id="206b8478" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> edgar <span class="im">import</span> Company, set_identity</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> edgar.xbrl <span class="im">import</span> XBRLS</span>
@@ -812,7 +817,10 @@ WMT: 16 filings retrieved</code></pre>
 <section id="unstructured-data-in-company-filings" class="level2" data-number="C.4">
 <h2 data-number="C.4" class="anchored" data-anchor-id="unstructured-data-in-company-filings"><span class="header-section-number">C.4</span> Unstructured Data in Company Filings</h2>
 <p>Companay filings (e.g., 10-K) contain a large amount of unstructured text data, especially in sections such as the business description, risk factors, legal proceedings, and management’s discussion and analysis. Unlike structured financial statement data, this narrative information is not arranged in fixed rows and columns, which makes it more difficult to analyze using traditional spreadsheet methods. However, it is often rich in useful signals about firm strategy, uncertainty, governance, litigation exposure, and future expectations. <code>edgartools</code> can be used to extract unstructured data as well.</p>
-<div id="4dd40da9" class="cell" data-execution_count="12">
+<section id="extracting-items-text-from-10-k" class="level3" data-number="C.4.1">
+<h3 data-number="C.4.1" class="anchored" data-anchor-id="extracting-items-text-from-10-k"><span class="header-section-number">C.4.1</span> Extracting Item’s Text from 10-K</h3>
+<p>Form 10-K is an annual report required by the U.S. Securities and Exchange Commission (SEC) that provides a comprehensive summary of a public company’s performance, organized into four main parts containing up to 16 specific items. Part I covers the core business operations (Item 1), risk factors (Item 1A), and physical properties (Item 2). Part II houses Management’s Discussion and Analysis (Item 7) and the audited financial statements (Item 8). Parts III and IV detail executive leadership, ownership, corporate governance (Items 10–14), and required exhibits (Item 15).</p>
+<div id="e9d59547" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> edgar <span class="im">import</span> <span class="op">*</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>set_identity(<span class="st">"Sharif Islam mdshariful.islam@siu.edu"</span>)</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>filings <span class="op">=</span> get_filings(form<span class="op">=</span><span class="st">'10-K'</span>, amendments<span class="op">=</span><span class="va">False</span>, filing_date<span class="op">=</span><span class="st">"2026-01-05:2026-01-12"</span>)</span>
@@ -855,7 +863,7 @@ WMT: 16 filings retrieved</code></pre>
 <span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>items_df <span class="op">=</span> pd.DataFrame(items_texts)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>If you want to extract some specific companies’ unstructured data, you can do so as well.</p>
-<div id="71b73267" class="cell" data-execution_count="13">
+<div id="479e42ab" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>tickers <span class="op">=</span> [<span class="st">"AAPL"</span>, <span class="st">"MSFT"</span>, <span class="st">"WMT"</span>]</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>date_range <span class="op">=</span> <span class="st">"2018-01-01:2022-12-31"</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -899,8 +907,11 @@ WMT: 16 filings retrieved</code></pre>
 <span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a DataFrame from the Item 1c text data</span></span>
 <span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>company_items_df <span class="op">=</span> pd.DataFrame(items_texts)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>If you want to extract some accounting policies of some specific companies, you can do so using <code>edgartools</code> python package.</p>
-<div id="1d1a779a" class="cell" data-execution_count="14">
+</section>
+<section id="extracting-accounting-policies-from-10-k" class="level3" data-number="C.4.2">
+<h3 data-number="C.4.2" class="anchored" data-anchor-id="extracting-accounting-policies-from-10-k"><span class="header-section-number">C.4.2</span> Extracting Accounting Policies from 10-K</h3>
+<p>Accounting policies are the specific principles, bases, conventions, rules, and procedures chosen by management to prepare and present financial statements under frameworks like Generally Accepted Accounting Principles (GAAP) or International Financial Reporting Standards (IFRS). Typically detailed in the first footnote of a report—known as the summary of significant accounting policies—these choices cover critical areas such as revenue recognition, inventory valuation methods (such as FIFO or average cost), depreciation techniques, and consolidation principles. Because accounting standards allow for operational flexibility, disclosing these policies is essential for giving investors, auditors, and regulators a transparent, comparable view of the company’s financial health and performance. If you want to extract some accounting policies of some specific companies, you can do so using <code>edgartools</code> python package.</p>
+<div id="3ffbdce3" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> edgar <span class="im">import</span> Company</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -948,7 +959,7 @@ WMT: 16 filings retrieved</code></pre>
 <span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a>accounting_policy_df <span class="op">=</span> pd.DataFrame(records)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="a7a1b92a" class="cell" data-execution_count="15">
+<div id="06a0744f" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># How to convert the accounting policies into a dataframe</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> ast</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -992,7 +1003,7 @@ WMT: 16 filings retrieved</code></pre>
 <span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>policies_df <span class="op">=</span> pd.concat(frames, ignore_index<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a>policies_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="14">
+<div class="cell-output cell-output-display" data-execution_count="32">
 <div>
 
 
@@ -1152,6 +1163,67 @@ WMT: 16 filings retrieved</code></pre>
 </div>
 </div>
 </section>
+<section id="extracting-notes-to-financial-statements" class="level3" data-number="C.4.3">
+<h3 data-number="C.4.3" class="anchored" data-anchor-id="extracting-notes-to-financial-statements"><span class="header-section-number">C.4.3</span> Extracting Notes to Financial Statements</h3>
+<p>Notes to financial statements are detailed explanatory disclosures that accompany primary financial reports like the balance sheet, income statement, and cash flow statement. They break down the underlying accounting policies, valuation methods, management estimates, and assumptions used to calculate the reported figures. Furthermore, these notes reveal crucial qualitative and off-balance-sheet information—such as debt repayment terms, tax disclosures, contingencies, commitments, and related-party transactions—that investors and lenders need to accurately assess a company’s true financial risk and health.</p>
+<div id="a1690feb" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> edgar <span class="im">import</span> Company, set_identity</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>set_identity(<span class="st">"Sharif Islam mdshariful.islam@siu.edu"</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>tickers <span class="op">=</span> [<span class="st">"AAPL"</span>, <span class="st">"MSFT"</span>, <span class="st">"WMT"</span>, <span class="st">"TSLA"</span>]</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>date_range <span class="op">=</span> <span class="st">"2010-01-01:2025-12-31"</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>notes_data <span class="op">=</span> []</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ticker <span class="kw">in</span> tickers:</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>    company <span class="op">=</span> Company(ticker)</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>    filings <span class="op">=</span> company.get_filings(</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>        form<span class="op">=</span><span class="st">"10-K"</span>,</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>        date<span class="op">=</span>date_range</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> filing <span class="kw">in</span> filings:</span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>            tenk <span class="op">=</span> filing.obj()</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>            notes <span class="op">=</span> tenk.notes</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>            note_context_FULL <span class="op">=</span> notes.to_context(detail<span class="op">=</span><span class="st">"full"</span>)</span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>            note_markdown_FULL <span class="op">=</span> notes.to_markdown(detail<span class="op">=</span><span class="st">"full"</span>)</span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Get the collection's individual note titles</span></span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>            note_titles <span class="op">=</span> notes.to_context(detail<span class="op">=</span><span class="st">"minimal"</span>)</span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Individual notes can be accessed by title.</span></span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Inspect the collection first to identify the</span></span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>            <span class="co"># exact iteration/indexing method in your version.</span></span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(notes) <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a>                note <span class="op">=</span> notes[i]</span>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a>                notes_data.append({</span>
+<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"ticker"</span>: ticker,</span>
+<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"cik"</span>: filing.cik,</span>
+<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"filing_date"</span>: filing.filing_date,</span>
+<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"reporting_date"</span>: filing.report_date,</span>
+<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"notes"</span>: note.title,</span>
+<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"note_context"</span>: note.to_context(detail<span class="op">=</span><span class="st">"full"</span>),</span>
+<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"note_markdown"</span>: note.to_markdown(detail<span class="op">=</span><span class="st">"full"</span>),</span>
+<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a>                    <span class="st">'note_context_FULL'</span>: note_context_FULL,</span>
+<span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a>                    <span class="st">'note_markdown_FULL'</span>: note_markdown_FULL</span>
+<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a>                })</span>
+<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-48"><a href="#cb17-48" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> e:</span>
+<span id="cb17-49"><a href="#cb17-49" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(</span>
+<span id="cb17-50"><a href="#cb17-50" aria-hidden="true" tabindex="-1"></a>                <span class="ss">f"Error processing </span><span class="sc">{</span>ticker<span class="sc">}</span><span class="ss">, "</span></span>
+<span id="cb17-51"><a href="#cb17-51" aria-hidden="true" tabindex="-1"></a>                <span class="ss">f"filing date </span><span class="sc">{</span>filing<span class="sc">.</span>filing_date<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb17-52"><a href="#cb17-52" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb17-53"><a href="#cb17-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-54"><a href="#cb17-54" aria-hidden="true" tabindex="-1"></a>notes_df <span class="op">=</span> pd.DataFrame(notes_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
 <section id="tidyfinance---python-package-for-share-price-data" class="level2" data-number="C.5">
 <h2 data-number="C.5" class="anchored" data-anchor-id="tidyfinance---python-package-for-share-price-data"><span class="header-section-number">C.5</span> tidyfinance - Python package for Share Price Data</h2>
 <p>In <a href="07-financial-statement-analysis.html" class="quarto-xref"><span>Chapter 7</span></a>, we talked about the significance of financial statement information for capital market efficiency. Therefore, just getting data or information from financial statements is not enough, we also need capital market data, particulary share price data of a given company. We can get these data using <code>tidyfinance</code> python package. There are two widely used models that examine whether stock prices are associated with accounting numbers. One model is called price model, and the other one is called Return model.</p>
@@ -1187,20 +1259,20 @@ WMT: 16 filings retrieved</code></pre>
 <li><span class="math inline">\(\varepsilon_i\)</span> = Error term</li>
 </ul>
 <p>The return model evaluates whether new accounting information is reflected in stock returns.</p>
-<div id="ece0454c" class="cell" data-execution_count="16">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> tidyfinance <span class="im">as</span> tf</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>tf.set_backend(<span class="st">"polars"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="6498ca19" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> tidyfinance <span class="im">as</span> tf</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>tf.set_backend(<span class="st">"polars"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="0c5a63aa" class="cell" data-execution_count="17">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>prices <span class="op">=</span> tf.download_data(</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    domain<span class="op">=</span><span class="st">"Stock Prices"</span>,</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    symbols<span class="op">=</span> [<span class="st">"AAPL"</span>, <span class="st">"GOOGL"</span>, <span class="st">"WMT"</span>],</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    start_date<span class="op">=</span><span class="st">"2000-01-01"</span>,</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    end_date<span class="op">=</span><span class="st">"2025-12-31"</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>prices.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="16">
+<div id="3602dbc5" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>prices <span class="op">=</span> tf.download_data(</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    domain<span class="op">=</span><span class="st">"Stock Prices"</span>,</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    symbols<span class="op">=</span> [<span class="st">"AAPL"</span>, <span class="st">"GOOGL"</span>, <span class="st">"WMT"</span>],</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    start_date<span class="op">=</span><span class="st">"2000-01-01"</span>,</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    end_date<span class="op">=</span><span class="st">"2025-12-31"</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>prices.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="34">
 <div><style>
 .dataframe > thead > tr,
 .dataframe > tbody > tr {
@@ -1296,15 +1368,15 @@ WMT: 16 filings retrieved</code></pre>
 <ul>
 <li><span class="math inline">\(\text{P}_t\)</span> = Adjusted Price at the End of Day <span class="math inline">\(t\)</span></li>
 </ul>
-<div id="50ba34c0" class="cell" data-execution_count="18">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>returns <span class="op">=</span> (</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>     prices</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>     .sort([<span class="st">"symbol"</span>, <span class="st">'date'</span>])</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>     .with_columns(pl.col(<span class="st">"adjusted_close"</span>).pct_change().over(<span class="st">"symbol"</span>).alias(<span class="st">"ret"</span>))</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>     .select(<span class="st">"symbol"</span>, <span class="st">"date"</span>, <span class="st">"adjusted_close"</span>, <span class="st">"ret"</span>)</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>returns </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="17">
+<div id="460f2fb8" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>returns <span class="op">=</span> (</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>     prices</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>     .sort([<span class="st">"symbol"</span>, <span class="st">'date'</span>])</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>     .with_columns(pl.col(<span class="st">"adjusted_close"</span>).pct_change().over(<span class="st">"symbol"</span>).alias(<span class="st">"ret"</span>))</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>     .select(<span class="st">"symbol"</span>, <span class="st">"date"</span>, <span class="st">"adjusted_close"</span>, <span class="st">"ret"</span>)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>returns </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="35">
 <div><style>
 .dataframe > thead > tr,
 .dataframe > tbody > tr {
@@ -1392,7 +1464,7 @@ WMT: 16 filings retrieved</code></pre>
 <tr class="odd">
 <td>"WMT"</td>
 <td>2025-12-30</td>
-<td>111.211784</td>
+<td>111.211792</td>
 <td>-0.005421</td>
 </tr>
 </tbody>
@@ -1401,21 +1473,21 @@ WMT: 16 filings retrieved</code></pre>
 </div>
 </div>
 <p>We can also visualize the prices or returns of companies to identify patterns, if any.</p>
-<div id="01e86418" class="cell" data-execution_count="19">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> <span class="op">*</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>theme_set(theme_minimal())</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>price_viz <span class="op">=</span> (</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    ggplot(prices, aes(y <span class="op">=</span> <span class="st">"adjusted_close"</span>, x <span class="op">=</span> <span class="st">"date"</span>, color <span class="op">=</span> <span class="st">"symbol"</span>))</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_line()</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> scale_x_date(date_breaks<span class="op">=</span><span class="st">"5 years"</span>, date_labels<span class="op">=</span><span class="st">"%Y"</span>)</span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> labs(x<span class="op">=</span><span class="st">""</span>, y<span class="op">=</span><span class="st">""</span>, color<span class="op">=</span><span class="st">""</span>, title<span class="op">=</span><span class="st">"Stock prices of Apple, Google, and Walmart"</span>)</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> theme(legend_position<span class="op">=</span><span class="st">"bottom"</span>)</span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>price_viz.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="1f8b3e9d" class="cell" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>theme_set(theme_minimal())</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>price_viz <span class="op">=</span> (</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    ggplot(prices, aes(y <span class="op">=</span> <span class="st">"adjusted_close"</span>, x <span class="op">=</span> <span class="st">"date"</span>, color <span class="op">=</span> <span class="st">"symbol"</span>))</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_line()</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> scale_x_date(date_breaks<span class="op">=</span><span class="st">"5 years"</span>, date_labels<span class="op">=</span><span class="st">"%Y"</span>)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> labs(x<span class="op">=</span><span class="st">""</span>, y<span class="op">=</span><span class="st">""</span>, color<span class="op">=</span><span class="st">""</span>, title<span class="op">=</span><span class="st">"Stock prices of Apple, Google, and Walmart"</span>)</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> theme(legend_position<span class="op">=</span><span class="st">"bottom"</span>)</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>price_viz.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="appendix-c-edgar-database_files/figure-html/cell-20-output-1.png" width="672" height="480" class="figure-img"></p>
+<p><img src="appendix-c-edgar-database_files/figure-html/cell-21-output-1.png" width="672" height="480" class="figure-img"></p>
 </figure>
 </div>
 </div>
